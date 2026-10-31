@@ -6,6 +6,7 @@ repair loop and the aggregate accounting (tokens, latency, cost, statuses).
 
 from __future__ import annotations
 
+import shutil
 import time
 from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -345,7 +346,7 @@ def generate_dataset(
     """Generate ``request.count`` contracts, verify them and export a dataset."""
 
     output = Path(output)
-    output.mkdir(parents=True, exist_ok=True)
+    _reset_dataset_output(output)
     provider = create_provider(settings)
     registry = load_registry()
     scenario_generator = ScenarioGenerator(registry)
@@ -405,6 +406,24 @@ def generate_dataset(
         stats=stats,
         total_seconds=total_seconds,
     )
+
+
+def _reset_dataset_output(output: Path) -> None:
+    """Remove generated artifacts from a previous run in the same directory.
+
+    A re-run must not mix old contract directories or stale ``rejected/*.json``
+    entries into a new dataset: the manifest, stats and rejected accounting must
+    describe exactly one run. Only ContractForge's own generated paths are
+    removed; other files are left untouched.
+    """
+
+    output = Path(output)
+    output.mkdir(parents=True, exist_ok=True)
+    for entry in output.iterdir():
+        if entry.is_dir() and (entry.name.startswith("contract_") or entry.name == "rejected"):
+            shutil.rmtree(entry)
+        elif entry.is_file() and entry.name in ("dataset_manifest.json", "stats.json"):
+            entry.unlink()
 
 
 def _adjust_rejections(

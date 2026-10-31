@@ -325,11 +325,12 @@ Senaste mätningarna (fullständig rapport i
 
 | Körning | Provider | Avtal | Godkända | Reparerade dokument | Dokument/min | Token | Kostnad |
 |---------|----------|-------|----------|---------------------|--------------|-------|---------|
-| Offline pipeline | mock | 100 | 100 | 0 | 1 253 | okänd | okänd |
-| Live Cerebras | `gpt-oss-120b` | 20 | 20 | 3 | 174 | 137 820 | okänd¹ |
+| Offline pipeline | mock | 100 | 100 | 0 | 1 119 | okänd | okänd |
+| Live Cerebras | `gpt-oss-120b` | 100 | 100 | 14 | 174 | 688 885 | okänd¹ |
 
 ¹ Ingen prisuppgift angavs. Med `pricing.json` beräknas faktisk kostnad per
-godkänt dokument och per validerad golden-fråga.
+godkänt dokument och per validerad golden-fråga. Live-körningen tog 34,4 s med
+4 parallella anrop och 1 091 ms genomsnittlig anropstid.
 
 Ett live-genererat exempeldataset finns i
 [`examples/sample_live_consulting/`](examples/sample_live_consulting/) och kan

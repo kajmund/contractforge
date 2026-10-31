@@ -168,3 +168,21 @@ def test_questions_have_valid_evidence_and_answerability(tmp_path):
             assert snippet, "evidence span must not be empty"
             if evidence.quote:
                 assert evidence.quote.strip() in snippet or snippet.strip() in evidence.quote
+
+
+def test_rerun_same_output_replaces_previous_dataset(tmp_path):
+    """A repeated generate must not mix stale contracts or rejected entries."""
+
+    dataset = tmp_path / "dataset"
+    generate_dataset(_settings(), _request(count=3, clauses=6, seed=1), dataset)
+    assert len(load_dataset(dataset)) == 3
+
+    generate_dataset(_settings(), _request(count=2, clauses=6, seed=2), dataset)
+    contracts = load_dataset(dataset)
+    assert [contract.contract_id for contract in contracts] == ["contract_0001", "contract_0002"]
+    assert not (dataset / "contract_0003").exists()
+    assert not (dataset / "rejected").exists()
+
+    report = validate_dataset(dataset)
+    assert report.status.value == "PASS", report.errors
+    assert report.contracts_checked == 2

@@ -19,22 +19,23 @@ frågor → export) men **inte** LLM-kvalitet. Providern är deterministisk.
 | Golden-frågor | 2 200 (alla validerade) |
 | Token | okänd (mock rapporterar ingen usage) |
 | Kostnad | okänd (mock; ingen prisuppgift) |
-| Tid | 9,6 s |
-| Dokument/minut | 1 253 |
-| Klausuler/minut | 8 143 |
+| Tid | 10,7 s |
+| Dokument/minut | 1 119 |
+| Klausuler/minut | 7 276 |
 | Verifiering | 100 % godkända |
 
 **Tolkning:** siffrorna visar att pipeline, verifiering och export klarar
 100 avtal utan nätverk. De säger ingenting om Cerebras-modellens kvalitet,
 latens eller kostnad.
 
-## Live: Cerebras-benchmark (20 avtal)
+## Live: Cerebras-benchmark (100 avtal)
 
-En live-körning mot Cerebras (`gpt-oss-120b`) med 20 konsultavtal på nivå 2,
-8 klausuler, 4 parallella anrop och seed 777. Ett separat smoke-test (1 avtal)
-körs med `@pytest.mark.live` när `CEREBRAS_API_KEY` finns; resultatet
-dokumenteras med modell, promptversion, tokenförbrukning, latens och
-verifieringsutfall. Kostnad redovisas endast om en explicit prisuppgift angetts.
+En live-körning mot Cerebras (`gpt-oss-120b`) med 100 konsultavtal på nivå 2,
+8 klausuler, 4 parallella anrop och seed 4242. 100 av 100 avtal godkändes; 86
+dokument klarade första försöket och 14 reparerades efter verifieringsfeedback.
+Ett separat smoke-test (1 avtal) körs med `@pytest.mark.live` när
+`CEREBRAS_API_KEY` finns. Kostnad redovisas endast om en explicit prisuppgift
+angetts, eftersom inga modellpriser hårdkodas.
 
 | Fält | Värde |
 |------|-------|
@@ -50,7 +51,7 @@ verifieringsutfall. Kostnad redovisas endast om en explicit prisuppgift angetts.
 | Genomströmning | 174 dokument/min (4 parallella) |
 | Kostnad | okänd utan `pricing.json` (inga priser hårdkodas) |
 
-Se `benchmarks/results/cerebras_consulting_20.json` för fullständig rapport.
+Se `benchmarks/results/cerebras_consulting_100.json` för fullständig rapport.
 
 ## Reproducerbarhet
 
