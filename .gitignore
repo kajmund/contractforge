@@ -25,6 +25,10 @@ htmlcov/
 !.env.example
 pricing.json
 
+# AI review runs: the frozen round under ai_review_blind2 is committed as the
+# preliminary measurement; older/intermediate runs stay local.
+benchmarks/results/ai_review_blind/
+
 # Generated datasets (keep benchmark summaries, not raw corpora)
 dataset/
 out/
@@ -33,4 +37,7 @@ out/
 # Benchmark run directories (dataset + raw reports) are regenerated;
 # the small summary report committed at benchmarks/results/*.json is kept.
 benchmarks/results/*/
+# except the frozen preliminary AI review round (small JSON/CSV, cited in docs)
+!benchmarks/results/ai_review_blind2/
+!benchmarks/results/ai_review_blind2/**
 examples/sample_dataset/rejected*/

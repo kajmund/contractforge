@@ -449,6 +449,34 @@ def test_rater_models_are_recorded_verbatim(tmp_path):
     assert "modellbaserad" in report
 
 
+def test_own_answer_comparison_uses_semantic_normalisation():
+    """Pass-1 answers in natural language must match the normalised gold."""
+
+    import sys
+    from pathlib import Path as _Path
+
+    sys.path.insert(0, str(_Path(__file__).resolve().parents[1] / "benchmarks"))
+    from ai_review import own_answer_matches_gold
+
+    assert own_answer_matches_gold("1 150 kr per timme", {"value": 1150, "currency": "SEK"})[0]
+    assert own_answer_matches_gold("15 januari 2026", {"value": "2026-01-15", "kind": "date"})[0]
+    assert own_answer_matches_gold("ett kvartal", {"value": 3, "unit": "months"})[0]
+    assert own_answer_matches_gold("320 timmar", {"value": 320, "unit": "hours"})[0]
+    assert not own_answer_matches_gold("fem månader", {"value": 3, "unit": "months"})[0]
+    assert not own_answer_matches_gold("", {"value": 1150, "currency": "SEK"})[0]
+
+
+def test_own_answer_comparison_never_crashes_on_odd_gold():
+    import sys
+    from pathlib import Path as _Path
+
+    sys.path.insert(0, str(_Path(__file__).resolve().parents[1] / "benchmarks"))
+    from ai_review import own_answer_matches_gold
+
+    assert own_answer_matches_gold("något", {})[0] is False
+    assert own_answer_matches_gold("x", {"value": None})[0] is False
+
+
 def test_axes_constant_is_complete():
     assert set(AXES) == {"Q1", "Q2", "Q3", "Q4"}
     assert set(AXIS_COLUMNS) == set(AXES)

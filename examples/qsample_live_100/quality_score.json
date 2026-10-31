@@ -1,0 +1,734 @@
+{
+  "schema_version": "1.0",
+  "kind": "quality_score",
+  "created_at": "2026-10-31T17:28:19.564970+00:00",
+  "source": {
+    "ratings_dir": "examples/qsample_live_100",
+    "source_sha256": "4344845099a39dbdc7d09c54f6d50cf03e74d1f831c78eda34cb67182893ae7e",
+    "selection_sha256": "1272bd8a819f1b39bfe6b17225da64635dad50854f42ad66be8665886702f650",
+    "sample_size": 100,
+    "pool_size": 1723,
+    "sheet_a": {
+      "path": "benchmarks/results/ai_review_blind2/ratings_A_ai.csv",
+      "sha256": "701177891f0534a53fff26479268f7532aee31e0e63efac383f0518612249a1d"
+    },
+    "sheet_b": {
+      "path": "benchmarks/results/ai_review_blind2/ratings_B_ai.csv",
+      "sha256": "6a5c10d7b0ddd2d8e0e8fc9ef2a617a37d58a90503f28a64291bbe21b38cef0d"
+    },
+    "raters": {
+      "orders_identical": false,
+      "source": "raters.json"
+    }
+  },
+  "reviewer": {
+    "rater_a": {
+      "kind": "model",
+      "name": "gpt-oss-120b"
+    },
+    "rater_b": {
+      "kind": "model",
+      "name": "qwen-3.8-27b"
+    },
+    "assessment_type": "modellbaserad oberoende bedömning",
+    "is_model_based": true,
+    "caveat": "Modellbaserad bedömning – inte mänsklig juridisk granskning. Två modeller kan dela systematiska fel."
+  },
+  "axes": {
+    "Q1": {
+      "axis": "Q1",
+      "n": 100,
+      "yes": 97,
+      "no": 1,
+      "unsure": 2,
+      "not_applicable": 0,
+      "missing": 0,
+      "proportion_yes": 0.97,
+      "wilson_95": [
+        0.9154806351014251,
+        0.9897454760557186
+      ],
+      "gate_passed": null,
+      "gate_reasons": [],
+      "agreement": {
+        "n": 100,
+        "same": 98,
+        "p0": 0.98,
+        "pe": 0.9605999999999999,
+        "kappa": 0.4923857868020313
+      }
+    },
+    "Q2": {
+      "axis": "Q2",
+      "n": 100,
+      "yes": 92,
+      "no": 1,
+      "unsure": 7,
+      "not_applicable": 0,
+      "missing": 0,
+      "proportion_yes": 0.92,
+      "wilson_95": [
+        0.8500189223072279,
+        0.9589065387268154
+      ],
+      "gate_passed": null,
+      "gate_reasons": [],
+      "agreement": {
+        "n": 100,
+        "same": 93,
+        "p0": 0.93,
+        "pe": 0.9139999999999999,
+        "kappa": 0.18604651162790828
+      }
+    },
+    "Q3": {
+      "axis": "Q3",
+      "n": 100,
+      "yes": 45,
+      "no": 9,
+      "unsure": 46,
+      "not_applicable": 0,
+      "missing": 0,
+      "proportion_yes": 0.45,
+      "wilson_95": [
+        0.3561453790959721,
+        0.5475539707809277
+      ],
+      "gate_passed": null,
+      "gate_reasons": [],
+      "agreement": {
+        "n": 100,
+        "same": 54,
+        "p0": 0.54,
+        "pe": 0.468,
+        "kappa": 0.13533834586466167
+      }
+    },
+    "Q4": {
+      "axis": "Q4",
+      "n": 0,
+      "yes": 0,
+      "no": 0,
+      "unsure": 0,
+      "not_applicable": 100,
+      "missing": 0,
+      "proportion_yes": null,
+      "wilson_95": null,
+      "gate_passed": null,
+      "gate_reasons": [],
+      "agreement": {
+        "n": 100,
+        "same": 100,
+        "p0": 1.0,
+        "pe": null,
+        "kappa": null
+      }
+    }
+  },
+  "gates": {
+    "quality": {
+      "Q2": {
+        "applicable": true,
+        "passed": false,
+        "point": 0.92,
+        "wilson_lower": 0.8500189223072279,
+        "reasons": [
+          "punkt 92.0% < 95%",
+          "Wilson nedre 85.0% < 90% (n=100)"
+        ]
+      },
+      "Q3": {
+        "applicable": true,
+        "passed": false,
+        "point": 0.45,
+        "wilson_lower": 0.3561453790959721,
+        "reasons": [
+          "punkt 45.0% < 90%",
+          "Wilson nedre 35.6% < 85% (n=100)"
+        ]
+      },
+      "Q1": {
+        "applicable": true,
+        "passed": true,
+        "point": 0.97,
+        "reasons": []
+      },
+      "Q4": {
+        "applicable": false,
+        "passed": null,
+        "reasons": [
+          "för få tillämpliga poster (n=0 < 10)"
+        ]
+      }
+    },
+    "agreement": {
+      "Q2": {
+        "applicable": true,
+        "passed": false,
+        "agreement": 0.93,
+        "kappa": 0.18604651162790828,
+        "reasons": [
+          "kappa 0.19 < 0.70"
+        ]
+      },
+      "Q1": {
+        "applicable": true,
+        "passed": false,
+        "agreement": 0.98,
+        "kappa": 0.4923857868020313,
+        "reasons": [
+          "kappa 0.49 < 0.60"
+        ]
+      },
+      "Q3": {
+        "applicable": true,
+        "passed": false,
+        "agreement": 0.54,
+        "kappa": 0.13533834586466167,
+        "reasons": [
+          "enighet 54.0% < 80%",
+          "kappa 0.14 < 0.60"
+        ]
+      },
+      "Q4": {
+        "applicable": true,
+        "passed": false,
+        "agreement": 1.0,
+        "kappa": null,
+        "reasons": [
+          "kappa kan inte beräknas"
+        ]
+      }
+    }
+  },
+  "disagreements": {
+    "per_axis": {
+      "Q1": {
+        "total": 2,
+        "by_type": {
+          "felavvikelse": 1,
+          "gränsfall": 0,
+          "faktaoenighet": 1
+        },
+        "posts": [
+          {
+            "sample_id": "cfq-636094743c79",
+            "a": "nej",
+            "b": "ja",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-c67b9f72a573",
+            "a": "nej",
+            "b": "ja",
+            "final": "osäker",
+            "type": "felavvikelse"
+          }
+        ]
+      },
+      "Q2": {
+        "total": 7,
+        "by_type": {
+          "felavvikelse": 2,
+          "gränsfall": 0,
+          "faktaoenighet": 5
+        },
+        "posts": [
+          {
+            "sample_id": "cfq-22096908a3be",
+            "a": "nej",
+            "b": "ja",
+            "final": "osäker",
+            "type": "felavvikelse"
+          },
+          {
+            "sample_id": "cfq-2218421025ec",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-330989a73d7b",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-6b820eff9e68",
+            "a": "nej",
+            "b": "ja",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-89e49f1feafc",
+            "a": "nej",
+            "b": "ja",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-a3b0f6a2a220",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-c67b9f72a573",
+            "a": "nej",
+            "b": "ja",
+            "final": "osäker",
+            "type": "felavvikelse"
+          }
+        ]
+      },
+      "Q3": {
+        "total": 46,
+        "by_type": {
+          "felavvikelse": 1,
+          "gränsfall": 0,
+          "faktaoenighet": 45
+        },
+        "posts": [
+          {
+            "sample_id": "cfq-0138fd99b729",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-01cbb750d41e",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-0c7daac7b169",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-132711f61736",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-1c665d14484d",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-21bd300c65f5",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-22096908a3be",
+            "a": "nej",
+            "b": "ja",
+            "final": "osäker",
+            "type": "felavvikelse"
+          },
+          {
+            "sample_id": "cfq-263707beae01",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-27b4a4e01eec",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-2850d782b4b0",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-2de09762c8ee",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-2fec5dd97b91",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-331f7fff01be",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-353b4fd14b66",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-3a379b96b51d",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-3ebf2f4f892e",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-4456743bf792",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-4cd813fe836e",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-4e4f3dcb1f66",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-57823d713c36",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-5978fd06ecb3",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-68df542d096f",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-8c0cd4a94809",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-943f4d72dbe2",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-a0b19c454454",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-a32e242a1918",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-aa7ad46f29d3",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-ac821964e132",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-afdfd3c65a86",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-b050155727b9",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-b169eed6f65d",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-b8e37f58ca62",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-bcceed51bbf8",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-c6701eaa0408",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-c91a64ad66c5",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-c9a332d6d44b",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-cf4a128ceae9",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-d6927521e13c",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-d7667bf33165",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-db6f5fff7917",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-e4300e287b92",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-e50bc41e7f66",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-ea8582890ce6",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-ee014395b0bf",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-f37e00c9e6c4",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          },
+          {
+            "sample_id": "cfq-ffa86d1f54c0",
+            "a": "ja",
+            "b": "nej",
+            "final": "osäker",
+            "type": "faktaoenighet"
+          }
+        ]
+      },
+      "Q4": {
+        "total": 0,
+        "by_type": {
+          "felavvikelse": 0,
+          "gränsfall": 0,
+          "faktaoenighet": 0
+        },
+        "posts": []
+      }
+    },
+    "unresolved_posts": 0
+  },
+  "errors": {
+    "causes": {
+      "by_cause": {
+        "frågeformulering": 0,
+        "facitvärde": 0,
+        "evidensspann": 0,
+        "validatorlucka": 0,
+        "genereringsfel": 0,
+        "juridisk_tolkning": 0
+      },
+      "total_classified": 0,
+      "roles": {
+        "facitfel": 0,
+        "mätbarhetsproblem": 0,
+        "systemfel": 0
+      }
+    },
+    "unclassified_posts": [
+      "cfq-0138fd99b729",
+      "cfq-01cbb750d41e",
+      "cfq-0c7daac7b169",
+      "cfq-132711f61736",
+      "cfq-1c665d14484d",
+      "cfq-21bd300c65f5",
+      "cfq-22096908a3be",
+      "cfq-2218421025ec",
+      "cfq-23eb63b616f2",
+      "cfq-263707beae01",
+      "cfq-26467397be65",
+      "cfq-27b4a4e01eec",
+      "cfq-2850d782b4b0",
+      "cfq-2a8937ed960c",
+      "cfq-2de09762c8ee",
+      "cfq-2fec5dd97b91",
+      "cfq-308aa934a26d",
+      "cfq-330989a73d7b",
+      "cfq-331f7fff01be",
+      "cfq-353b4fd14b66",
+      "cfq-3a379b96b51d",
+      "cfq-3ebf2f4f892e",
+      "cfq-4456743bf792",
+      "cfq-4cd813fe836e",
+      "cfq-4e4f3dcb1f66",
+      "cfq-57823d713c36",
+      "cfq-5978fd06ecb3",
+      "cfq-636094743c79",
+      "cfq-68df542d096f",
+      "cfq-6b820eff9e68",
+      "cfq-852fd8f79ffc",
+      "cfq-89e49f1feafc",
+      "cfq-8c0cd4a94809",
+      "cfq-943f4d72dbe2",
+      "cfq-a0b19c454454",
+      "cfq-a32e242a1918",
+      "cfq-a3b0f6a2a220",
+      "cfq-aa7ad46f29d3",
+      "cfq-ac35f1653ac9",
+      "cfq-ac821964e132",
+      "cfq-afdfd3c65a86",
+      "cfq-b050155727b9",
+      "cfq-b169eed6f65d",
+      "cfq-b8e37f58ca62",
+      "cfq-bcceed51bbf8",
+      "cfq-c6701eaa0408",
+      "cfq-c67b9f72a573",
+      "cfq-c91a64ad66c5",
+      "cfq-c9a332d6d44b",
+      "cfq-cf4a128ceae9",
+      "cfq-d2347da118e3",
+      "cfq-d6927521e13c",
+      "cfq-d7667bf33165",
+      "cfq-db6f5fff7917",
+      "cfq-e4300e287b92",
+      "cfq-e50bc41e7f66",
+      "cfq-ea8582890ce6",
+      "cfq-ee014395b0bf",
+      "cfq-eeb92c4957fa",
+      "cfq-f37e00c9e6c4",
+      "cfq-ffa86d1f54c0"
+    ],
+    "gate_passed": false
+  },
+  "population_estimate": {
+    "status": "not_computed",
+    "reason": "Ingen populationsfil angavs (--population). En viktad skattning kräver stratumstorlekarna i hela populationen; urvalsvärdet gäller urvalet.",
+    "source": "manifest.json (bara urvalets strata)"
+  },
+  "status": "measured – gates not all met",
+  "gates_all_met": false,
+  "completeness": {
+    "sampled": 100,
+    "uncoded_posts": 0,
+    "uncoded_sample_ids": [],
+    "complete": true,
+    "gate_passed": true
+  },
+  "notes": [
+    "Överensstämmelse är beräknad på ursprungliga individuella koder (7.5); en konsensuslösning påverkar endast postens kvalitet.",
+    "Urvalsvärdet är standard; en populationsskattning är ett separat tal (5.4).",
+    "Ett sammanslaget kappa över alla axlar får inte användas som grind (4.3)."
+  ]
+}

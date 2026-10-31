@@ -1,0 +1,2017 @@
+{
+  "rater": {
+    "rater_id": "B",
+    "model": "qwen-3.8-27b",
+    "temperature": 0.0,
+    "seed": 2026,
+    "max_tokens": 8000,
+    "timeout_s": 240.0,
+    "max_retries": 3,
+    "concurrency": 3
+  },
+  "pass": "pass2_verdict",
+  "prompt_version": "ai-review-verdict-v2",
+  "prompt_sha256": "d73f48177e68ab3fa1e6beed6432863e45121dce284f0c3f0c8cc0ce6feb0a05",
+  "results": [
+    {
+      "sample_id": "cfq-c1ab450cfb29",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt timarvode 1 150 SEK enligt klausul 3, och dokumentet saknar motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt timarvode 1 150 SEK enligt klausul 3, och dokumentet saknar motsägelser."
+      },
+      "usage_total_tokens": 2148,
+      "latency_ms": 1473.4630419989116,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:10.688582+00:00"
+    },
+    {
+      "sample_id": "cfq-22096908a3be",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger i sak samma omfattning som klausul 2, men med en kortare parafraz.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger i sak samma omfattning som klausul 2, men med en kortare parafraz."
+      },
+      "usage_total_tokens": 2152,
+      "latency_ms": 1448.9257920031378,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:12.162264+00:00"
+    },
+    {
+      "sample_id": "cfq-d6927521e13c",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt startdatum, men beviscitat saknar sammanhanget \\\"Uppdraget påbörjas\\\" för att fullt motivera att det är startdatum.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt startdatum, men beviscitat saknar sammanhanget \"Uppdraget påbörjas\" för att fullt motivera att det är startdatum."
+      },
+      "usage_total_tokens": 1928,
+      "latency_ms": 717.5668749987381,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:13.611574+00:00"
+    },
+    {
+      "sample_id": "cfq-2a8937ed960c",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt namn, men bevisningen saknar kopplingen till uppdragsgivaren.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt namn, men bevisningen saknar kopplingen till uppdragsgivaren."
+      },
+      "usage_total_tokens": 1603,
+      "latency_ms": 826.9069579982897,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:14.329493+00:00"
+    },
+    {
+      "sample_id": "cfq-8a0093833788",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\":\"ja\",\"Q2_answer_correct\":\"ja\",\"Q3_evidence_sufficient\":\"ja\",\"Q4_anomaly_handling\":\"ej_tillamplig\",\"comment\":\"Facit anger korrekt och entydigt 1 500 000 kronor/SEK enligt klausul 6 utan relevanta undantag.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt och entydigt 1 500 000 kronor/SEK enligt klausul 6 utan relevanta undantag."
+      },
+      "usage_total_tokens": 1583,
+      "latency_ms": 554.5642500001122,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:15.156769+00:00"
+    },
+    {
+      "sample_id": "cfq-2850d782b4b0",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt namn, men beviset saknar kopplingen till uppdragsgivaren.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt namn, men beviset saknar kopplingen till uppdragsgivaren."
+      },
+      "usage_total_tokens": 1838,
+      "latency_ms": 716.5926660018158,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:15.711708+00:00"
+    },
+    {
+      "sample_id": "cfq-21bd300c65f5",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt timarvode, men citatet '1 150 kr' saknar 'per timme' och är därför inte fullt tillräckligt för att motivera hela svaret.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt timarvode, men citatet '1 150 kr' saknar 'per timme' och är därför inte fullt tillräckligt för att motivera hela svaret."
+      },
+      "usage_total_tokens": 3494,
+      "latency_ms": 3170.8407500009343,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:16.428724+00:00"
+    },
+    {
+      "sample_id": "cfq-26eecb81b301",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Dokumentet anger entydigt timarvodet till 1 250 kr och facit fångar värdet samt valutan korrekt.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Dokumentet anger entydigt timarvodet till 1 250 kr och facit fångar värdet samt valutan korrekt."
+      },
+      "usage_total_tokens": 1612,
+      "latency_ms": 485.2242920023855,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:19.600325+00:00"
+    },
+    {
+      "sample_id": "cfq-57823d713c36",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt värde, men citatet saknar koppling till att det rör beräknad tidsåtgång.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt värde, men citatet saknar koppling till att det rör beräknad tidsåtgång."
+      },
+      "usage_total_tokens": 1832,
+      "latency_ms": 675.4600420026691,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:20.085727+00:00"
+    },
+    {
+      "sample_id": "cfq-6b820eff9e68",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt kärnvärde för Uppdragets omfattning enligt klausul 2, även om det är något förenklat jämfört med dokumenttexten.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt kärnvärde för Uppdragets omfattning enligt klausul 2, även om det är något förenklat jämfört med dokumenttexten."
+      },
+      "usage_total_tokens": 2526,
+      "latency_ms": 1299.7990000003483,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:20.761387+00:00"
+    },
+    {
+      "sample_id": "cfq-ea8582890ce6",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt startdatum som 2026-01-15, men evidenscitatet saknar kontexten \\\"inleds\\\" för att fullt motivera att det är startdatum.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt startdatum som 2026-01-15, men evidenscitatet saknar kontexten \"inleds\" för att fullt motivera att det är startdatum."
+      },
+      "usage_total_tokens": 2316,
+      "latency_ms": 1323.2812920032302,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:22.061493+00:00"
+    },
+    {
+      "sample_id": "cfq-331f7fff01be",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt parter, men evidenscitat saknar uttrycklig koppling till att de är avtalsparter.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt parter, men evidenscitat saknar uttrycklig koppling till att de är avtalsparter."
+      },
+      "usage_total_tokens": 2740,
+      "latency_ms": 1289.2308330010565,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:23.385028+00:00"
+    },
+    {
+      "sample_id": "cfq-bcceed51bbf8",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt parter, men citaten saknar den uttryckliga kopplingen att de är avtalsparter.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt parter, men citaten saknar den uttryckliga kopplingen att de är avtalsparter."
+      },
+      "usage_total_tokens": 1897,
+      "latency_ms": 750.7440420013154,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:24.674519+00:00"
+    },
+    {
+      "sample_id": "cfq-1a2c2fb72cf2",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\":\"ja\",\"Q2_answer_correct\":\"ja\",\"Q3_evidence_sufficient\":\"ja\",\"Q4_anomaly_handling\":\"ej_tillamplig\",\"comment\":\"Facit anger rätt omfattning men med en lätt parafras av dokumenttexten.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt omfattning men med en lätt parafras av dokumenttexten."
+      },
+      "usage_total_tokens": 1744,
+      "latency_ms": 775.6950419970963,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:25.425440+00:00"
+    },
+    {
+      "sample_id": "cfq-eeb92c4957fa",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"nej\", \"Q2_answer_correct\": \"nej\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit byter ut frågans begrepp \\\"Rättigheter till resultat\\\" på \\\"bakgrundsrättigheter\\\" och kan därför inte accepteras.\"}",
+      "parsed": {
+        "Q1_answerable": "nej",
+        "Q2_answer_correct": "nej",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit byter ut frågans begrepp \"Rättigheter till resultat\" på \"bakgrundsrättigheter\" och kan därför inte accepteras."
+      },
+      "usage_total_tokens": 1812,
+      "latency_ms": 741.735499999777,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:26.203549+00:00"
+    },
+    {
+      "sample_id": "cfq-c28154a58dd1",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Dokumentet anger entydigt ansvarsbegränsningen till 1 500 000 kronor och facit fångar värdet och valutan korrekt.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Dokumentet anger entydigt ansvarsbegränsningen till 1 500 000 kronor och facit fångar värdet och valutan korrekt."
+      },
+      "usage_total_tokens": 1988,
+      "latency_ms": 781.6384170000674,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:26.945468+00:00"
+    },
+    {
+      "sample_id": "cfq-fc814f788a3f",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger 6 månader vilket motsvarar dokumentets uttryckliga angivelse av ett halvår, och det finns inga motsägelser i avtalet.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger 6 månader vilket motsvarar dokumentets uttryckliga angivelse av ett halvår, och det finns inga motsägelser i avtalet."
+      },
+      "usage_total_tokens": 1653,
+      "latency_ms": 814.1393330006395,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:27.727313+00:00"
+    },
+    {
+      "sample_id": "cfq-dd5bb73c1a01",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Klausul 6 anger entydigt ansvarsbegränsningen till 1 500 000 kr, vilket facit återger korrekt.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Klausul 6 anger entydigt ansvarsbegränsningen till 1 500 000 kr, vilket facit återger korrekt."
+      },
+      "usage_total_tokens": 1854,
+      "latency_ms": 1090.5853339972964,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:28.541623+00:00"
+    },
+    {
+      "sample_id": "cfq-330989a73d7b",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"nej\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger det högsta värdet (9 månader) men identifierar inte entydigt att det är uppdragsperioden som är högst.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "nej",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger det högsta värdet (9 månader) men identifierar inte entydigt att det är uppdragsperioden som är högst."
+      },
+      "usage_total_tokens": 2741,
+      "latency_ms": 1422.6123340013146,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:29.632406+00:00"
+    },
+    {
+      "sample_id": "cfq-2fec5dd97b91",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit normaliserar ett kvartal till 3 månader, men citatet 'ett kvartal' motiverar inte explicit månadsvärdet.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit normaliserar ett kvartal till 3 månader, men citatet 'ett kvartal' motiverar inte explicit månadsvärdet."
+      },
+      "usage_total_tokens": 2508,
+      "latency_ms": 1203.1844170014665,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:31.055298+00:00"
+    },
+    {
+      "sample_id": "cfq-636094743c79",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit stämmer med klausul 8 och citatet är tillräckligt, utan relevanta undantag.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit stämmer med klausul 8 och citatet är tillräckligt, utan relevanta undantag."
+      },
+      "usage_total_tokens": 1883,
+      "latency_ms": 696.678708998661,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:32.259240+00:00"
+    },
+    {
+      "sample_id": "cfq-9716840b4f38",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit stämmer med klausul 8 och dokumentet saknar motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit stämmer med klausul 8 och dokumentet saknar motsägelser."
+      },
+      "usage_total_tokens": 1701,
+      "latency_ms": 565.907749998587,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:32.956515+00:00"
+    },
+    {
+      "sample_id": "cfq-cf4a128ceae9",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt värde, men bevisningen \\\"3 år\\\" saknar kontext för att koppla värdet till sekretessperioden.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt värde, men bevisningen \"3 år\" saknar kontext för att koppla värdet till sekretessperioden."
+      },
+      "usage_total_tokens": 1783,
+      "latency_ms": 832.0844169975317,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:33.522813+00:00"
+    },
+    {
+      "sample_id": "cfq-34e78b1321be",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Dokumentet anger entydigt uppsägningstid som 2 månader utan undantag eller motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Dokumentet anger entydigt uppsägningstid som 2 månader utan undantag eller motsägelser."
+      },
+      "usage_total_tokens": 1528,
+      "latency_ms": 501.456791000237,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:34.355200+00:00"
+    },
+    {
+      "sample_id": "cfq-ac821964e132",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt det högsta värdet 9 månader, men citaten saknar kontext för att koppla värdena till respektive begrepp.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt det högsta värdet 9 månader, men citaten saknar kontext för att koppla värdena till respektive begrepp."
+      },
+      "usage_total_tokens": 2613,
+      "latency_ms": 1561.1733330006246,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:34.856862+00:00"
+    },
+    {
+      "sample_id": "cfq-b050155727b9",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt part, men citaten saknar den explicita rolldefinitionen 'Konsulten' som behövs för att fullt motivera svaret.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt part, men citaten saknar den explicita rolldefinitionen 'Konsulten' som behövs för att fullt motivera svaret."
+      },
+      "usage_total_tokens": 1760,
+      "latency_ms": 594.9051669995242,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:36.418288+00:00"
+    },
+    {
+      "sample_id": "cfq-a0b19c454454",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt belopp men citaten saknar koppling till begreppen timarvode och utlägg.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt belopp men citaten saknar koppling till begreppen timarvode och utlägg."
+      },
+      "usage_total_tokens": 2833,
+      "latency_ms": 1226.7601659987122,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:37.013369+00:00"
+    },
+    {
+      "sample_id": "cfq-0d5ef4f2b59e",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit fångar rätt omfattning men är en parafas av dokumenttexten.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit fångar rätt omfattning men är en parafas av dokumenttexten."
+      },
+      "usage_total_tokens": 4181,
+      "latency_ms": 3912.8777500009164,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:38.240532+00:00"
+    },
+    {
+      "sample_id": "cfq-eda8ac94dc5f",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\":\"ja\",\"Q2_answer_correct\":\"ja\",\"Q3_evidence_sufficient\":\"ja\",\"Q4_anomaly_handling\":\"ej_tillamplig\",\"comment\":\"Dokumentet anger entydigt att uppdragsperioden är 9 månader i klausul 4.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Dokumentet anger entydigt att uppdragsperioden är 9 månader i klausul 4."
+      },
+      "usage_total_tokens": 1340,
+      "latency_ms": 455.1164999975299,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:42.154413+00:00"
+    },
+    {
+      "sample_id": "cfq-0c7daac7b169",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt belopp men citatet saknar koppling till att beloppet avser utläggsram.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt belopp men citatet saknar koppling till att beloppet avser utläggsram."
+      },
+      "usage_total_tokens": 1972,
+      "latency_ms": 914.3401670007734,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:42.609705+00:00"
+    },
+    {
+      "sample_id": "cfq-308aa934a26d",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt part men citaten saknar koppling till rollen Konsulten.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt part men citaten saknar koppling till rollen Konsulten."
+      },
+      "usage_total_tokens": 1961,
+      "latency_ms": 1003.3161669998663,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:43.524276+00:00"
+    },
+    {
+      "sample_id": "cfq-40fba125dcbe",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt de två avtalsparterna som framgår av klausul 1, och inga undantag eller motsägelser finns i dokumentet.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt de två avtalsparterna som framgår av klausul 1, och inga undantag eller motsägelser finns i dokumentet."
+      },
+      "usage_total_tokens": 3504,
+      "latency_ms": 1858.2410830022127,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:44.528101+00:00"
+    },
+    {
+      "sample_id": "cfq-3a379b96b51d",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt datum, men citatet saknar kontexten att det är startdatumet.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt datum, men citatet saknar kontexten att det är startdatumet."
+      },
+      "usage_total_tokens": 2138,
+      "latency_ms": 982.3482089996105,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:46.387131+00:00"
+    },
+    {
+      "sample_id": "cfq-2218421025ec",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"nej\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger bara det högsta värdet (6 månader) men inte att det är Uppdragsperioden som är högst.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "nej",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger bara det högsta värdet (6 månader) men inte att det är Uppdragsperioden som är högst."
+      },
+      "usage_total_tokens": 2524,
+      "latency_ms": 1105.621875001816,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:47.369699+00:00"
+    },
+    {
+      "sample_id": "cfq-132711f61736",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt värde men citatet saknar kontexten att det avser beräknad tidsåtgång.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt värde men citatet saknar kontexten att det avser beräknad tidsåtgång."
+      },
+      "usage_total_tokens": 1947,
+      "latency_ms": 755.1991660002386,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:48.475575+00:00"
+    },
+    {
+      "sample_id": "cfq-894a4317683b",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt att ett kvartal motsvarar 3 månader och dokumentet saknar motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt att ett kvartal motsvarar 3 månader och dokumentet saknar motsägelser."
+      },
+      "usage_total_tokens": 2024,
+      "latency_ms": 881.5066249990196,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:49.231027+00:00"
+    },
+    {
+      "sample_id": "cfq-1c665d14484d",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt timarvode, men beviscitat saknar koppling till timarvode och är därför inte fullt tillräckligt.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt timarvode, men beviscitat saknar koppling till timarvode och är därför inte fullt tillräckligt."
+      },
+      "usage_total_tokens": 3228,
+      "latency_ms": 1517.4895000018296,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:50.112741+00:00"
+    },
+    {
+      "sample_id": "cfq-ee014395b0bf",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit extraherar rätt värde, men citatet saknar kontext för att visa att det är Uppdragets omfattning.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit extraherar rätt värde, men citatet saknar kontext för att visa att det är Uppdragets omfattning."
+      },
+      "usage_total_tokens": 2699,
+      "latency_ms": 1244.7602090032888,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:51.630561+00:00"
+    },
+    {
+      "sample_id": "cfq-fe9a0ecd1adb",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Dokumentet anger entydigt sekretessperioden som 5 år i klausul 7, och facit motsvarar detta utan relevanta undantag.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Dokumentet anger entydigt sekretessperioden som 5 år i klausul 7, och facit motsvarar detta utan relevanta undantag."
+      },
+      "usage_total_tokens": 1953,
+      "latency_ms": 1023.9840840004035,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:52.875571+00:00"
+    },
+    {
+      "sample_id": "cfq-c71a437d6941",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit är i sak korrekt och stöds av klausul 8, men formuleringen är en förenkling av att Uppdragsgivaren förvärvar samtliga rättigheter till resultatet.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit är i sak korrekt och stöds av klausul 8, men formuleringen är en förenkling av att Uppdragsgivaren förvärvar samtliga rättigheter till resultatet."
+      },
+      "usage_total_tokens": 3545,
+      "latency_ms": 1808.608749997802,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:53.899763+00:00"
+    },
+    {
+      "sample_id": "cfq-509f2a36cf25",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger entydigt 5 år enligt klausul 7 och dokumentet saknar relevanta undantag.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger entydigt 5 år enligt klausul 7 och dokumentet saknar relevanta undantag."
+      },
+      "usage_total_tokens": 2528,
+      "latency_ms": 1294.3070000001171,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:55.709010+00:00"
+    },
+    {
+      "sample_id": "cfq-23eb63b616f2",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt part, men evidenscitat saknar kopplingen till rollen Uppdragsgivaren/client.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt part, men evidenscitat saknar kopplingen till rollen Uppdragsgivaren/client."
+      },
+      "usage_total_tokens": 1976,
+      "latency_ms": 687.1054160001222,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:57.003565+00:00"
+    },
+    {
+      "sample_id": "cfq-4456743bf792",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt värde men citatet saknar koppling till beräknad tidsåtgång.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt värde men citatet saknar koppling till beräknad tidsåtgång."
+      },
+      "usage_total_tokens": 2362,
+      "latency_ms": 1067.5151659997937,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:57.691158+00:00"
+    },
+    {
+      "sample_id": "cfq-afdfd3c65a86",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt timarvode, men beviscitat saknar ordet timarvode och är därför inte fullt tillräckligt.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt timarvode, men beviscitat saknar ordet timarvode och är därför inte fullt tillräckligt."
+      },
+      "usage_total_tokens": 2276,
+      "latency_ms": 918.8262919997214,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:58.759060+00:00"
+    },
+    {
+      "sample_id": "cfq-aa7ad46f29d3",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt datum, men citatet saknar ordet 'påbörjas' och visar därför inte tydligt att det är startdatumet.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt datum, men citatet saknar ordet 'påbörjas' och visar därför inte tydligt att det är startdatumet."
+      },
+      "usage_total_tokens": 1783,
+      "latency_ms": 601.584083000489,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:26:59.678120+00:00"
+    },
+    {
+      "sample_id": "cfq-6798cf1bfcf4",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt timarvode 1 150 SEK enligt klausul 3, och dokumentet saknar motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt timarvode 1 150 SEK enligt klausul 3, och dokumentet saknar motsägelser."
+      },
+      "usage_total_tokens": 2033,
+      "latency_ms": 870.8733749990643,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:00.279916+00:00"
+    },
+    {
+      "sample_id": "cfq-8c0cd4a94809",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt 3 år, men beviscitat saknar kontext för att koppla värdet till sekretessperioden.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt 3 år, men beviscitat saknar kontext för att koppla värdet till sekretessperioden."
+      },
+      "usage_total_tokens": 1841,
+      "latency_ms": 1151.4217500007362,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:01.151303+00:00"
+    },
+    {
+      "sample_id": "cfq-1b6409e30fb5",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\":\"ja\",\"Q2_answer_correct\":\"ja\",\"Q3_evidence_sufficient\":\"ja\",\"Q4_anomaly_handling\":\"ej_tillamplig\",\"comment\":\"Facit anger korrekt startdatum som ISO-datum och stöds av dokumenttexten utan motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt startdatum som ISO-datum och stöds av dokumenttexten utan motsägelser."
+      },
+      "usage_total_tokens": 1555,
+      "latency_ms": 507.18966700151213,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:02.302953+00:00"
+    },
+    {
+      "sample_id": "cfq-3ebf2f4f892e",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\":\"ja\",\"Q2_answer_correct\":\"ja\",\"Q3_evidence_sufficient\":\"nej\",\"Q4_anomaly_handling\":\"ej_tillamplig\",\"comment\":\"Facit anger rätt betalningstid, men citatet '45 dagar' saknar kontext för att visa att det avser fakturor/betalningsvillkor.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt betalningstid, men citatet '45 dagar' saknar kontext för att visa att det avser fakturor/betalningsvillkor."
+      },
+      "usage_total_tokens": 2010,
+      "latency_ms": 860.624666998774,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:02.810553+00:00"
+    },
+    {
+      "sample_id": "cfq-8bed8d4cd507",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\":\"ja\",\"Q2_answer_correct\":\"ja\",\"Q3_evidence_sufficient\":\"ja\",\"Q4_anomaly_handling\":\"ej_tillamplig\",\"comment\":\"Facit stämmer med klausul 8 och dokumentet saknar motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit stämmer med klausul 8 och dokumentet saknar motsägelser."
+      },
+      "usage_total_tokens": 1479,
+      "latency_ms": 1596.2369160006347,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:03.671447+00:00"
+    },
+    {
+      "sample_id": "cfq-b169eed6f65d",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt betalningstid, men beviscitatet är för kort för att koppla värdet till betalningsvillkoret.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt betalningstid, men beviscitatet är för kort för att koppla värdet till betalningsvillkoret."
+      },
+      "usage_total_tokens": 1892,
+      "latency_ms": 864.8262500028068,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:05.267882+00:00"
+    },
+    {
+      "sample_id": "cfq-df46835c9713",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Dokumentet anger entydigt uppsägningstiden som 3 månader och facit motsvarar detta.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Dokumentet anger entydigt uppsägningstiden som 3 månader och facit motsvarar detta."
+      },
+      "usage_total_tokens": 1816,
+      "latency_ms": 843.3153750011115,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:06.133057+00:00"
+    },
+    {
+      "sample_id": "cfq-4b45013d60a7",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Dokumentet anger entydigt betalningsvillkoret som 45 dagar och facit stämmer med texten.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Dokumentet anger entydigt betalningsvillkoret som 45 dagar och facit stämmer med texten."
+      },
+      "usage_total_tokens": 1989,
+      "latency_ms": 913.4381669973664,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:06.976575+00:00"
+    },
+    {
+      "sample_id": "cfq-b8e37f58ca62",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facits citat anger endast namnet och saknar den uttryckliga kopplingen till att Sundberg Handel AB är Uppdragsgivaren.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facits citat anger endast namnet och saknar den uttryckliga kopplingen till att Sundberg Handel AB är Uppdragsgivaren."
+      },
+      "usage_total_tokens": 1692,
+      "latency_ms": 684.6757499988598,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:07.890306+00:00"
+    },
+    {
+      "sample_id": "cfq-ae7ff6cb03d2",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Dokumentet anger entydigt att uppdragsperioden är ett halvår och uppsägningstiden ett kvartal, vilket gör att facits 6 månader är det högsta värdet.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Dokumentet anger entydigt att uppdragsperioden är ett halvår och uppsägningstiden ett kvartal, vilket gör att facits 6 månader är det högsta värdet."
+      },
+      "usage_total_tokens": 1942,
+      "latency_ms": 991.8201670006965,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:08.575169+00:00"
+    },
+    {
+      "sample_id": "cfq-b96141d16d76",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit fångar huvudinnehållet i klausul 8, även om 'äger resultatet' är en förenkling av 'förvärvar samtliga rättigheter till resultatet'.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit fångar huvudinnehållet i klausul 8, även om 'äger resultatet' är en förenkling av 'förvärvar samtliga rättigheter till resultatet'."
+      },
+      "usage_total_tokens": 3143,
+      "latency_ms": 1960.1953749988752,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:09.567279+00:00"
+    },
+    {
+      "sample_id": "cfq-f37e00c9e6c4",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt betalningsfrist, men citatet saknar tillräcklig kontext för att entydigt koppla värdet till betalningsvillkoret.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt betalningsfrist, men citatet saknar tillräcklig kontext för att entydigt koppla värdet till betalningsvillkoret."
+      },
+      "usage_total_tokens": 1975,
+      "latency_ms": 817.2211659984896,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:11.528095+00:00"
+    },
+    {
+      "sample_id": "cfq-5978fd06ecb3",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt part, men evidenscitat saknar uttrycklig koppling till rollen Konsulten.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt part, men evidenscitat saknar uttrycklig koppling till rollen Konsulten."
+      },
+      "usage_total_tokens": 1867,
+      "latency_ms": 634.8217500017199,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:12.345711+00:00"
+    },
+    {
+      "sample_id": "cfq-7e5169347752",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt startdatum som 15 januari 2026 och citatet är tillräckligt eftersom det är det enda datumet i avtalet.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt startdatum som 15 januari 2026 och citatet är tillräckligt eftersom det är det enda datumet i avtalet."
+      },
+      "usage_total_tokens": 2939,
+      "latency_ms": 1472.092915999383,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:12.980956+00:00"
+    },
+    {
+      "sample_id": "cfq-d7667bf33165",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt part, men citaten saknar den uttryckliga kopplingen till rollen Konsulten.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt part, men citaten saknar den uttryckliga kopplingen till rollen Konsulten."
+      },
+      "usage_total_tokens": 1961,
+      "latency_ms": 649.2025410007045,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:14.453651+00:00"
+    },
+    {
+      "sample_id": "cfq-01cbb750d41e",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt parter, men evidens saknar formuleringen som visar att de är avtalsparter.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt parter, men evidens saknar formuleringen som visar att de är avtalsparter."
+      },
+      "usage_total_tokens": 3023,
+      "latency_ms": 1390.9216669999296,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:15.103384+00:00"
+    },
+    {
+      "sample_id": "cfq-82b6cf45c228",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt kärnan i klausul 8 men är ofullständigt eftersom det utesluter att rättigheten gäller allt resultat som framkommer i samband med uppdraget.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt kärnan i klausul 8 men är ofullständigt eftersom det utesluter att rättigheten gäller allt resultat som framkommer i samband med uppdraget."
+      },
+      "usage_total_tokens": 2597,
+      "latency_ms": 1372.865916997398,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:16.494991+00:00"
+    },
+    {
+      "sample_id": "cfq-1346774db4e1",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt startdatum som 2026-02-01 enligt klausul 4, och dokumentet innehåller inga motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt startdatum som 2026-02-01 enligt klausul 4, och dokumentet innehåller inga motsägelser."
+      },
+      "usage_total_tokens": 2738,
+      "latency_ms": 1481.5717919991584,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:17.868233+00:00"
+    },
+    {
+      "sample_id": "cfq-353b4fd14b66",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger det högre värdet korrekt, men citaten saknar tillräcklig kontext för att koppla beloppen till timarvode respektive utläggsram.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger det högre värdet korrekt, men citaten saknar tillräcklig kontext för att koppla beloppen till timarvode respektive utläggsram."
+      },
+      "usage_total_tokens": 2242,
+      "latency_ms": 1077.8520419989945,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:19.350566+00:00"
+    },
+    {
+      "sample_id": "cfq-47a3b5e57f84",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit omvandlar det entydiga avtalsuttrycket 'ett kvartal' till 3 månader, och dokumentet saknar motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit omvandlar det entydiga avtalsuttrycket 'ett kvartal' till 3 månader, och dokumentet saknar motsägelser."
+      },
+      "usage_total_tokens": 2089,
+      "latency_ms": 1913.0649999970046,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:20.428772+00:00"
+    },
+    {
+      "sample_id": "cfq-d2347da118e3",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\":\"ja\",\"Q2_answer_correct\":\"ja\",\"Q3_evidence_sufficient\":\"nej\",\"Q4_anomaly_handling\":\"ej_tillamplig\",\"comment\":\"Facit anger rätt part, men evidenscitatet saknar uttrycket konsult och är därför inte tillräckligt för att motivera hela svaret.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt part, men evidenscitatet saknar uttrycket konsult och är därför inte tillräckligt för att motivera hela svaret."
+      },
+      "usage_total_tokens": 1443,
+      "latency_ms": 596.4624580010423,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:22.342324+00:00"
+    },
+    {
+      "sample_id": "cfq-db6f5fff7917",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt namn, men bevisningen saknar kopplingen till Uppdragsgivaren.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt namn, men bevisningen saknar kopplingen till Uppdragsgivaren."
+      },
+      "usage_total_tokens": 1836,
+      "latency_ms": 661.9427089972305,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:22.938967+00:00"
+    },
+    {
+      "sample_id": "cfq-b02beb9cf3bc",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt startdatum 2026-01-15 från punkt 4 och dokumentet innehåller inga motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt startdatum 2026-01-15 från punkt 4 och dokumentet innehåller inga motsägelser."
+      },
+      "usage_total_tokens": 1640,
+      "latency_ms": 522.652375002508,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:23.601196+00:00"
+    },
+    {
+      "sample_id": "cfq-fa80849a1c9a",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt 75 000 SEK enligt klausul 5, och dokumentet saknar motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt 75 000 SEK enligt klausul 5, och dokumentet saknar motsägelser."
+      },
+      "usage_total_tokens": 2157,
+      "latency_ms": 915.0256250031816,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:24.124126+00:00"
+    },
+    {
+      "sample_id": "cfq-2de09762c8ee",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\":\"ja\",\"Q2_answer_correct\":\"ja\",\"Q3_evidence_sufficient\":\"nej\",\"Q4_anomaly_handling\":\"ej_tillamplig\",\"comment\":\"Facit anger rätt part, men citaten saknar uttrycket konsult och visar därför inte kopplingen till rollen consultant.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt part, men citaten saknar uttrycket konsult och visar därför inte kopplingen till rollen consultant."
+      },
+      "usage_total_tokens": 1806,
+      "latency_ms": 646.670958998584,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:25.039497+00:00"
+    },
+    {
+      "sample_id": "cfq-852fd8f79ffc",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt part, men evidenscitat saknar koppling till rollen Uppdragsgivaren/client.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt part, men evidenscitat saknar koppling till rollen Uppdragsgivaren/client."
+      },
+      "usage_total_tokens": 1814,
+      "latency_ms": 623.5942919993249,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:25.686395+00:00"
+    },
+    {
+      "sample_id": "cfq-0df3111fbf05",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Klausul 4 anger entydigt att uppdragsperioden är sex månader, och facit fångar detta värde korrekt.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Klausul 4 anger entydigt att uppdragsperioden är sex månader, och facit fångar detta värde korrekt."
+      },
+      "usage_total_tokens": 1635,
+      "latency_ms": 666.6462920002232,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:26.310324+00:00"
+    },
+    {
+      "sample_id": "cfq-c91a64ad66c5",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt 30 dagar, men citatet '30 dagar' saknar kontext för att fullt motivera att det är betalningsvillkoret.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt 30 dagar, men citatet '30 dagar' saknar kontext för att fullt motivera att det är betalningsvillkoret."
+      },
+      "usage_total_tokens": 2246,
+      "latency_ms": 950.62304199746,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:26.977230+00:00"
+    },
+    {
+      "sample_id": "cfq-cd169ff20493",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Dokumentet anger entydigt ansvarsbegränsningen till 1 500 000 kr och facit fångar detta värde korrekt.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Dokumentet anger entydigt ansvarsbegränsningen till 1 500 000 kr och facit fångar detta värde korrekt."
+      },
+      "usage_total_tokens": 2015,
+      "latency_ms": 760.5249580010423,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:27.928242+00:00"
+    },
+    {
+      "sample_id": "cfq-4cd813fe836e",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt parter, men citaten saknar kontexten att de är avtalsparter och att inga andra parter finns.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt parter, men citaten saknar kontexten att de är avtalsparter och att inga andra parter finns."
+      },
+      "usage_total_tokens": 2583,
+      "latency_ms": 1154.3327089966624,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:28.688976+00:00"
+    },
+    {
+      "sample_id": "cfq-ac35f1653ac9",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit identifierar rätt part, men citaten saknar kopplingen till rollen Uppdragsgivaren/client.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit identifierar rätt part, men citaten saknar kopplingen till rollen Uppdragsgivaren/client."
+      },
+      "usage_total_tokens": 1693,
+      "latency_ms": 712.3154159999103,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:29.843537+00:00"
+    },
+    {
+      "sample_id": "cfq-92b0370a35e3",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit extraherar entydigt ägandet av resultatet från klausul 8 utan relevanta undantag.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit extraherar entydigt ägandet av resultatet från klausul 8 utan relevanta undantag."
+      },
+      "usage_total_tokens": 1687,
+      "latency_ms": 753.8967920008872,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:30.556008+00:00"
+    },
+    {
+      "sample_id": "cfq-b87c67e7c596",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger entydigt 45 dagar från klausul 5 och dokumentet saknar motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger entydigt 45 dagar från klausul 5 och dokumentet saknar motsägelser."
+      },
+      "usage_total_tokens": 2122,
+      "latency_ms": 928.275999998732,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:31.310066+00:00"
+    },
+    {
+      "sample_id": "cfq-e4300e287b92",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facits citat saknar kontexten 'Timarvodet är' och räcker därför inte för att motivera hela svaret.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facits citat saknar kontexten 'Timarvodet är' och räcker därför inte för att motivera hela svaret."
+      },
+      "usage_total_tokens": 2446,
+      "latency_ms": 1293.4416249991045,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:32.238545+00:00"
+    },
+    {
+      "sample_id": "cfq-0138fd99b729",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt belopp, men evidenscitatet saknar kontext för att entydigt koppla beloppet till ansvarsbegränsningen.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt belopp, men evidenscitatet saknar kontext för att entydigt koppla beloppet till ansvarsbegränsningen."
+      },
+      "usage_total_tokens": 2080,
+      "latency_ms": 792.1422079998592,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:33.532238+00:00"
+    },
+    {
+      "sample_id": "cfq-c9a332d6d44b",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt värde, men citatet saknar kontext för att visa att beloppet är kostnadsramen för utlägg.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt värde, men citatet saknar kontext för att visa att beloppet är kostnadsramen för utlägg."
+      },
+      "usage_total_tokens": 1767,
+      "latency_ms": 670.0135419996514,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:34.324670+00:00"
+    },
+    {
+      "sample_id": "cfq-26467397be65",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facits citat identifierar Nordvik Teknik AB men saknar uttryckligen rollen uppdragsgivare/client.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facits citat identifierar Nordvik Teknik AB men saknar uttryckligen rollen uppdragsgivare/client."
+      },
+      "usage_total_tokens": 1606,
+      "latency_ms": 742.6158750022296,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:34.994857+00:00"
+    },
+    {
+      "sample_id": "cfq-c6701eaa0408",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facits citat \\\"45 dagar\\\" saknar tillräcklig kontext för att visa att värdet avser betalningstid för fakturor.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facits citat \"45 dagar\" saknar tillräcklig kontext för att visa att värdet avser betalningstid för fakturor."
+      },
+      "usage_total_tokens": 2389,
+      "latency_ms": 1417.1230000029027,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:35.737645+00:00"
+    },
+    {
+      "sample_id": "cfq-89e49f1feafc",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Klausul 2 anger entydigt omfattningen och facit är en korrekt sammanfattning av citatet.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Klausul 2 anger entydigt omfattningen och facit är en korrekt sammanfattning av citatet."
+      },
+      "usage_total_tokens": 1537,
+      "latency_ms": 807.2237499982293,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:37.155000+00:00"
+    },
+    {
+      "sample_id": "cfq-943f4d72dbe2",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt parter, men evidens saknar klausulens kontext för att bevisa att de är avtalsparter.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt parter, men evidens saknar klausulens kontext för att bevisa att de är avtalsparter."
+      },
+      "usage_total_tokens": 1721,
+      "latency_ms": 1006.5803329998744,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:37.962410+00:00"
+    },
+    {
+      "sample_id": "cfq-c67b9f72a573",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit identifierar rätt part men citaten saknar koppling till rollen client/uppdragsgivare.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit identifierar rätt part men citaten saknar koppling till rollen client/uppdragsgivare."
+      },
+      "usage_total_tokens": 5477,
+      "latency_ms": 3526.648707997083,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:38.969199+00:00"
+    },
+    {
+      "sample_id": "cfq-9b3e529755b8",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit extraherar korrekt värde från klausul 8 utan relevanta undantag eller motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit extraherar korrekt värde från klausul 8 utan relevanta undantag eller motsägelser."
+      },
+      "usage_total_tokens": 1897,
+      "latency_ms": 655.795083999692,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:42.496364+00:00"
+    },
+    {
+      "sample_id": "cfq-016490686c63",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Dokumentet anger entydigt att uppdragsperioden är 9 månader utan relevanta undantag eller motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Dokumentet anger entydigt att uppdragsperioden är 9 månader utan relevanta undantag eller motsägelser."
+      },
+      "usage_total_tokens": 1555,
+      "latency_ms": 430.03391700040083,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:43.152339+00:00"
+    },
+    {
+      "sample_id": "cfq-6b425b2ddf89",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt 75 000 SEK enligt klausul 5, och citatet är tillräckligt för värdet.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt 75 000 SEK enligt klausul 5, och citatet är tillräckligt för värdet."
+      },
+      "usage_total_tokens": 3084,
+      "latency_ms": 1915.7091250017402,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:43.582526+00:00"
+    },
+    {
+      "sample_id": "cfq-a32e242a1918",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\":\"ja\",\"Q2_answer_correct\":\"ja\",\"Q3_evidence_sufficient\":\"nej\",\"Q4_anomaly_handling\":\"ej_tillamplig\",\"comment\":\"Facit anger rätt part, men citaten saknar uttrycket 'hädanefter Konsulten' och är därför inte tillräckliga för att bevisa rollen.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt part, men citaten saknar uttrycket 'hädanefter Konsulten' och är därför inte tillräckliga för att bevisa rollen."
+      },
+      "usage_total_tokens": 2068,
+      "latency_ms": 1061.7029999993974,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:45.498652+00:00"
+    },
+    {
+      "sample_id": "cfq-ffa86d1f54c0",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt högst värde, men citaten saknar kontext för att koppla beloppen till respektive begrepp.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt högst värde, men citaten saknar kontext för att koppla beloppen till respektive begrepp."
+      },
+      "usage_total_tokens": 4356,
+      "latency_ms": 2660.7689579977887,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:46.560540+00:00"
+    },
+    {
+      "sample_id": "cfq-aeaccfe9b356",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt 400 timmar enligt klausul 3 och dokumentet saknar motsägelser.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt 400 timmar enligt klausul 3 och dokumentet saknar motsägelser."
+      },
+      "usage_total_tokens": 1789,
+      "latency_ms": 677.5354159981362,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:49.222026+00:00"
+    },
+    {
+      "sample_id": "cfq-4e4f3dcb1f66",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt betalningsvillkor, men beviscitat saknar kontext för att koppla 45 dagar till betalning.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt betalningsvillkor, men beviscitat saknar kontext för att koppla 45 dagar till betalning."
+      },
+      "usage_total_tokens": 1864,
+      "latency_ms": 762.6405420014635,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:49.899832+00:00"
+    },
+    {
+      "sample_id": "cfq-1802cb0d030c",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger det högsta värdet 6 månader, vilket stämmer med uppdragsperioden ett halvår mot uppsägningstid ett kvartal.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger det högsta värdet 6 månader, vilket stämmer med uppdragsperioden ett halvår mot uppsägningstid ett kvartal."
+      },
+      "usage_total_tokens": 2109,
+      "latency_ms": 1400.6604999995034,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:50.662668+00:00"
+    },
+    {
+      "sample_id": "cfq-27b4a4e01eec",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger korrekt 45 dagar, men beviscitatet är för kort för att fullt motivera kopplingen till betalningsvillkoret.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger korrekt 45 dagar, men beviscitatet är för kort för att fullt motivera kopplingen till betalningsvillkoret."
+      },
+      "usage_total_tokens": 2304,
+      "latency_ms": 1042.8780830006872,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:52.063534+00:00"
+    },
+    {
+      "sample_id": "cfq-a3b0f6a2a220",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"nej\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger 6 månader men identifierar inte entydigt att Uppdragsperiod är det högsta alternativet.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "nej",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger 6 månader men identifierar inte entydigt att Uppdragsperiod är det högsta alternativet."
+      },
+      "usage_total_tokens": 2726,
+      "latency_ms": 1355.923792001704,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:53.106613+00:00"
+    },
+    {
+      "sample_id": "cfq-263707beae01",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt värde, men citatet saknar kopplingen till Uppdragsgivaren.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt värde, men citatet saknar kopplingen till Uppdragsgivaren."
+      },
+      "usage_total_tokens": 1788,
+      "latency_ms": 981.4064579986734,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:54.462919+00:00"
+    },
+    {
+      "sample_id": "cfq-68df542d096f",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt värde, men citatet \\\"9 månader\\\" saknar koppling till Uppdragsperiod och räcker därför inte för hela svaret.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt värde, men citatet \"9 månader\" saknar koppling till Uppdragsperiod och räcker därför inte för hela svaret."
+      },
+      "usage_total_tokens": 1705,
+      "latency_ms": 1022.7571249997709,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:55.444501+00:00"
+    },
+    {
+      "sample_id": "cfq-525c4750bc67",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"ja\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt omfattning men med en lätt omformulering av dokumenttexten.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "ja",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt omfattning men med en lätt omformulering av dokumenttexten."
+      },
+      "usage_total_tokens": 1693,
+      "latency_ms": 1127.5874999992084,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:56.467452+00:00"
+    },
+    {
+      "sample_id": "cfq-e50bc41e7f66",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass2_verdict",
+      "prompt_version": "ai-review-verdict-v2",
+      "response_text": "\n\n{\"Q1_answerable\": \"ja\", \"Q2_answer_correct\": \"ja\", \"Q3_evidence_sufficient\": \"nej\", \"Q4_anomaly_handling\": \"ej_tillamplig\", \"comment\": \"Facit anger rätt belopp, men citaten saknar tillräcklig kontext för att koppla 75 000 kr till kostnadsramen för utlägg.\"}",
+      "parsed": {
+        "Q1_answerable": "ja",
+        "Q2_answer_correct": "ja",
+        "Q3_evidence_sufficient": "nej",
+        "Q4_anomaly_handling": "ej_tillamplig",
+        "comment": "Facit anger rätt belopp, men citaten saknar tillräcklig kontext för att koppla 75 000 kr till kostnadsramen för utlägg."
+      },
+      "usage_total_tokens": 4145,
+      "latency_ms": 2933.7670839995553,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:27:57.595380+00:00"
+    }
+  ]
+}

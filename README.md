@@ -261,6 +261,11 @@ hashar, och `score-ratings` beräknar felprocent, Wilson-KI, överensstämmelse
 alltid på de **ursprungliga individuella** koderna; en efterhandsbedömning får
 bara avgöra postens kvalitet, aldrig kappavärdet.
 
+En **preliminär modellbaserad omgång** är genomförd (gpt-oss-120b + qwen-3.8-27b,
+två pass, 100 frågor): [`docs/quality-report-ai-preliminary.md`](docs/quality-report-ai-preliminary.md).
+Den är en prioriteringslista för den mänskliga granskningen – inte en
+kvalitetsmätning enligt grindarna, eftersom raterna är modeller.
+
 Ett färdigt mätpaket finns: [`examples/qsample_live_100/`](examples/qsample_live_100/)
 – 100 blinda frågor från live-datasetet (källa `cerebras_consulting_100.zip`,
 SHA-256 `43448450…ae7e`, urvals-seed 2026, `selection_sha256`

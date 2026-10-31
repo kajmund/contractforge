@@ -1,0 +1,490 @@
+{
+  "schema_version": "1.0",
+  "kind": "ai_review_run",
+  "created_at": "2026-10-31T17:25:00.387692+00:00",
+  "packet": {
+    "path": "examples/qsample_live_100",
+    "source_sha256": "4344845099a39dbdc7d09c54f6d50cf03e74d1f831c78eda34cb67182893ae7e",
+    "selection_sha256": "1272bd8a819f1b39bfe6b17225da64635dad50854f42ad66be8665886702f650",
+    "sample_size": 100
+  },
+  "prompts": {
+    "pass1": {
+      "version": "ai-review-answer-v1",
+      "sha256": "95d85b0cddf495b0672d8b3edd9df0049c347a6bf35838c7ac20880490edc263"
+    },
+    "pass2": {
+      "version": "ai-review-verdict-v2",
+      "sha256": "d73f48177e68ab3fa1e6beed6432863e45121dce284f0c3f0c8cc0ce6feb0a05"
+    }
+  },
+  "raters": [
+    {
+      "rater_id": "A",
+      "model": "gpt-oss-120b",
+      "temperature": 0.0,
+      "seed": 2026,
+      "max_tokens": 8000,
+      "provider": "cerebras"
+    },
+    {
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "temperature": 0.0,
+      "seed": 2026,
+      "max_tokens": 8000,
+      "provider": "cerebras"
+    }
+  ],
+  "reservation": "PRELIMINÄR MODELLBASERAD GRANSKNING. Raterna är språkmodeller via Cerebras; en av dem (gpt-oss-120b) genererade dessutom korpusen. Deras enighet är därför inget bevis för juridisk korrekthet och får inte ersätta mänsklig granskning.",
+  "protocol": "docs/quality-protocol.md (7.4–7.6): separat, blind, två pass",
+  "comparison": {
+    "per_sample": {
+      "cfq-c1ab450cfb29": {
+        "A": false,
+        "B": true
+      },
+      "cfq-22096908a3be": {
+        "A": false,
+        "B": false
+      },
+      "cfq-d6927521e13c": {
+        "A": false,
+        "B": false
+      },
+      "cfq-2a8937ed960c": {
+        "A": true,
+        "B": true
+      },
+      "cfq-8a0093833788": {
+        "A": true,
+        "B": true
+      },
+      "cfq-2850d782b4b0": {
+        "A": true,
+        "B": true
+      },
+      "cfq-21bd300c65f5": {
+        "A": false,
+        "B": true
+      },
+      "cfq-26eecb81b301": {
+        "A": false,
+        "B": true
+      },
+      "cfq-57823d713c36": {
+        "A": true,
+        "B": true
+      },
+      "cfq-6b820eff9e68": {
+        "A": false,
+        "B": false
+      },
+      "cfq-ea8582890ce6": {
+        "A": false,
+        "B": false
+      },
+      "cfq-331f7fff01be": {
+        "A": true,
+        "B": true
+      },
+      "cfq-bcceed51bbf8": {
+        "A": true,
+        "B": true
+      },
+      "cfq-1a2c2fb72cf2": {
+        "A": false,
+        "B": false
+      },
+      "cfq-eeb92c4957fa": {
+        "A": false,
+        "B": false
+      },
+      "cfq-c28154a58dd1": {
+        "A": true,
+        "B": true
+      },
+      "cfq-fc814f788a3f": {
+        "A": true,
+        "B": true
+      },
+      "cfq-dd5bb73c1a01": {
+        "A": false,
+        "B": true
+      },
+      "cfq-330989a73d7b": {
+        "A": false,
+        "B": false
+      },
+      "cfq-2fec5dd97b91": {
+        "A": true,
+        "B": true
+      },
+      "cfq-636094743c79": {
+        "A": false,
+        "B": false
+      },
+      "cfq-9716840b4f38": {
+        "A": true,
+        "B": true
+      },
+      "cfq-cf4a128ceae9": {
+        "A": true,
+        "B": true
+      },
+      "cfq-34e78b1321be": {
+        "A": true,
+        "B": true
+      },
+      "cfq-ac821964e132": {
+        "A": false,
+        "B": true
+      },
+      "cfq-b050155727b9": {
+        "A": true,
+        "B": true
+      },
+      "cfq-a0b19c454454": {
+        "A": false,
+        "B": false
+      },
+      "cfq-0d5ef4f2b59e": {
+        "A": false,
+        "B": false
+      },
+      "cfq-eda8ac94dc5f": {
+        "A": true,
+        "B": true
+      },
+      "cfq-0c7daac7b169": {
+        "A": false,
+        "B": true
+      },
+      "cfq-308aa934a26d": {
+        "A": true,
+        "B": true
+      },
+      "cfq-40fba125dcbe": {
+        "A": true,
+        "B": true
+      },
+      "cfq-3a379b96b51d": {
+        "A": false,
+        "B": false
+      },
+      "cfq-2218421025ec": {
+        "A": true,
+        "B": false
+      },
+      "cfq-132711f61736": {
+        "A": true,
+        "B": true
+      },
+      "cfq-894a4317683b": {
+        "A": true,
+        "B": true
+      },
+      "cfq-1c665d14484d": {
+        "A": false,
+        "B": true
+      },
+      "cfq-ee014395b0bf": {
+        "A": true,
+        "B": true
+      },
+      "cfq-fe9a0ecd1adb": {
+        "A": true,
+        "B": true
+      },
+      "cfq-c71a437d6941": {
+        "A": false,
+        "B": false
+      },
+      "cfq-509f2a36cf25": {
+        "A": true,
+        "B": true
+      },
+      "cfq-23eb63b616f2": {
+        "A": true,
+        "B": true
+      },
+      "cfq-4456743bf792": {
+        "A": true,
+        "B": true
+      },
+      "cfq-afdfd3c65a86": {
+        "A": false,
+        "B": true
+      },
+      "cfq-aa7ad46f29d3": {
+        "A": false,
+        "B": false
+      },
+      "cfq-6798cf1bfcf4": {
+        "A": false,
+        "B": true
+      },
+      "cfq-8c0cd4a94809": {
+        "A": true,
+        "B": true
+      },
+      "cfq-1b6409e30fb5": {
+        "A": false,
+        "B": false
+      },
+      "cfq-3ebf2f4f892e": {
+        "A": true,
+        "B": true
+      },
+      "cfq-8bed8d4cd507": {
+        "A": false,
+        "B": true
+      },
+      "cfq-b169eed6f65d": {
+        "A": true,
+        "B": true
+      },
+      "cfq-df46835c9713": {
+        "A": true,
+        "B": true
+      },
+      "cfq-4b45013d60a7": {
+        "A": true,
+        "B": true
+      },
+      "cfq-b8e37f58ca62": {
+        "A": true,
+        "B": true
+      },
+      "cfq-ae7ff6cb03d2": {
+        "A": false,
+        "B": false
+      },
+      "cfq-b96141d16d76": {
+        "A": false,
+        "B": false
+      },
+      "cfq-f37e00c9e6c4": {
+        "A": true,
+        "B": true
+      },
+      "cfq-5978fd06ecb3": {
+        "A": true,
+        "B": true
+      },
+      "cfq-7e5169347752": {
+        "A": false,
+        "B": false
+      },
+      "cfq-d7667bf33165": {
+        "A": true,
+        "B": true
+      },
+      "cfq-01cbb750d41e": {
+        "A": true,
+        "B": true
+      },
+      "cfq-82b6cf45c228": {
+        "A": false,
+        "B": true
+      },
+      "cfq-1346774db4e1": {
+        "A": false,
+        "B": false
+      },
+      "cfq-353b4fd14b66": {
+        "A": false,
+        "B": false
+      },
+      "cfq-47a3b5e57f84": {
+        "A": true,
+        "B": true
+      },
+      "cfq-d2347da118e3": {
+        "A": true,
+        "B": true
+      },
+      "cfq-db6f5fff7917": {
+        "A": true,
+        "B": true
+      },
+      "cfq-b02beb9cf3bc": {
+        "A": false,
+        "B": false
+      },
+      "cfq-fa80849a1c9a": {
+        "A": true,
+        "B": true
+      },
+      "cfq-2de09762c8ee": {
+        "A": true,
+        "B": true
+      },
+      "cfq-852fd8f79ffc": {
+        "A": true,
+        "B": true
+      },
+      "cfq-0df3111fbf05": {
+        "A": true,
+        "B": true
+      },
+      "cfq-c91a64ad66c5": {
+        "A": true,
+        "B": true
+      },
+      "cfq-cd169ff20493": {
+        "A": false,
+        "B": true
+      },
+      "cfq-4cd813fe836e": {
+        "A": true,
+        "B": true
+      },
+      "cfq-ac35f1653ac9": {
+        "A": true,
+        "B": true
+      },
+      "cfq-92b0370a35e3": {
+        "A": false,
+        "B": true
+      },
+      "cfq-b87c67e7c596": {
+        "A": true,
+        "B": true
+      },
+      "cfq-e4300e287b92": {
+        "A": true,
+        "B": true
+      },
+      "cfq-0138fd99b729": {
+        "A": false,
+        "B": true
+      },
+      "cfq-c9a332d6d44b": {
+        "A": false,
+        "B": true
+      },
+      "cfq-26467397be65": {
+        "A": true,
+        "B": true
+      },
+      "cfq-c6701eaa0408": {
+        "A": true,
+        "B": true
+      },
+      "cfq-89e49f1feafc": {
+        "A": false,
+        "B": false
+      },
+      "cfq-943f4d72dbe2": {
+        "A": true,
+        "B": true
+      },
+      "cfq-c67b9f72a573": {
+        "A": true,
+        "B": false
+      },
+      "cfq-9b3e529755b8": {
+        "A": true,
+        "B": true
+      },
+      "cfq-016490686c63": {
+        "A": true,
+        "B": true
+      },
+      "cfq-6b425b2ddf89": {
+        "A": true,
+        "B": true
+      },
+      "cfq-a32e242a1918": {
+        "A": true,
+        "B": true
+      },
+      "cfq-ffa86d1f54c0": {
+        "A": false,
+        "B": false
+      },
+      "cfq-aeaccfe9b356": {
+        "A": true,
+        "B": true
+      },
+      "cfq-4e4f3dcb1f66": {
+        "A": true,
+        "B": true
+      },
+      "cfq-1802cb0d030c": {
+        "A": false,
+        "B": false
+      },
+      "cfq-27b4a4e01eec": {
+        "A": true,
+        "B": true
+      },
+      "cfq-a3b0f6a2a220": {
+        "A": false,
+        "B": true
+      },
+      "cfq-263707beae01": {
+        "A": true,
+        "B": true
+      },
+      "cfq-68df542d096f": {
+        "A": true,
+        "B": true
+      },
+      "cfq-525c4750bc67": {
+        "A": false,
+        "B": false
+      },
+      "cfq-e50bc41e7f66": {
+        "A": false,
+        "B": false
+      }
+    },
+    "own_answer_matches_gold": {
+      "A": {
+        "n": 100,
+        "matches": 59
+      },
+      "B": {
+        "n": 100,
+        "matches": 73
+      }
+    },
+    "raters_agree_on_own_answer": {
+      "comparable": 96,
+      "agree": 53,
+      "rate": 0.5520833333333334
+    },
+    "both_own_answers_differ_from_gold_but_agree_with_each_other": [
+      "cfq-22096908a3be",
+      "cfq-d6927521e13c",
+      "cfq-ea8582890ce6",
+      "cfq-1a2c2fb72cf2",
+      "cfq-a0b19c454454",
+      "cfq-0d5ef4f2b59e",
+      "cfq-3a379b96b51d",
+      "cfq-aa7ad46f29d3",
+      "cfq-1b6409e30fb5",
+      "cfq-b96141d16d76",
+      "cfq-7e5169347752",
+      "cfq-1346774db4e1",
+      "cfq-b02beb9cf3bc"
+    ]
+  },
+  "cost": {
+    "A": {
+      "calls": 200,
+      "errors": 0,
+      "total_tokens": 247693,
+      "mean_latency_ms": 582.6474164250612
+    },
+    "B": {
+      "calls": 200,
+      "errors": 0,
+      "total_tokens": 362111,
+      "mean_latency_ms": 855.2837175249624
+    },
+    "total_tokens": 609804
+  }
+}

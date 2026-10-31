@@ -1,0 +1,1917 @@
+{
+  "rater": {
+    "rater_id": "B",
+    "model": "qwen-3.8-27b",
+    "temperature": 0.0,
+    "seed": 2026,
+    "max_tokens": 8000,
+    "timeout_s": 240.0,
+    "max_retries": 3,
+    "concurrency": 3
+  },
+  "pass": "pass1_answer",
+  "prompt_version": "ai-review-answer-v1",
+  "prompt_sha256": "95d85b0cddf495b0672d8b3edd9df0049c347a6bf35838c7ac20880490edc263",
+  "results": [
+    {
+      "sample_id": "cfq-c1ab450cfb29",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"1 150 kr per timme\", \"evidence_quote\": \"Arvodet för utfört arbete uppgår till 1 150 kr per timme\", \"reason\": \"Klausul 3 anger tydligt arvode per timme.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "1 150 kr per timme",
+        "evidence_quote": "Arvodet för utfört arbete uppgår till 1 150 kr per timme",
+        "reason": "Klausul 3 anger tydligt arvode per timme."
+      },
+      "usage_total_tokens": 1311,
+      "latency_ms": 464.8922920023324,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:13.577597+00:00"
+    },
+    {
+      "sample_id": "cfq-22096908a3be",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Projektledning samt analysarbete\", \"evidence_quote\": \"Uppdraget avser projektledning samt analysarbete.\", \"reason\": \"Klausul 2 i Konsultavtalet anger Uppdragets omfattning.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Projektledning samt analysarbete",
+        "evidence_quote": "Uppdraget avser projektledning samt analysarbete.",
+        "reason": "Klausul 2 i Konsultavtalet anger Uppdragets omfattning."
+      },
+      "usage_total_tokens": 1101,
+      "latency_ms": 424.86941700190073,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:14.042688+00:00"
+    },
+    {
+      "sample_id": "cfq-d6927521e13c",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"15 januari 2026\", \"evidence_quote\": \"Uppdraget påbörjas den 15 januari 2026 och löper under en period om 9 månader.\", \"reason\": \"Konsultavtalets punkt 4 anger att uppdraget påbörjas den 15 januari 2026, vilket motsvarar startdatumet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "15 januari 2026",
+        "evidence_quote": "Uppdraget påbörjas den 15 januari 2026 och löper under en period om 9 månader.",
+        "reason": "Konsultavtalets punkt 4 anger att uppdraget påbörjas den 15 januari 2026, vilket motsvarar startdatumet."
+      },
+      "usage_total_tokens": 1189,
+      "latency_ms": 395.8113330008928,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:14.467866+00:00"
+    },
+    {
+      "sample_id": "cfq-2a8937ed960c",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Arken Digital AB\", \"evidence_quote\": \"Detta avtal sluts mellan Arken Digital AB som uppdragsgivare och Lindfors Analys AB som konsult.\", \"reason\": \"Klausul 1 anger uttryckligen att Arken Digital AB är uppdragsgivare.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Arken Digital AB",
+        "evidence_quote": "Detta avtal sluts mellan Arken Digital AB som uppdragsgivare och Lindfors Analys AB som konsult.",
+        "reason": "Klausul 1 anger uttryckligen att Arken Digital AB är uppdragsgivare."
+      },
+      "usage_total_tokens": 999,
+      "latency_ms": 354.03137499815784,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:14.864025+00:00"
+    },
+    {
+      "sample_id": "cfq-8a0093833788",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"1 500 000 kronor\", \"evidence_quote\": \"Ansvarsbegränsning uppgår till 1 500 000 kronor.\", \"reason\": \"Klausul 6 i Konsultavtalet anger ansvarsbegränsningens värde.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "1 500 000 kronor",
+        "evidence_quote": "Ansvarsbegränsning uppgår till 1 500 000 kronor.",
+        "reason": "Klausul 6 i Konsultavtalet anger ansvarsbegränsningens värde."
+      },
+      "usage_total_tokens": 1005,
+      "latency_ms": 372.2003750008298,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:15.218567+00:00"
+    },
+    {
+      "sample_id": "cfq-2850d782b4b0",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Arken Digital AB\", \"evidence_quote\": \"Arken Digital AB, org.nr 559002-3136, med adress Provgatan 21, 411 20 Göteborg (uppdragsgivare)\", \"reason\": \"Avtalens parter-klausul anger uttryckligen att Arken Digital AB är uppdragsgivare.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Arken Digital AB",
+        "evidence_quote": "Arken Digital AB, org.nr 559002-3136, med adress Provgatan 21, 411 20 Göteborg (uppdragsgivare)",
+        "reason": "Avtalens parter-klausul anger uttryckligen att Arken Digital AB är uppdragsgivare."
+      },
+      "usage_total_tokens": 1214,
+      "latency_ms": 389.2382499980158,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:15.591112+00:00"
+    },
+    {
+      "sample_id": "cfq-21bd300c65f5",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"1 150 kr per timme\", \"evidence_quote\": \"Arvodet för utfört arbete utgör 1 150 kr per timme\", \"reason\": \"Klausul 3 i Konsultavtalet anger tydligt timarvodet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "1 150 kr per timme",
+        "evidence_quote": "Arvodet för utfört arbete utgör 1 150 kr per timme",
+        "reason": "Klausul 3 i Konsultavtalet anger tydligt timarvodet."
+      },
+      "usage_total_tokens": 1396,
+      "latency_ms": 443.7010839974391,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:15.980765+00:00"
+    },
+    {
+      "sample_id": "cfq-26eecb81b301",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Timarvodet är 1 250 kr per timme.\", \"evidence_quote\": \"Timarvodet uppgår till 1 250 kr per timme, och den totala beräknade tidsåtgången är en svarstid om 320 timmar.\", \"reason\": \"Klausul 3 i Konsultavtalet anger tydligt timarvodet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Timarvodet är 1 250 kr per timme.",
+        "evidence_quote": "Timarvodet uppgår till 1 250 kr per timme, och den totala beräknade tidsåtgången är en svarstid om 320 timmar.",
+        "reason": "Klausul 3 i Konsultavtalet anger tydligt timarvodet."
+      },
+      "usage_total_tokens": 1213,
+      "latency_ms": 495.41450000106124,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:16.424846+00:00"
+    },
+    {
+      "sample_id": "cfq-57823d713c36",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"320 timmar\", \"evidence_quote\": \"den totala beräknade tidsåtgången är en svarstid om 320 timmar\", \"reason\": \"Klausul 3 anger uttryckligen den totala beräknade tidsåtgången.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "320 timmar",
+        "evidence_quote": "den totala beräknade tidsåtgången är en svarstid om 320 timmar",
+        "reason": "Klausul 3 anger uttryckligen den totala beräknade tidsåtgången."
+      },
+      "usage_total_tokens": 1214,
+      "latency_ms": 443.08112500220886,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:16.920626+00:00"
+    },
+    {
+      "sample_id": "cfq-6b820eff9e68",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Projektledning samt analysarbete som ska utföras för Uppdragsgivarens räkning.\", \"evidence_quote\": \"Uppdraget omfattar projektledning samt analysarbete som ska utföras för Uppdragsgivarens räkning.\", \"reason\": \"Klausul 2 i Konsultavtalet anger Uppdragets omfattning.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Projektledning samt analysarbete som ska utföras för Uppdragsgivarens räkning.",
+        "evidence_quote": "Uppdraget omfattar projektledning samt analysarbete som ska utföras för Uppdragsgivarens räkning.",
+        "reason": "Klausul 2 i Konsultavtalet anger Uppdragets omfattning."
+      },
+      "usage_total_tokens": 1345,
+      "latency_ms": 554.9219170025026,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:17.363865+00:00"
+    },
+    {
+      "sample_id": "cfq-ea8582890ce6",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"15 januari 2026\", \"evidence_quote\": \"Avtalets löptid inleds den 15 januari 2026\", \"reason\": \"Konsultavtalets punkt 4 anger att avtalets löptid inleds den 15 januari 2026, vilket motsvarar startdatumet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "15 januari 2026",
+        "evidence_quote": "Avtalets löptid inleds den 15 januari 2026",
+        "reason": "Konsultavtalets punkt 4 anger att avtalets löptid inleds den 15 januari 2026, vilket motsvarar startdatumet."
+      },
+      "usage_total_tokens": 1239,
+      "latency_ms": 582.7235420001671,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:17.918925+00:00"
+    },
+    {
+      "sample_id": "cfq-331f7fff01be",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Avtalens parter är Arken Digital AB (Uppdragsgivaren) och Sundberg Konsult AB (Konsulten).\", \"evidence_quote\": \"Parterna i detta avtal är Arken Digital AB, org.nr 559002-7829, med säte på Exempelvägen 8, 111 20 Stockholm (hädanefter \\\"Uppdragsgivaren\\\"), och Sundberg Konsult AB, org.nr 559003-2360, med säte på Testvägen 3, 722 20 Västerås (hädanefter \\\"Konsulten\\\").\", \"reason\": \"Klausul 1 anger uttryckligen vilka parter som ingår i avtalet, och inga andra parter nämns i dokumentet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Avtalens parter är Arken Digital AB (Uppdragsgivaren) och Sundberg Konsult AB (Konsulten).",
+        "evidence_quote": "Parterna i detta avtal är Arken Digital AB, org.nr 559002-7829, med säte på Exempelvägen 8, 111 20 Stockholm (hädanefter \"Uppdragsgivaren\"), och Sundberg Konsult AB, org.nr 559003-2360, med säte på Testvägen 3, 722 20 Västerås (hädanefter \"Konsulten\").",
+        "reason": "Klausul 1 anger uttryckligen vilka parter som ingår i avtalet, och inga andra parter nämns i dokumentet."
+      },
+      "usage_total_tokens": 1566,
+      "latency_ms": 902.7070830015873,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:18.501782+00:00"
+    },
+    {
+      "sample_id": "cfq-bcceed51bbf8",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Sundberg Handel AB och Västberg Rådgivning AB\", \"evidence_quote\": \"Detta avtal ingås mellan Sundberg Handel AB, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter \\\"Uppdragsgivaren\\\"), och Västberg Rådgivning AB, med adress Testvägen 3, 722 20 Västerås (hädanefter \\\"Konsulten\\\").\", \"reason\": \"Avtalsparterna anges uttryckligen i punkt 1.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Sundberg Handel AB och Västberg Rådgivning AB",
+        "evidence_quote": "Detta avtal ingås mellan Sundberg Handel AB, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter \"Uppdragsgivaren\"), och Västberg Rådgivning AB, med adress Testvägen 3, 722 20 Västerås (hädanefter \"Konsulten\").",
+        "reason": "Avtalsparterna anges uttryckligen i punkt 1."
+      },
+      "usage_total_tokens": 1646,
+      "latency_ms": 977.9630829980306,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:19.404629+00:00"
+    },
+    {
+      "sample_id": "cfq-1a2c2fb72cf2",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdraget omfattar utveckling och integration av system.\", \"evidence_quote\": \"Uppdraget omfattar utveckling och integration av system.\", \"reason\": \"Klausul 2 i Konsultavtalet anger Uppdragets omfattning.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdraget omfattar utveckling och integration av system.",
+        "evidence_quote": "Uppdraget omfattar utveckling och integration av system.",
+        "reason": "Klausul 2 i Konsultavtalet anger Uppdragets omfattning."
+      },
+      "usage_total_tokens": 1118,
+      "latency_ms": 363.78958400018746,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:20.382752+00:00"
+    },
+    {
+      "sample_id": "cfq-eeb92c4957fa",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": false, \"answer\": \"Dokumentet anger inte vilket värde Rättigheter till resultat har.\", \"evidence_quote\": \"Konsulten behåller bakgrundsrättigheter\", \"reason\": \"Dokumenttexten innehåller ingen klausul eller värde för 'Rättigheter till resultat'; endast bakgrundsrättigheter nämns.\"}",
+      "parsed": {
+        "answered": false,
+        "answer": "Dokumentet anger inte vilket värde Rättigheter till resultat har.",
+        "evidence_quote": "Konsulten behåller bakgrundsrättigheter",
+        "reason": "Dokumenttexten innehåller ingen klausul eller värde för 'Rättigheter till resultat'; endast bakgrundsrättigheter nämns."
+      },
+      "usage_total_tokens": 1335,
+      "latency_ms": 654.5910839995486,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:20.746807+00:00"
+    },
+    {
+      "sample_id": "cfq-c28154a58dd1",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"1 500 000 kronor\", \"evidence_quote\": \"Ansvarsbegränsning uppgår till ett belopp om 1 500 000 kronor.\", \"reason\": \"Klausul 6 i Konsultavtalet anger uttryckligen ansvarsbegränsningens belopp.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "1 500 000 kronor",
+        "evidence_quote": "Ansvarsbegränsning uppgår till ett belopp om 1 500 000 kronor.",
+        "reason": "Klausul 6 i Konsultavtalet anger uttryckligen ansvarsbegränsningens belopp."
+      },
+      "usage_total_tokens": 1110,
+      "latency_ms": 376.75666699942667,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:21.401655+00:00"
+    },
+    {
+      "sample_id": "cfq-fc814f788a3f",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Ett halvår\", \"evidence_quote\": \"Uppdraget träder i kraft den 15 januari 2026 och löper under ett halvår\", \"reason\": \"Klausul 4 anger att uppdraget löper under ett halvår.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Ett halvår",
+        "evidence_quote": "Uppdraget träder i kraft den 15 januari 2026 och löper under ett halvår",
+        "reason": "Klausul 4 anger att uppdraget löper under ett halvår."
+      },
+      "usage_total_tokens": 1312,
+      "latency_ms": 537.6547079977172,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:21.778604+00:00"
+    },
+    {
+      "sample_id": "cfq-dd5bb73c1a01",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"1 500 000 kr\", \"evidence_quote\": \"Konsultens ansvar är begränsat till ett belopp om 1 500 000 kr för alla krav som kan uppkomma i samband med detta avtal.\", \"reason\": \"Klausul 6 i Konsultavtalet anger uttryckligen ansvarsbegränsningens belopp.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "1 500 000 kr",
+        "evidence_quote": "Konsultens ansvar är begränsat till ett belopp om 1 500 000 kr för alla krav som kan uppkomma i samband med detta avtal.",
+        "reason": "Klausul 6 i Konsultavtalet anger uttryckligen ansvarsbegränsningens belopp."
+      },
+      "usage_total_tokens": 1276,
+      "latency_ms": 509.1277909996279,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:22.316601+00:00"
+    },
+    {
+      "sample_id": "cfq-330989a73d7b",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragsperiod\", \"evidence_quote\": \"Uppdraget påbörjas den 1 februari 2026 och löper under en period om 9 månader. Uppsägning sker med en uppsägningstid om ett kvartal.\", \"reason\": \"Uppdragsperioden är 9 månader, medan uppsägningstiden är ett kvartal, det vill säga 3 månader. 9 månader är högre än 3 månader.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsperiod",
+        "evidence_quote": "Uppdraget påbörjas den 1 februari 2026 och löper under en period om 9 månader. Uppsägning sker med en uppsägningstid om ett kvartal.",
+        "reason": "Uppdragsperioden är 9 månader, medan uppsägningstiden är ett kvartal, det vill säga 3 månader. 9 månader är högre än 3 månader."
+      },
+      "usage_total_tokens": 1123,
+      "latency_ms": 872.15741700129,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:22.826220+00:00"
+    },
+    {
+      "sample_id": "cfq-2fec5dd97b91",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Ett kvartal\", \"evidence_quote\": \"Uppsägning av avtalet ska ske med ett varsel på ett kvartal.\", \"reason\": \"Klausul 4 anger uttryckligen att uppsägning ska ske med ett varsel på ett kvartal.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Ett kvartal",
+        "evidence_quote": "Uppsägning av avtalet ska ske med ett varsel på ett kvartal.",
+        "reason": "Klausul 4 anger uttryckligen att uppsägning ska ske med ett varsel på ett kvartal."
+      },
+      "usage_total_tokens": 1092,
+      "latency_ms": 451.25999999800115,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:23.698612+00:00"
+    },
+    {
+      "sample_id": "cfq-636094743c79",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragsgivaren förvärvar samtliga rättigheter till resultatet.\", \"evidence_quote\": \"Uppdragsgivaren förvärvar samtliga rättigheter till resultatet.\", \"reason\": \"Klausul 8 anger att Uppdragsgivaren förvärvar samtliga rättigheter till resultatet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsgivaren förvärvar samtliga rättigheter till resultatet.",
+        "evidence_quote": "Uppdragsgivaren förvärvar samtliga rättigheter till resultatet.",
+        "reason": "Klausul 8 anger att Uppdragsgivaren förvärvar samtliga rättigheter till resultatet."
+      },
+      "usage_total_tokens": 3680,
+      "latency_ms": 2304.561791999731,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:24.150125+00:00"
+    },
+    {
+      "sample_id": "cfq-9716840b4f38",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragsgivaren äger resultatet.\", \"evidence_quote\": \"Uppdragsgivaren äger resultatet.\", \"reason\": \"Klausul 8, Immateriella rättigheter, anger att Uppdragsgivaren äger resultatet, vilket är avtalets angivna värde för rättigheter till resultat.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsgivaren äger resultatet.",
+        "evidence_quote": "Uppdragsgivaren äger resultatet.",
+        "reason": "Klausul 8, Immateriella rättigheter, anger att Uppdragsgivaren äger resultatet, vilket är avtalets angivna värde för rättigheter till resultat."
+      },
+      "usage_total_tokens": 1448,
+      "latency_ms": 559.631874999468,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:26.455172+00:00"
+    },
+    {
+      "sample_id": "cfq-cf4a128ceae9",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"3 år\", \"evidence_quote\": \"Parterna förbinder sig att bevara konfidentialitet i en tid om 3 år.\", \"reason\": \"Klausul 7 i Konsultavtalet anger sekretessperioden entydigt.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "3 år",
+        "evidence_quote": "Parterna förbinder sig att bevara konfidentialitet i en tid om 3 år.",
+        "reason": "Klausul 7 i Konsultavtalet anger sekretessperioden entydigt."
+      },
+      "usage_total_tokens": 1076,
+      "latency_ms": 416.1454999994021,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:27.014965+00:00"
+    },
+    {
+      "sample_id": "cfq-34e78b1321be",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"2 månader\", \"evidence_quote\": \"Uppsägning kan ske med en period om 2 månader.\", \"reason\": \"Klausul 4 anger uttryckligen att uppsägning kan ske med en period om 2 månader.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "2 månader",
+        "evidence_quote": "Uppsägning kan ske med en period om 2 månader.",
+        "reason": "Klausul 4 anger uttryckligen att uppsägning kan ske med en period om 2 månader."
+      },
+      "usage_total_tokens": 1162,
+      "latency_ms": 416.7026249997434,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:27.431229+00:00"
+    },
+    {
+      "sample_id": "cfq-ac821964e132",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragsperioden är högst, eftersom den är 9 månader medan uppsägningstiden är 2 månader.\", \"evidence_quote\": \"Uppdraget påbörjas den 1 februari 2026 och löper under en period om 9 månader. Uppsägning kan ske med en period om 2 månader.\", \"reason\": \"Dokumentet anger tydligt att uppdragsperioden är 9 månader och uppsägningstiden är 2 månader, vilket gör uppdragsperioden högst.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsperioden är högst, eftersom den är 9 månader medan uppsägningstiden är 2 månader.",
+        "evidence_quote": "Uppdraget påbörjas den 1 februari 2026 och löper under en period om 9 månader. Uppsägning kan ske med en period om 2 månader.",
+        "reason": "Dokumentet anger tydligt att uppdragsperioden är 9 månader och uppsägningstiden är 2 månader, vilket gör uppdragsperioden högst."
+      },
+      "usage_total_tokens": 1185,
+      "latency_ms": 406.6990419996728,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:27.848055+00:00"
+    },
+    {
+      "sample_id": "cfq-b050155727b9",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\":true,\"answer\":\"Sundberg Konsult AB har rollen consultant i avtalet.\",\"evidence_quote\":\"Sundberg Konsult AB, org.nr 559003-0832, med adress Testvägen 3, 722 20 Västerås (hädanefter \\\"Konsulten\\\").\",\"reason\":\"Avtalet definierar Sundberg Konsult AB som \\\"Konsulten\\\", vilket motsvarar rollen consultant.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Sundberg Konsult AB har rollen consultant i avtalet.",
+        "evidence_quote": "Sundberg Konsult AB, org.nr 559003-0832, med adress Testvägen 3, 722 20 Västerås (hädanefter \"Konsulten\").",
+        "reason": "Avtalet definierar Sundberg Konsult AB som \"Konsulten\", vilket motsvarar rollen consultant."
+      },
+      "usage_total_tokens": 1166,
+      "latency_ms": 501.2921670022479,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:28.254881+00:00"
+    },
+    {
+      "sample_id": "cfq-a0b19c454454",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Kostnadsram för utlägg är högst.\", \"evidence_quote\": \"Konsulten erhåller timarvode om 1 250 kr. Konsulten får ersättning för godkända utlägg upp till ett belopp om 50 000 kronor.\", \"reason\": \"Timarvode är 1 250 kr medan kostnadsramen för utlägg är 50 000 kr, vilket är ett högre värde.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Kostnadsram för utlägg är högst.",
+        "evidence_quote": "Konsulten erhåller timarvode om 1 250 kr. Konsulten får ersättning för godkända utlägg upp till ett belopp om 50 000 kronor.",
+        "reason": "Timarvode är 1 250 kr medan kostnadsramen för utlägg är 50 000 kr, vilket är ett högre värde."
+      },
+      "usage_total_tokens": 1892,
+      "latency_ms": 1045.365917001618,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:28.756297+00:00"
+    },
+    {
+      "sample_id": "cfq-0d5ef4f2b59e",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdraget avser projektledning samt analysarbete för Uppdragsgivaren.\", \"evidence_quote\": \"Uppdraget avser projektledning samt analysarbete för Uppdragsgivaren.\", \"reason\": \"Klausul 2 i Konsultavtalet anger Uppdragets omfattning.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdraget avser projektledning samt analysarbete för Uppdragsgivaren.",
+        "evidence_quote": "Uppdraget avser projektledning samt analysarbete för Uppdragsgivaren.",
+        "reason": "Klausul 2 i Konsultavtalet anger Uppdragets omfattning."
+      },
+      "usage_total_tokens": 1161,
+      "latency_ms": 413.12087499682093,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:29.801914+00:00"
+    },
+    {
+      "sample_id": "cfq-eda8ac94dc5f",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"9 månader\", \"evidence_quote\": \"löper i en period om 9 månader\", \"reason\": \"Klausul 4 anger att uppdraget löper i en period om 9 månader.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "9 månader",
+        "evidence_quote": "löper i en period om 9 månader",
+        "reason": "Klausul 4 anger att uppdraget löper i en period om 9 månader."
+      },
+      "usage_total_tokens": 1072,
+      "latency_ms": 421.4875840007153,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:30.215280+00:00"
+    },
+    {
+      "sample_id": "cfq-0c7daac7b169",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"75 000 kr\", \"evidence_quote\": \"Eventuella utlägg ersätts upp till ett maximalt belopp om 75 000 kr.\", \"reason\": \"Punkt 5 anger maximalt belopp för ersättning av utlägg.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "75 000 kr",
+        "evidence_quote": "Eventuella utlägg ersätts upp till ett maximalt belopp om 75 000 kr.",
+        "reason": "Punkt 5 anger maximalt belopp för ersättning av utlägg."
+      },
+      "usage_total_tokens": 1242,
+      "latency_ms": 395.89404100115644,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:30.637033+00:00"
+    },
+    {
+      "sample_id": "cfq-308aa934a26d",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Sundberg Konsult AB har rollen consultant i avtalet.\", \"evidence_quote\": \"Detta avtal ingås mellan Arken Digital AB, org.nr 559002-4761, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter \\\"Uppdragsgivaren\\\") och Sundberg Konsult AB, org.nr 559003-2360, med adress Testvägen 3, 722 20 Västerås (hädanefter \\\"Konsulten\\\").\", \"reason\": \"Avtalstexten definierar Sundberg Konsult AB som \\\"Konsulten\\\", vilket motsvarar rollen consultant.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Sundberg Konsult AB har rollen consultant i avtalet.",
+        "evidence_quote": "Detta avtal ingås mellan Arken Digital AB, org.nr 559002-4761, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter \"Uppdragsgivaren\") och Sundberg Konsult AB, org.nr 559003-2360, med adress Testvägen 3, 722 20 Västerås (hädanefter \"Konsulten\").",
+        "reason": "Avtalstexten definierar Sundberg Konsult AB som \"Konsulten\", vilket motsvarar rollen consultant."
+      },
+      "usage_total_tokens": 1387,
+      "latency_ms": 492.46379200121737,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:31.033186+00:00"
+    },
+    {
+      "sample_id": "cfq-40fba125dcbe",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Arken Digital AB (Uppdragsgivaren) och Sundberg Konsult AB (Konsulten).\", \"evidence_quote\": \"Detta avtal ingås mellan Arken Digital AB, org.nr 559002-4761, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter \\\"Uppdragsgivaren\\\") och Sundberg Konsult AB, org.nr 559003-2360, med adress Testvägen 3, 722 20 Västerås (hädanefter \\\"Konsulten\\\").\", \"reason\": \"Klausul 1 anger avtalsparterna och inga andra parter nämns i dokumentet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Arken Digital AB (Uppdragsgivaren) och Sundberg Konsult AB (Konsulten).",
+        "evidence_quote": "Detta avtal ingås mellan Arken Digital AB, org.nr 559002-4761, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter \"Uppdragsgivaren\") och Sundberg Konsult AB, org.nr 559003-2360, med adress Testvägen 3, 722 20 Västerås (hädanefter \"Konsulten\").",
+        "reason": "Klausul 1 anger avtalsparterna och inga andra parter nämns i dokumentet."
+      },
+      "usage_total_tokens": 1621,
+      "latency_ms": 634.6505000001343,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:31.525959+00:00"
+    },
+    {
+      "sample_id": "cfq-3a379b96b51d",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"1 februari 2026\", \"evidence_quote\": \"Uppdraget påbörjas den 1 februari 2026 och löper under en period av 6 månader\", \"reason\": \"Klausul 4 anger att uppdraget påbörjas den 1 februari 2026, vilket motsvarar startdatumet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "1 februari 2026",
+        "evidence_quote": "Uppdraget påbörjas den 1 februari 2026 och löper under en period av 6 månader",
+        "reason": "Klausul 4 anger att uppdraget påbörjas den 1 februari 2026, vilket motsvarar startdatumet."
+      },
+      "usage_total_tokens": 1248,
+      "latency_ms": 401.4250420004828,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:32.160879+00:00"
+    },
+    {
+      "sample_id": "cfq-2218421025ec",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragsperiod\", \"evidence_quote\": \"Uppdraget påbörjas den 1 februari 2026 och löper under en period av 6 månader, varvid varje part har rätt att säga upp avtalet med en uppsägningstid om 2 månader.\", \"reason\": \"Uppdragsperioden är 6 månader medan uppsägningstiden är 2 månader, vilket gör att uppdragsperioden är högst.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsperiod",
+        "evidence_quote": "Uppdraget påbörjas den 1 februari 2026 och löper under en period av 6 månader, varvid varje part har rätt att säga upp avtalet med en uppsägningstid om 2 månader.",
+        "reason": "Uppdragsperioden är 6 månader medan uppsägningstiden är 2 månader, vilket gör att uppdragsperioden är högst."
+      },
+      "usage_total_tokens": 1234,
+      "latency_ms": 364.57624999820837,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:32.562501+00:00"
+    },
+    {
+      "sample_id": "cfq-132711f61736",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"400 timmar\", \"evidence_quote\": \"den totala beräknade tidsåtgången är en svarstid om 400 timmar\", \"reason\": \"Klausul 3 anger uttryckligen den totala beräknade tidsåtgången.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "400 timmar",
+        "evidence_quote": "den totala beräknade tidsåtgången är en svarstid om 400 timmar",
+        "reason": "Klausul 3 anger uttryckligen den totala beräknade tidsåtgången."
+      },
+      "usage_total_tokens": 1146,
+      "latency_ms": 363.14883299928624,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:32.927223+00:00"
+    },
+    {
+      "sample_id": "cfq-894a4317683b",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Ett kvartal\", \"evidence_quote\": \"Uppsägning sker med ett kvartal före avtalets utgång.\", \"reason\": \"Klausul 4 anger uppsägningstiden som ett kvartal före avtalets utgång.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Ett kvartal",
+        "evidence_quote": "Uppsägning sker med ett kvartal före avtalets utgång.",
+        "reason": "Klausul 4 anger uppsägningstiden som ett kvartal före avtalets utgång."
+      },
+      "usage_total_tokens": 1100,
+      "latency_ms": 401.1449579993496,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:33.290550+00:00"
+    },
+    {
+      "sample_id": "cfq-1c665d14484d",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Timarvodet är 1 150 kronor per timme.\", \"evidence_quote\": \"Timarvodet är ett belopp om 1 150 kronor per timme\", \"reason\": \"Klausul 3 i Konsultavtalet anger tydligt timarvodet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Timarvodet är 1 150 kronor per timme.",
+        "evidence_quote": "Timarvodet är ett belopp om 1 150 kronor per timme",
+        "reason": "Klausul 3 i Konsultavtalet anger tydligt timarvodet."
+      },
+      "usage_total_tokens": 1070,
+      "latency_ms": 368.28049999894574,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:33.691992+00:00"
+    },
+    {
+      "sample_id": "cfq-ee014395b0bf",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdraget avser utveckling och integration av system, vilket innebär att Konsulten ska utföra systemutveckling och integration enligt Uppdragsgivarens specifikationer.\", \"evidence_quote\": \"Uppdraget avser utveckling och integration av system, vilket innebär att Konsulten ska utföra systemutveckling och integration enligt Uppdragsgivarens specifikationer.\", \"reason\": \"Punkt 2 i Konsultavtalet anger Uppdragets omfattning.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdraget avser utveckling och integration av system, vilket innebär att Konsulten ska utföra systemutveckling och integration enligt Uppdragsgivarens specifikationer.",
+        "evidence_quote": "Uppdraget avser utveckling och integration av system, vilket innebär att Konsulten ska utföra systemutveckling och integration enligt Uppdragsgivarens specifikationer.",
+        "reason": "Punkt 2 i Konsultavtalet anger Uppdragets omfattning."
+      },
+      "usage_total_tokens": 1397,
+      "latency_ms": 951.3742500021181,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:34.060487+00:00"
+    },
+    {
+      "sample_id": "cfq-fe9a0ecd1adb",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Sekretessperioden är 5 år.\", \"evidence_quote\": \"Parterna förbinder sig att bevara konfidentialitet under en tid om 5 år från avtalets undertecknande.\", \"reason\": \"Klausul 7 anger uttryckligen att konfidentialiteten ska bevaras under 5 år.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Sekretessperioden är 5 år.",
+        "evidence_quote": "Parterna förbinder sig att bevara konfidentialitet under en tid om 5 år från avtalets undertecknande.",
+        "reason": "Klausul 7 anger uttryckligen att konfidentialiteten ska bevaras under 5 år."
+      },
+      "usage_total_tokens": 1127,
+      "latency_ms": 363.1466669976362,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:35.012266+00:00"
+    },
+    {
+      "sample_id": "cfq-c71a437d6941",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragsgivaren förvärvar samtliga rättigheter till resultatet som Konsulten producerar inom ramen för uppdraget.\", \"evidence_quote\": \"Uppdragsgivaren förvärvar samtliga rättigheter till resultatet som Konsulten producerar inom ramen för uppdraget.\", \"reason\": \"Klausul 8 i Konsultavtalet anger vad som gäller för rättigheter till resultat.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsgivaren förvärvar samtliga rättigheter till resultatet som Konsulten producerar inom ramen för uppdraget.",
+        "evidence_quote": "Uppdragsgivaren förvärvar samtliga rättigheter till resultatet som Konsulten producerar inom ramen för uppdraget.",
+        "reason": "Klausul 8 i Konsultavtalet anger vad som gäller för rättigheter till resultat."
+      },
+      "usage_total_tokens": 1751,
+      "latency_ms": 726.3462080009049,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:35.375636+00:00"
+    },
+    {
+      "sample_id": "cfq-509f2a36cf25",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"5 år\", \"evidence_quote\": \"Parterna förbinder sig att bevara konfidentiell information i hemlighet under en avtalsperiod om 5 år från avtalets ikraftträdande.\", \"reason\": \"Klausul 7 i Konsultavtalet anger att konfidentiell information ska bevaras i hemlighet under 5 år.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "5 år",
+        "evidence_quote": "Parterna förbinder sig att bevara konfidentiell information i hemlighet under en avtalsperiod om 5 år från avtalets ikraftträdande.",
+        "reason": "Klausul 7 i Konsultavtalet anger att konfidentiell information ska bevaras i hemlighet under 5 år."
+      },
+      "usage_total_tokens": 1194,
+      "latency_ms": 457.68691699777264,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:36.102164+00:00"
+    },
+    {
+      "sample_id": "cfq-23eb63b616f2",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Arken Digital AB har rollen Uppdragsgivaren, vilket motsvarar client.\", \"evidence_quote\": \"Arken Digital AB, org.nr 559002-2197, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter “Uppdragsgivaren”)\", \"reason\": \"Dokumentet anger uttryckligen att Arken Digital AB är Uppdragsgivaren, vilket i ett konsultavtal motsvarar rollen client.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Arken Digital AB har rollen Uppdragsgivaren, vilket motsvarar client.",
+        "evidence_quote": "Arken Digital AB, org.nr 559002-2197, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter “Uppdragsgivaren”)",
+        "reason": "Dokumentet anger uttryckligen att Arken Digital AB är Uppdragsgivaren, vilket i ett konsultavtal motsvarar rollen client."
+      },
+      "usage_total_tokens": 2329,
+      "latency_ms": 1072.3449170000094,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:36.560510+00:00"
+    },
+    {
+      "sample_id": "cfq-4456743bf792",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"400 timmar\", \"evidence_quote\": \"den beräknade tidsåtgången är 400 timmar\", \"reason\": \"Klausul 3 i Konsultavtalet anger uttryckligen den beräknade tidsåtgången.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "400 timmar",
+        "evidence_quote": "den beräknade tidsåtgången är 400 timmar",
+        "reason": "Klausul 3 i Konsultavtalet anger uttryckligen den beräknade tidsåtgången."
+      },
+      "usage_total_tokens": 1153,
+      "latency_ms": 415.0625839974964,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:37.633409+00:00"
+    },
+    {
+      "sample_id": "cfq-afdfd3c65a86",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Timarvode är 1 250 kr per timme.\", \"evidence_quote\": \"Konsulten ersätts med ett timarvode om 1 250 kr per timme\", \"reason\": \"Klausul 3 anger tydligt timarvodet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Timarvode är 1 250 kr per timme.",
+        "evidence_quote": "Konsulten ersätts med ett timarvode om 1 250 kr per timme",
+        "reason": "Klausul 3 anger tydligt timarvodet."
+      },
+      "usage_total_tokens": 1201,
+      "latency_ms": 406.75924999959534,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:38.048714+00:00"
+    },
+    {
+      "sample_id": "cfq-aa7ad46f29d3",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"1 februari 2026\", \"evidence_quote\": \"Uppdraget påbörjas den 1 februari 2026\", \"reason\": \"Klausul 4 anger att uppdraget påbörjas den 1 februari 2026, vilket motsvarar startdatumet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "1 februari 2026",
+        "evidence_quote": "Uppdraget påbörjas den 1 februari 2026",
+        "reason": "Klausul 4 anger att uppdraget påbörjas den 1 februari 2026, vilket motsvarar startdatumet."
+      },
+      "usage_total_tokens": 1250,
+      "latency_ms": 419.2785000013828,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:38.455667+00:00"
+    },
+    {
+      "sample_id": "cfq-6798cf1bfcf4",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Timarvodet är 1 150 kronor per timme.\", \"evidence_quote\": \"Arvodet är ett belopp om 1 150 kronor per timme, och den totala beräknade tidsåtgången uppgår till 400 timmar.\", \"reason\": \"Klausul 3 i Konsultavtalet anger tydligt arvode per timme.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Timarvodet är 1 150 kronor per timme.",
+        "evidence_quote": "Arvodet är ett belopp om 1 150 kronor per timme, och den totala beräknade tidsåtgången uppgår till 400 timmar.",
+        "reason": "Klausul 3 i Konsultavtalet anger tydligt arvode per timme."
+      },
+      "usage_total_tokens": 1356,
+      "latency_ms": 532.6737079994928,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:38.875186+00:00"
+    },
+    {
+      "sample_id": "cfq-8c0cd4a94809",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"3 år\", \"evidence_quote\": \"Parterna förbinder sig att bevara konfidentiell information under en period om 3 år från avtalets ikraftträdande.\", \"reason\": \"Klausul 7 anger sekretessperioden som 3 år från avtalets ikraftträdande.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "3 år",
+        "evidence_quote": "Parterna förbinder sig att bevara konfidentiell information under en period om 3 år från avtalets ikraftträdande.",
+        "reason": "Klausul 7 anger sekretessperioden som 3 år från avtalets ikraftträdande."
+      },
+      "usage_total_tokens": 1087,
+      "latency_ms": 329.24187499884283,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:39.408228+00:00"
+    },
+    {
+      "sample_id": "cfq-1b6409e30fb5",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"1 februari 2026\", \"evidence_quote\": \"Uppdraget påbörjas den 1 februari 2026 och löper under en period om 9 månader.\", \"reason\": \"Konsultavtalets punkt 4 anger uttryckligen när uppdraget påbörjas.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "1 februari 2026",
+        "evidence_quote": "Uppdraget påbörjas den 1 februari 2026 och löper under en period om 9 månader.",
+        "reason": "Konsultavtalets punkt 4 anger uttryckligen när uppdraget påbörjas."
+      },
+      "usage_total_tokens": 1174,
+      "latency_ms": 393.35312500043074,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:39.737834+00:00"
+    },
+    {
+      "sample_id": "cfq-3ebf2f4f892e",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Fakturor ska betalas inom 45 dagar från fakturadatum.\", \"evidence_quote\": \"Fakturor ska betalas inom 45 dagar från fakturadatum.\", \"reason\": \"Klausul 5 i Konsultavtalet anger betalningsvillkoret.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Fakturor ska betalas inom 45 dagar från fakturadatum.",
+        "evidence_quote": "Fakturor ska betalas inom 45 dagar från fakturadatum.",
+        "reason": "Klausul 5 i Konsultavtalet anger betalningsvillkoret."
+      },
+      "usage_total_tokens": 1235,
+      "latency_ms": 455.84154199968907,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:40.131428+00:00"
+    },
+    {
+      "sample_id": "cfq-8bed8d4cd507",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragsgivaren äger resultatet.\", \"evidence_quote\": \"Uppdragsgivaren äger resultatet.\", \"reason\": \"Klausul 8 i Konsultavtalet anger att uppdragsgivaren äger resultatet, och inget annat värde anges i dokumentpaketet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsgivaren äger resultatet.",
+        "evidence_quote": "Uppdragsgivaren äger resultatet.",
+        "reason": "Klausul 8 i Konsultavtalet anger att uppdragsgivaren äger resultatet, och inget annat värde anges i dokumentpaketet."
+      },
+      "usage_total_tokens": 1267,
+      "latency_ms": 572.4402500018186,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:40.587416+00:00"
+    },
+    {
+      "sample_id": "cfq-b169eed6f65d",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Betalning ska erläggas inom 30 dagar från fakturadatum.\", \"evidence_quote\": \"Betalning ska erläggas inom 30 dagar från fakturadatum.\", \"reason\": \"Klausul 5 i Konsultavtalet anger betalningsvillkoret.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Betalning ska erläggas inom 30 dagar från fakturadatum.",
+        "evidence_quote": "Betalning ska erläggas inom 30 dagar från fakturadatum.",
+        "reason": "Klausul 5 i Konsultavtalet anger betalningsvillkoret."
+      },
+      "usage_total_tokens": 1131,
+      "latency_ms": 571.9408749973809,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:41.160162+00:00"
+    },
+    {
+      "sample_id": "cfq-df46835c9713",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"3 månader\", \"evidence_quote\": \"Uppsägning sker med en uppsägningstid på 3 månader.\", \"reason\": \"Klausul 4 anger uttryckligen uppsägningstiden.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "3 månader",
+        "evidence_quote": "Uppsägning sker med en uppsägningstid på 3 månader.",
+        "reason": "Klausul 4 anger uttryckligen uppsägningstiden."
+      },
+      "usage_total_tokens": 967,
+      "latency_ms": 457.79304100142326,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:41.732391+00:00"
+    },
+    {
+      "sample_id": "cfq-4b45013d60a7",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"45 dagar\", \"evidence_quote\": \"Faktura skall betalas inom en period om 45 dagar från mottagandet.\", \"reason\": \"Klausul 5 anger att faktura ska betalas inom 45 dagar från mottagandet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "45 dagar",
+        "evidence_quote": "Faktura skall betalas inom en period om 45 dagar från mottagandet.",
+        "reason": "Klausul 5 anger att faktura ska betalas inom 45 dagar från mottagandet."
+      },
+      "usage_total_tokens": 1300,
+      "latency_ms": 446.758875001251,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:42.190508+00:00"
+    },
+    {
+      "sample_id": "cfq-b8e37f58ca62",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Sundberg Handel AB\", \"evidence_quote\": \"Sundberg Handel AB, org.nr 559002-2283, med adress Provgatan 21, 411 20 Göteborg (hädanefter \\\"Uppdragsgivaren\\\")\", \"reason\": \"Avtalens parter-klausul anger uttryckligen att Sundberg Handel AB är Uppdragsgivaren.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Sundberg Handel AB",
+        "evidence_quote": "Sundberg Handel AB, org.nr 559002-2283, med adress Provgatan 21, 411 20 Göteborg (hädanefter \"Uppdragsgivaren\")",
+        "reason": "Avtalens parter-klausul anger uttryckligen att Sundberg Handel AB är Uppdragsgivaren."
+      },
+      "usage_total_tokens": 1185,
+      "latency_ms": 460.7949999990524,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:42.637491+00:00"
+    },
+    {
+      "sample_id": "cfq-ae7ff6cb03d2",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragsperiod\", \"evidence_quote\": \"Uppdraget inleds den 15 januari 2026 och har en löptid på ett halvår. Uppsägningstid är ett kvartal.\", \"reason\": \"Uppdragsperioden är ett halvår, vilket är längre än uppsägningstiden på ett kvartal.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsperiod",
+        "evidence_quote": "Uppdraget inleds den 15 januari 2026 och har en löptid på ett halvår. Uppsägningstid är ett kvartal.",
+        "reason": "Uppdragsperioden är ett halvår, vilket är längre än uppsägningstiden på ett kvartal."
+      },
+      "usage_total_tokens": 1219,
+      "latency_ms": 396.5920830014511,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:43.098431+00:00"
+    },
+    {
+      "sample_id": "cfq-b96141d16d76",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\n  \"answered\": true,\n  \"answer\": \"Uppdragsgivaren förvärvar samtliga rättigheter till resultatet.\",\n  \"evidence_quote\": \"Uppdragsgivaren förvärvar samtliga rättigheter till resultatet.\",\n  \"reason\": \"Klausul 8 (Immateriella rättigheter) anger att Uppdragsgivaren förvärvar samtliga rättigheter till resultatet.\"\n}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsgivaren förvärvar samtliga rättigheter till resultatet.",
+        "evidence_quote": "Uppdragsgivaren förvärvar samtliga rättigheter till resultatet.",
+        "reason": "Klausul 8 (Immateriella rättigheter) anger att Uppdragsgivaren förvärvar samtliga rättigheter till resultatet."
+      },
+      "usage_total_tokens": 2669,
+      "latency_ms": 1363.0941249975876,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:43.495381+00:00"
+    },
+    {
+      "sample_id": "cfq-f37e00c9e6c4",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"30 dagar\", \"evidence_quote\": \"Fakturor ska betalas inom en frist om 30 dagar.\", \"reason\": \"Klausul 5 i Konsultavtalet anger att fakturor ska betalas inom en frist om 30 dagar.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "30 dagar",
+        "evidence_quote": "Fakturor ska betalas inom en frist om 30 dagar.",
+        "reason": "Klausul 5 i Konsultavtalet anger att fakturor ska betalas inom en frist om 30 dagar."
+      },
+      "usage_total_tokens": 1202,
+      "latency_ms": 516.5779579983791,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:44.858894+00:00"
+    },
+    {
+      "sample_id": "cfq-5978fd06ecb3",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Västberg Rådgivning AB har rollen som Konsulten.\", \"evidence_quote\": \"Västberg Rådgivning AB, org.nr 559003-4105, med adress Testvägen 3, 722 20 Västerås (hädanefter \\\"Konsulten\\\").\", \"reason\": \"Avtalens parter-klausul anger uttryckligen att Västberg Rådgivning AB benämns som Konsulten.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Västberg Rådgivning AB har rollen som Konsulten.",
+        "evidence_quote": "Västberg Rådgivning AB, org.nr 559003-4105, med adress Testvägen 3, 722 20 Västerås (hädanefter \"Konsulten\").",
+        "reason": "Avtalens parter-klausul anger uttryckligen att Västberg Rådgivning AB benämns som Konsulten."
+      },
+      "usage_total_tokens": 1316,
+      "latency_ms": 410.6429580024269,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:45.375598+00:00"
+    },
+    {
+      "sample_id": "cfq-7e5169347752",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"15 januari 2026\", \"evidence_quote\": \"Avtalet träder i kraft den 15 januari 2026\", \"reason\": \"Klausul 4 anger att avtalet träder i kraft den 15 januari 2026, vilket motsvarar startdatumet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "15 januari 2026",
+        "evidence_quote": "Avtalet träder i kraft den 15 januari 2026",
+        "reason": "Klausul 4 anger att avtalet träder i kraft den 15 januari 2026, vilket motsvarar startdatumet."
+      },
+      "usage_total_tokens": 1642,
+      "latency_ms": 497.3078750008426,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:45.786440+00:00"
+    },
+    {
+      "sample_id": "cfq-d7667bf33165",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Lindfors Analys AB har rollen som konsult i avtalet.\", \"evidence_quote\": \"Detta avtal sluts mellan Arken Digital AB, org.nr. 559002-8754, med säte i Stockholm (hädanefter \\\"Uppdragsgivaren\\\"), och Lindfors Analys AB, org.nr. 559003-5629, med säte i Västerås (hädanefter \\\"Konsulten\\\").\", \"reason\": \"Avtalstexten definierar uttryckligen Lindfors Analys AB som \\\"Konsulten\\\".\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Lindfors Analys AB har rollen som konsult i avtalet.",
+        "evidence_quote": "Detta avtal sluts mellan Arken Digital AB, org.nr. 559002-8754, med säte i Stockholm (hädanefter \"Uppdragsgivaren\"), och Lindfors Analys AB, org.nr. 559003-5629, med säte i Västerås (hädanefter \"Konsulten\").",
+        "reason": "Avtalstexten definierar uttryckligen Lindfors Analys AB som \"Konsulten\"."
+      },
+      "usage_total_tokens": 1573,
+      "latency_ms": 421.8514159983897,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:46.283906+00:00"
+    },
+    {
+      "sample_id": "cfq-01cbb750d41e",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Avtalens parter är Arken Digital AB (Uppdragsgivaren) och Västberg Rådgivning AB (Konsulten).\", \"evidence_quote\": \"Parterna i detta avtal är Arken Digital AB, org.nr 559002-4554, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter \\\"Uppdragsgivaren\\\") och Västberg Rådgivning AB, org.nr 559003-1912, med adress Testvägen 3, 722 20 Västerås (hädanefter \\\"Konsulten\\\").\", \"reason\": \"Avtalens parter anges i avsnitt 1 och inga andra parter nämns i dokumentpaketet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Avtalens parter är Arken Digital AB (Uppdragsgivaren) och Västberg Rådgivning AB (Konsulten).",
+        "evidence_quote": "Parterna i detta avtal är Arken Digital AB, org.nr 559002-4554, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter \"Uppdragsgivaren\") och Västberg Rådgivning AB, org.nr 559003-1912, med adress Testvägen 3, 722 20 Västerås (hädanefter \"Konsulten\").",
+        "reason": "Avtalens parter anges i avsnitt 1 och inga andra parter nämns i dokumentpaketet."
+      },
+      "usage_total_tokens": 1998,
+      "latency_ms": 798.4994580001512,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:46.706108+00:00"
+    },
+    {
+      "sample_id": "cfq-82b6cf45c228",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Konsulten behåller bakgrundsrättigheter till allt resultat som framkommer i samband med uppdraget.\", \"evidence_quote\": \"Konsulten behåller bakgrundsrättigheter till allt resultat som framkommer i samband med uppdraget.\", \"reason\": \"Klausul 8 (Immateriella rättigheter) anger att Konsulten behåller bakgrundsrättigheter till resultat; inget annat värde anges i dokumentet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Konsulten behåller bakgrundsrättigheter till allt resultat som framkommer i samband med uppdraget.",
+        "evidence_quote": "Konsulten behåller bakgrundsrättigheter till allt resultat som framkommer i samband med uppdraget.",
+        "reason": "Klausul 8 (Immateriella rättigheter) anger att Konsulten behåller bakgrundsrättigheter till resultat; inget annat värde anges i dokumentet."
+      },
+      "usage_total_tokens": 1879,
+      "latency_ms": 809.3411250010831,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:47.505163+00:00"
+    },
+    {
+      "sample_id": "cfq-1346774db4e1",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"1 februari 2026\", \"evidence_quote\": \"Uppdraget påbörjas den 1 februari 2026 och löper under ett halvår, med möjlighet för vardera parten att säga upp avtalet med ett kvartal.\", \"reason\": \"Klausul 4 anger att uppdraget påbörjas den 1 februari 2026, vilket motsvarar startdatumet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "1 februari 2026",
+        "evidence_quote": "Uppdraget påbörjas den 1 februari 2026 och löper under ett halvår, med möjlighet för vardera parten att säga upp avtalet med ett kvartal.",
+        "reason": "Klausul 4 anger att uppdraget påbörjas den 1 februari 2026, vilket motsvarar startdatumet."
+      },
+      "usage_total_tokens": 1310,
+      "latency_ms": 524.038333001954,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:48.314730+00:00"
+    },
+    {
+      "sample_id": "cfq-353b4fd14b66",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\n  \"answered\": true,\n  \"answer\": \"Kostnadsram för utlägg\",\n  \"evidence_quote\": \"timarvode om 1 150 kr per timme\"\n  ,\n  \"reason\": \"Timarvodet anges till 1 150 kr per timme, medan kostnadsrammen för utlägg anges till 75 000 kr. 75 000 kr är ett högre belopp än 1 150 kr.\"\n}",
+      "parsed": {
+        "answered": true,
+        "answer": "Kostnadsram för utlägg",
+        "evidence_quote": "timarvode om 1 150 kr per timme",
+        "reason": "Timarvodet anges till 1 150 kr per timme, medan kostnadsrammen för utlägg anges till 75 000 kr. 75 000 kr är ett högre belopp än 1 150 kr."
+      },
+      "usage_total_tokens": 3198,
+      "latency_ms": 1427.0639589994971,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:48.838960+00:00"
+    },
+    {
+      "sample_id": "cfq-47a3b5e57f84",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Ett kvartal\", \"evidence_quote\": \"Uppsägning sker med en frist på ett kvartal.\", \"reason\": \"Klausul 4 anger uppsägningstiden som en frist på ett kvartal.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Ett kvartal",
+        "evidence_quote": "Uppsägning sker med en frist på ett kvartal.",
+        "reason": "Klausul 4 anger uppsägningstiden som en frist på ett kvartal."
+      },
+      "usage_total_tokens": 1122,
+      "latency_ms": 456.5279999987979,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:50.266694+00:00"
+    },
+    {
+      "sample_id": "cfq-d2347da118e3",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Sundberg Konsult AB har rollen consultant i avtalet.\", \"evidence_quote\": \"Avtalet sluts mellan Arken Digital AB (uppdragsgivare) och Sundberg Konsult AB (konsult).\", \"reason\": \"Dokumentet anger uttryckligen att Sundberg Konsult AB är konsult, vilket motsvarar rollen consultant.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Sundberg Konsult AB har rollen consultant i avtalet.",
+        "evidence_quote": "Avtalet sluts mellan Arken Digital AB (uppdragsgivare) och Sundberg Konsult AB (konsult).",
+        "reason": "Dokumentet anger uttryckligen att Sundberg Konsult AB är konsult, vilket motsvarar rollen consultant."
+      },
+      "usage_total_tokens": 982,
+      "latency_ms": 369.1749579993484,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:50.723446+00:00"
+    },
+    {
+      "sample_id": "cfq-db6f5fff7917",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Nordvik Teknik AB\", \"evidence_quote\": \"Nordvik Teknik AB, org.nr 559002-9157, med adress Provgatan 21, 411 20 Göteborg (hädanefter ”Uppdragsgivaren”)\", \"reason\": \"Avtalens parter-klausul anger att Nordvik Teknik AB benämns Uppdragsgivaren.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Nordvik Teknik AB",
+        "evidence_quote": "Nordvik Teknik AB, org.nr 559002-9157, med adress Provgatan 21, 411 20 Göteborg (hädanefter ”Uppdragsgivaren”)",
+        "reason": "Avtalens parter-klausul anger att Nordvik Teknik AB benämns Uppdragsgivaren."
+      },
+      "usage_total_tokens": 1513,
+      "latency_ms": 482.2504999974626,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:51.092908+00:00"
+    },
+    {
+      "sample_id": "cfq-b02beb9cf3bc",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"15 januari 2026\", \"evidence_quote\": \"Uppdraget påbörjas den 15 januari 2026\", \"reason\": \"Konsultavtalets punkt 4 anger att uppdraget påbörjas den 15 januari 2026, vilket motsvarar startdatumet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "15 januari 2026",
+        "evidence_quote": "Uppdraget påbörjas den 15 januari 2026",
+        "reason": "Konsultavtalets punkt 4 anger att uppdraget påbörjas den 15 januari 2026, vilket motsvarar startdatumet."
+      },
+      "usage_total_tokens": 1193,
+      "latency_ms": 388.7479169970902,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:51.575354+00:00"
+    },
+    {
+      "sample_id": "cfq-fa80849a1c9a",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"75 000 kronor\", \"evidence_quote\": \"utlägg ersätts upp till ett belopp om 75 000 kronor\", \"reason\": \"Klausul 5 anger att utlägg ersätts upp till 75 000 kronor, vilket motsvarar kostnadsramen för utlägg.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "75 000 kronor",
+        "evidence_quote": "utlägg ersätts upp till ett belopp om 75 000 kronor",
+        "reason": "Klausul 5 anger att utlägg ersätts upp till 75 000 kronor, vilket motsvarar kostnadsramen för utlägg."
+      },
+      "usage_total_tokens": 1411,
+      "latency_ms": 827.876457999082,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:51.964363+00:00"
+    },
+    {
+      "sample_id": "cfq-2de09762c8ee",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Lindfors Analys AB\", \"evidence_quote\": \"Lindfors Analys AB, org.nr 559003-2328, med adress Testvägen 3, 722 20 Västerås (konsult).\", \"reason\": \"Avtalet anger uttryckligen att Lindfors Analys AB är konsulten, vilket motsvarar rollen consultant.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Lindfors Analys AB",
+        "evidence_quote": "Lindfors Analys AB, org.nr 559003-2328, med adress Testvägen 3, 722 20 Västerås (konsult).",
+        "reason": "Avtalet anger uttryckligen att Lindfors Analys AB är konsulten, vilket motsvarar rollen consultant."
+      },
+      "usage_total_tokens": 1123,
+      "latency_ms": 595.9870830010914,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:52.792473+00:00"
+    },
+    {
+      "sample_id": "cfq-852fd8f79ffc",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Nordvik Teknik AB\", \"evidence_quote\": \"Nordvik Teknik AB, org.nr 559002-5255, med adress Provgatan 21, 411 20 Göteborg (hädanefter \\\"Uppdragsgivaren\\\")\", \"reason\": \"Dokumentet anger att Nordvik Teknik AB är 'Uppdragsgivaren', vilket är den part som har rollen client.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Nordvik Teknik AB",
+        "evidence_quote": "Nordvik Teknik AB, org.nr 559002-5255, med adress Provgatan 21, 411 20 Göteborg (hädanefter \"Uppdragsgivaren\")",
+        "reason": "Dokumentet anger att Nordvik Teknik AB är 'Uppdragsgivaren', vilket är den part som har rollen client."
+      },
+      "usage_total_tokens": 5077,
+      "latency_ms": 2653.941417000169,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:53.388590+00:00"
+    },
+    {
+      "sample_id": "cfq-0df3111fbf05",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragsperioden är sex (6) månader, från och med den 1 februari 2026.\", \"evidence_quote\": \"Uppdraget påbörjas den 1 februari 2026 och löper under en period av sex (6) månader.\", \"reason\": \"Klausul 4 anger tydligt uppdragets startdatum och längd.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsperioden är sex (6) månader, från och med den 1 februari 2026.",
+        "evidence_quote": "Uppdraget påbörjas den 1 februari 2026 och löper under en period av sex (6) månader.",
+        "reason": "Klausul 4 anger tydligt uppdragets startdatum och längd."
+      },
+      "usage_total_tokens": 1350,
+      "latency_ms": 442.2317919998022,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:56.043045+00:00"
+    },
+    {
+      "sample_id": "cfq-c91a64ad66c5",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Fakturor ska betalas inom 30 dagar från fakturadatum.\", \"evidence_quote\": \"Fakturor ska betalas inom 30 dagar från fakturadatum.\", \"reason\": \"Klausul 5 i Konsultavtalet anger betalningsvillkoret.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Fakturor ska betalas inom 30 dagar från fakturadatum.",
+        "evidence_quote": "Fakturor ska betalas inom 30 dagar från fakturadatum.",
+        "reason": "Klausul 5 i Konsultavtalet anger betalningsvillkoret."
+      },
+      "usage_total_tokens": 1418,
+      "latency_ms": 540.1378340029623,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:56.485612+00:00"
+    },
+    {
+      "sample_id": "cfq-cd169ff20493",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"1 500 000 kr\", \"evidence_quote\": \"Konsultens totala ansvar för skador eller förluster är begränsat till ett belopp om 1 500 000 kr.\", \"reason\": \"Klausul 6 i Konsultavtalet anger uttryckligen ansvarsbegränsningens belopp.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "1 500 000 kr",
+        "evidence_quote": "Konsultens totala ansvar för skador eller förluster är begränsat till ett belopp om 1 500 000 kr.",
+        "reason": "Klausul 6 i Konsultavtalet anger uttryckligen ansvarsbegränsningens belopp."
+      },
+      "usage_total_tokens": 1270,
+      "latency_ms": 431.4470410026843,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:57.025996+00:00"
+    },
+    {
+      "sample_id": "cfq-4cd813fe836e",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Nordvik Teknik AB (Uppdragsgivaren) och Sundberg Konsult AB (Konsulten).\", \"evidence_quote\": \"Avtalet ingås mellan Nordvik Teknik AB, org.nr 559002-6058, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter \\\"Uppdragsgivaren\\\"), och Sundberg Konsult AB, org.nr 559003-2327, med adress Testvägen 3, 722 20 Västerås (hädanefter \\\"Konsulten\\\").\", \"reason\": \"Dokumentet anger avtalsparter i punkt 1 och inga andra parter nämns i dokumentpaketet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Nordvik Teknik AB (Uppdragsgivaren) och Sundberg Konsult AB (Konsulten).",
+        "evidence_quote": "Avtalet ingås mellan Nordvik Teknik AB, org.nr 559002-6058, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter \"Uppdragsgivaren\"), och Sundberg Konsult AB, org.nr 559003-2327, med adress Testvägen 3, 722 20 Västerås (hädanefter \"Konsulten\").",
+        "reason": "Dokumentet anger avtalsparter i punkt 1 och inga andra parter nämns i dokumentpaketet."
+      },
+      "usage_total_tokens": 1573,
+      "latency_ms": 680.4526250016352,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:57.457815+00:00"
+    },
+    {
+      "sample_id": "cfq-ac35f1653ac9",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Sundberg Handel AB, org.nr 559002-9042, har rollen Uppdragsgivaren, vilket motsvarar client.\", \"evidence_quote\": \"Sundberg Handel AB, org.nr 559002-9042, med adress Provgatan 21, 411 20 Göteborg (hädanefter \\\"Uppdragsgivaren\\\")\", \"reason\": \"Avtalstexten definierar Sundberg Handel AB som Uppdragsgivaren, vilket är den part som motsvarar klientrollen.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Sundberg Handel AB, org.nr 559002-9042, har rollen Uppdragsgivaren, vilket motsvarar client.",
+        "evidence_quote": "Sundberg Handel AB, org.nr 559002-9042, med adress Provgatan 21, 411 20 Göteborg (hädanefter \"Uppdragsgivaren\")",
+        "reason": "Avtalstexten definierar Sundberg Handel AB som Uppdragsgivaren, vilket är den part som motsvarar klientrollen."
+      },
+      "usage_total_tokens": 1464,
+      "latency_ms": 744.7282500033907,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:58.138725+00:00"
+    },
+    {
+      "sample_id": "cfq-92b0370a35e3",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragsgivaren äger resultatet.\", \"evidence_quote\": \"Alla immateriella rättigheter till det levererade resultatet tillfaller uppdragsgivaren, vilket innebär att uppdragsgivaren äger resultatet.\", \"reason\": \"Klausul 8 anger att immateriella rättigheter till det levererade resultatet tillfaller uppdragsgivaren.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsgivaren äger resultatet.",
+        "evidence_quote": "Alla immateriella rättigheter till det levererade resultatet tillfaller uppdragsgivaren, vilket innebär att uppdragsgivaren äger resultatet.",
+        "reason": "Klausul 8 anger att immateriella rättigheter till det levererade resultatet tillfaller uppdragsgivaren."
+      },
+      "usage_total_tokens": 2183,
+      "latency_ms": 1205.0785000028554,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:19:58.883672+00:00"
+    },
+    {
+      "sample_id": "cfq-b87c67e7c596",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Fakturor ska betalas inom en period om 45 dagar från mottagandet.\", \"evidence_quote\": \"Fakturor ska betalas inom en period om 45 dagar från mottagandet.\", \"reason\": \"Klausul 5 anger betalningsvillkoret entydigt.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Fakturor ska betalas inom en period om 45 dagar från mottagandet.",
+        "evidence_quote": "Fakturor ska betalas inom en period om 45 dagar från mottagandet.",
+        "reason": "Klausul 5 anger betalningsvillkoret entydigt."
+      },
+      "usage_total_tokens": 1201,
+      "latency_ms": 474.77608299959684,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:00.089143+00:00"
+    },
+    {
+      "sample_id": "cfq-e4300e287b92",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Timarvodet är 1 250 kr.\", \"evidence_quote\": \"Timarvodet är 1 250 kr, och den beräknade tidsåtgången är 320 timmar.\", \"reason\": \"Klausul 3 i Konsultavtalet anger tydligt timarvodet.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Timarvodet är 1 250 kr.",
+        "evidence_quote": "Timarvodet är 1 250 kr, och den beräknade tidsåtgången är 320 timmar.",
+        "reason": "Klausul 3 i Konsultavtalet anger tydligt timarvodet."
+      },
+      "usage_total_tokens": 1142,
+      "latency_ms": 460.58404100040207,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:00.564069+00:00"
+    },
+    {
+      "sample_id": "cfq-0138fd99b729",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"1 500 000 kr\", \"evidence_quote\": \"Konsultens ansvar begränsas till ett maximalt belopp om 1 500 000 kr.\", \"reason\": \"Klausul 6 i Konsultavtalet anger uttryckligen det maximala ansvaret.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "1 500 000 kr",
+        "evidence_quote": "Konsultens ansvar begränsas till ett maximalt belopp om 1 500 000 kr.",
+        "reason": "Klausul 6 i Konsultavtalet anger uttryckligen det maximala ansvaret."
+      },
+      "usage_total_tokens": 1129,
+      "latency_ms": 395.31033399907756,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:01.024963+00:00"
+    },
+    {
+      "sample_id": "cfq-c9a332d6d44b",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"50 000 kr\", \"evidence_quote\": \"Utlägg ersätts upp till ett högsta belopp av 50 000 kr.\", \"reason\": \"Klausul 5 anger att utlägg ersätts upp till ett högsta belopp av 50 000 kr, vilket utgör kostnadsramen för utlägg.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "50 000 kr",
+        "evidence_quote": "Utlägg ersätts upp till ett högsta belopp av 50 000 kr.",
+        "reason": "Klausul 5 anger att utlägg ersätts upp till ett högsta belopp av 50 000 kr, vilket utgör kostnadsramen för utlägg."
+      },
+      "usage_total_tokens": 1180,
+      "latency_ms": 522.6957910017518,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:01.420532+00:00"
+    },
+    {
+      "sample_id": "cfq-26467397be65",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Nordvik Teknik AB\", \"evidence_quote\": \"Nordvik Teknik AB, org.nr 559002-8861, med adress Provgatan 21, 411 20 Göteborg (uppdragsgivare)\", \"reason\": \"Avtalet anger Nordvik Teknik AB som uppdragsgivare.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Nordvik Teknik AB",
+        "evidence_quote": "Nordvik Teknik AB, org.nr 559002-8861, med adress Provgatan 21, 411 20 Göteborg (uppdragsgivare)",
+        "reason": "Avtalet anger Nordvik Teknik AB som uppdragsgivare."
+      },
+      "usage_total_tokens": 2750,
+      "latency_ms": 2012.6890829997137,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:01.943532+00:00"
+    },
+    {
+      "sample_id": "cfq-c6701eaa0408",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"45 dagar\", \"evidence_quote\": \"Erhållna fakturor ska betalas inom en period om 45 dagar.\", \"reason\": \"Klausul 5 i Konsultavtalet anger att fakturor ska betalas inom 45 dagar.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "45 dagar",
+        "evidence_quote": "Erhållna fakturor ska betalas inom en period om 45 dagar.",
+        "reason": "Klausul 5 i Konsultavtalet anger att fakturor ska betalas inom 45 dagar."
+      },
+      "usage_total_tokens": 1237,
+      "latency_ms": 513.7589169971761,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:03.957068+00:00"
+    },
+    {
+      "sample_id": "cfq-89e49f1feafc",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragets omfattning är projektledning samt analysarbete.\", \"evidence_quote\": \"Uppdraget omfattar projektledning samt analysarbete.\", \"reason\": \"Klausul 2 i Konsultavtalet anger uttryckligen vad uppdraget omfattar.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragets omfattning är projektledning samt analysarbete.",
+        "evidence_quote": "Uppdraget omfattar projektledning samt analysarbete.",
+        "reason": "Klausul 2 i Konsultavtalet anger uttryckligen vad uppdraget omfattar."
+      },
+      "usage_total_tokens": 965,
+      "latency_ms": 444.1043330007233,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:04.471235+00:00"
+    },
+    {
+      "sample_id": "cfq-943f4d72dbe2",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Sundberg Handel AB och Lindfors Analys AB\", \"evidence_quote\": \"Parterna i detta avtal är Sundberg Handel AB (uppdragsgivare) och Lindfors Analys AB (konsult).\", \"reason\": \"Klausul 1 anger uttryckligen avtalsparterna.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Sundberg Handel AB och Lindfors Analys AB",
+        "evidence_quote": "Parterna i detta avtal är Sundberg Handel AB (uppdragsgivare) och Lindfors Analys AB (konsult).",
+        "reason": "Klausul 1 anger uttryckligen avtalsparterna."
+      },
+      "usage_total_tokens": 978,
+      "latency_ms": 380.99658400096814,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:04.915633+00:00"
+    },
+    {
+      "sample_id": "cfq-c67b9f72a573",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": false, \"answer\": \"Dokumentet anger inte entydigt vilken part som har rollen client.\", \"evidence_quote\": \"Parterna i detta avtal är Nordvik Teknik AB, org.nr 559002-9696, med adress Provgatan 21, 411 20 Göteborg (hädanefter 'Uppdragsgivaren'), och Sundberg Konsult AB, org.nr 559003-0123, med adress Testvägen 3, 722 20 Västerås (hädanefter 'Konsulten').\", \"reason\": \"Dokumentet definierar endast rollerna Uppdragsgivaren och Konsulten och nämner inte termen client, så svaret är inte entydigt.\"}",
+      "parsed": {
+        "answered": false,
+        "answer": "Dokumentet anger inte entydigt vilken part som har rollen client.",
+        "evidence_quote": "Parterna i detta avtal är Nordvik Teknik AB, org.nr 559002-9696, med adress Provgatan 21, 411 20 Göteborg (hädanefter 'Uppdragsgivaren'), och Sundberg Konsult AB, org.nr 559003-0123, med adress Testvägen 3, 722 20 Västerås (hädanefter 'Konsulten').",
+        "reason": "Dokumentet definierar endast rollerna Uppdragsgivaren och Konsulten och nämner inte termen client, så svaret är inte entydigt."
+      },
+      "usage_total_tokens": 2511,
+      "latency_ms": 1264.5924579992425,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:05.296998+00:00"
+    },
+    {
+      "sample_id": "cfq-9b3e529755b8",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Konsulten behåller bakgrundsrättigheter, vilket innebär att Konsulten behåller rättigheter till bakgrundsmaterial.\", \"evidence_quote\": \"Rättigheterna till resultaten av uppdraget regleras enligt att Konsulten behåller bakgrundsrättigheter, vilket innebär att Konsulten behåller rättigheter till bakgrundsmaterial.\", \"reason\": \"Klausul 8 anger hur rättigheterna till resultaten av uppdraget regleras.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Konsulten behåller bakgrundsrättigheter, vilket innebär att Konsulten behåller rättigheter till bakgrundsmaterial.",
+        "evidence_quote": "Rättigheterna till resultaten av uppdraget regleras enligt att Konsulten behåller bakgrundsrättigheter, vilket innebär att Konsulten behåller rättigheter till bakgrundsmaterial.",
+        "reason": "Klausul 8 anger hur rättigheterna till resultaten av uppdraget regleras."
+      },
+      "usage_total_tokens": 1720,
+      "latency_ms": 565.1340409967816,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:06.562204+00:00"
+    },
+    {
+      "sample_id": "cfq-016490686c63",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragsperioden är 9 månader, med start den 15 januari 2026.\", \"evidence_quote\": \"Uppdraget påbörjas den 15 januari 2026 och löper under en period om 9 månader.\", \"reason\": \"Klausul 4 anger tydligt uppdragets startdatum och längd.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsperioden är 9 månader, med start den 15 januari 2026.",
+        "evidence_quote": "Uppdraget påbörjas den 15 januari 2026 och löper under en period om 9 månader.",
+        "reason": "Klausul 4 anger tydligt uppdragets startdatum och längd."
+      },
+      "usage_total_tokens": 1468,
+      "latency_ms": 710.708958999021,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:07.127563+00:00"
+    },
+    {
+      "sample_id": "cfq-6b425b2ddf89",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"75 000 SEK\", \"evidence_quote\": \"Konsultens kostnadsersättningar för utlägg får inte överstiga 75 000 SEK.\", \"reason\": \"Klausul 5 anger uttryckligen att kostnadsersättningar för utlägg får inte överstiga 75 000 SEK.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "75 000 SEK",
+        "evidence_quote": "Konsultens kostnadsersättningar för utlägg får inte överstiga 75 000 SEK.",
+        "reason": "Klausul 5 anger uttryckligen att kostnadsersättningar för utlägg får inte överstiga 75 000 SEK."
+      },
+      "usage_total_tokens": 1300,
+      "latency_ms": 963.8242920009361,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:07.838510+00:00"
+    },
+    {
+      "sample_id": "cfq-a32e242a1918",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Sundberg Konsult AB har rollen consultant i avtalet.\", \"evidence_quote\": \"Sundberg Konsult AB, org.nr 559003-3143, med adress Testvägen 3, 722 20 Västerås (hädanefter Konsulten).\", \"reason\": \"Avtalstexten anger uttryckligen att Sundberg Konsult AB hädanefter benämns Konsulten, vilket motsvarar rollen consultant.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Sundberg Konsult AB har rollen consultant i avtalet.",
+        "evidence_quote": "Sundberg Konsult AB, org.nr 559003-3143, med adress Testvägen 3, 722 20 Västerås (hädanefter Konsulten).",
+        "reason": "Avtalstexten anger uttryckligen att Sundberg Konsult AB hädanefter benämns Konsulten, vilket motsvarar rollen consultant."
+      },
+      "usage_total_tokens": 1265,
+      "latency_ms": 559.8673329986923,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:08.802566+00:00"
+    },
+    {
+      "sample_id": "cfq-ffa86d1f54c0",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Kostnadsram för utlägg är högst.\", \"evidence_quote\": \"Arvodet för konsulttjänsterna uppgår till 1 150 SEK per timme. ... Konsultens kostnadsersättningar för utlägg får inte överstiga 75 000 SEK.\", \"reason\": \"Timarvodet är 1 150 SEK per timme, medan kostnadsramen för utlägg är 75 000 SEK, vilket är ett högre belopp.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Kostnadsram för utlägg är högst.",
+        "evidence_quote": "Arvodet för konsulttjänsterna uppgår till 1 150 SEK per timme. ... Konsultens kostnadsersättningar för utlägg får inte överstiga 75 000 SEK.",
+        "reason": "Timarvodet är 1 150 SEK per timme, medan kostnadsramen för utlägg är 75 000 SEK, vilket är ett högre belopp."
+      },
+      "usage_total_tokens": 1281,
+      "latency_ms": 518.6384580010781,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:09.362735+00:00"
+    },
+    {
+      "sample_id": "cfq-aeaccfe9b356",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"400 timmar\", \"evidence_quote\": \"den totala beräknade tidsåtgången uppskattas till en svarstid om 400 timmar\", \"reason\": \"Klausul 3 anger den beräknade tidsåtgången till 400 timmar.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "400 timmar",
+        "evidence_quote": "den totala beräknade tidsåtgången uppskattas till en svarstid om 400 timmar",
+        "reason": "Klausul 3 anger den beräknade tidsåtgången till 400 timmar."
+      },
+      "usage_total_tokens": 1143,
+      "latency_ms": 474.74125000007916,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:09.881535+00:00"
+    },
+    {
+      "sample_id": "cfq-4e4f3dcb1f66",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Fakturor ska betalas inom 45 dagar från fakturadatum.\", \"evidence_quote\": \"Fakturor ska betalas inom en period om 45 dagar från fakturadatum, och Konsulten har rätt till ersättning för utlägg upp till ett belopp om 75 000 kronor.\", \"reason\": \"Klausul 5 anger entydigt betalningsvillkoret.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Fakturor ska betalas inom 45 dagar från fakturadatum.",
+        "evidence_quote": "Fakturor ska betalas inom en period om 45 dagar från fakturadatum, och Konsulten har rätt till ersättning för utlägg upp till ett belopp om 75 000 kronor.",
+        "reason": "Klausul 5 anger entydigt betalningsvillkoret."
+      },
+      "usage_total_tokens": 1291,
+      "latency_ms": 463.55258299809066,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:10.356572+00:00"
+    },
+    {
+      "sample_id": "cfq-1802cb0d030c",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragsperiod\", \"evidence_quote\": \"Uppdraget träder i kraft den 15 januari 2026 och löper under ett halvår, med möjlighet till uppsägning genom en skriftlig anmälan med ett kvartal varsel.\", \"reason\": \"Uppdragsperioden är ett halvår, medan uppsägningstiden är ett kvartal; ett halvår är längre än ett kvartal.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsperiod",
+        "evidence_quote": "Uppdraget träder i kraft den 15 januari 2026 och löper under ett halvår, med möjlighet till uppsägning genom en skriftlig anmälan med ett kvartal varsel.",
+        "reason": "Uppdragsperioden är ett halvår, medan uppsägningstiden är ett kvartal; ett halvår är längre än ett kvartal."
+      },
+      "usage_total_tokens": 1278,
+      "latency_ms": 459.62737499939976,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:10.820277+00:00"
+    },
+    {
+      "sample_id": "cfq-27b4a4e01eec",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"45 dagar från fakturadatum\", \"evidence_quote\": \"Fakturor som utfärdas av Konsulten skall betalas av Uppdragsgivaren inom en period om 45 dagar från fakturadatum\", \"reason\": \"Klausul 5 anger att fakturor ska betalas inom 45 dagar från fakturadatum.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "45 dagar från fakturadatum",
+        "evidence_quote": "Fakturor som utfärdas av Konsulten skall betalas av Uppdragsgivaren inom en period om 45 dagar från fakturadatum",
+        "reason": "Klausul 5 anger att fakturor ska betalas inom 45 dagar från fakturadatum."
+      },
+      "usage_total_tokens": 1585,
+      "latency_ms": 554.2998329983675,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:11.280226+00:00"
+    },
+    {
+      "sample_id": "cfq-a3b0f6a2a220",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragsperioden är högst, eftersom den är ett halvår medan uppsägningstiden är ett kvartal.\", \"evidence_quote\": \"löper under ett halvår ... säger upp avtalet med ett kvartal föregående skriftligt meddelande\", \"reason\": \"Ett halvår (6 månader) är längre än ett kvartal (3 månader).\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragsperioden är högst, eftersom den är ett halvår medan uppsägningstiden är ett kvartal.",
+        "evidence_quote": "löper under ett halvår ... säger upp avtalet med ett kvartal föregående skriftligt meddelande",
+        "reason": "Ett halvår (6 månader) är längre än ett kvartal (3 månader)."
+      },
+      "usage_total_tokens": 1490,
+      "latency_ms": 479.87108400047873,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:11.834861+00:00"
+    },
+    {
+      "sample_id": "cfq-263707beae01",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Nordvik Teknik AB\", \"evidence_quote\": \"Avtalet sluts mellan Nordvik Teknik AB, org.nr 559002-4728, med adress Exempelvägen 8, 111 20 Stockholm (härefter \\\"Uppdragsgivaren\\\")\", \"reason\": \"Dokumentet anger uttryckligen att Nordvik Teknik AB är Uppdragsgivaren.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Nordvik Teknik AB",
+        "evidence_quote": "Avtalet sluts mellan Nordvik Teknik AB, org.nr 559002-4728, med adress Exempelvägen 8, 111 20 Stockholm (härefter \"Uppdragsgivaren\")",
+        "reason": "Dokumentet anger uttryckligen att Nordvik Teknik AB är Uppdragsgivaren."
+      },
+      "usage_total_tokens": 1132,
+      "latency_ms": 572.8881249997357,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:12.314929+00:00"
+    },
+    {
+      "sample_id": "cfq-68df542d096f",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"9 månader\", \"evidence_quote\": \"Uppdraget påbörjas den 1 februari 2026 och löper i en period om 9 månader.\", \"reason\": \"Klausul 4 anger att uppdraget löper i en period om 9 månader.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "9 månader",
+        "evidence_quote": "Uppdraget påbörjas den 1 februari 2026 och löper i en period om 9 månader.",
+        "reason": "Klausul 4 anger att uppdraget löper i en period om 9 månader."
+      },
+      "usage_total_tokens": 1246,
+      "latency_ms": 728.1047500000568,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:12.887979+00:00"
+    },
+    {
+      "sample_id": "cfq-525c4750bc67",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\"answered\": true, \"answer\": \"Uppdragets omfattning är utveckling och integration av system.\", \"evidence_quote\": \"Uppdraget avser utveckling och integration av system.\", \"reason\": \"Klausul 2 i Konsultavtalet anger uttryckligen vad uppdraget avser.\"}",
+      "parsed": {
+        "answered": true,
+        "answer": "Uppdragets omfattning är utveckling och integration av system.",
+        "evidence_quote": "Uppdraget avser utveckling och integration av system.",
+        "reason": "Klausul 2 i Konsultavtalet anger uttryckligen vad uppdraget avser."
+      },
+      "usage_total_tokens": 1156,
+      "latency_ms": 521.4610410002933,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:13.616276+00:00"
+    },
+    {
+      "sample_id": "cfq-e50bc41e7f66",
+      "rater_id": "B",
+      "model": "qwen-3.8-27b",
+      "pass_name": "pass1_answer",
+      "prompt_version": "ai-review-answer-v1",
+      "response_text": "\n\n{\n  \"answered\": true,\n  \"answer\": \"Kostnadsram för utlägg\",\n  \"evidence_quote\": \"Timarvode ... 1 250 kr per timme ... utlägg ersätts upp till ett belopp om 75 000 kr\",\n  \"reason\": \"Kostnadsramen för utlägg (75 000 kr) är högre än timarvodet (1 250 kr).\"\n}",
+      "parsed": {
+        "answered": true,
+        "answer": "Kostnadsram för utlägg",
+        "evidence_quote": "Timarvode ... 1 250 kr per timme ... utlägg ersätts upp till ett belopp om 75 000 kr",
+        "reason": "Kostnadsramen för utlägg (75 000 kr) är högre än timarvodet (1 250 kr)."
+      },
+      "usage_total_tokens": 1563,
+      "latency_ms": 718.5475000005681,
+      "attempts": 1,
+      "error": null,
+      "timestamp": "2026-10-31T17:20:14.138078+00:00"
+    }
+  ]
+}

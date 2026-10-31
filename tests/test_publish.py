@@ -7,6 +7,7 @@ import hashlib
 import io
 import json
 import zipfile
+from pathlib import Path
 
 import pytest
 
@@ -572,3 +573,34 @@ def test_packet_publishes_the_whole_document_package(dataset, tmp_path):
     readme = (out / "README.md").read_text(encoding="utf-8")
     assert "document_texts" in readme
     assert "3.0" in readme
+
+
+def test_shipped_ai_review_sheets_are_scored_by_the_engine(tmp_path):
+    """The frozen AI review round must stay scoreable with the same rules."""
+
+    import shutil
+
+    from contractforge.quality import ScoreInput, score_round
+
+    packet = tmp_path / "packet"
+    shutil.copytree(
+        Path(__file__).resolve().parents[1] / "examples" / "qsample_live_100", packet
+    )
+    results = (
+        Path(__file__).resolve().parents[1] / "benchmarks" / "results" / "ai_review_blind2"
+    )
+    if not (results / "ratings_A_ai.csv").is_file():
+        pytest.skip("AI-granskningsresultaten är inte committade")
+
+    payload = score_round(
+        ScoreInput(
+            ratings_dir=packet,
+            sheet_a=results / "ratings_A_ai.csv",
+            sheet_b=results / "ratings_B_ai.csv",
+            rater_a_kind="model",
+            rater_b_kind="model",
+        )
+    )
+    assert payload["completeness"]["complete"] is True
+    assert payload["reviewer"]["assessment_type"] == "modellbaserad oberoende bedömning"
+    assert payload["axes"]["Q2"]["n"] == 100

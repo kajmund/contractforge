@@ -1,0 +1,211 @@
+﻿sample_id;question;expected_answer;evidence_quote;Q1_answerable;Q2_answer_correct;Q3_evidence_sufficient;Q4_anomaly_handling;comment
+cfq-c1ab450cfb29;Vilket värde har Timarvode enligt Konsultavtal?;1150 (SEK);1 150 kr;ja;ja;ja;ej_tillamplig;Facit ger rätt värde och valuta, citatet täcker siffran och enheten, och det finns inga motstridigheter i dokumentet.
+cfq-22096908a3be;Vilket värde har Uppdragets omfattning enligt Konsultavtal?;projektledning och analys;projektledning samt analysarbete;ja;nej;nej;ej_tillamplig;Facit svarar inte exakt på dokumentets formulering och citatet stödjer inte det angivna värdet fullt ut.
+cfq-d6927521e13c;Vilket värde har Startdatum enligt Konsultavtal?;2026-01-15;15 januari 2026;ja;ja;ja;ej_tillamplig;Facit ger korrekt datum med tillräcklig evidens och hanterar inga undantag eftersom dokumentet bara innehåller ett startdatum.
+cfq-2a8937ed960c;Vilket värde har Uppdragsgivarens namn enligt Konsultavtal?;Arken Digital AB;Arken Digital AB;ja;ja;nej;ej_tillamplig;Frågan kan besvaras tydligt från dokumentet, facit ger rätt svar men citatet saknar kontexten att namnet är uppdragsgivarens.
+cfq-8a0093833788;Vilket värde har Ansvarsbegränsning enligt Konsultavtal?;1500000 (SEK);1 500 000 kronor;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att ansvarsbegränsning är 1 500 000 kronor, vilket facit återger korrekt och med tillräcklig evidens utan några undantag.
+cfq-2850d782b4b0;Vilket värde har Uppdragsgivarens namn enligt Konsultavtal?;Arken Digital AB;Arken Digital AB;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att uppdragsgivarens namn är Arken Digital AB och det finns inga motsägelser.
+cfq-21bd300c65f5;Vilket värde har Timarvode enligt Konsultavtal?;1150 (SEK);1 150 kr;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt timarvodet 1 150 kr, facit ger rätt värde och valuta, med tillräcklig evidens och utan motstridiga undantag.
+cfq-26eecb81b301;Vilket värde har Timarvode enligt Konsultavtal?;1250 (SEK);1 250 kr;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt timarvodet som 1 250 kr per timme, och facit återger detta korrekt utan att behöva hantera några undantag.
+cfq-57823d713c36;Vilket värde har Beräknad tidsåtgång enligt Konsultavtal?;320 (hours);320 timmar;ja;ja;ja;ej_tillamplig;Facit svarar korrekt med 320 timmar och citatet täcker hela svaret utan några undantag i dokumentet.
+cfq-6b820eff9e68;Vilket värde har Uppdragets omfattning enligt Konsultavtal?;projektledning och analys;projektledning samt analysarbete;ja;nej;ja;ej_tillamplig;"Facit saknar ordet ""arbete"" vilket en noggrann jurist skulle anse vara en avvikelse från den exakta klausulen."
+cfq-ea8582890ce6;Vilket värde har Startdatum enligt Konsultavtal?;2026-01-15;15 januari 2026;ja;ja;ja;ej_tillamplig;Facit ger korrekt datum med tillräcklig evidens och inga undantag finns i dokumentet.
+cfq-331f7fff01be;Räkna upp samtliga parter som ingår i avtalet.;Arken Digital AB | Sundberg Konsult AB;"Arken Digital AB
+---
+559002-7829
+---
+Exempelvägen 8, 111 20 Stockholm
+---
+Sundberg Konsult AB
+---
+559003-2360
+---
+Testvägen 3, 722 20 Västerås";ja;ja;ja;ej_tillamplig;Dokumentet listar tydligt de två avtalsparterna och facit återger dem korrekt med tillräcklig evidens.
+cfq-bcceed51bbf8;Räkna upp samtliga parter som ingår i avtalet.;Sundberg Handel AB | Västberg Rådgivning AB;"Sundberg Handel AB
+---
+Exempelvägen 8, 111 20 Stockholm
+---
+Västberg Rådgivning AB
+---
+Testvägen 3, 722 20 Västerås";ja;ja;ja;ej_tillamplig;Dokumentet listar tydligt de två avtalsparterna, facit återger dem korrekt och med tillräcklig evidens utan några motsägelser.
+cfq-1a2c2fb72cf2;Vilket värde har Uppdragets omfattning enligt Konsultavtal?;systemutveckling och integration;utveckling och integration av system;ja;ja;ja;ej_tillamplig;Facit svarar korrekt och med tillräcklig evidens, och det finns inga undantag i dokumentet.
+cfq-eeb92c4957fa;Vilket värde har Rättigheter till resultat enligt Konsultavtal?;Konsulten behåller bakgrundsrättigheter;Konsulten behåller bakgrundsrättigheter;nej;nej;nej;ej_tillamplig;"Dokumentet innehåller ingen specifik klausul om ""Rättigheter till resultat"", bara en hänvisning till bakgrundsrättigheter, så facit svarar felaktigt och utan tillräcklig evidens."
+cfq-c28154a58dd1;Vilket värde har Ansvarsbegränsning enligt Konsultavtal?;1500000 (SEK);1 500 000 kronor;ja;ja;ja;ej_tillamplig;"Facit svarar korrekt med rätt belopp och använder ett tillräckligt citat; frågan är entydigt besvarbar och inga undantag finns."
+cfq-fc814f788a3f;Vilket värde har Uppdragsperiod enligt Konsultavtal?;6 (months);ett halvår;ja;ja;ja;ej_tillamplig;"Facit svarar korrekt med 6 månader baserat på klausul 4 och citatet ""ett halvår"" är tillräckligt för att stödja svaret utan några motstridigheter i dokumentet."
+cfq-dd5bb73c1a01;Vilket värde har Ansvarsbegränsning enligt Konsultavtal?;1500000 (SEK);1 500 000 kr;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt ansvarsbegränsningens värde och facit återger detta korrekt utan att behöva hantera några undantag.
+cfq-330989a73d7b;Vilket av följande värden är högst: Uppdragsperiod eller Uppsägningstid?;9 (months);"9 månader
+---
+ett kvartal";ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att uppdragsperioden är 9 månader och uppsägningstiden ett kvartal, så svaret 9 månader är korrekt och evidensen räcker.
+cfq-2fec5dd97b91;Vilket värde har Uppsägningstid enligt Konsultavtal?;3 (months);ett kvartal;ja;ja;ja;ej_tillamplig;Facit svarar korrekt med 3 månader baserat på citatet 'ett kvartal', vilket är entydigt i dokumentet och inga undantag finns.
+cfq-636094743c79;Vilket värde har Rättigheter till resultat enligt Konsultavtal?;Uppdragsgivaren äger resultatet;Uppdragsgivaren förvärvar samtliga rättigheter till resultatet;nej;ja;ja;ej_tillamplig;Dokumentet anger att uppdragsgivaren förvärvar alla rättigheter, men ger ingen monetär värde, så frågan kan inte besvaras med ett värde, medan facit korrekt återger äganderätten och stöds av citatet utan motstridigheter.
+cfq-9716840b4f38;Vilket värde har Rättigheter till resultat enligt Konsultavtal?;Uppdragsgivaren äger resultatet;Uppdragsgivaren äger resultatet;ja;ja;ja;ej_tillamplig;Facit svarar korrekt och fullständigt med tydlig citat, och frågan kan besvaras entydigt utan några undantag i dokumentet.
+cfq-cf4a128ceae9;Vilket värde har Sekretessperiod enligt Konsultavtal?;3 (years);3 år;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att sekretessperioden är 3 år, och facit återger detta korrekt med tillräcklig evidens och utan att behöva hantera några undantag.
+cfq-34e78b1321be;Vilket värde har Uppsägningstid enligt Konsultavtal?;2 (months);2 månader;ja;ja;ja;ej_tillamplig;Svaret är tydligt stödjt av klausulen och inga motsägelser finns i dokumentet.
+cfq-ac821964e132;Vilket av följande värden är högst: Uppdragsperiod eller Uppsägningstid?;9 (months);"9 månader
+---
+2 månader";ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att uppdragsperioden är 9 månader och uppsägningstiden 2 månader, så facit ger korrekt svar med tillräcklig evidens och utan att behöva hantera några undantag.
+cfq-b050155727b9;Vilken part har rollen consultant i avtalet?;Sundberg Konsult AB;"Sundberg Konsult AB
+---
+559003-0832
+---
+Testvägen 3, 722 20 Västerås";ja;ja;ja;ej_tillamplig;"Dokumentet identifierar tydligt Sundberg Konsult AB som ""Konsulten"", vilket facit korrekt återger utan motsägelser."
+cfq-a0b19c454454;Vilket av följande värden är högst: Timarvode eller Kostnadsram för utlägg?;50000 (SEK);"1 250 kr
+---
+50 000 kronor";ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt timarvode 1 250 kr och kostnadsram 50 000 kr, så svaret är entydigt och facit använder korrekta citat utan att behöva hantera undantag.
+cfq-0d5ef4f2b59e;Vilket värde har Uppdragets omfattning enligt Konsultavtal?;projektledning och analys;projektledning samt analysarbete;ja;ja;ja;ej_tillamplig;Facit återger korrekt innehåll från avsnitt 2 och ger tillräcklig evidens utan att behöva hantera några undantag.
+cfq-eda8ac94dc5f;Vilket värde har Uppdragsperiod enligt Konsultavtal?;9 (months);9 månader;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att uppdragsperioden är 9 månader och facit återger detta korrekt med tillräcklig evidens.
+cfq-0c7daac7b169;Vilket värde har Kostnadsram för utlägg enligt Konsultavtal?;75000 (SEK);75 000 kr;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att utlägg ersätts upp till 75 000 kr, vilket facit korrekt återger och stöds av citatet.
+cfq-308aa934a26d;Vilken part har rollen consultant i avtalet?;Sundberg Konsult AB;"Sundberg Konsult AB
+---
+559003-2360
+---
+Testvägen 3, 722 20 Västerås";ja;ja;nej;ej_tillamplig;Facit svarar korrekt men citaten visar inte tydligt att Sundberg Konsult AB är den part som benämns som Konsulten.
+cfq-40fba125dcbe;Räkna upp samtliga parter som ingår i avtalet.;Arken Digital AB | Sundberg Konsult AB;"Arken Digital AB
+---
+559002-4761
+---
+Exempelvägen 8, 111 20 Stockholm
+---
+Sundberg Konsult AB
+---
+559003-2360
+---
+Testvägen 3, 722 20 Västerås";ja;ja;ja;ej_tillamplig;Dokumentet listar tydligt de två avtalsparterna och facit återger exakt dessa utan motsägelser.
+cfq-3a379b96b51d;Vilket värde har Startdatum enligt Konsultavtal?;2026-02-01;1 februari 2026;ja;ja;ja;ej_tillamplig;Facit ger korrekt datum och stöds av tydligt citat utan motstridigheter i dokumentet.
+cfq-2218421025ec;Vilket av följande värden är högst: Uppdragsperiod eller Uppsägningstid?;6 (months);"6 månader
+---
+2 månader";ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att uppdragsperioden är 6 månader och uppsägningstiden 2 månader, så facit svarar korrekt och med tillräcklig evidens utan att behöva hantera några undantag.
+cfq-132711f61736;Vilket värde har Beräknad tidsåtgång enligt Konsultavtal?;400 (hours);400 timmar;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att den beräknade tidsåtgången är 400 timmar, vilket facit korrekt återger utan behov av ytterligare nyanser.
+cfq-894a4317683b;Vilket värde har Uppsägningstid enligt Konsultavtal?;3 (months);ett kvartal;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att uppsägning sker med ett kvartal, vilket motsvarar 3 månader, och facit reflekterar detta korrekt utan motsägelser.
+cfq-1c665d14484d;Vilket värde har Timarvode enligt Konsultavtal?;1150 (SEK);1 150 kronor;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt timarvodet som 1 150 kronor per timme, och facit återger detta korrekt med tillräcklig evidens.
+cfq-ee014395b0bf;Vilket värde har Uppdragets omfattning enligt Konsultavtal?;systemutveckling och integration;systemutveckling och integration;ja;ja;ja;ej_tillamplig;Facit svarar korrekt på en entydig fråga och stöds av ett exakt citat utan några undantag i dokumentet.
+cfq-fe9a0ecd1adb;Vilket värde har Sekretessperiod enligt Konsultavtal?;5 (years);5 år;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att sekretessperioden är 5 år, facit återger detta korrekt och ger tillräcklig evidens utan motstridigheter.
+cfq-c71a437d6941;Vilket värde har Rättigheter till resultat enligt Konsultavtal?;Uppdragsgivaren äger resultatet;Uppdragsgivaren förvärvar samtliga rättigheter till resultatet;ja;ja;ja;ej_tillamplig;Dokumentet tydligt anger att uppdragsgivaren förvärvar alla rättigheter, vilket facit korrekt återger och fullt stödjs av citatet utan några undantag.
+cfq-509f2a36cf25;Vilket värde har Sekretessperiod enligt Konsultavtal?;5 (years);5 år;ja;ja;ja;ej_tillamplig;Facit svarar korrekt med 5 år och citerar den relevanta klausulen utan motstridigheter.
+cfq-23eb63b616f2;Vilken part har rollen client i avtalet?;Arken Digital AB;"Arken Digital AB
+---
+559002-2197
+---
+Exempelvägen 8, 111 20 Stockholm";ja;ja;nej;ej_tillamplig;"Facit identifierar rätt part men ger inte citat som tydligt visar att den är ""Uppdragsgivaren"" (client)."
+cfq-4456743bf792;Vilket värde har Beräknad tidsåtgång enligt Konsultavtal?;400 (hours);400 timmar;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att den beräknade tidsåtgången är 400 timmar, vilket facit återger korrekt utan några motstridigheter.
+cfq-afdfd3c65a86;Vilket värde har Timarvode enligt Konsultavtal?;1250 (SEK);1 250 kr;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt timarvodet 1 250 kr per timme, facit återger detta korrekt och utan motstridigheter.
+cfq-aa7ad46f29d3;Vilket värde har Startdatum enligt Konsultavtal?;2026-02-01;1 februari 2026;ja;ja;ja;ej_tillamplig;Startdatumet anges tydligt som 1 februari 2026 och facit återger detta korrekt utan behov av ytterligare nyanser.
+cfq-6798cf1bfcf4;Vilket värde har Timarvode enligt Konsultavtal?;1150 (SEK);1 150 kronor;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt timarvodet som 1 150 kronor per timme, vilket facit korrekt återger som 1150 SEK utan att behöva hantera några undantag.
+cfq-8c0cd4a94809;Vilket värde har Sekretessperiod enligt Konsultavtal?;3 (years);3 år;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att sekretessperioden är 3 år, och facit återger detta korrekt med tillräcklig evidens och utan att behöva hantera några undantag.
+cfq-1b6409e30fb5;Vilket värde har Startdatum enligt Konsultavtal?;2026-02-01;1 februari 2026;ja;ja;ja;ej_tillamplig;Facit ger korrekt datum med tillräcklig evidens och inga undantag finns i dokumentet.
+cfq-3ebf2f4f892e;Vilket värde har Betalningsvillkor enligt Konsultavtal?;45 (days);45 dagar;ja;ja;ja;ej_tillamplig;Facit ger ett korrekt svar med tillräcklig evidens och frågan är entydigt besvarbar utan några undantag i dokumentet.
+cfq-8bed8d4cd507;Vilket värde har Rättigheter till resultat enligt Konsultavtal?;Uppdragsgivaren äger resultatet;Uppdragsgivaren äger resultatet;ja;ja;ja;ej_tillamplig;Klausul 8 ger ett entydigt svar utan motstridigheter, och facit citerar exakt den texten.
+cfq-b169eed6f65d;Vilket värde har Betalningsvillkor enligt Konsultavtal?;30 (days);30 dagar;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att betalning ska ske inom 30 dagar, vilket facit korrekt återger utan motstridiga undantag.
+cfq-df46835c9713;Vilket värde har Uppsägningstid enligt Konsultavtal?;3 (months);3 månader;ja;ja;ja;ej_tillamplig;Uppsägningstiden anges tydligt som 3 månader i klausul 4 utan motstridigheter.
+cfq-4b45013d60a7;Vilket värde har Betalningsvillkor enligt Konsultavtal?;45 (days);45 dagar;ja;ja;ja;ej_tillamplig;Facit svarar korrekt med 45 dagar och citerar den enda relevanta klausulen utan motstridigheter.
+cfq-b8e37f58ca62;Vilket värde har Uppdragsgivarens namn enligt Konsultavtal?;Sundberg Handel AB;Sundberg Handel AB;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att Uppdragsgivaren är Sundberg Handel AB, utan motsägelser.
+cfq-ae7ff6cb03d2;Vilket av följande värden är högst: Uppdragsperiod eller Uppsägningstid?;6 (months);"ett halvår
+---
+ett kvartal";ja;ja;ja;ej_tillamplig;Dokumentet ger tydliga perioder (halvår vs kvartal) och facit använder dessa för att ge rätt värde utan att missa någon motsägelse.
+cfq-b96141d16d76;Vilket värde har Rättigheter till resultat enligt Konsultavtal?;Uppdragsgivaren äger resultatet;Uppdragsgivaren förvärvar samtliga rättigheter till resultatet;ja;ja;ja;ej_tillamplig;Klausulen om immateriella rättigheter ger tydligt att uppdragsgivaren förvärvar alla rättigheter, vilket facit korrekt återger utan motstridiga undantag.
+cfq-f37e00c9e6c4;Vilket värde har Betalningsvillkor enligt Konsultavtal?;30 (days);30 dagar;ja;ja;ja;ej_tillamplig;Facit ger korrekt värde 30 dagar och citerar den relevanta texten utan att behöva hantera några undantag.
+cfq-5978fd06ecb3;Vilken part har rollen consultant i avtalet?;Västberg Rådgivning AB;"Västberg Rådgivning AB
+---
+559003-4105
+---
+Testvägen 3, 722 20 Västerås";ja;ja;ja;ej_tillamplig;Dokumentet tydligt anger Västberg Rådgivning AB som Konsulten, utan motsägelser.
+cfq-7e5169347752;Vilket värde har Startdatum enligt Konsultavtal?;2026-01-15;15 januari 2026;ja;ja;ja;ej_tillamplig;Facit ger korrekt datum och stöds av tydligt citat utan motstridigheter.
+cfq-d7667bf33165;Vilken part har rollen consultant i avtalet?;Lindfors Analys AB;"Lindfors Analys AB
+---
+559003-5629";ja;ja;ja;ej_tillamplig;Facit svarar korrekt på en entydig fråga och stöds av tydligt citat utan motstridigheter.
+cfq-01cbb750d41e;Räkna upp samtliga parter som ingår i avtalet.;Arken Digital AB | Västberg Rådgivning AB;"Arken Digital AB
+---
+559002-4554
+---
+Exempelvägen 8, 111 20 Stockholm
+---
+Västberg Rådgivning AB
+---
+559003-1912
+---
+Testvägen 3, 722 20 Västerås";ja;ja;ja;ej_tillamplig;Facit listar exakt de två parter som tydligt anges i avtalet utan några motsägelser.
+cfq-82b6cf45c228;Vilket värde har Rättigheter till resultat enligt Konsultavtal?;Konsulten behåller bakgrundsrättigheter;Konsulten behåller bakgrundsrättigheter;ja;ja;ja;ej_tillamplig;Facit svarar korrekt och tydligt med stöd i klausul 8, och frågan kan besvaras entydigt utan motstridigheter i dokumentet.
+cfq-1346774db4e1;Vilket värde har Startdatum enligt Konsultavtal?;2026-02-01;1 februari 2026;ja;ja;ja;ej_tillamplig;Facit svarar entydigt med korrekt datum och tillräcklig evidens, utan att behöva hantera några undantag.
+cfq-353b4fd14b66;Vilket av följande värden är högst: Timarvode eller Kostnadsram för utlägg?;75000 (SEK);"1 150 kr
+---
+75 000 kr";ja;ja;ja;ej_tillamplig;Facit jämför korrekt de två siffrorna och ger rätt svar utan att behöva hantera några undantag eller motsägelser.
+cfq-47a3b5e57f84;Vilket värde har Uppsägningstid enligt Konsultavtal?;3 (months);ett kvartal;ja;ja;ja;ej_tillamplig;"Facit ger korrekt värde (3 månader) baserat på citatet ""ett kvartal"" utan några motstridiga undantag i dokumentet."
+cfq-d2347da118e3;Vilken part har rollen consultant i avtalet?;Sundberg Konsult AB;Sundberg Konsult AB;ja;ja;nej;ej_tillamplig;Dokumentet tydligt anger Sundberg Konsult AB som konsult, men facit citerar bara namnet utan kontext.
+cfq-db6f5fff7917;Vilket värde har Uppdragsgivarens namn enligt Konsultavtal?;Nordvik Teknik AB;Nordvik Teknik AB;ja;ja;ja;ej_tillamplig;Facit svarar korrekt med namn som tydligt anges i avtalsparterna och ger ett exakt citat utan motsägelser.
+cfq-b02beb9cf3bc;Vilket värde har Startdatum enligt Konsultavtal?;2026-01-15;15 januari 2026;ja;ja;ja;ej_tillamplig;Facit svarar korrekt på den entydiga startdatumet och använder ett tillräckligt citat utan att behöva hantera några undantag.
+cfq-fa80849a1c9a;Vilket värde har Kostnadsram för utlägg enligt Konsultavtal?;75000 (SEK);75 000 kronor;ja;ja;ja;ej_tillamplig;Facit ger rätt belopp och citatet täcker hela svaret, utan några undantag i dokumentet.
+cfq-2de09762c8ee;Vilken part har rollen consultant i avtalet?;Lindfors Analys AB;"Lindfors Analys AB
+---
+559003-2328
+---
+Testvägen 3, 722 20 Västerås";ja;ja;ja;ej_tillamplig;Facit identifierar korrekt den part som anges som konsult i avtalet och ger tillräcklig evidens utan att behöva hantera några undantag.
+cfq-852fd8f79ffc;Vilken part har rollen client i avtalet?;Nordvik Teknik AB;"Nordvik Teknik AB
+---
+559002-5255
+---
+Provgatan 21, 411 20 Göteborg";ja;ja;nej;ej_tillamplig;"Facit identifierar rätt part men ger ingen källa som visar att denne är ""client"" i avtalet."
+cfq-0df3111fbf05;Vilket värde har Uppdragsperiod enligt Konsultavtal?;6 (months);sex (6) månader;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att uppdragsperioden är sex månader, vilket facit korrekt återger och stöds av citatet.
+cfq-c91a64ad66c5;Vilket värde har Betalningsvillkor enligt Konsultavtal?;30 (days);30 dagar;ja;ja;ja;ej_tillamplig;Frågan kan besvaras entydigt med dokumentet, facit ger korrekt svar, citatet räcker för hela svaret och inga undantag finns att hantera.
+cfq-cd169ff20493;Vilket värde har Ansvarsbegränsning enligt Konsultavtal?;1500000 (SEK);1 500 000 kr;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att ansvarsbegränsningens belopp är 1 500 000 kr, vilket facit korrekt återger och med tillräcklig evidens.
+cfq-4cd813fe836e;Räkna upp samtliga parter som ingår i avtalet.;Nordvik Teknik AB | Sundberg Konsult AB;"Nordvik Teknik AB
+---
+559002-6058
+---
+Exempelvägen 8, 111 20 Stockholm
+---
+Sundberg Konsult AB
+---
+559003-2327
+---
+Testvägen 3, 722 20 Västerås";ja;ja;ja;ej_tillamplig;Facit listar exakt de två parter som tydligt anges i avtalet och ger tillräcklig evidens utan att behöva hantera några undantag.
+cfq-ac35f1653ac9;Vilken part har rollen client i avtalet?;Sundberg Handel AB;"Sundberg Handel AB
+---
+559002-9042
+---
+Provgatan 21, 411 20 Göteborg";ja;ja;nej;ej_tillamplig;Facit identifierar rätt part men ger ingen direkt citat som binder Sundberg Handel AB till rollen client.
+cfq-92b0370a35e3;Vilket värde har Rättigheter till resultat enligt Konsultavtal?;Uppdragsgivaren äger resultatet;uppdragsgivaren äger resultatet;ja;ja;ja;ej_tillamplig;Facit svarar korrekt på äganderätten som dokumentet anger och ger tillräcklig evidens utan att behöva hantera några undantag.
+cfq-b87c67e7c596;Vilket värde har Betalningsvillkor enligt Konsultavtal?;45 (days);45 dagar;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att betalningsvillkoren är 45 dagar, och facit återger detta korrekt utan att behöva hantera några undantag.
+cfq-e4300e287b92;Vilket värde har Timarvode enligt Konsultavtal?;1250 (SEK);1 250 kr;ja;ja;ja;ej_tillamplig;Facit svarar korrekt på frågan med tydlig evidens och utan att behöva hantera några undantag eller motsägelser.
+cfq-0138fd99b729;Vilket värde har Ansvarsbegränsning enligt Konsultavtal?;1500000 (SEK);1 500 000 kr;ja;ja;ja;ej_tillamplig;Klausul 6 anger tydligt att ansvarsbegränsningen är 1 500 000 kr, vilket facit återger korrekt utan behov av ytterligare nyanser.
+cfq-c9a332d6d44b;Vilket värde har Kostnadsram för utlägg enligt Konsultavtal?;50000 (SEK);50 000 kr;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att utlägg ersätts upp till 50 000 kr, vilket facit korrekt återger utan behov av undantagshantering.
+cfq-26467397be65;Vilken part har rollen client i avtalet?;Nordvik Teknik AB;"Nordvik Teknik AB
+---
+559002-8861
+---
+Provgatan 21, 411 20 Göteborg";ja;ja;nej;ej_tillamplig;Facit identifierar rätt part men ger inte citat som visar rollen uppdragsgivare, vilket behövs för fullständig motivering.
+cfq-c6701eaa0408;Vilket värde har Betalningsvillkor enligt Konsultavtal?;45 (days);45 dagar;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt betalningsvillkoret som 45 dagar och facit återger detta korrekt med tillräcklig evidens.
+cfq-89e49f1feafc;Vilket värde har Uppdragets omfattning enligt Konsultavtal?;projektledning och analys;projektledning samt analysarbete;ja;nej;ja;ej_tillamplig;Frågan kan besvaras tydligt, men facit avviker något från exakt dokumenttext, medan citatet är tillräckligt och inga undantag finns.
+cfq-943f4d72dbe2;Räkna upp samtliga parter som ingår i avtalet.;Sundberg Handel AB | Lindfors Analys AB;"Sundberg Handel AB
+---
+Lindfors Analys AB";ja;ja;ja;ej_tillamplig;Facit listar korrekt de två parter som tydligt anges i avtalet och ger tillräcklig evidens utan motsägelser.
+cfq-c67b9f72a573;Vilken part har rollen client i avtalet?;Nordvik Teknik AB;"Nordvik Teknik AB
+---
+559002-9696
+---
+Provgatan 21, 411 20 Göteborg";nej;nej;nej;ej_tillamplig;"Dokumentet nämner inte rollen ""client"", så svaret kan inte härledas entydigt och evidensen saknar koppling till den rollen."
+cfq-9b3e529755b8;Vilket värde har Rättigheter till resultat enligt Konsultavtal?;Konsulten behåller bakgrundsrättigheter;Konsulten behåller bakgrundsrättigheter;ja;ja;ja;ej_tillamplig;Facit svarar korrekt och tydligt med stöd i avtalsklausul 8, utan några undantag eller motsägelser i dokumentet.
+cfq-016490686c63;Vilket värde har Uppdragsperiod enligt Konsultavtal?;9 (months);9 månader;ja;ja;ja;ej_tillamplig;Facit svarar korrekt med 9 månader och citatet '9 månader' räcker för att stödja svaret, utan några undantag i dokumentet.
+cfq-6b425b2ddf89;Vilket värde har Kostnadsram för utlägg enligt Konsultavtal?;75000 (SEK);75 000 SEK;ja;ja;ja;ej_tillamplig;Facit ger korrekt värde och citat, och frågan kan besvaras entydigt utan att behöva hantera undantag.
+cfq-a32e242a1918;Vilken part har rollen consultant i avtalet?;Sundberg Konsult AB;"Sundberg Konsult AB
+---
+559003-3143
+---
+Testvägen 3, 722 20 Västerås";ja;ja;ja;ej_tillamplig;Dokumentet identifierar tydligt Sundberg Konsult AB som Konsulten, så svaret är entydigt och korrekt utan motstridigheter.
+cfq-ffa86d1f54c0;Vilket av följande värden är högst: Timarvode eller Kostnadsram för utlägg?;75000 (SEK);"1 150 SEK
+---
+75 000 SEK";ja;ja;ja;ej_tillamplig;Dokumentet ger tydliga siffror (1 150 SEK per timme vs max 75 000 SEK) så svaret är entydigt och facit använder rätt data utan att behöva hantera några undantag.
+cfq-aeaccfe9b356;Vilket värde har Beräknad tidsåtgång enligt Konsultavtal?;400 (hours);400 timmar;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att den beräknade tidsåtgången är 400 timmar och facit återger detta korrekt med tillräcklig evidens.
+cfq-4e4f3dcb1f66;Vilket värde har Betalningsvillkor enligt Konsultavtal?;45 (days);45 dagar;ja;ja;ja;ej_tillamplig;Facit svarar korrekt med 45 dagar och citatet täcker hela svaret utan några motstridiga uppgifter i dokumentet.
+cfq-1802cb0d030c;Vilket av följande värden är högst: Uppdragsperiod eller Uppsägningstid?;6 (months);"ett halvår
+---
+ett kvartal";ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att uppdragsperioden är ett halvår (6 månader) och uppsägningstiden ett kvartal (3 månader), så facit med värdet 6 månader är korrekt och välunderbyggt utan motstridigheter.
+cfq-27b4a4e01eec;Vilket värde har Betalningsvillkor enligt Konsultavtal?;45 (days);45 dagar;ja;ja;ja;ej_tillamplig;Facit svarar korrekt med 45 dagar och citatet räcker för att stödja svaret, utan att det finns några undantag i dokumentet.
+cfq-a3b0f6a2a220;Vilket av följande värden är högst: Uppdragsperiod eller Uppsägningstid?;6 (months);"ett halvår
+---
+ett kvartal";ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att uppdragsperioden är ett halvår (6 mån) och uppsägningstiden ett kvartal (3 mån), så facit svarar korrekt och med tillräcklig evidens utan att behöva hantera några undantag.
+cfq-263707beae01;Vilket värde har Uppdragsgivarens namn enligt Konsultavtal?;Nordvik Teknik AB;Nordvik Teknik AB;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att Uppdragsgivarens namn är Nordvik Teknik AB och inget motsägelsefullt finns.
+cfq-68df542d096f;Vilket värde har Uppdragsperiod enligt Konsultavtal?;9 (months);9 månader;ja;ja;ja;ej_tillamplig;Dokumentet anger tydligt att uppdragsperioden är 9 månader, vilket facit korrekt återger utan behov av ytterligare nyanser.
+cfq-525c4750bc67;Vilket värde har Uppdragets omfattning enligt Konsultavtal?;systemutveckling och integration;utveckling och integration av system;ja;ja;ja;ej_tillamplig;Dokumentet ger en tydlig klausul om uppdragets omfattning som facit korrekt återger och stöds av det angivna citatet utan motstridigheter.
+cfq-e50bc41e7f66;Vilket av följande värden är högst: Timarvode eller Kostnadsram för utlägg?;75000 (SEK);"1 250 kr
+---
+75 000 kr";ja;ja;ja;ej_tillamplig;Dokumentet ger tydliga siffror för timarvodet (1 250 kr) och kostnadsramen för utlägg (upp till 75 000 kr), så svaret är entydigt och facit använder korrekt evidens utan att behöva hantera några undantag.
