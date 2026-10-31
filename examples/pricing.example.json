@@ -1,0 +1,10 @@
+{
+  "providers": {
+    "cerebras": {
+      "example-model-id": {
+        "input_usd_per_million": 0.0,
+        "output_usd_per_million": 0.0
+      }
+    }
+  }
+}

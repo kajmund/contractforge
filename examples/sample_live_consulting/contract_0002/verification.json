@@ -1,0 +1,588 @@
+{
+  "contract_id": "contract_0002",
+  "status": "ACCEPTED",
+  "documents": [
+    {
+      "document_id": "main_agreement",
+      "status": "ACCEPTED",
+      "checks": [
+        {
+          "check_id": "document.main_agreement.generated.present",
+          "status": "PASS",
+          "message": "dokumentet main_agreement finns i genererat paket.",
+          "document_id": "main_agreement",
+          "clause_id": null,
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.rendered.present",
+          "status": "PASS",
+          "message": "kanonisk text finns för main_agreement (1121 tecken).",
+          "document_id": "main_agreement",
+          "clause_id": null,
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.rendered.spans",
+          "status": "PASS",
+          "message": "main_agreement: alla 6 klausulspann är giltiga.",
+          "document_id": "main_agreement",
+          "clause_id": null,
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.rendered.title",
+          "status": "PASS",
+          "message": "dokumenttiteln finns i kanonisk text för main_agreement.",
+          "document_id": "main_agreement",
+          "clause_id": null,
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.structure.clause_ids",
+          "status": "PASS",
+          "message": "main_agreement: alla klausul-id:n matchar planen och är unika.",
+          "document_id": "main_agreement",
+          "clause_id": null,
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.structure.clause_count",
+          "status": "PASS",
+          "message": "main_agreement: 6 klausuler som förväntat.",
+          "document_id": "main_agreement",
+          "clause_id": null,
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.structure.clause_order",
+          "status": "PASS",
+          "message": "main_agreement: klausulordningen är korrekt.",
+          "document_id": "main_agreement",
+          "clause_id": null,
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.duplicates.headings",
+          "status": "PASS",
+          "message": "main_agreement: inga dubbla klausulrubriker.",
+          "document_id": "main_agreement",
+          "clause_id": null,
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.duplicates.clause_texts",
+          "status": "PASS",
+          "message": "main_agreement: ingen klausultext upprepas ordagrant.",
+          "document_id": "main_agreement",
+          "clause_id": null,
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.duplicates.definitions",
+          "status": "PASS",
+          "message": "main_agreement: inga dubbla definitioner.",
+          "document_id": "main_agreement",
+          "clause_id": null,
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_01.heading_present",
+          "status": "PASS",
+          "message": "main_agreement/clause_01: rubriken finns i spannet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_01",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_01.text_present",
+          "status": "PASS",
+          "message": "main_agreement/clause_01: klausultexten finns ordagrant i spannet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_01",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_01.fact.fact_client_name",
+          "status": "PASS",
+          "message": "fact_client_name: explicit surface 'Arken Digital AB' finns i clause_01.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_01",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_01.fact.fact_client_name.semantic",
+          "status": "SKIP",
+          "message": "fact_client_name: faktatypen entity har ingen numerisk normalisering.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_01",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_01.fact.fact_consultant_name",
+          "status": "PASS",
+          "message": "fact_consultant_name: explicit surface 'Lindfors Analys AB' finns i clause_01.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_01",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_01.fact.fact_consultant_name.semantic",
+          "status": "SKIP",
+          "message": "fact_consultant_name: faktatypen entity har ingen numerisk normalisering.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_01",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_02.heading_present",
+          "status": "PASS",
+          "message": "main_agreement/clause_02: rubriken finns i spannet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_02",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_02.text_present",
+          "status": "PASS",
+          "message": "main_agreement/clause_02: klausultexten finns ordagrant i spannet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_02",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_02.fact.fact_scope",
+          "status": "PASS",
+          "message": "fact_scope: explicit surface 'systemutveckling och integration' finns i clause_02.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_02",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_02.fact.fact_scope.semantic",
+          "status": "SKIP",
+          "message": "fact_scope: faktatypen text har ingen numerisk normalisering.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_02",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_03.heading_present",
+          "status": "PASS",
+          "message": "main_agreement/clause_03: rubriken finns i spannet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_03",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_03.text_present",
+          "status": "PASS",
+          "message": "main_agreement/clause_03: klausultexten finns ordagrant i spannet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_03",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_03.fact.fact_hourly_rate",
+          "status": "PASS",
+          "message": "fact_hourly_rate: explicit surface '1 150 SEK' finns i clause_03.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_03",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_03.fact.fact_hourly_rate.semantic",
+          "status": "PASS",
+          "message": "fact_hourly_rate: operativt värde 1150 SEK verifieras i clause_03.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_03",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_03.fact.fact_estimated_hours",
+          "status": "PASS",
+          "message": "fact_estimated_hours: explicit surface '400 timmar' finns i clause_03.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_03",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_03.fact.fact_estimated_hours.semantic",
+          "status": "PASS",
+          "message": "fact_estimated_hours: operativt värde 400 hours verifieras i clause_03.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_03",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_04.heading_present",
+          "status": "PASS",
+          "message": "main_agreement/clause_04: rubriken finns i spannet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_04",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_04.text_present",
+          "status": "PASS",
+          "message": "main_agreement/clause_04: klausultexten finns ordagrant i spannet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_04",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_04.fact.fact_start_date",
+          "status": "PASS",
+          "message": "fact_start_date: explicit surface '1 februari 2026' finns i clause_04.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_04",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_04.fact.fact_start_date.semantic",
+          "status": "SKIP",
+          "message": "fact_start_date: faktatypen date har ingen numerisk normalisering.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_04",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_04.fact.fact_duration_months",
+          "status": "PASS",
+          "message": "fact_duration_months: explicit surface '6 månader' finns i clause_04.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_04",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_04.fact.fact_duration_months.semantic",
+          "status": "WARN",
+          "message": "fact_duration_months: rätt värde 6 months finns i clause_04, men även avvikande värden '3 månader'. Distraktorvärden får inte ersätta det operativa värdet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_04",
+          "details": {
+            "conflicts": [
+              "3 månader"
+            ]
+          }
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_04.fact.fact_notice_months",
+          "status": "PASS",
+          "message": "fact_notice_months: explicit surface '3 månader' finns i clause_04.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_04",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_04.fact.fact_notice_months.semantic",
+          "status": "WARN",
+          "message": "fact_notice_months: rätt värde 3 months finns i clause_04, men även avvikande värden '6 månader'. Distraktorvärden får inte ersätta det operativa värdet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_04",
+          "details": {
+            "conflicts": [
+              "6 månader"
+            ]
+          }
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_05.heading_present",
+          "status": "PASS",
+          "message": "main_agreement/clause_05: rubriken finns i spannet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_05",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_05.text_present",
+          "status": "PASS",
+          "message": "main_agreement/clause_05: klausultexten finns ordagrant i spannet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_05",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_05.fact.fact_payment_days",
+          "status": "PASS",
+          "message": "fact_payment_days: explicit surface '45 dagar' finns i clause_05.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_05",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_05.fact.fact_payment_days.semantic",
+          "status": "PASS",
+          "message": "fact_payment_days: operativt värde 45 days verifieras i clause_05.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_05",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_05.fact.fact_expense_cap",
+          "status": "PASS",
+          "message": "fact_expense_cap: explicit surface '75 000 SEK' finns i clause_05.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_05",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_05.fact.fact_expense_cap.semantic",
+          "status": "PASS",
+          "message": "fact_expense_cap: operativt värde 75000 SEK verifieras i clause_05.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_05",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_06.heading_present",
+          "status": "PASS",
+          "message": "main_agreement/clause_06: rubriken finns i spannet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_06",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_06.text_present",
+          "status": "PASS",
+          "message": "main_agreement/clause_06: klausultexten finns ordagrant i spannet.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_06",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_06.fact.fact_liability_cap",
+          "status": "PASS",
+          "message": "fact_liability_cap: explicit surface '1 000 000 SEK' finns i clause_06.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_06",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_06.fact.fact_liability_cap.semantic",
+          "status": "PASS",
+          "message": "fact_liability_cap: operativt värde 1000000 SEK verifieras i clause_06.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_06",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_06.fact.fact_ip_rights",
+          "status": "PASS",
+          "message": "fact_ip_rights: explicit surface 'Uppdragsgivaren äger resultatet' finns i clause_06.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_06",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_06.fact.fact_ip_rights.semantic",
+          "status": "SKIP",
+          "message": "fact_ip_rights: faktatypen defined_term har ingen numerisk normalisering.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_06",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_06.fact.fact_confidentiality_years",
+          "status": "PASS",
+          "message": "fact_confidentiality_years: explicit surface '5 år' finns i clause_06.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_06",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.clause.clause_06.fact.fact_confidentiality_years.semantic",
+          "status": "PASS",
+          "message": "fact_confidentiality_years: operativt värde 5 years verifieras i clause_06.",
+          "document_id": "main_agreement",
+          "clause_id": "clause_06",
+          "details": {}
+        },
+        {
+          "check_id": "document.main_agreement.references",
+          "status": "PASS",
+          "message": "main_agreement: alla dokumentreferenser [] är giltiga eller deklareras som saknade.",
+          "document_id": "main_agreement",
+          "clause_id": null,
+          "details": {
+            "targets": []
+          }
+        }
+      ],
+      "attempts": 1,
+      "reasons": []
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "package.contract_id",
+      "status": "PASS",
+      "message": "paketets contract_id matchar scenariot (contract_0002).",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "package.structure.documents",
+      "status": "PASS",
+      "message": "dokumentpaketet innehåller exakt de förväntade dokumenten ['main_agreement'].",
+      "document_id": null,
+      "clause_id": null,
+      "details": {
+        "documents": [
+          "main_agreement"
+        ]
+      }
+    },
+    {
+      "check_id": "package.structure.document_count",
+      "status": "PASS",
+      "message": "antal dokument 1 stämmer.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "package.structure.unique_document_ids",
+      "status": "PASS",
+      "message": "alla dokument-id:n är unika.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "package.rendered.unexpected_documents",
+      "status": "PASS",
+      "message": "inga oväntade renderade dokument.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "package.expected_counts.clauses",
+      "status": "PASS",
+      "message": "antal klausuler 6 stämmer.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "package.entity.party_client",
+      "status": "PASS",
+      "message": "parten 'Arken Digital AB' finns i main_agreement.",
+      "document_id": "main_agreement",
+      "clause_id": null,
+      "details": {
+        "party_id": "party_client",
+        "name": "Arken Digital AB"
+      }
+    },
+    {
+      "check_id": "package.entity.party_client.org_number",
+      "status": "PASS",
+      "message": "organisationsnummer '559002-0222' finns i texten.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {
+        "org_number": "559002-0222"
+      }
+    },
+    {
+      "check_id": "package.entity.party_client.address",
+      "status": "PASS",
+      "message": "adressen 'Exempelvägen 8, 111 20 Stockholm' finns i texten.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {
+        "address": "Exempelvägen 8, 111 20 Stockholm"
+      }
+    },
+    {
+      "check_id": "package.entity.party_client.role",
+      "status": "WARN",
+      "message": "rollen 'client' för 'Arken Digital AB' uttrycks inte ordagrant i texten; verifiera att rätt part har rätt roll.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {
+        "role": "client"
+      }
+    },
+    {
+      "check_id": "package.entity.party_consultant",
+      "status": "PASS",
+      "message": "parten 'Lindfors Analys AB' finns i main_agreement.",
+      "document_id": "main_agreement",
+      "clause_id": null,
+      "details": {
+        "party_id": "party_consultant",
+        "name": "Lindfors Analys AB"
+      }
+    },
+    {
+      "check_id": "package.entity.party_consultant.org_number",
+      "status": "PASS",
+      "message": "organisationsnummer '559003-6653' finns i texten.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {
+        "org_number": "559003-6653"
+      }
+    },
+    {
+      "check_id": "package.entity.party_consultant.address",
+      "status": "PASS",
+      "message": "adressen 'Testvägen 3, 722 20 Västerås' finns i texten.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {
+        "address": "Testvägen 3, 722 20 Västerås"
+      }
+    },
+    {
+      "check_id": "package.entity.party_consultant.role",
+      "status": "WARN",
+      "message": "rollen 'consultant' för 'Lindfors Analys AB' uttrycks inte ordagrant i texten; verifiera att rätt part har rätt roll.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {
+        "role": "consultant"
+      }
+    },
+    {
+      "check_id": "package.expected_counts.facts",
+      "status": "PASS",
+      "message": "alla 13 förväntade fakta har stöd i texten.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {
+        "total": 13
+      }
+    },
+    {
+      "check_id": "package.references.relations",
+      "status": "SKIP",
+      "message": "scenariot deklarerar inga relationer.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "package.anomalies.present",
+      "status": "SKIP",
+      "message": "scenariot deklarerar inga avsiktliga anomalies.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    }
+  ],
+  "stats": {
+    "documents_total": 1,
+    "documents_accepted": 1,
+    "documents_repaired": 0,
+    "documents_rejected": 0,
+    "checks_total": 66,
+    "checks_failed": 0,
+    "checks_warned": 4
+  },
+  "attempts": 1
+}

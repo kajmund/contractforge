@@ -1,0 +1,942 @@
+{
+  "contract_type": "shareholders",
+  "definition_version": "1.0",
+  "title_sv": "Aktieägaravtal",
+  "title_en": "Shareholders' Agreement",
+  "description_sv": "Ägarfördelning, drag- och tag-along, utträde och konkurrensklausul mellan ägarna.",
+  "parties": [
+    {
+      "party_id": "party_founder_a",
+      "role": "shareholder",
+      "role_sv": "Grundare A",
+      "role_en": "Founder A",
+      "kind": "individual",
+      "name_pool": [
+        "Anna Västberg",
+        "Lars Almqvist"
+      ],
+      "address_pool": [
+        "Testvägen 1, 111 20 Stockholm"
+      ]
+    },
+    {
+      "party_id": "party_founder_b",
+      "role": "shareholder",
+      "role_sv": "Grundare B",
+      "role_en": "Founder B",
+      "kind": "individual",
+      "name_pool": [
+        "Per Sandberg",
+        "Eva Lindfors"
+      ],
+      "address_pool": [
+        "Testvägen 2, 411 20 Göteborg"
+      ]
+    },
+    {
+      "party_id": "party_holding",
+      "role": "shareholder",
+      "role_sv": "Holdingbolag",
+      "role_en": "Holding company",
+      "kind": "organisation",
+      "name_pool": [
+        "Västberg Förvaltning AB",
+        "Lindfors Invest AB"
+      ],
+      "address_pool": [
+        "Exempelvägen 2, 111 20 Stockholm"
+      ],
+      "org_number_series": "559004"
+    }
+  ],
+  "facts": [
+    {
+      "fact_id": "fact_holding_name",
+      "kind": "entity",
+      "label_sv": "Holdingbolagets namn",
+      "label_en": "Holding company name",
+      "keywords_sv": [
+        "holdingbolag",
+        "namn"
+      ],
+      "keywords_en": [
+        "holding company",
+        "name"
+      ],
+      "entity_party_id": "party_holding",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_founder_a_name",
+      "kind": "entity",
+      "label_sv": "Grundare A:s namn",
+      "label_en": "Founder A name",
+      "keywords_sv": [
+        "grundare a",
+        "namn"
+      ],
+      "keywords_en": [
+        "founder a",
+        "name"
+      ],
+      "entity_party_id": "party_founder_a",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_founder_b_name",
+      "kind": "entity",
+      "label_sv": "Grundare B:s namn",
+      "label_en": "Founder B name",
+      "keywords_sv": [
+        "grundare b",
+        "namn"
+      ],
+      "keywords_en": [
+        "founder b",
+        "name"
+      ],
+      "entity_party_id": "party_founder_b",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_share_capital",
+      "kind": "money",
+      "label_sv": "Aktiekapital",
+      "label_en": "Share capital",
+      "keywords_sv": [
+        "aktiekapital",
+        "kapital"
+      ],
+      "keywords_en": [
+        "share capital",
+        "capital"
+      ],
+      "variants": [
+        {
+          "value": 500000,
+          "explicit_surfaces": [
+            "500 000 SEK",
+            "500 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "500 000 kr",
+            "ett belopp om 500 000 kronor"
+          ]
+        },
+        {
+          "value": 750000,
+          "explicit_surfaces": [
+            "750 000 SEK",
+            "750 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "750 000 kr",
+            "ett belopp om 750 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_founder_a_share",
+      "kind": "percentage",
+      "label_sv": "Ägarandel grundare A",
+      "label_en": "Founder A ownership",
+      "keywords_sv": [
+        "ägarandel",
+        "ägande"
+      ],
+      "keywords_en": [
+        "ownership",
+        "shareholding"
+      ],
+      "variants": [
+        {
+          "value": 40,
+          "explicit_surfaces": [
+            "40 procent",
+            "40 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 40 procent",
+            "40 procent av det totala"
+          ]
+        },
+        {
+          "value": 35,
+          "explicit_surfaces": [
+            "35 procent",
+            "35 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 35 procent",
+            "35 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    {
+      "fact_id": "fact_founder_b_share",
+      "kind": "percentage",
+      "label_sv": "Ägarandel grundare B",
+      "label_en": "Founder B ownership",
+      "keywords_sv": [
+        "ägarandel",
+        "ägande"
+      ],
+      "keywords_en": [
+        "ownership",
+        "shareholding"
+      ],
+      "variants": [
+        {
+          "value": 35,
+          "explicit_surfaces": [
+            "35 procent",
+            "35 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 35 procent",
+            "35 procent av det totala"
+          ]
+        },
+        {
+          "value": 30,
+          "explicit_surfaces": [
+            "30 procent",
+            "30 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 30 procent",
+            "30 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    {
+      "fact_id": "fact_holding_share",
+      "kind": "percentage",
+      "label_sv": "Ägarandel holdingbolag",
+      "label_en": "Holding ownership",
+      "keywords_sv": [
+        "ägarandel",
+        "holding"
+      ],
+      "keywords_en": [
+        "ownership",
+        "holding"
+      ],
+      "variants": [
+        {
+          "value": 25,
+          "explicit_surfaces": [
+            "25 procent",
+            "25 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 25 procent",
+            "25 procent av det totala"
+          ]
+        },
+        {
+          "value": 30,
+          "explicit_surfaces": [
+            "30 procent",
+            "30 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 30 procent",
+            "30 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    {
+      "fact_id": "fact_board_seats",
+      "kind": "integer",
+      "label_sv": "Styrelseplatser",
+      "label_en": "Board seats",
+      "keywords_sv": [
+        "styrelse",
+        "styrelseplatser"
+      ],
+      "keywords_en": [
+        "board",
+        "board seats"
+      ],
+      "variants": [
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 styrelseplatser",
+            "antalet 3 styrelseplatser"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 3 styrelseplatser",
+            "sammanlagt 3 styrelseplatser"
+          ]
+        },
+        {
+          "value": 5,
+          "explicit_surfaces": [
+            "5 styrelseplatser",
+            "antalet 5 styrelseplatser"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 5 styrelseplatser",
+            "sammanlagt 5 styrelseplatser"
+          ]
+        }
+      ],
+      "unit": "seats"
+    },
+    {
+      "fact_id": "fact_drag_along",
+      "kind": "percentage",
+      "label_sv": "Drag-along-tröskel",
+      "label_en": "Drag-along threshold",
+      "keywords_sv": [
+        "drag-along",
+        "tröskel"
+      ],
+      "keywords_en": [
+        "drag-along",
+        "threshold"
+      ],
+      "variants": [
+        {
+          "value": 75,
+          "explicit_surfaces": [
+            "75 procent",
+            "75 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 75 procent",
+            "75 procent av det totala"
+          ]
+        },
+        {
+          "value": 80,
+          "explicit_surfaces": [
+            "80 procent",
+            "80 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 80 procent",
+            "80 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    {
+      "fact_id": "fact_tag_along",
+      "kind": "percentage",
+      "label_sv": "Tag-along-tröskel",
+      "label_en": "Tag-along threshold",
+      "keywords_sv": [
+        "tag-along",
+        "tröskel"
+      ],
+      "keywords_en": [
+        "tag-along",
+        "threshold"
+      ],
+      "variants": [
+        {
+          "value": 50,
+          "explicit_surfaces": [
+            "50 procent",
+            "50 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 50 procent",
+            "50 procent av det totala"
+          ]
+        },
+        {
+          "value": 60,
+          "explicit_surfaces": [
+            "60 procent",
+            "60 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 60 procent",
+            "60 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    {
+      "fact_id": "fact_exit_period",
+      "kind": "duration",
+      "label_sv": "Utträdesperiod",
+      "label_en": "Exit period",
+      "keywords_sv": [
+        "utträde",
+        "period"
+      ],
+      "keywords_en": [
+        "exit period",
+        "exit"
+      ],
+      "variants": [
+        {
+          "value": 24,
+          "explicit_surfaces": [
+            "24 månader",
+            "tjugofyra (24) månader"
+          ],
+          "paraphrase_surfaces": [
+            "två år"
+          ]
+        },
+        {
+          "value": 36,
+          "explicit_surfaces": [
+            "36 månader",
+            "trettiosex (36) månader"
+          ],
+          "paraphrase_surfaces": [
+            "tre år"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    {
+      "fact_id": "fact_non_compete",
+      "kind": "duration",
+      "label_sv": "Konkurrensklausul",
+      "label_en": "Non-compete period",
+      "keywords_sv": [
+        "konkurrensklausul",
+        "konkurrens"
+      ],
+      "keywords_en": [
+        "non-compete",
+        "competition"
+      ],
+      "variants": [
+        {
+          "value": 12,
+          "explicit_surfaces": [
+            "12 månader",
+            "tolv (12) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett år"
+          ]
+        },
+        {
+          "value": 18,
+          "explicit_surfaces": [
+            "18 månader",
+            "arton (18) månader"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 18 månader",
+            "en avtalsperiod om 18 månader"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    {
+      "fact_id": "fact_valuation_method",
+      "kind": "defined_term",
+      "label_sv": "Värderingsmetod",
+      "label_en": "Valuation method",
+      "keywords_sv": [
+        "värdering",
+        "metod"
+      ],
+      "keywords_en": [
+        "valuation",
+        "method"
+      ],
+      "variants": [
+        {
+          "value": "företagsvärdering enligt EBITDA-multipel",
+          "explicit_surfaces": [
+            "företagsvärdering enligt EBITDA-multipel"
+          ],
+          "paraphrase_surfaces": [
+            "värdering baserad på EBITDA-multipel"
+          ]
+        },
+        {
+          "value": "värdering enligt oberoende värderingsman",
+          "explicit_surfaces": [
+            "värdering enligt oberoende värderingsman"
+          ],
+          "paraphrase_surfaces": [
+            "värdering av oberoende värderingsman"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_dividend_policy",
+      "kind": "defined_term",
+      "label_sv": "Utdelningspolicy",
+      "label_en": "Dividend policy",
+      "keywords_sv": [
+        "utdelning",
+        "vinst"
+      ],
+      "keywords_en": [
+        "dividend",
+        "distribution"
+      ],
+      "variants": [
+        {
+          "value": "utdelning i förhållande till ägarandel",
+          "explicit_surfaces": [
+            "utdelning i förhållande till ägarandel"
+          ],
+          "paraphrase_surfaces": [
+            "utdelning proportionell mot ägarandel"
+          ]
+        },
+        {
+          "value": "utdelning efter styrelsens förslag",
+          "explicit_surfaces": [
+            "utdelning efter styrelsens förslag"
+          ],
+          "paraphrase_surfaces": [
+            "utdelning enligt styrelsens förslag"
+          ]
+        }
+      ]
+    }
+  ],
+  "main_clauses": [
+    {
+      "clause_id": "clause_01",
+      "heading_sv": "Parter och ägarfördelning",
+      "heading_en": "Parties and ownership",
+      "fact_ids": [
+        "fact_holding_name",
+        "fact_founder_a_name",
+        "fact_founder_b_name",
+        "fact_founder_a_share",
+        "fact_founder_b_share",
+        "fact_holding_share"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera parter och ägarfördelning och uttryck följande uppgifter tydligt: holdingbolagets namn, grundare a:s namn, grundare b:s namn, ägarandel grundare a, ägarandel grundare b, ägarandel holdingbolag."
+    },
+    {
+      "clause_id": "clause_02",
+      "heading_sv": "Aktiekapital",
+      "heading_en": "Share capital",
+      "fact_ids": [
+        "fact_share_capital"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera aktiekapital och uttryck följande uppgifter tydligt: aktiekapital."
+    },
+    {
+      "clause_id": "clause_03",
+      "heading_sv": "Styrelse och ägarinflytande",
+      "heading_en": "Board and governance",
+      "fact_ids": [
+        "fact_board_seats"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera styrelse och ägarinflytande och uttryck följande uppgifter tydligt: styrelseplatser."
+    },
+    {
+      "clause_id": "clause_04",
+      "heading_sv": "Drag-along",
+      "heading_en": "Drag-along",
+      "fact_ids": [
+        "fact_drag_along"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera drag-along och uttryck följande uppgifter tydligt: drag-along-tröskel."
+    },
+    {
+      "clause_id": "clause_05",
+      "heading_sv": "Tag-along",
+      "heading_en": "Tag-along",
+      "fact_ids": [
+        "fact_tag_along"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera tag-along och uttryck följande uppgifter tydligt: tag-along-tröskel."
+    },
+    {
+      "clause_id": "clause_06",
+      "heading_sv": "Värdering vid utträde",
+      "heading_en": "Exit valuation",
+      "fact_ids": [
+        "fact_valuation_method"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera värdering vid utträde och uttryck följande uppgifter tydligt: värderingsmetod."
+    },
+    {
+      "clause_id": "clause_07",
+      "heading_sv": "Utträde och konkurrens",
+      "heading_en": "Exit and non-compete",
+      "fact_ids": [
+        "fact_exit_period",
+        "fact_non_compete"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera utträde och konkurrens och uttryck följande uppgifter tydligt: utträdesperiod, konkurrensklausul."
+    },
+    {
+      "clause_id": "clause_08",
+      "heading_sv": "Utdelningspolicy",
+      "heading_en": "Dividend policy",
+      "fact_ids": [
+        "fact_dividend_policy"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera utdelningspolicy och uttryck följande uppgifter tydligt: utdelningspolicy."
+    },
+    {
+      "clause_id": "clause_09",
+      "heading_sv": "Sekretess mellan ägarna",
+      "heading_en": "Confidentiality between shareholders",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera sekretess mellan ägarna med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_10",
+      "heading_sv": "Ändringar och tillägg",
+      "heading_en": "Amendments",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera ändringar och tillägg med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_11",
+      "heading_sv": "Undertecknande",
+      "heading_en": "Signatures",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera undertecknande med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_12",
+      "heading_sv": "Tillämplig lag och tvistlösning",
+      "heading_en": "Governing law and disputes",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera tillämplig lag och tvistlösning med sedvanlig avtalsformulering."
+    }
+  ],
+  "extra_main_clauses": [
+    {
+      "clause_id": "clause_13",
+      "heading_sv": "Force majeure",
+      "heading_en": "Force majeure",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera force majeure med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_14",
+      "heading_sv": "Meddelanden",
+      "heading_en": "Notices",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera meddelanden med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_15",
+      "heading_sv": "Överlåtelse av avtal",
+      "heading_en": "Assignment",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera överlåtelse av avtal med sedvanlig avtalsformulering."
+    }
+  ],
+  "appendix_clauses": [
+    {
+      "clause_id": "appendix_a_clause_01",
+      "heading_sv": "Bilaga A – Kompletterande villkor",
+      "heading_en": "Appendix A – Supplementary terms",
+      "fact_ids": [
+        "fact_founder_b_name",
+        "fact_share_capital"
+      ],
+      "mode": "definition",
+      "instruction_sv": "Reglera bilaga a – kompletterande villkor och uttryck följande uppgifter tydligt: grundare b:s namn, aktiekapital."
+    },
+    {
+      "clause_id": "appendix_a_clause_02",
+      "heading_sv": "Bilaga A – Detaljreglering",
+      "heading_en": "Appendix A – Detailed regulation",
+      "fact_ids": [],
+      "mode": "reference",
+      "distributed_facts": true,
+      "instruction_sv": "Reglera bilaga a – detaljreglering och koppla detaljerna till huvudavtalets bestämmelser."
+    },
+    {
+      "clause_id": "appendix_a_clause_03",
+      "heading_sv": "Bilaga A – Tidigare diskuterade villkor",
+      "heading_en": "Appendix A – Previously discussed terms",
+      "fact_ids": [
+        "fact_founder_a_share_alt",
+        "fact_drag_along_alt"
+      ],
+      "mode": "distractor",
+      "instruction_sv": "Reglera bilaga a – tidigare diskuterade villkor och uttryck följande uppgifter tydligt: tidigare diskuterad ägarandel, högre diskuterad drag-along-tröskel."
+    }
+  ],
+  "amendment_clauses": [
+    {
+      "clause_id": "amendment_1_clause_01",
+      "heading_sv": "Tillägg 1 – Ändrade villkor",
+      "heading_en": "Amendment 1 – Amended terms",
+      "fact_ids": [
+        "fact_founder_a_share",
+        "fact_founder_a_share_amendment"
+      ],
+      "mode": "contradiction",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – ändrade villkor och uttryck följande uppgifter tydligt: ägarandel grundare a, avvikande ägarandel i tillägg."
+    },
+    {
+      "clause_id": "amendment_1_clause_02",
+      "heading_sv": "Tillägg 1 – Undantag",
+      "heading_en": "Amendment 1 – Exception",
+      "fact_ids": [
+        "fact_non_compete",
+        "fact_non_compete_exception"
+      ],
+      "mode": "exception",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – undantag och uttryck följande uppgifter tydligt: konkurrensklausul, förkortad konkurrensklausul vid exit."
+    },
+    {
+      "clause_id": "amendment_1_clause_03",
+      "heading_sv": "Tillägg 1 – Externa dokument",
+      "heading_en": "Amendment 1 – External documents",
+      "fact_ids": [],
+      "mode": "reference",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – externa dokument och hänvisa till externa dokument som inte ingår i avtalspaketet."
+    },
+    {
+      "clause_id": "amendment_1_clause_04",
+      "heading_sv": "Tillägg 1 – Villkorade bestämmelser",
+      "heading_en": "Amendment 1 – Conditional provisions",
+      "fact_ids": [
+        "fact_conditional_dividend",
+        "fact_dividend_policy"
+      ],
+      "mode": "conditional",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – villkorade bestämmelser och uttryck följande uppgifter tydligt: villkorad tilläggsutdelning, utdelningspolicy."
+    }
+  ],
+  "package": {
+    "appendix": {
+      "document_id": "appendix_a",
+      "title_sv": "Bilaga A – Kompletterande villkor",
+      "title_en": "Appendix A – Supplementary terms",
+      "filename_stem": "appendix_a"
+    },
+    "amendment": {
+      "document_id": "amendment_1",
+      "title_sv": "Tillägg 1 – Ändrade villkor",
+      "title_en": "Amendment 1 – Amended terms",
+      "filename_stem": "amendment_1"
+    }
+  },
+  "variation": {
+    "styles": [
+      "formal",
+      "complex",
+      "plain"
+    ],
+    "document_qualities": [
+      "clean",
+      "line_breaks",
+      "tables",
+      "page_breaks"
+    ]
+  },
+  "distractor_facts": [
+    {
+      "fact_id": "fact_founder_a_share_alt",
+      "kind": "percentage",
+      "label_sv": "Tidigare diskuterad ägarandel",
+      "label_en": "Earlier discussed ownership",
+      "keywords_sv": [
+        "tidigare ägarandel",
+        "diskuterad andel"
+      ],
+      "keywords_en": [
+        "earlier ownership",
+        "discussed share"
+      ],
+      "variants": [
+        {
+          "value": 30,
+          "explicit_surfaces": [
+            "30 procent",
+            "30 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 30 procent",
+            "30 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent",
+      "based_on_fact_id": "fact_founder_a_share"
+    },
+    {
+      "fact_id": "fact_drag_along_alt",
+      "kind": "percentage",
+      "label_sv": "Högre diskuterad drag-along-tröskel",
+      "label_en": "Higher discussed drag-along threshold",
+      "keywords_sv": [
+        "drag-along förslag",
+        "högre tröskel"
+      ],
+      "keywords_en": [
+        "drag-along proposal",
+        "higher threshold"
+      ],
+      "variants": [
+        {
+          "value": 90,
+          "explicit_surfaces": [
+            "90 procent",
+            "90 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 90 procent",
+            "90 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent",
+      "based_on_fact_id": "fact_drag_along"
+    }
+  ],
+  "contradiction": {
+    "base_fact_id": "fact_founder_a_share",
+    "fact": {
+      "fact_id": "fact_founder_a_share_amendment",
+      "kind": "percentage",
+      "label_sv": "Avvikande ägarandel i tillägg",
+      "label_en": "Differing ownership in amendment",
+      "keywords_sv": [
+        "ägarandel tillägg",
+        "avvikande andel"
+      ],
+      "keywords_en": [
+        "ownership amendment"
+      ],
+      "variants": [
+        {
+          "value": 45,
+          "explicit_surfaces": [
+            "45 procent",
+            "45 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 45 procent",
+            "45 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    "description_sv": "Tillägg 1 anger en annan ägarandel för grundare A än huvudavtalets ägarförteckning.",
+    "description_en": ""
+  },
+  "exception": {
+    "base_fact_id": "fact_non_compete",
+    "fact": {
+      "fact_id": "fact_non_compete_exception",
+      "kind": "duration",
+      "label_sv": "Förkortad konkurrensklausul vid exit",
+      "label_en": "Shortened non-compete at exit",
+      "keywords_sv": [
+        "undantag konkurrensklausul",
+        "exit"
+      ],
+      "keywords_en": [
+        "non-compete exception",
+        "exit"
+      ],
+      "variants": [
+        {
+          "value": 6,
+          "explicit_surfaces": [
+            "6 månader",
+            "sex (6) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett halvår"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    "description_sv": "Konkurrensklausulen förkortas vid utträde enligt undantaget i Tillägg 1; huvudavtalets period gäller i övrigt.",
+    "description_en": ""
+  },
+  "missing_information": {
+    "missing_documents": [
+      "appendix_b_agarlista",
+      "side_letter_2026"
+    ],
+    "insufficient_evidence_fact_id": "fact_exit_period",
+    "conditional_fact": {
+      "fact_id": "fact_conditional_dividend",
+      "kind": "percentage",
+      "label_sv": "Villkorad tilläggsutdelning",
+      "label_en": "Conditional extra dividend",
+      "keywords_sv": [
+        "villkorad utdelning",
+        "tilläggsutdelning"
+      ],
+      "keywords_en": [
+        "conditional dividend",
+        "extra dividend"
+      ],
+      "variants": [
+        {
+          "value": 5,
+          "explicit_surfaces": [
+            "5 procent",
+            "5 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 5 procent",
+            "5 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    "conditional_governing_fact_id": "fact_dividend_policy",
+    "description_sv": "Den kompletta ägarlistan (bilaga B) saknas; utträdesperiodens tillämpning på samtliga ägare kan inte verifieras.",
+    "conditional_description_sv": "Tilläggsutdelningen är villkorad av ägarlistan i bilaga B, som inte ingår i avtalspaketet."
+  }
+}

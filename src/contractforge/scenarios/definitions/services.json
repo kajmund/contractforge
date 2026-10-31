@@ -1,0 +1,910 @@
+{
+  "contract_type": "services",
+  "definition_version": "1.0",
+  "title_sv": "Tjänsteavtal",
+  "title_en": "Services Agreement",
+  "description_sv": "Drift och support med serviceavgift, servicenivåer, viten och underleverantörer.",
+  "parties": [
+    {
+      "party_id": "party_supplier",
+      "role": "supplier",
+      "role_sv": "Leverantör",
+      "role_en": "Supplier",
+      "kind": "organisation",
+      "name_pool": [
+        "Nordvik Drift AB",
+        "Arken Support AB",
+        "Sundberg IT AB"
+      ],
+      "address_pool": [
+        "Exempelvägen 17, 111 20 Stockholm"
+      ],
+      "org_number_series": "559007"
+    },
+    {
+      "party_id": "party_customer",
+      "role": "customer",
+      "role_sv": "Kund",
+      "role_en": "Customer",
+      "kind": "organisation",
+      "name_pool": [
+        "Sundberg Fastigheter AB",
+        "Västberg Handel AB",
+        "Lindfors Vård AB"
+      ],
+      "address_pool": [
+        "Provgatan 3, 411 20 Göteborg"
+      ],
+      "org_number_series": "559008"
+    }
+  ],
+  "facts": [
+    {
+      "fact_id": "fact_supplier_name",
+      "kind": "entity",
+      "label_sv": "Leverantörens namn",
+      "label_en": "Supplier name",
+      "keywords_sv": [
+        "leverantör",
+        "namn"
+      ],
+      "keywords_en": [
+        "supplier",
+        "name"
+      ],
+      "entity_party_id": "party_supplier",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_customer_name",
+      "kind": "entity",
+      "label_sv": "Kundens namn",
+      "label_en": "Customer name",
+      "keywords_sv": [
+        "kund",
+        "namn"
+      ],
+      "keywords_en": [
+        "customer",
+        "name"
+      ],
+      "entity_party_id": "party_customer",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_service_scope",
+      "kind": "text",
+      "label_sv": "Tjänsternas omfattning",
+      "label_en": "Scope of services",
+      "keywords_sv": [
+        "tjänster",
+        "omfattning"
+      ],
+      "keywords_en": [
+        "services",
+        "scope"
+      ],
+      "variants": [
+        {
+          "value": "drift och support av affärssystem",
+          "explicit_surfaces": [
+            "drift och support av affärssystem"
+          ],
+          "paraphrase_surfaces": [
+            "drift samt support av affärssystem"
+          ]
+        },
+        {
+          "value": "helpdesk och incidenthantering",
+          "explicit_surfaces": [
+            "helpdesk och incidenthantering"
+          ],
+          "paraphrase_surfaces": [
+            "helpdesk och hantering av incidenter"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_monthly_fee",
+      "kind": "money",
+      "label_sv": "Serviceavgift",
+      "label_en": "Monthly service fee",
+      "keywords_sv": [
+        "serviceavgift",
+        "månadsavgift"
+      ],
+      "keywords_en": [
+        "service fee",
+        "monthly fee"
+      ],
+      "variants": [
+        {
+          "value": 82000,
+          "explicit_surfaces": [
+            "82 000 SEK per månad",
+            "82 000 kronor per månad"
+          ],
+          "paraphrase_surfaces": [
+            "månadslön om 82 000 kronor",
+            "82 000 kr per månad"
+          ]
+        },
+        {
+          "value": 75000,
+          "explicit_surfaces": [
+            "75 000 SEK per månad",
+            "75 000 kronor per månad"
+          ],
+          "paraphrase_surfaces": [
+            "månadslön om 75 000 kronor",
+            "75 000 kr per månad"
+          ]
+        }
+      ],
+      "unit": "per_month",
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_response_time",
+      "kind": "duration",
+      "label_sv": "Svarstid",
+      "label_en": "Response time",
+      "keywords_sv": [
+        "svarstid",
+        "respons"
+      ],
+      "keywords_en": [
+        "response time",
+        "response"
+      ],
+      "variants": [
+        {
+          "value": 4,
+          "explicit_surfaces": [
+            "4 timmar",
+            "inom 4 timmar"
+          ],
+          "paraphrase_surfaces": [
+            "en svarstid om 4 timmar"
+          ]
+        },
+        {
+          "value": 8,
+          "explicit_surfaces": [
+            "8 timmar",
+            "inom 8 timmar"
+          ],
+          "paraphrase_surfaces": [
+            "en svarstid om 8 timmar"
+          ]
+        }
+      ],
+      "unit": "hours"
+    },
+    {
+      "fact_id": "fact_availability",
+      "kind": "percentage",
+      "label_sv": "Tillgänglighet",
+      "label_en": "Availability",
+      "keywords_sv": [
+        "tillgänglighet",
+        "upptid"
+      ],
+      "keywords_en": [
+        "availability",
+        "uptime"
+      ],
+      "variants": [
+        {
+          "value": 99.5,
+          "explicit_surfaces": [
+            "99,5 procent",
+            "99,5 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 99,5 procent",
+            "99,5 procent av det totala"
+          ]
+        },
+        {
+          "value": 98.5,
+          "explicit_surfaces": [
+            "98,5 procent",
+            "98,5 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 98,5 procent",
+            "98,5 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    {
+      "fact_id": "fact_term_months",
+      "kind": "duration",
+      "label_sv": "Avtalstid",
+      "label_en": "Term",
+      "keywords_sv": [
+        "avtalstid",
+        "löptid"
+      ],
+      "keywords_en": [
+        "term",
+        "duration"
+      ],
+      "variants": [
+        {
+          "value": 24,
+          "explicit_surfaces": [
+            "24 månader",
+            "tjugofyra (24) månader"
+          ],
+          "paraphrase_surfaces": [
+            "två år"
+          ]
+        },
+        {
+          "value": 36,
+          "explicit_surfaces": [
+            "36 månader",
+            "trettiosex (36) månader"
+          ],
+          "paraphrase_surfaces": [
+            "tre år"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    {
+      "fact_id": "fact_notice_months",
+      "kind": "duration",
+      "label_sv": "Uppsägningstid",
+      "label_en": "Notice period",
+      "keywords_sv": [
+        "uppsägningstid",
+        "uppsägning"
+      ],
+      "keywords_en": [
+        "notice period",
+        "notice"
+      ],
+      "variants": [
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 månader",
+            "tre (3) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett kvartal"
+          ]
+        },
+        {
+          "value": 6,
+          "explicit_surfaces": [
+            "6 månader",
+            "sex (6) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett halvår"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    {
+      "fact_id": "fact_penalty_per_breach",
+      "kind": "money",
+      "label_sv": "Vite per avtalsbrott",
+      "label_en": "Penalty per breach",
+      "keywords_sv": [
+        "vite",
+        "avtalsbrott"
+      ],
+      "keywords_en": [
+        "penalty",
+        "breach"
+      ],
+      "variants": [
+        {
+          "value": 50000,
+          "explicit_surfaces": [
+            "50 000 SEK",
+            "50 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "50 000 kr",
+            "ett belopp om 50 000 kronor"
+          ]
+        },
+        {
+          "value": 75000,
+          "explicit_surfaces": [
+            "75 000 SEK",
+            "75 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "75 000 kr",
+            "ett belopp om 75 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_reporting_frequency",
+      "kind": "integer",
+      "label_sv": "Rapporteringsfrekvens",
+      "label_en": "Reporting frequency",
+      "keywords_sv": [
+        "rapportering",
+        "frekvens"
+      ],
+      "keywords_en": [
+        "reporting",
+        "frequency"
+      ],
+      "variants": [
+        {
+          "value": 1,
+          "explicit_surfaces": [
+            "1 gånger per månad",
+            "antalet 1 gånger per månad"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 1 gånger per månad",
+            "sammanlagt 1 gånger per månad"
+          ]
+        },
+        {
+          "value": 2,
+          "explicit_surfaces": [
+            "2 gånger per månad",
+            "antalet 2 gånger per månad"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 2 gånger per månad",
+            "sammanlagt 2 gånger per månad"
+          ]
+        }
+      ],
+      "unit": "times_per_month"
+    },
+    {
+      "fact_id": "fact_insurance",
+      "kind": "money",
+      "label_sv": "Försäkringsbelopp",
+      "label_en": "Insurance amount",
+      "keywords_sv": [
+        "försäkring",
+        "försäkringsbelopp"
+      ],
+      "keywords_en": [
+        "insurance",
+        "insurance amount"
+      ],
+      "variants": [
+        {
+          "value": 10000000,
+          "explicit_surfaces": [
+            "10 000 000 SEK",
+            "10 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "10 000 000 kr",
+            "ett belopp om 10 000 000 kronor"
+          ]
+        },
+        {
+          "value": 5000000,
+          "explicit_surfaces": [
+            "5 000 000 SEK",
+            "5 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "5 000 000 kr",
+            "ett belopp om 5 000 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_subcontracting",
+      "kind": "defined_term",
+      "label_sv": "Underleverantörer",
+      "label_en": "Subcontractors",
+      "keywords_sv": [
+        "underleverantör",
+        "underentreprenör"
+      ],
+      "keywords_en": [
+        "subcontractor",
+        "subcontracting"
+      ],
+      "variants": [
+        {
+          "value": "underleverantörer får anlitas efter skriftligt godkännande",
+          "explicit_surfaces": [
+            "underleverantörer får anlitas efter skriftligt godkännande"
+          ],
+          "paraphrase_surfaces": [
+            "anlitande av underleverantörer kräver skriftligt godkännande"
+          ]
+        },
+        {
+          "value": "underleverantörer får inte anlitas",
+          "explicit_surfaces": [
+            "underleverantörer får inte anlitas"
+          ],
+          "paraphrase_surfaces": [
+            "ingen anlitande av underleverantörer utan skriftligt medgivande"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_force_majeure",
+      "kind": "defined_term",
+      "label_sv": "Force majeure",
+      "label_en": "Force majeure",
+      "keywords_sv": [
+        "force majeure",
+        "befrielse"
+      ],
+      "keywords_en": [
+        "force majeure",
+        "relief"
+      ],
+      "variants": [
+        {
+          "value": "force majeure befriar part från ansvar",
+          "explicit_surfaces": [
+            "force majeure befriar part från ansvar"
+          ],
+          "paraphrase_surfaces": [
+            "befrielse vid force majeure enligt svensk rätt"
+          ]
+        },
+        {
+          "value": "force majeure påverkar inte betalningsskyldighet",
+          "explicit_surfaces": [
+            "force majeure påverkar inte betalningsskyldighet"
+          ],
+          "paraphrase_surfaces": [
+            "betalningsskyldighet kvarstår vid force majeure"
+          ]
+        }
+      ]
+    }
+  ],
+  "main_clauses": [
+    {
+      "clause_id": "clause_01",
+      "heading_sv": "Avtalsparter",
+      "heading_en": "Parties",
+      "fact_ids": [
+        "fact_supplier_name",
+        "fact_customer_name"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera avtalsparter och uttryck följande uppgifter tydligt: leverantörens namn, kundens namn."
+    },
+    {
+      "clause_id": "clause_02",
+      "heading_sv": "Tjänsternas omfattning",
+      "heading_en": "Scope of services",
+      "fact_ids": [
+        "fact_service_scope"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera tjänsternas omfattning och uttryck följande uppgifter tydligt: tjänsternas omfattning."
+    },
+    {
+      "clause_id": "clause_03",
+      "heading_sv": "Serviceavgift och rapportering",
+      "heading_en": "Service fee and reporting",
+      "fact_ids": [
+        "fact_monthly_fee",
+        "fact_reporting_frequency"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera serviceavgift och rapportering och uttryck följande uppgifter tydligt: serviceavgift, rapporteringsfrekvens."
+    },
+    {
+      "clause_id": "clause_04",
+      "heading_sv": "Servicenivåer",
+      "heading_en": "Service levels",
+      "fact_ids": [
+        "fact_response_time",
+        "fact_availability"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera servicenivåer och uttryck följande uppgifter tydligt: svarstid, tillgänglighet."
+    },
+    {
+      "clause_id": "clause_05",
+      "heading_sv": "Avtalsperiod och uppsägning",
+      "heading_en": "Term and notice",
+      "fact_ids": [
+        "fact_term_months",
+        "fact_notice_months"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera avtalsperiod och uppsägning och uttryck följande uppgifter tydligt: avtalstid, uppsägningstid."
+    },
+    {
+      "clause_id": "clause_06",
+      "heading_sv": "Viten och ansvar",
+      "heading_en": "Penalties and liability",
+      "fact_ids": [
+        "fact_penalty_per_breach",
+        "fact_insurance"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera viten och ansvar och uttryck följande uppgifter tydligt: vite per avtalsbrott, försäkringsbelopp."
+    },
+    {
+      "clause_id": "clause_07",
+      "heading_sv": "Underleverantörer",
+      "heading_en": "Subcontractors",
+      "fact_ids": [
+        "fact_subcontracting"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera underleverantörer och uttryck följande uppgifter tydligt: underleverantörer."
+    },
+    {
+      "clause_id": "clause_08",
+      "heading_sv": "Force majeure",
+      "heading_en": "Force majeure",
+      "fact_ids": [
+        "fact_force_majeure"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera force majeure och uttryck följande uppgifter tydligt: force majeure."
+    },
+    {
+      "clause_id": "clause_09",
+      "heading_sv": "Dataskydd och personuppgifter",
+      "heading_en": "Data protection",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera dataskydd och personuppgifter med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_10",
+      "heading_sv": "Ändringar och tillägg",
+      "heading_en": "Amendments",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera ändringar och tillägg med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_11",
+      "heading_sv": "Undertecknande",
+      "heading_en": "Signatures",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera undertecknande med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_12",
+      "heading_sv": "Tillämplig lag och tvistlösning",
+      "heading_en": "Governing law and disputes",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera tillämplig lag och tvistlösning med sedvanlig avtalsformulering."
+    }
+  ],
+  "extra_main_clauses": [
+    {
+      "clause_id": "clause_13",
+      "heading_sv": "Meddelanden",
+      "heading_en": "Notices",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera meddelanden med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_14",
+      "heading_sv": "Överlåtelse av avtal",
+      "heading_en": "Assignment",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera överlåtelse av avtal med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_15",
+      "heading_sv": "Sekretess",
+      "heading_en": "Confidentiality",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera sekretess med sedvanlig avtalsformulering."
+    }
+  ],
+  "appendix_clauses": [
+    {
+      "clause_id": "appendix_a_clause_01",
+      "heading_sv": "Bilaga A – Kompletterande villkor",
+      "heading_en": "Appendix A – Supplementary terms",
+      "fact_ids": [
+        "fact_service_scope",
+        "fact_monthly_fee"
+      ],
+      "mode": "definition",
+      "instruction_sv": "Reglera bilaga a – kompletterande villkor och uttryck följande uppgifter tydligt: tjänsternas omfattning, serviceavgift."
+    },
+    {
+      "clause_id": "appendix_a_clause_02",
+      "heading_sv": "Bilaga A – Detaljreglering",
+      "heading_en": "Appendix A – Detailed regulation",
+      "fact_ids": [],
+      "mode": "reference",
+      "distributed_facts": true,
+      "instruction_sv": "Reglera bilaga a – detaljreglering och koppla detaljerna till huvudavtalets bestämmelser."
+    },
+    {
+      "clause_id": "appendix_a_clause_03",
+      "heading_sv": "Bilaga A – Tidigare diskuterade villkor",
+      "heading_en": "Appendix A – Previously discussed terms",
+      "fact_ids": [
+        "fact_monthly_fee_alt",
+        "fact_availability_alt"
+      ],
+      "mode": "distractor",
+      "instruction_sv": "Reglera bilaga a – tidigare diskuterade villkor och uttryck följande uppgifter tydligt: tidigare diskuterad serviceavgift, högre utlovad tillgänglighet i utkast."
+    }
+  ],
+  "amendment_clauses": [
+    {
+      "clause_id": "amendment_1_clause_01",
+      "heading_sv": "Tillägg 1 – Ändrade villkor",
+      "heading_en": "Amendment 1 – Amended terms",
+      "fact_ids": [
+        "fact_monthly_fee",
+        "fact_monthly_fee_amendment"
+      ],
+      "mode": "contradiction",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – ändrade villkor och uttryck följande uppgifter tydligt: serviceavgift, avvikande serviceavgift i tillägg."
+    },
+    {
+      "clause_id": "amendment_1_clause_02",
+      "heading_sv": "Tillägg 1 – Undantag",
+      "heading_en": "Amendment 1 – Exception",
+      "fact_ids": [
+        "fact_notice_months",
+        "fact_notice_exception"
+      ],
+      "mode": "exception",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – undantag och uttryck följande uppgifter tydligt: uppsägningstid, omedelbar uppsägning vid väsentligt avtalsbrott."
+    },
+    {
+      "clause_id": "amendment_1_clause_03",
+      "heading_sv": "Tillägg 1 – Externa dokument",
+      "heading_en": "Amendment 1 – External documents",
+      "fact_ids": [],
+      "mode": "reference",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – externa dokument och hänvisa till externa dokument som inte ingår i avtalspaketet."
+    },
+    {
+      "clause_id": "amendment_1_clause_04",
+      "heading_sv": "Tillägg 1 – Villkorade bestämmelser",
+      "heading_en": "Amendment 1 – Conditional provisions",
+      "fact_ids": [
+        "fact_conditional_discount",
+        "fact_monthly_fee"
+      ],
+      "mode": "conditional",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – villkorade bestämmelser och uttryck följande uppgifter tydligt: villkorad rabatt, serviceavgift."
+    }
+  ],
+  "package": {
+    "appendix": {
+      "document_id": "appendix_a",
+      "title_sv": "Bilaga A – Kompletterande villkor",
+      "title_en": "Appendix A – Supplementary terms",
+      "filename_stem": "appendix_a"
+    },
+    "amendment": {
+      "document_id": "amendment_1",
+      "title_sv": "Tillägg 1 – Ändrade villkor",
+      "title_en": "Amendment 1 – Amended terms",
+      "filename_stem": "amendment_1"
+    }
+  },
+  "variation": {
+    "styles": [
+      "formal",
+      "complex",
+      "plain"
+    ],
+    "document_qualities": [
+      "clean",
+      "line_breaks",
+      "tables",
+      "page_breaks"
+    ]
+  },
+  "distractor_facts": [
+    {
+      "fact_id": "fact_monthly_fee_alt",
+      "kind": "money",
+      "label_sv": "Tidigare diskuterad serviceavgift",
+      "label_en": "Earlier discussed service fee",
+      "keywords_sv": [
+        "tidigare avgift",
+        "lägre avgift"
+      ],
+      "keywords_en": [
+        "earlier fee",
+        "lower fee"
+      ],
+      "variants": [
+        {
+          "value": 68000,
+          "explicit_surfaces": [
+            "68 000 SEK per månad",
+            "68 000 kronor per månad"
+          ],
+          "paraphrase_surfaces": [
+            "månadslön om 68 000 kronor",
+            "68 000 kr per månad"
+          ]
+        }
+      ],
+      "unit": "per_month",
+      "currency": "SEK",
+      "based_on_fact_id": "fact_monthly_fee"
+    },
+    {
+      "fact_id": "fact_availability_alt",
+      "kind": "percentage",
+      "label_sv": "Högre utlovad tillgänglighet i utkast",
+      "label_en": "Higher promised availability in draft",
+      "keywords_sv": [
+        "utlovad tillgänglighet",
+        "tidigare nivå"
+      ],
+      "keywords_en": [
+        "promised availability",
+        "earlier level"
+      ],
+      "variants": [
+        {
+          "value": 99.9,
+          "explicit_surfaces": [
+            "99,9 procent",
+            "99,9 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 99,9 procent",
+            "99,9 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent",
+      "based_on_fact_id": "fact_availability"
+    }
+  ],
+  "contradiction": {
+    "base_fact_id": "fact_monthly_fee",
+    "fact": {
+      "fact_id": "fact_monthly_fee_amendment",
+      "kind": "money",
+      "label_sv": "Avvikande serviceavgift i tillägg",
+      "label_en": "Differing service fee in amendment",
+      "keywords_sv": [
+        "serviceavgift tillägg",
+        "avvikande avgift"
+      ],
+      "keywords_en": [
+        "fee amendment"
+      ],
+      "variants": [
+        {
+          "value": 88000,
+          "explicit_surfaces": [
+            "88 000 SEK per månad",
+            "88 000 kronor per månad"
+          ],
+          "paraphrase_surfaces": [
+            "månadslön om 88 000 kronor",
+            "88 000 kr per månad"
+          ]
+        }
+      ],
+      "unit": "per_month",
+      "currency": "SEK"
+    },
+    "description_sv": "Tillägg 1 anger en högre serviceavgift än huvudavtalet, samtidigt som huvudavtalets belopp står kvar.",
+    "description_en": ""
+  },
+  "exception": {
+    "base_fact_id": "fact_notice_months",
+    "fact": {
+      "fact_id": "fact_notice_exception",
+      "kind": "duration",
+      "label_sv": "Omedelbar uppsägning vid väsentligt avtalsbrott",
+      "label_en": "Immediate termination on material breach",
+      "keywords_sv": [
+        "undantag uppsägning",
+        "väsentligt avtalsbrott"
+      ],
+      "keywords_en": [
+        "termination exception",
+        "material breach"
+      ],
+      "variants": [
+        {
+          "value": 1,
+          "explicit_surfaces": [
+            "1 månader",
+            "ett (1) månader"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 1 månader",
+            "en avtalsperiod om 1 månader"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    "description_sv": "Omedelbar uppsägning får ske vid väsentligt avtalsbrott enligt undantaget i Tillägg 1.",
+    "description_en": ""
+  },
+  "missing_information": {
+    "missing_documents": [
+      "appendix_b_sla",
+      "side_letter_2026"
+    ],
+    "insufficient_evidence_fact_id": "fact_availability",
+    "conditional_fact": {
+      "fact_id": "fact_conditional_discount",
+      "kind": "percentage",
+      "label_sv": "Villkorad rabatt",
+      "label_en": "Conditional discount",
+      "keywords_sv": [
+        "villkorad rabatt",
+        "rabatt"
+      ],
+      "keywords_en": [
+        "conditional discount",
+        "discount"
+      ],
+      "variants": [
+        {
+          "value": 5,
+          "explicit_surfaces": [
+            "5 procent",
+            "5 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 5 procent",
+            "5 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    "conditional_governing_fact_id": "fact_monthly_fee",
+    "description_sv": "SLA-bilagan (bilaga B) saknas; mätmetoden för tillgänglighet kan därför inte verifieras.",
+    "conditional_description_sv": "Rabatten är villkorad av SLA-bilagan i bilaga B, som inte ingår i avtalspaketet."
+  }
+}

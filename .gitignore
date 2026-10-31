@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Local secrets and runtime data
+.env
+.env.*
+!.env.example
+pricing.json
+
+# Generated datasets (keep benchmark summaries, not raw corpora)
+dataset/
+out/
+*.zip
+
+# Benchmark run directories (dataset + raw reports) are regenerated;
+# the small summary report committed at benchmarks/results/*.json is kept.
+benchmarks/results/*/
+examples/sample_dataset/rejected*/

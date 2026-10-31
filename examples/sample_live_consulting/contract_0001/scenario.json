@@ -1,0 +1,546 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "contract_0001",
+  "contract_type": "consulting",
+  "jurisdiction": "SE",
+  "language": "sv",
+  "difficulty": 1,
+  "seed": 2026,
+  "parties": [
+    {
+      "party_id": "party_client",
+      "name": "Arken Digital AB",
+      "role": "client",
+      "org_number": "559002-3658",
+      "address": "Exempelvägen 8, 111 20 Stockholm",
+      "synthetic": true
+    },
+    {
+      "party_id": "party_consultant",
+      "name": "Lindfors Analys AB",
+      "role": "consultant",
+      "org_number": "559003-9380",
+      "address": "Testvägen 3, 722 20 Västerås",
+      "synthetic": true
+    }
+  ],
+  "facts": [
+    {
+      "fact_id": "fact_client_name",
+      "kind": "entity",
+      "value": "Arken Digital AB",
+      "unit": null,
+      "currency": null,
+      "entity_id": "party_client",
+      "label_sv": "Uppdragsgivarens namn",
+      "label_en": "Client name",
+      "description_sv": "",
+      "explicit_surfaces": [
+        "Arken Digital AB"
+      ],
+      "paraphrase_surfaces": [
+        "Arken Digital AB"
+      ],
+      "keywords_sv": [
+        "uppdragsgivare",
+        "kund"
+      ],
+      "keywords_en": [
+        "client",
+        "customer"
+      ],
+      "status": "active",
+      "superseded_by": null,
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "fact_id": "fact_consultant_name",
+      "kind": "entity",
+      "value": "Lindfors Analys AB",
+      "unit": null,
+      "currency": null,
+      "entity_id": "party_consultant",
+      "label_sv": "Konsultens namn",
+      "label_en": "Consultant name",
+      "description_sv": "",
+      "explicit_surfaces": [
+        "Lindfors Analys AB"
+      ],
+      "paraphrase_surfaces": [
+        "Lindfors Analys AB"
+      ],
+      "keywords_sv": [
+        "konsult",
+        "namn"
+      ],
+      "keywords_en": [
+        "consultant",
+        "name"
+      ],
+      "status": "active",
+      "superseded_by": null,
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "fact_id": "fact_scope",
+      "kind": "text",
+      "value": "projektledning och analys",
+      "unit": null,
+      "currency": null,
+      "entity_id": null,
+      "label_sv": "Uppdragets omfattning",
+      "label_en": "Scope",
+      "description_sv": "",
+      "explicit_surfaces": [
+        "projektledning och analys"
+      ],
+      "paraphrase_surfaces": [
+        "projektledning samt analysarbete"
+      ],
+      "keywords_sv": [
+        "uppdrag",
+        "omfattning"
+      ],
+      "keywords_en": [
+        "scope",
+        "assignment"
+      ],
+      "status": "active",
+      "superseded_by": null,
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "fact_id": "fact_hourly_rate",
+      "kind": "money",
+      "value": 1150,
+      "unit": null,
+      "currency": "SEK",
+      "entity_id": null,
+      "label_sv": "Timarvode",
+      "label_en": "Hourly rate",
+      "description_sv": "",
+      "explicit_surfaces": [
+        "1 150 SEK",
+        "1 150 kronor"
+      ],
+      "paraphrase_surfaces": [
+        "1 150 kr",
+        "ett belopp om 1 150 kronor"
+      ],
+      "keywords_sv": [
+        "timarvode",
+        "arvode"
+      ],
+      "keywords_en": [
+        "hourly rate",
+        "rate"
+      ],
+      "status": "active",
+      "superseded_by": null,
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "fact_id": "fact_estimated_hours",
+      "kind": "duration",
+      "value": 400,
+      "unit": "hours",
+      "currency": null,
+      "entity_id": null,
+      "label_sv": "Beräknad tidsåtgång",
+      "label_en": "Estimated hours",
+      "description_sv": "",
+      "explicit_surfaces": [
+        "400 timmar",
+        "inom 400 timmar"
+      ],
+      "paraphrase_surfaces": [
+        "en svarstid om 400 timmar"
+      ],
+      "keywords_sv": [
+        "tidsuppskattning",
+        "timmar"
+      ],
+      "keywords_en": [
+        "estimated hours",
+        "hours"
+      ],
+      "status": "active",
+      "superseded_by": null,
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "fact_id": "fact_start_date",
+      "kind": "date",
+      "value": "2026-01-15",
+      "unit": null,
+      "currency": null,
+      "entity_id": null,
+      "label_sv": "Startdatum",
+      "label_en": "Start date",
+      "description_sv": "",
+      "explicit_surfaces": [
+        "15 januari 2026",
+        "2026-01-15"
+      ],
+      "paraphrase_surfaces": [
+        "den 15 januari 2026"
+      ],
+      "keywords_sv": [
+        "startdatum",
+        "tillträde"
+      ],
+      "keywords_en": [
+        "start date",
+        "commencement"
+      ],
+      "status": "active",
+      "superseded_by": null,
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "fact_id": "fact_duration_months",
+      "kind": "duration",
+      "value": 6,
+      "unit": "months",
+      "currency": null,
+      "entity_id": null,
+      "label_sv": "Uppdragsperiod",
+      "label_en": "Assignment period",
+      "description_sv": "",
+      "explicit_surfaces": [
+        "6 månader",
+        "sex (6) månader"
+      ],
+      "paraphrase_surfaces": [
+        "ett halvår"
+      ],
+      "keywords_sv": [
+        "avtalstid",
+        "uppdragsperiod"
+      ],
+      "keywords_en": [
+        "term",
+        "duration"
+      ],
+      "status": "active",
+      "superseded_by": null,
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "fact_id": "fact_payment_days",
+      "kind": "duration",
+      "value": 30,
+      "unit": "days",
+      "currency": null,
+      "entity_id": null,
+      "label_sv": "Betalningsvillkor",
+      "label_en": "Payment terms",
+      "description_sv": "",
+      "explicit_surfaces": [
+        "30 dagar",
+        "en frist om 30 dagar"
+      ],
+      "paraphrase_surfaces": [
+        "en period om 30 dagar",
+        "en frist om 30 dagar"
+      ],
+      "keywords_sv": [
+        "betalningsvillkor",
+        "betalningsfrist"
+      ],
+      "keywords_en": [
+        "payment terms",
+        "payment days"
+      ],
+      "status": "active",
+      "superseded_by": null,
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "fact_id": "fact_expense_cap",
+      "kind": "money",
+      "value": 75000,
+      "unit": null,
+      "currency": "SEK",
+      "entity_id": null,
+      "label_sv": "Kostnadsram för utlägg",
+      "label_en": "Expense cap",
+      "description_sv": "Högsta ersättning för utlägg.",
+      "explicit_surfaces": [
+        "75 000 SEK",
+        "75 000 kronor"
+      ],
+      "paraphrase_surfaces": [
+        "75 000 kr",
+        "ett belopp om 75 000 kronor"
+      ],
+      "keywords_sv": [
+        "kostnadsram",
+        "utlägg"
+      ],
+      "keywords_en": [
+        "expense cap",
+        "expenses"
+      ],
+      "status": "active",
+      "superseded_by": null,
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "fact_id": "fact_liability_cap",
+      "kind": "money",
+      "value": 1000000,
+      "unit": null,
+      "currency": "SEK",
+      "entity_id": null,
+      "label_sv": "Ansvarsbegränsning",
+      "label_en": "Liability cap",
+      "description_sv": "",
+      "explicit_surfaces": [
+        "1 000 000 SEK",
+        "1 000 000 kronor"
+      ],
+      "paraphrase_surfaces": [
+        "1 000 000 kr",
+        "ett belopp om 1 000 000 kronor"
+      ],
+      "keywords_sv": [
+        "ansvarsbegränsning",
+        "ansvar"
+      ],
+      "keywords_en": [
+        "liability cap",
+        "liability"
+      ],
+      "status": "active",
+      "superseded_by": null,
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "fact_id": "fact_notice_months",
+      "kind": "duration",
+      "value": 3,
+      "unit": "months",
+      "currency": null,
+      "entity_id": null,
+      "label_sv": "Uppsägningstid",
+      "label_en": "Notice period",
+      "description_sv": "",
+      "explicit_surfaces": [
+        "3 månader",
+        "tre (3) månader"
+      ],
+      "paraphrase_surfaces": [
+        "ett kvartal"
+      ],
+      "keywords_sv": [
+        "uppsägningstid",
+        "uppsägning"
+      ],
+      "keywords_en": [
+        "notice period",
+        "notice"
+      ],
+      "status": "active",
+      "superseded_by": null,
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "fact_id": "fact_confidentiality_years",
+      "kind": "duration",
+      "value": 3,
+      "unit": "years",
+      "currency": null,
+      "entity_id": null,
+      "label_sv": "Sekretessperiod",
+      "label_en": "Confidentiality period",
+      "description_sv": "",
+      "explicit_surfaces": [
+        "3 år",
+        "tre (3) år"
+      ],
+      "paraphrase_surfaces": [
+        "en avtalsperiod om 3 år",
+        "en tid om 3 år"
+      ],
+      "keywords_sv": [
+        "sekretess",
+        "konfidentialitet"
+      ],
+      "keywords_en": [
+        "confidentiality",
+        "secrecy"
+      ],
+      "status": "active",
+      "superseded_by": null,
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "fact_id": "fact_ip_rights",
+      "kind": "defined_term",
+      "value": "Konsulten behåller bakgrundsrättigheter",
+      "unit": null,
+      "currency": null,
+      "entity_id": null,
+      "label_sv": "Rättigheter till resultat",
+      "label_en": "Intellectual property rights",
+      "description_sv": "",
+      "explicit_surfaces": [
+        "Konsulten behåller bakgrundsrättigheter"
+      ],
+      "paraphrase_surfaces": [
+        "konsulten behåller rättigheter till bakgrundsmaterial"
+      ],
+      "keywords_sv": [
+        "immateriella rättigheter",
+        "resultat"
+      ],
+      "keywords_en": [
+        "intellectual property",
+        "results"
+      ],
+      "status": "active",
+      "superseded_by": null,
+      "valid_from": null,
+      "valid_to": null
+    }
+  ],
+  "documents": [
+    {
+      "document_id": "main_agreement",
+      "kind": "main_agreement",
+      "title_sv": "Konsultavtal",
+      "title_en": "Consulting Agreement",
+      "filename_stem": "main_agreement",
+      "clauses": [
+        {
+          "clause_id": "clause_01",
+          "document_id": "main_agreement",
+          "order": 1,
+          "heading_sv": "Avtalsparter",
+          "heading_en": "Parties",
+          "fact_ids": [
+            "fact_client_name",
+            "fact_consultant_name"
+          ],
+          "mode": "explicit",
+          "depends_on": [],
+          "reference_to": [],
+          "instruction_sv": "Reglera avtalsparter och uttryck följande uppgifter tydligt: uppdragsgivarens namn, konsultens namn.",
+          "instruction_en": "Regulate parties with customary contract language."
+        },
+        {
+          "clause_id": "clause_02",
+          "document_id": "main_agreement",
+          "order": 2,
+          "heading_sv": "Uppdragets omfattning",
+          "heading_en": "Scope",
+          "fact_ids": [
+            "fact_scope"
+          ],
+          "mode": "explicit",
+          "depends_on": [],
+          "reference_to": [],
+          "instruction_sv": "Reglera uppdragets omfattning och uttryck följande uppgifter tydligt: uppdragets omfattning.",
+          "instruction_en": "Regulate scope with customary contract language."
+        },
+        {
+          "clause_id": "clause_03",
+          "document_id": "main_agreement",
+          "order": 3,
+          "heading_sv": "Arvode och tidsåtgång",
+          "heading_en": "Fees and estimated hours",
+          "fact_ids": [
+            "fact_hourly_rate",
+            "fact_estimated_hours"
+          ],
+          "mode": "explicit",
+          "depends_on": [],
+          "reference_to": [],
+          "instruction_sv": "Reglera arvode och tidsåtgång och uttryck följande uppgifter tydligt: timarvode, beräknad tidsåtgång.",
+          "instruction_en": "Regulate fees and estimated hours with customary contract language."
+        },
+        {
+          "clause_id": "clause_04",
+          "document_id": "main_agreement",
+          "order": 4,
+          "heading_sv": "Uppdragsperiod och uppsägning",
+          "heading_en": "Term and notice",
+          "fact_ids": [
+            "fact_start_date",
+            "fact_duration_months",
+            "fact_notice_months"
+          ],
+          "mode": "explicit",
+          "depends_on": [],
+          "reference_to": [],
+          "instruction_sv": "Reglera uppdragsperiod och uppsägning och uttryck följande uppgifter tydligt: startdatum, uppdragsperiod, uppsägningstid.",
+          "instruction_en": "Regulate term and notice with customary contract language."
+        },
+        {
+          "clause_id": "clause_05",
+          "document_id": "main_agreement",
+          "order": 5,
+          "heading_sv": "Betalningsvillkor och utlägg",
+          "heading_en": "Payment terms and expenses",
+          "fact_ids": [
+            "fact_payment_days",
+            "fact_expense_cap"
+          ],
+          "mode": "explicit",
+          "depends_on": [],
+          "reference_to": [],
+          "instruction_sv": "Reglera betalningsvillkor och utlägg och uttryck följande uppgifter tydligt: betalningsvillkor, kostnadsram för utlägg.",
+          "instruction_en": "Regulate payment terms and expenses with customary contract language."
+        },
+        {
+          "clause_id": "clause_06",
+          "document_id": "main_agreement",
+          "order": 6,
+          "heading_sv": "Ansvarsbegränsning",
+          "heading_en": "Limitation of liability",
+          "fact_ids": [
+            "fact_liability_cap",
+            "fact_ip_rights",
+            "fact_confidentiality_years"
+          ],
+          "mode": "explicit",
+          "depends_on": [],
+          "reference_to": [],
+          "instruction_sv": "Reglera ansvarsbegränsning och uttryck följande uppgifter tydligt: ansvarsbegränsning.",
+          "instruction_en": "Regulate limitation of liability with customary contract language."
+        }
+      ],
+      "references_documents": [],
+      "effective_date": "2026-03-02",
+      "notes": "Syntetiskt dokument skapat av ContractForge."
+    }
+  ],
+  "variation": {
+    "language": "sv",
+    "style": "plain",
+    "directness": "explicit",
+    "structure": "single_clause",
+    "reference_modes": [],
+    "distractor_count": 0,
+    "document_quality": "clean",
+    "dependency_modes": []
+  },
+  "relations": [],
+  "anomalies": [],
+  "missing_documents": [],
+  "synthetic": true,
+  "notes_sv": "Syntetiskt scenario för avtalstyp consulting (svårighetsgrad 1). Alla parter, organisationsnummer och belopp är påhittade."
+}

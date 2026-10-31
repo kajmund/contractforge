@@ -1,0 +1,905 @@
+{
+  "contract_type": "license",
+  "definition_version": "1.0",
+  "title_sv": "Licensavtal",
+  "title_en": "License Agreement",
+  "description_sv": "Programvarulicens med avgift, royalty, territorium, support och ansvarsgräns.",
+  "parties": [
+    {
+      "party_id": "party_licensor",
+      "role": "licensor",
+      "role_sv": "Licensgivare",
+      "role_en": "Licensor",
+      "kind": "organisation",
+      "name_pool": [
+        "Nordvik Programvara AB",
+        "Arken System AB",
+        "Sundberg Plattform AB"
+      ],
+      "address_pool": [
+        "Exempelvägen 30, 111 20 Stockholm"
+      ],
+      "org_number_series": "559011"
+    },
+    {
+      "party_id": "party_licensee",
+      "role": "licensee",
+      "role_sv": "Licenstagare",
+      "role_en": "Licensee",
+      "kind": "organisation",
+      "name_pool": [
+        "Sundberg Data AB",
+        "Västberg Media AB",
+        "Lindfors Digital AB"
+      ],
+      "address_pool": [
+        "Provgatan 11, 411 20 Göteborg"
+      ],
+      "org_number_series": "559012"
+    }
+  ],
+  "facts": [
+    {
+      "fact_id": "fact_licensor_name",
+      "kind": "entity",
+      "label_sv": "Licensgivarens namn",
+      "label_en": "Licensor name",
+      "keywords_sv": [
+        "licensgivare",
+        "namn"
+      ],
+      "keywords_en": [
+        "licensor",
+        "name"
+      ],
+      "entity_party_id": "party_licensor",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_licensee_name",
+      "kind": "entity",
+      "label_sv": "Licenstagarens namn",
+      "label_en": "Licensee name",
+      "keywords_sv": [
+        "licenstagare",
+        "namn"
+      ],
+      "keywords_en": [
+        "licensee",
+        "name"
+      ],
+      "entity_party_id": "party_licensee",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_licensed_software",
+      "kind": "text",
+      "label_sv": "Licensierad programvara",
+      "label_en": "Licensed software",
+      "keywords_sv": [
+        "programvara",
+        "licens"
+      ],
+      "keywords_en": [
+        "software",
+        "license"
+      ],
+      "variants": [
+        {
+          "value": "plattformen Atlas Core version 4",
+          "explicit_surfaces": [
+            "plattformen Atlas Core version 4"
+          ],
+          "paraphrase_surfaces": [
+            "plattformen Atlas Core i version 4"
+          ]
+        },
+        {
+          "value": "modulen Nova Analytics",
+          "explicit_surfaces": [
+            "modulen Nova Analytics"
+          ],
+          "paraphrase_surfaces": [
+            "modulen Nova Analytics"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_license_fee",
+      "kind": "money",
+      "label_sv": "Årlig licensavgift",
+      "label_en": "Annual license fee",
+      "keywords_sv": [
+        "licensavgift",
+        "avgift"
+      ],
+      "keywords_en": [
+        "license fee",
+        "fee"
+      ],
+      "variants": [
+        {
+          "value": 450000,
+          "explicit_surfaces": [
+            "450 000 SEK",
+            "450 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "450 000 kr",
+            "ett belopp om 450 000 kronor"
+          ]
+        },
+        {
+          "value": 600000,
+          "explicit_surfaces": [
+            "600 000 SEK",
+            "600 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "600 000 kr",
+            "ett belopp om 600 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_royalty",
+      "kind": "percentage",
+      "label_sv": "Royalty",
+      "label_en": "Royalty",
+      "keywords_sv": [
+        "royalty",
+        "intäktsandel"
+      ],
+      "keywords_en": [
+        "royalty",
+        "revenue share"
+      ],
+      "variants": [
+        {
+          "value": 10,
+          "explicit_surfaces": [
+            "10 procent",
+            "10 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 10 procent",
+            "10 procent av det totala"
+          ]
+        },
+        {
+          "value": 12,
+          "explicit_surfaces": [
+            "12 procent",
+            "12 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 12 procent",
+            "12 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    {
+      "fact_id": "fact_term_years",
+      "kind": "duration",
+      "label_sv": "Avtalstid",
+      "label_en": "Term",
+      "keywords_sv": [
+        "avtalstid",
+        "löptid"
+      ],
+      "keywords_en": [
+        "term",
+        "duration"
+      ],
+      "variants": [
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 år",
+            "tre (3) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 3 år",
+            "en tid om 3 år"
+          ]
+        },
+        {
+          "value": 5,
+          "explicit_surfaces": [
+            "5 år",
+            "fem (5) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 5 år",
+            "en tid om 5 år"
+          ]
+        }
+      ],
+      "unit": "years"
+    },
+    {
+      "fact_id": "fact_territory",
+      "kind": "text",
+      "label_sv": "Territorium",
+      "label_en": "Territory",
+      "keywords_sv": [
+        "territorium",
+        "geografi"
+      ],
+      "keywords_en": [
+        "territory",
+        "geography"
+      ],
+      "variants": [
+        {
+          "value": "Sverige och Norge",
+          "explicit_surfaces": [
+            "Sverige och Norge"
+          ],
+          "paraphrase_surfaces": [
+            "Sverige och Norge"
+          ]
+        },
+        {
+          "value": "Norden och Baltikum",
+          "explicit_surfaces": [
+            "Norden och Baltikum"
+          ],
+          "paraphrase_surfaces": [
+            "Norden och Baltikum"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_permitted_users",
+      "kind": "integer",
+      "label_sv": "Antal användare",
+      "label_en": "Permitted users",
+      "keywords_sv": [
+        "användare",
+        "antal"
+      ],
+      "keywords_en": [
+        "users",
+        "seats"
+      ],
+      "variants": [
+        {
+          "value": 200,
+          "explicit_surfaces": [
+            "200 användare",
+            "antalet 200 användare"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 200 användare",
+            "sammanlagt 200 användare"
+          ]
+        },
+        {
+          "value": 250,
+          "explicit_surfaces": [
+            "250 användare",
+            "antalet 250 användare"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 250 användare",
+            "sammanlagt 250 användare"
+          ]
+        }
+      ],
+      "unit": "users"
+    },
+    {
+      "fact_id": "fact_support_response",
+      "kind": "duration",
+      "label_sv": "Svarstid support",
+      "label_en": "Support response time",
+      "keywords_sv": [
+        "support",
+        "svarstid"
+      ],
+      "keywords_en": [
+        "support",
+        "response time"
+      ],
+      "variants": [
+        {
+          "value": 8,
+          "explicit_surfaces": [
+            "8 timmar",
+            "inom 8 timmar"
+          ],
+          "paraphrase_surfaces": [
+            "en svarstid om 8 timmar"
+          ]
+        },
+        {
+          "value": 4,
+          "explicit_surfaces": [
+            "4 timmar",
+            "inom 4 timmar"
+          ],
+          "paraphrase_surfaces": [
+            "en svarstid om 4 timmar"
+          ]
+        }
+      ],
+      "unit": "hours"
+    },
+    {
+      "fact_id": "fact_audit_notice",
+      "kind": "duration",
+      "label_sv": "Varsel om revision",
+      "label_en": "Audit notice",
+      "keywords_sv": [
+        "revision",
+        "varsel"
+      ],
+      "keywords_en": [
+        "audit",
+        "notice"
+      ],
+      "variants": [
+        {
+          "value": 30,
+          "explicit_surfaces": [
+            "30 dagar",
+            "en frist om 30 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 30 dagar",
+            "en frist om 30 dagar"
+          ]
+        },
+        {
+          "value": 20,
+          "explicit_surfaces": [
+            "20 dagar",
+            "en frist om 20 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 20 dagar",
+            "en frist om 20 dagar"
+          ]
+        }
+      ],
+      "unit": "days"
+    },
+    {
+      "fact_id": "fact_liability_cap",
+      "kind": "money",
+      "label_sv": "Ansvarsbegränsning",
+      "label_en": "Liability cap",
+      "keywords_sv": [
+        "ansvarsbegränsning",
+        "ansvar"
+      ],
+      "keywords_en": [
+        "liability cap",
+        "liability"
+      ],
+      "variants": [
+        {
+          "value": 3000000,
+          "explicit_surfaces": [
+            "3 000 000 SEK",
+            "3 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "3 000 000 kr",
+            "ett belopp om 3 000 000 kronor"
+          ]
+        },
+        {
+          "value": 5000000,
+          "explicit_surfaces": [
+            "5 000 000 SEK",
+            "5 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "5 000 000 kr",
+            "ett belopp om 5 000 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_source_code",
+      "kind": "defined_term",
+      "label_sv": "Källkod",
+      "label_en": "Source code",
+      "keywords_sv": [
+        "källkod",
+        "deposition"
+      ],
+      "keywords_en": [
+        "source code",
+        "escrow"
+      ],
+      "variants": [
+        {
+          "value": "källkod deponeras hos oberoende part",
+          "explicit_surfaces": [
+            "källkod deponeras hos oberoende part"
+          ],
+          "paraphrase_surfaces": [
+            "källkoden deponeras hos en oberoende part"
+          ]
+        },
+        {
+          "value": "källkod lämnas inte ut",
+          "explicit_surfaces": [
+            "källkod lämnas inte ut"
+          ],
+          "paraphrase_surfaces": [
+            "källkoden omfattas inte av licensen"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_ip_ownership",
+      "kind": "defined_term",
+      "label_sv": "Immateriella rättigheter",
+      "label_en": "Intellectual property",
+      "keywords_sv": [
+        "immateriella rättigheter",
+        "ägande"
+      ],
+      "keywords_en": [
+        "intellectual property",
+        "ownership"
+      ],
+      "variants": [
+        {
+          "value": "licensgivaren behåller samtliga immateriella rättigheter",
+          "explicit_surfaces": [
+            "licensgivaren behåller samtliga immateriella rättigheter"
+          ],
+          "paraphrase_surfaces": [
+            "licensgivaren behåller alla immateriella rättigheter"
+          ]
+        },
+        {
+          "value": "licensgivaren behåller rättigheter till programvaran",
+          "explicit_surfaces": [
+            "licensgivaren behåller rättigheter till programvaran"
+          ],
+          "paraphrase_surfaces": [
+            "rättigheterna till programvaran tillhör licensgivaren"
+          ]
+        }
+      ]
+    }
+  ],
+  "main_clauses": [
+    {
+      "clause_id": "clause_01",
+      "heading_sv": "Avtalsparter",
+      "heading_en": "Parties",
+      "fact_ids": [
+        "fact_licensor_name",
+        "fact_licensee_name"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera avtalsparter och uttryck följande uppgifter tydligt: licensgivarens namn, licenstagarens namn."
+    },
+    {
+      "clause_id": "clause_02",
+      "heading_sv": "Licensens omfattning",
+      "heading_en": "Scope of license",
+      "fact_ids": [
+        "fact_licensed_software"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera licensens omfattning och uttryck följande uppgifter tydligt: licensierad programvara."
+    },
+    {
+      "clause_id": "clause_03",
+      "heading_sv": "Avgifter",
+      "heading_en": "Fees",
+      "fact_ids": [
+        "fact_license_fee",
+        "fact_royalty"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera avgifter och uttryck följande uppgifter tydligt: årlig licensavgift, royalty."
+    },
+    {
+      "clause_id": "clause_04",
+      "heading_sv": "Avtalsperiod och territorium",
+      "heading_en": "Term and territory",
+      "fact_ids": [
+        "fact_term_years",
+        "fact_territory"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera avtalsperiod och territorium och uttryck följande uppgifter tydligt: avtalstid, territorium."
+    },
+    {
+      "clause_id": "clause_05",
+      "heading_sv": "Användare och support",
+      "heading_en": "Users and support",
+      "fact_ids": [
+        "fact_permitted_users",
+        "fact_support_response"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera användare och support och uttryck följande uppgifter tydligt: antal användare, svarstid support."
+    },
+    {
+      "clause_id": "clause_06",
+      "heading_sv": "Revision",
+      "heading_en": "Audit",
+      "fact_ids": [
+        "fact_audit_notice"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera revision och uttryck följande uppgifter tydligt: varsel om revision."
+    },
+    {
+      "clause_id": "clause_07",
+      "heading_sv": "Immateriella rättigheter och källkod",
+      "heading_en": "Intellectual property and source code",
+      "fact_ids": [
+        "fact_ip_ownership",
+        "fact_source_code"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera immateriella rättigheter och källkod och uttryck följande uppgifter tydligt: immateriella rättigheter, källkod."
+    },
+    {
+      "clause_id": "clause_08",
+      "heading_sv": "Ansvarsbegränsning",
+      "heading_en": "Limitation of liability",
+      "fact_ids": [
+        "fact_liability_cap"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera ansvarsbegränsning och uttryck följande uppgifter tydligt: ansvarsbegränsning."
+    },
+    {
+      "clause_id": "clause_09",
+      "heading_sv": "Ändringar och tillägg",
+      "heading_en": "Amendments",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera ändringar och tillägg med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_10",
+      "heading_sv": "Undertecknande",
+      "heading_en": "Signatures",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera undertecknande med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_11",
+      "heading_sv": "Tillämplig lag och tvistlösning",
+      "heading_en": "Governing law and disputes",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera tillämplig lag och tvistlösning med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_12",
+      "heading_sv": "Force majeure",
+      "heading_en": "Force majeure",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera force majeure med sedvanlig avtalsformulering."
+    }
+  ],
+  "extra_main_clauses": [
+    {
+      "clause_id": "clause_13",
+      "heading_sv": "Meddelanden",
+      "heading_en": "Notices",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera meddelanden med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_14",
+      "heading_sv": "Överlåtelse av avtal",
+      "heading_en": "Assignment",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera överlåtelse av avtal med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_15",
+      "heading_sv": "Sekretess",
+      "heading_en": "Confidentiality",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera sekretess med sedvanlig avtalsformulering."
+    }
+  ],
+  "appendix_clauses": [
+    {
+      "clause_id": "appendix_a_clause_01",
+      "heading_sv": "Bilaga A – Kompletterande villkor",
+      "heading_en": "Appendix A – Supplementary terms",
+      "fact_ids": [
+        "fact_licensed_software",
+        "fact_license_fee"
+      ],
+      "mode": "definition",
+      "instruction_sv": "Reglera bilaga a – kompletterande villkor och uttryck följande uppgifter tydligt: licensierad programvara, årlig licensavgift."
+    },
+    {
+      "clause_id": "appendix_a_clause_02",
+      "heading_sv": "Bilaga A – Detaljreglering",
+      "heading_en": "Appendix A – Detailed regulation",
+      "fact_ids": [],
+      "mode": "reference",
+      "distributed_facts": true,
+      "instruction_sv": "Reglera bilaga a – detaljreglering och koppla detaljerna till huvudavtalets bestämmelser."
+    },
+    {
+      "clause_id": "appendix_a_clause_03",
+      "heading_sv": "Bilaga A – Tidigare diskuterade villkor",
+      "heading_en": "Appendix A – Previously discussed terms",
+      "fact_ids": [
+        "fact_royalty_alt",
+        "fact_users_alt"
+      ],
+      "mode": "distractor",
+      "instruction_sv": "Reglera bilaga a – tidigare diskuterade villkor och uttryck följande uppgifter tydligt: tidigare diskuterad royalty, ursprungligt antal användare."
+    }
+  ],
+  "amendment_clauses": [
+    {
+      "clause_id": "amendment_1_clause_01",
+      "heading_sv": "Tillägg 1 – Ändrade villkor",
+      "heading_en": "Amendment 1 – Amended terms",
+      "fact_ids": [
+        "fact_royalty",
+        "fact_royalty_amendment"
+      ],
+      "mode": "contradiction",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – ändrade villkor och uttryck följande uppgifter tydligt: royalty, avvikande royalty i tillägg."
+    },
+    {
+      "clause_id": "amendment_1_clause_02",
+      "heading_sv": "Tillägg 1 – Undantag",
+      "heading_en": "Amendment 1 – Exception",
+      "fact_ids": [
+        "fact_support_response",
+        "fact_support_exception"
+      ],
+      "mode": "exception",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – undantag och uttryck följande uppgifter tydligt: svarstid support, längre svarstid vid helgdag."
+    },
+    {
+      "clause_id": "amendment_1_clause_03",
+      "heading_sv": "Tillägg 1 – Externa dokument",
+      "heading_en": "Amendment 1 – External documents",
+      "fact_ids": [],
+      "mode": "reference",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – externa dokument och hänvisa till externa dokument som inte ingår i avtalspaketet."
+    },
+    {
+      "clause_id": "amendment_1_clause_04",
+      "heading_sv": "Tillägg 1 – Villkorade bestämmelser",
+      "heading_en": "Amendment 1 – Conditional provisions",
+      "fact_ids": [
+        "fact_conditional_royalty_discount",
+        "fact_royalty"
+      ],
+      "mode": "conditional",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – villkorade bestämmelser och uttryck följande uppgifter tydligt: villkorad royaltyreduktion, royalty."
+    }
+  ],
+  "package": {
+    "appendix": {
+      "document_id": "appendix_a",
+      "title_sv": "Bilaga A – Kompletterande villkor",
+      "title_en": "Appendix A – Supplementary terms",
+      "filename_stem": "appendix_a"
+    },
+    "amendment": {
+      "document_id": "amendment_1",
+      "title_sv": "Tillägg 1 – Ändrade villkor",
+      "title_en": "Amendment 1 – Amended terms",
+      "filename_stem": "amendment_1"
+    }
+  },
+  "variation": {
+    "styles": [
+      "formal",
+      "complex",
+      "plain"
+    ],
+    "document_qualities": [
+      "clean",
+      "line_breaks",
+      "tables",
+      "page_breaks"
+    ]
+  },
+  "distractor_facts": [
+    {
+      "fact_id": "fact_royalty_alt",
+      "kind": "percentage",
+      "label_sv": "Tidigare diskuterad royalty",
+      "label_en": "Earlier discussed royalty",
+      "keywords_sv": [
+        "tidigare royalty",
+        "lägre royalty"
+      ],
+      "keywords_en": [
+        "earlier royalty",
+        "lower royalty"
+      ],
+      "variants": [
+        {
+          "value": 8,
+          "explicit_surfaces": [
+            "8 procent",
+            "8 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 8 procent",
+            "8 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent",
+      "based_on_fact_id": "fact_royalty"
+    },
+    {
+      "fact_id": "fact_users_alt",
+      "kind": "integer",
+      "label_sv": "Ursprungligt antal användare",
+      "label_en": "Original number of users",
+      "keywords_sv": [
+        "ursprungligt antal",
+        "tidigare användare"
+      ],
+      "keywords_en": [
+        "original number",
+        "earlier users"
+      ],
+      "variants": [
+        {
+          "value": 150,
+          "explicit_surfaces": [
+            "150 användare",
+            "antalet 150 användare"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 150 användare",
+            "sammanlagt 150 användare"
+          ]
+        }
+      ],
+      "unit": "users",
+      "based_on_fact_id": "fact_permitted_users"
+    }
+  ],
+  "contradiction": {
+    "base_fact_id": "fact_royalty",
+    "fact": {
+      "fact_id": "fact_royalty_amendment",
+      "kind": "percentage",
+      "label_sv": "Avvikande royalty i tillägg",
+      "label_en": "Differing royalty in amendment",
+      "keywords_sv": [
+        "royalty tillägg",
+        "avvikande royalty"
+      ],
+      "keywords_en": [
+        "royalty amendment"
+      ],
+      "variants": [
+        {
+          "value": 14,
+          "explicit_surfaces": [
+            "14 procent",
+            "14 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 14 procent",
+            "14 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    "description_sv": "Tillägg 1 anger en högre royalty än huvudavtalet, samtidigt som huvudavtalets nivå står kvar.",
+    "description_en": ""
+  },
+  "exception": {
+    "base_fact_id": "fact_support_response",
+    "fact": {
+      "fact_id": "fact_support_exception",
+      "kind": "duration",
+      "label_sv": "Längre svarstid vid helgdag",
+      "label_en": "Longer response time on holidays",
+      "keywords_sv": [
+        "undantag svarstid",
+        "helgdag"
+      ],
+      "keywords_en": [
+        "support exception",
+        "holiday"
+      ],
+      "variants": [
+        {
+          "value": 24,
+          "explicit_surfaces": [
+            "24 timmar",
+            "inom 24 timmar"
+          ],
+          "paraphrase_surfaces": [
+            "en svarstid om 24 timmar"
+          ]
+        }
+      ],
+      "unit": "hours"
+    },
+    "description_sv": "Svarstiden förlängs vid helgdag enligt undantaget i Tillägg 1.",
+    "description_en": ""
+  },
+  "missing_information": {
+    "missing_documents": [
+      "appendix_b_teknisk_dokumentation",
+      "side_letter_2026"
+    ],
+    "insufficient_evidence_fact_id": "fact_source_code",
+    "conditional_fact": {
+      "fact_id": "fact_conditional_royalty_discount",
+      "kind": "percentage",
+      "label_sv": "Villkorad royaltyreduktion",
+      "label_en": "Conditional royalty reduction",
+      "keywords_sv": [
+        "villkorad royalty",
+        "royaltyreduktion"
+      ],
+      "keywords_en": [
+        "conditional royalty",
+        "royalty reduction"
+      ],
+      "variants": [
+        {
+          "value": 2,
+          "explicit_surfaces": [
+            "2 procent",
+            "2 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 2 procent",
+            "2 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    "conditional_governing_fact_id": "fact_royalty",
+    "description_sv": "Den tekniska dokumentationen (bilaga B) saknas; villkoren för källkodsdepositionen kan inte verifieras.",
+    "conditional_description_sv": "Royaltyreduktionen är villkorad av den tekniska dokumentationen i bilaga B, som inte ingår."
+  }
+}

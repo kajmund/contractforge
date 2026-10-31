@@ -1,0 +1,661 @@
+[
+  {
+    "question_id": "q_0001",
+    "question": "Vilket värde har Uppdragsgivarens namn enligt Konsultavtal?",
+    "language": "sv",
+    "category": "fact_extraction",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": "Arken Digital AB",
+      "values": [],
+      "unit": null,
+      "currency": null,
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_client_name"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 202,
+        "end": 218,
+        "quote": "Arken Digital AB"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0002",
+    "question": "Vilket värde har Konsultens namn enligt Konsultavtal?",
+    "language": "sv",
+    "category": "fact_extraction",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": "Lindfors Analys AB",
+      "values": [],
+      "unit": null,
+      "currency": null,
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_consultant_name"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 319,
+        "end": 337,
+        "quote": "Lindfors Analys AB"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0003",
+    "question": "Vilket värde har Uppdragets omfattning enligt Konsultavtal?",
+    "language": "sv",
+    "category": "fact_extraction",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": "systemutveckling och integration",
+      "values": [],
+      "unit": null,
+      "currency": null,
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_scope"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_02",
+        "start": 467,
+        "end": 499,
+        "quote": "systemutveckling och integration"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0004",
+    "question": "Vilket värde har Timarvode enligt Konsultavtal?",
+    "language": "sv",
+    "category": "fact_extraction",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": 1150,
+      "values": [],
+      "unit": null,
+      "currency": "SEK",
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_hourly_rate"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_03",
+        "start": 563,
+        "end": 572,
+        "quote": "1 150 SEK"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0005",
+    "question": "Vilket värde har Beräknad tidsåtgång enligt Konsultavtal?",
+    "language": "sv",
+    "category": "fact_extraction",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": 400,
+      "values": [],
+      "unit": "hours",
+      "currency": null,
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_estimated_hours"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_03",
+        "start": 639,
+        "end": 649,
+        "quote": "400 timmar"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0006",
+    "question": "Vilket värde har Startdatum enligt Konsultavtal?",
+    "language": "sv",
+    "category": "fact_extraction",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": "2026-02-01",
+      "values": [],
+      "unit": null,
+      "currency": null,
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_start_date"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_04",
+        "start": 708,
+        "end": 723,
+        "quote": "1 februari 2026"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0007",
+    "question": "Vilket värde har Uppdragsperiod enligt Konsultavtal?",
+    "language": "sv",
+    "category": "fact_extraction",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": 6,
+      "values": [],
+      "unit": "months",
+      "currency": null,
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_duration_months"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_04",
+        "start": 736,
+        "end": 745,
+        "quote": "6 månader"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0008",
+    "question": "Vilket värde har Betalningsvillkor enligt Konsultavtal?",
+    "language": "sv",
+    "category": "fact_extraction",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": 45,
+      "values": [],
+      "unit": "days",
+      "currency": null,
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_payment_days"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_05",
+        "start": 880,
+        "end": 888,
+        "quote": "45 dagar"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0009",
+    "question": "Vilket värde har Kostnadsram för utlägg enligt Konsultavtal?",
+    "language": "sv",
+    "category": "fact_extraction",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": 75000,
+      "values": [],
+      "unit": null,
+      "currency": "SEK",
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_expense_cap"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_05",
+        "start": 952,
+        "end": 962,
+        "quote": "75 000 SEK"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0010",
+    "question": "Vilket värde har Ansvarsbegränsning enligt Konsultavtal?",
+    "language": "sv",
+    "category": "fact_extraction",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": 1000000,
+      "values": [],
+      "unit": null,
+      "currency": "SEK",
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_liability_cap"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_06",
+        "start": 1036,
+        "end": 1049,
+        "quote": "1 000 000 SEK"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0011",
+    "question": "Vilket värde har Uppsägningstid enligt Konsultavtal?",
+    "language": "sv",
+    "category": "fact_extraction",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": 3,
+      "values": [],
+      "unit": "months",
+      "currency": null,
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_notice_months"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_04",
+        "start": 793,
+        "end": 802,
+        "quote": "3 månader"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0012",
+    "question": "Vilket värde har Sekretessperiod enligt Konsultavtal?",
+    "language": "sv",
+    "category": "fact_extraction",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": 5,
+      "values": [],
+      "unit": "years",
+      "currency": null,
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_confidentiality_years"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_06",
+        "start": 1115,
+        "end": 1119,
+        "quote": "5 år"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0013",
+    "question": "Vilket värde har Rättigheter till resultat enligt Konsultavtal?",
+    "language": "sv",
+    "category": "fact_extraction",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": "Uppdragsgivaren äger resultatet",
+      "values": [],
+      "unit": null,
+      "currency": null,
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_ip_rights"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_06",
+        "start": 1051,
+        "end": 1082,
+        "quote": "Uppdragsgivaren äger resultatet"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0014",
+    "question": "Vilken part har rollen client i avtalet?",
+    "language": "sv",
+    "category": "entity_identification",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": "Arken Digital AB",
+      "values": [],
+      "unit": null,
+      "currency": null,
+      "text": "Arken Digital AB",
+      "conditions": []
+    },
+    "required_facts": [],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 202,
+        "end": 218,
+        "quote": "Arken Digital AB"
+      },
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 227,
+        "end": 238,
+        "quote": "559002-0222"
+      },
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 251,
+        "end": 283,
+        "quote": "Exempelvägen 8, 111 20 Stockholm"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0015",
+    "question": "Vilken part har rollen consultant i avtalet?",
+    "language": "sv",
+    "category": "entity_identification",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": "Lindfors Analys AB",
+      "values": [],
+      "unit": null,
+      "currency": null,
+      "text": "Lindfors Analys AB",
+      "conditions": []
+    },
+    "required_facts": [],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 319,
+        "end": 337,
+        "quote": "Lindfors Analys AB"
+      },
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 346,
+        "end": 357,
+        "quote": "559003-6653"
+      },
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 370,
+        "end": 398,
+        "quote": "Testvägen 3, 722 20 Västerås"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0016",
+    "question": "Vilket av följande värden är högst: Timarvode eller Kostnadsram för utlägg?",
+    "language": "sv",
+    "category": "comparison",
+    "difficulty": 3,
+    "expected_answer": {
+      "value": 75000,
+      "values": [],
+      "unit": null,
+      "currency": "SEK",
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_hourly_rate",
+      "fact_expense_cap"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_03",
+        "start": 563,
+        "end": 572,
+        "quote": "1 150 SEK"
+      },
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_05",
+        "start": 952,
+        "end": 962,
+        "quote": "75 000 SEK"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0017",
+    "question": "Vilket av följande värden är högst: Uppdragsperiod eller Uppsägningstid?",
+    "language": "sv",
+    "category": "comparison",
+    "difficulty": 3,
+    "expected_answer": {
+      "value": 6,
+      "values": [],
+      "unit": "months",
+      "currency": null,
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [
+      "fact_duration_months",
+      "fact_notice_months"
+    ],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_04",
+        "start": 736,
+        "end": 745,
+        "quote": "6 månader"
+      },
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_04",
+        "start": 793,
+        "end": 802,
+        "quote": "3 månader"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": null,
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  },
+  {
+    "question_id": "q_0018",
+    "question": "Räkna upp samtliga parter som ingår i avtalet.",
+    "language": "sv",
+    "category": "completeness",
+    "difficulty": 1,
+    "expected_answer": {
+      "value": null,
+      "values": [
+        "Arken Digital AB",
+        "Lindfors Analys AB"
+      ],
+      "unit": null,
+      "currency": null,
+      "text": "",
+      "conditions": []
+    },
+    "required_facts": [],
+    "evidence": [
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 202,
+        "end": 218,
+        "quote": "Arken Digital AB"
+      },
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 227,
+        "end": 238,
+        "quote": "559002-0222"
+      },
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 251,
+        "end": 283,
+        "quote": "Exempelvägen 8, 111 20 Stockholm"
+      },
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 319,
+        "end": 337,
+        "quote": "Lindfors Analys AB"
+      },
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 346,
+        "end": 357,
+        "quote": "559003-6653"
+      },
+      {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 370,
+        "end": 398,
+        "quote": "Testvägen 3, 722 20 Västerås"
+      }
+    ],
+    "answerability": "ANSWERABLE",
+    "completeness": {
+      "kind": "all_parties",
+      "expected_ids": [
+        "party_client",
+        "party_consultant"
+      ],
+      "description_sv": "Alla avtalsparter måste räknas upp."
+    },
+    "validated": true,
+    "validation_notes": [],
+    "source": "deterministic"
+  }
+]

@@ -1,0 +1,907 @@
+{
+  "contract_type": "sale",
+  "definition_version": "1.0",
+  "title_sv": "Köpeavtal",
+  "title_en": "Sale Agreement",
+  "description_sv": "Rörelseförvärv med köpeskilling, due diligence, garanti, vite och tillträde.",
+  "parties": [
+    {
+      "party_id": "party_seller",
+      "role": "seller",
+      "role_sv": "Säljare",
+      "role_en": "Seller",
+      "kind": "organisation",
+      "name_pool": [
+        "Nordvik Maskin AB",
+        "Arken Verkstad AB",
+        "Sundberg Industri AB"
+      ],
+      "address_pool": [
+        "Exempelvägen 61, 111 20 Stockholm"
+      ],
+      "org_number_series": "559018"
+    },
+    {
+      "party_id": "party_buyer",
+      "role": "buyer",
+      "role_sv": "Köpare",
+      "role_en": "Buyer",
+      "kind": "organisation",
+      "name_pool": [
+        "Sundberg Invest AB",
+        "Västberg Industri AB",
+        "Lindfors Kapital AB"
+      ],
+      "address_pool": [
+        "Provgatan 18, 411 20 Göteborg"
+      ],
+      "org_number_series": "559019"
+    }
+  ],
+  "facts": [
+    {
+      "fact_id": "fact_seller_name",
+      "kind": "entity",
+      "label_sv": "Säljarens namn",
+      "label_en": "Seller name",
+      "keywords_sv": [
+        "säljare",
+        "namn"
+      ],
+      "keywords_en": [
+        "seller",
+        "name"
+      ],
+      "entity_party_id": "party_seller",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_buyer_name",
+      "kind": "entity",
+      "label_sv": "Köparens namn",
+      "label_en": "Buyer name",
+      "keywords_sv": [
+        "köpare",
+        "namn"
+      ],
+      "keywords_en": [
+        "buyer",
+        "name"
+      ],
+      "entity_party_id": "party_buyer",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_asset_scope",
+      "kind": "text",
+      "label_sv": "Tillgångarnas omfattning",
+      "label_en": "Assets",
+      "keywords_sv": [
+        "tillgångar",
+        "omfattning"
+      ],
+      "keywords_en": [
+        "assets",
+        "scope"
+      ],
+      "variants": [
+        {
+          "value": "maskinpark och tillhörande inventarier",
+          "explicit_surfaces": [
+            "maskinpark och tillhörande inventarier"
+          ],
+          "paraphrase_surfaces": [
+            "maskinparken samt tillhörande inventarier"
+          ]
+        },
+        {
+          "value": "rörelsen inklusive lager och kundavtal",
+          "explicit_surfaces": [
+            "rörelsen inklusive lager och kundavtal"
+          ],
+          "paraphrase_surfaces": [
+            "rörelsen inklusive lager och kundavtal"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_purchase_price",
+      "kind": "money",
+      "label_sv": "Köpeskilling",
+      "label_en": "Purchase price",
+      "keywords_sv": [
+        "köpeskilling",
+        "pris"
+      ],
+      "keywords_en": [
+        "purchase price",
+        "price"
+      ],
+      "variants": [
+        {
+          "value": 5000000,
+          "explicit_surfaces": [
+            "5 000 000 SEK",
+            "5 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "5 000 000 kr",
+            "ett belopp om 5 000 000 kronor"
+          ]
+        },
+        {
+          "value": 4700000,
+          "explicit_surfaces": [
+            "4 700 000 SEK",
+            "4 700 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "4 700 000 kr",
+            "ett belopp om 4 700 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_payment_days",
+      "kind": "duration",
+      "label_sv": "Betalningsvillkor",
+      "label_en": "Payment terms",
+      "keywords_sv": [
+        "betalningsvillkor",
+        "betalningsfrist"
+      ],
+      "keywords_en": [
+        "payment terms",
+        "payment days"
+      ],
+      "variants": [
+        {
+          "value": 30,
+          "explicit_surfaces": [
+            "30 dagar",
+            "en frist om 30 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 30 dagar",
+            "en frist om 30 dagar"
+          ]
+        },
+        {
+          "value": 45,
+          "explicit_surfaces": [
+            "45 dagar",
+            "en frist om 45 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 45 dagar",
+            "en frist om 45 dagar"
+          ]
+        }
+      ],
+      "unit": "days"
+    },
+    {
+      "fact_id": "fact_closing_date",
+      "kind": "date",
+      "label_sv": "Tillträdesdag",
+      "label_en": "Closing date",
+      "keywords_sv": [
+        "tillträde",
+        "closing"
+      ],
+      "keywords_en": [
+        "closing",
+        "completion"
+      ],
+      "variants": [
+        {
+          "value": "2026-06-01",
+          "explicit_surfaces": [
+            "1 juni 2026",
+            "2026-06-01"
+          ],
+          "paraphrase_surfaces": [
+            "den 1 juni 2026"
+          ]
+        },
+        {
+          "value": "2026-09-01",
+          "explicit_surfaces": [
+            "1 september 2026",
+            "2026-09-01"
+          ],
+          "paraphrase_surfaces": [
+            "den 1 september 2026"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_due_diligence",
+      "kind": "duration",
+      "label_sv": "Due diligence-period",
+      "label_en": "Due diligence period",
+      "keywords_sv": [
+        "due diligence",
+        "granskning"
+      ],
+      "keywords_en": [
+        "due diligence",
+        "review"
+      ],
+      "variants": [
+        {
+          "value": 20,
+          "explicit_surfaces": [
+            "20 dagar",
+            "en frist om 20 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 20 dagar",
+            "en frist om 20 dagar"
+          ]
+        },
+        {
+          "value": 30,
+          "explicit_surfaces": [
+            "30 dagar",
+            "en frist om 30 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 30 dagar",
+            "en frist om 30 dagar"
+          ]
+        }
+      ],
+      "unit": "days"
+    },
+    {
+      "fact_id": "fact_warranty",
+      "kind": "duration",
+      "label_sv": "Garantitid",
+      "label_en": "Warranty period",
+      "keywords_sv": [
+        "garanti",
+        "garantitid"
+      ],
+      "keywords_en": [
+        "warranty",
+        "warranty period"
+      ],
+      "variants": [
+        {
+          "value": 18,
+          "explicit_surfaces": [
+            "18 månader",
+            "arton (18) månader"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 18 månader",
+            "en avtalsperiod om 18 månader"
+          ]
+        },
+        {
+          "value": 24,
+          "explicit_surfaces": [
+            "24 månader",
+            "tjugofyra (24) månader"
+          ],
+          "paraphrase_surfaces": [
+            "två år"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    {
+      "fact_id": "fact_defect_claim_days",
+      "kind": "duration",
+      "label_sv": "Reklamationsfrist",
+      "label_en": "Defect claim period",
+      "keywords_sv": [
+        "reklamation",
+        "frist"
+      ],
+      "keywords_en": [
+        "claim",
+        "period"
+      ],
+      "variants": [
+        {
+          "value": 30,
+          "explicit_surfaces": [
+            "30 dagar",
+            "en frist om 30 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 30 dagar",
+            "en frist om 30 dagar"
+          ]
+        },
+        {
+          "value": 60,
+          "explicit_surfaces": [
+            "60 dagar",
+            "en frist om 60 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 60 dagar",
+            "en frist om 60 dagar"
+          ]
+        }
+      ],
+      "unit": "days"
+    },
+    {
+      "fact_id": "fact_penalty",
+      "kind": "money",
+      "label_sv": "Vite",
+      "label_en": "Penalty",
+      "keywords_sv": [
+        "vite",
+        "avtalsvite"
+      ],
+      "keywords_en": [
+        "penalty",
+        "liquidated damages"
+      ],
+      "variants": [
+        {
+          "value": 500000,
+          "explicit_surfaces": [
+            "500 000 SEK",
+            "500 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "500 000 kr",
+            "ett belopp om 500 000 kronor"
+          ]
+        },
+        {
+          "value": 750000,
+          "explicit_surfaces": [
+            "750 000 SEK",
+            "750 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "750 000 kr",
+            "ett belopp om 750 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_liability_cap",
+      "kind": "money",
+      "label_sv": "Ansvarsbegränsning",
+      "label_en": "Liability cap",
+      "keywords_sv": [
+        "ansvarsbegränsning",
+        "ansvar"
+      ],
+      "keywords_en": [
+        "liability cap",
+        "liability"
+      ],
+      "variants": [
+        {
+          "value": 1000000,
+          "explicit_surfaces": [
+            "1 000 000 SEK",
+            "1 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "1 000 000 kr",
+            "ett belopp om 1 000 000 kronor"
+          ]
+        },
+        {
+          "value": 1500000,
+          "explicit_surfaces": [
+            "1 500 000 SEK",
+            "1 500 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "1 500 000 kr",
+            "ett belopp om 1 500 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_risk_transfer",
+      "kind": "defined_term",
+      "label_sv": "Risktagande",
+      "label_en": "Risk transfer",
+      "keywords_sv": [
+        "risktagande",
+        "risk"
+      ],
+      "keywords_en": [
+        "risk transfer",
+        "risk"
+      ],
+      "variants": [
+        {
+          "value": "risken övergår vid tillträdet",
+          "explicit_surfaces": [
+            "risken övergår vid tillträdet"
+          ],
+          "paraphrase_surfaces": [
+            "risken för tillgångarna övergår vid tillträdet"
+          ]
+        },
+        {
+          "value": "risken övergår vid betalning",
+          "explicit_surfaces": [
+            "risken övergår vid betalning"
+          ],
+          "paraphrase_surfaces": [
+            "risken övergår när betalning erlagts"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_employee_transfer",
+      "kind": "defined_term",
+      "label_sv": "Anställda",
+      "label_en": "Employees",
+      "keywords_sv": [
+        "anställda",
+        "övertagande"
+      ],
+      "keywords_en": [
+        "employees",
+        "transfer"
+      ],
+      "variants": [
+        {
+          "value": "anställda övertas av köparen enligt LAS",
+          "explicit_surfaces": [
+            "anställda övertas av köparen enligt LAS"
+          ],
+          "paraphrase_surfaces": [
+            "köparen övertar anställningarna enligt LAS"
+          ]
+        },
+        {
+          "value": "inga anställda övertas",
+          "explicit_surfaces": [
+            "inga anställda övertas"
+          ],
+          "paraphrase_surfaces": [
+            "inga anställningar övertas av köparen"
+          ]
+        }
+      ]
+    }
+  ],
+  "main_clauses": [
+    {
+      "clause_id": "clause_01",
+      "heading_sv": "Avtalsparter",
+      "heading_en": "Parties",
+      "fact_ids": [
+        "fact_seller_name",
+        "fact_buyer_name"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera avtalsparter och uttryck följande uppgifter tydligt: säljarens namn, köparens namn."
+    },
+    {
+      "clause_id": "clause_02",
+      "heading_sv": "Tillgångar",
+      "heading_en": "Assets",
+      "fact_ids": [
+        "fact_asset_scope"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera tillgångar och uttryck följande uppgifter tydligt: tillgångarnas omfattning."
+    },
+    {
+      "clause_id": "clause_03",
+      "heading_sv": "Köpeskilling och betalning",
+      "heading_en": "Purchase price and payment",
+      "fact_ids": [
+        "fact_purchase_price",
+        "fact_payment_days"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera köpeskilling och betalning och uttryck följande uppgifter tydligt: köpeskilling, betalningsvillkor."
+    },
+    {
+      "clause_id": "clause_04",
+      "heading_sv": "Tillträde och due diligence",
+      "heading_en": "Closing and due diligence",
+      "fact_ids": [
+        "fact_closing_date",
+        "fact_due_diligence"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera tillträde och due diligence och uttryck följande uppgifter tydligt: tillträdesdag, due diligence-period."
+    },
+    {
+      "clause_id": "clause_05",
+      "heading_sv": "Garanti och reklamation",
+      "heading_en": "Warranty and defect claims",
+      "fact_ids": [
+        "fact_warranty",
+        "fact_defect_claim_days"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera garanti och reklamation och uttryck följande uppgifter tydligt: garantitid, reklamationsfrist."
+    },
+    {
+      "clause_id": "clause_06",
+      "heading_sv": "Vite och ansvar",
+      "heading_en": "Penalty and liability",
+      "fact_ids": [
+        "fact_penalty",
+        "fact_liability_cap"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera vite och ansvar och uttryck följande uppgifter tydligt: vite, ansvarsbegränsning."
+    },
+    {
+      "clause_id": "clause_07",
+      "heading_sv": "Risktagande",
+      "heading_en": "Risk transfer",
+      "fact_ids": [
+        "fact_risk_transfer"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera risktagande och uttryck följande uppgifter tydligt: risktagande."
+    },
+    {
+      "clause_id": "clause_08",
+      "heading_sv": "Anställda",
+      "heading_en": "Employees",
+      "fact_ids": [
+        "fact_employee_transfer"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera anställda och uttryck följande uppgifter tydligt: anställda."
+    },
+    {
+      "clause_id": "clause_09",
+      "heading_sv": "Ändringar och tillägg",
+      "heading_en": "Amendments",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera ändringar och tillägg med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_10",
+      "heading_sv": "Undertecknande",
+      "heading_en": "Signatures",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera undertecknande med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_11",
+      "heading_sv": "Tillämplig lag och tvistlösning",
+      "heading_en": "Governing law and disputes",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera tillämplig lag och tvistlösning med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_12",
+      "heading_sv": "Force majeure",
+      "heading_en": "Force majeure",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera force majeure med sedvanlig avtalsformulering."
+    }
+  ],
+  "extra_main_clauses": [
+    {
+      "clause_id": "clause_13",
+      "heading_sv": "Meddelanden",
+      "heading_en": "Notices",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera meddelanden med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_14",
+      "heading_sv": "Överlåtelse av avtal",
+      "heading_en": "Assignment",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera överlåtelse av avtal med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_15",
+      "heading_sv": "Sekretess",
+      "heading_en": "Confidentiality",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera sekretess med sedvanlig avtalsformulering."
+    }
+  ],
+  "appendix_clauses": [
+    {
+      "clause_id": "appendix_a_clause_01",
+      "heading_sv": "Bilaga A – Kompletterande villkor",
+      "heading_en": "Appendix A – Supplementary terms",
+      "fact_ids": [
+        "fact_asset_scope",
+        "fact_purchase_price"
+      ],
+      "mode": "definition",
+      "instruction_sv": "Reglera bilaga a – kompletterande villkor och uttryck följande uppgifter tydligt: tillgångarnas omfattning, köpeskilling."
+    },
+    {
+      "clause_id": "appendix_a_clause_02",
+      "heading_sv": "Bilaga A – Detaljreglering",
+      "heading_en": "Appendix A – Detailed regulation",
+      "fact_ids": [],
+      "mode": "reference",
+      "distributed_facts": true,
+      "instruction_sv": "Reglera bilaga a – detaljreglering och koppla detaljerna till huvudavtalets bestämmelser."
+    },
+    {
+      "clause_id": "appendix_a_clause_03",
+      "heading_sv": "Bilaga A – Tidigare diskuterade villkor",
+      "heading_en": "Appendix A – Previously discussed terms",
+      "fact_ids": [
+        "fact_purchase_price_alt",
+        "fact_warranty_alt"
+      ],
+      "mode": "distractor",
+      "instruction_sv": "Reglera bilaga a – tidigare diskuterade villkor och uttryck följande uppgifter tydligt: tidigare diskuterad köpeskilling, kortare garantitid i tidigare utkast."
+    }
+  ],
+  "amendment_clauses": [
+    {
+      "clause_id": "amendment_1_clause_01",
+      "heading_sv": "Tillägg 1 – Ändrade villkor",
+      "heading_en": "Amendment 1 – Amended terms",
+      "fact_ids": [
+        "fact_purchase_price",
+        "fact_purchase_price_amendment"
+      ],
+      "mode": "contradiction",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – ändrade villkor och uttryck följande uppgifter tydligt: köpeskilling, avvikande köpeskilling i tillägg."
+    },
+    {
+      "clause_id": "amendment_1_clause_02",
+      "heading_sv": "Tillägg 1 – Undantag",
+      "heading_en": "Amendment 1 – Exception",
+      "fact_ids": [
+        "fact_warranty",
+        "fact_warranty_exception"
+      ],
+      "mode": "exception",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – undantag och uttryck följande uppgifter tydligt: garantitid, förkortad garanti för slitdelar."
+    },
+    {
+      "clause_id": "amendment_1_clause_03",
+      "heading_sv": "Tillägg 1 – Externa dokument",
+      "heading_en": "Amendment 1 – External documents",
+      "fact_ids": [],
+      "mode": "reference",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – externa dokument och hänvisa till externa dokument som inte ingår i avtalspaketet."
+    },
+    {
+      "clause_id": "amendment_1_clause_04",
+      "heading_sv": "Tillägg 1 – Villkorade bestämmelser",
+      "heading_en": "Amendment 1 – Conditional provisions",
+      "fact_ids": [
+        "fact_conditional_earn_out",
+        "fact_purchase_price"
+      ],
+      "mode": "conditional",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – villkorade bestämmelser och uttryck följande uppgifter tydligt: villkorad tilläggsköpeskilling, köpeskilling."
+    }
+  ],
+  "package": {
+    "appendix": {
+      "document_id": "appendix_a",
+      "title_sv": "Bilaga A – Kompletterande villkor",
+      "title_en": "Appendix A – Supplementary terms",
+      "filename_stem": "appendix_a"
+    },
+    "amendment": {
+      "document_id": "amendment_1",
+      "title_sv": "Tillägg 1 – Ändrade villkor",
+      "title_en": "Amendment 1 – Amended terms",
+      "filename_stem": "amendment_1"
+    }
+  },
+  "variation": {
+    "styles": [
+      "formal",
+      "complex",
+      "plain"
+    ],
+    "document_qualities": [
+      "clean",
+      "line_breaks",
+      "tables",
+      "page_breaks"
+    ]
+  },
+  "distractor_facts": [
+    {
+      "fact_id": "fact_purchase_price_alt",
+      "kind": "money",
+      "label_sv": "Tidigare diskuterad köpeskilling",
+      "label_en": "Earlier discussed purchase price",
+      "keywords_sv": [
+        "tidigare köpeskilling",
+        "diskuterat pris"
+      ],
+      "keywords_en": [
+        "earlier purchase price",
+        "discussed price"
+      ],
+      "variants": [
+        {
+          "value": 4500000,
+          "explicit_surfaces": [
+            "4 500 000 SEK",
+            "4 500 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "4 500 000 kr",
+            "ett belopp om 4 500 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK",
+      "based_on_fact_id": "fact_purchase_price"
+    },
+    {
+      "fact_id": "fact_warranty_alt",
+      "kind": "duration",
+      "label_sv": "Kortare garantitid i tidigare utkast",
+      "label_en": "Shorter warranty in earlier draft",
+      "keywords_sv": [
+        "tidigare garantitid",
+        "kortare garanti"
+      ],
+      "keywords_en": [
+        "earlier warranty",
+        "shorter warranty"
+      ],
+      "variants": [
+        {
+          "value": 12,
+          "explicit_surfaces": [
+            "12 månader",
+            "tolv (12) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett år"
+          ]
+        }
+      ],
+      "unit": "months",
+      "based_on_fact_id": "fact_warranty"
+    }
+  ],
+  "contradiction": {
+    "base_fact_id": "fact_purchase_price",
+    "fact": {
+      "fact_id": "fact_purchase_price_amendment",
+      "kind": "money",
+      "label_sv": "Avvikande köpeskilling i tillägg",
+      "label_en": "Differing purchase price in amendment",
+      "keywords_sv": [
+        "köpeskilling tillägg",
+        "avvikande pris"
+      ],
+      "keywords_en": [
+        "price amendment"
+      ],
+      "variants": [
+        {
+          "value": 5300000,
+          "explicit_surfaces": [
+            "5 300 000 SEK",
+            "5 300 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "5 300 000 kr",
+            "ett belopp om 5 300 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    "description_sv": "Tillägg 1 anger en högre köpeskilling än huvudavtalet, utan att huvudavtalets belopp formellt upphävs.",
+    "description_en": ""
+  },
+  "exception": {
+    "base_fact_id": "fact_warranty",
+    "fact": {
+      "fact_id": "fact_warranty_exception",
+      "kind": "duration",
+      "label_sv": "Förkortad garanti för slitdelar",
+      "label_en": "Shortened warranty for wear parts",
+      "keywords_sv": [
+        "undantag garanti",
+        "slitdelar"
+      ],
+      "keywords_en": [
+        "warranty exception",
+        "wear parts"
+      ],
+      "variants": [
+        {
+          "value": 6,
+          "explicit_surfaces": [
+            "6 månader",
+            "sex (6) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett halvår"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    "description_sv": "Garantin för slitdelar är förkortad enligt undantaget i Tillägg 1; huvudavtalets garantitid gäller i övrigt.",
+    "description_en": ""
+  },
+  "missing_information": {
+    "missing_documents": [
+      "appendix_b_tillgangsforteckning",
+      "side_letter_2026"
+    ],
+    "insufficient_evidence_fact_id": "fact_asset_scope",
+    "conditional_fact": {
+      "fact_id": "fact_conditional_earn_out",
+      "kind": "money",
+      "label_sv": "Villkorad tilläggsköpeskilling",
+      "label_en": "Conditional earn-out",
+      "keywords_sv": [
+        "tilläggsköpeskilling",
+        "earn-out"
+      ],
+      "keywords_en": [
+        "earn-out",
+        "additional purchase price"
+      ],
+      "variants": [
+        {
+          "value": 300000,
+          "explicit_surfaces": [
+            "300 000 SEK",
+            "300 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "300 000 kr",
+            "ett belopp om 300 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    "conditional_governing_fact_id": "fact_purchase_price",
+    "description_sv": "Tillgångsförteckningen (bilaga B) saknas; exakt vilka tillgångar som överlåts kan inte verifieras.",
+    "conditional_description_sv": "Tilläggsköpeskillingen är villkorad av tillgångsförteckningen i bilaga B, som inte ingår."
+  }
+}

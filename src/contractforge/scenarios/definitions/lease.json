@@ -1,0 +1,906 @@
+{
+  "contract_type": "lease",
+  "definition_version": "1.0",
+  "title_sv": "Hyresavtal",
+  "title_en": "Lease Agreement",
+  "description_sv": "Lokalhyra med hyra, deposition, indexuppräkning, underhåll och förlängning.",
+  "parties": [
+    {
+      "party_id": "party_landlord",
+      "role": "landlord",
+      "role_sv": "Hyresvärd",
+      "role_en": "Landlord",
+      "kind": "organisation",
+      "name_pool": [
+        "Nordvik Fastigheter AB",
+        "Arken Hyrcenter AB",
+        "Sundberg Lokaler AB"
+      ],
+      "address_pool": [
+        "Exempelvägen 40, 111 20 Stockholm"
+      ],
+      "org_number_series": "559013"
+    },
+    {
+      "party_id": "party_tenant",
+      "role": "tenant",
+      "role_sv": "Hyresgäst",
+      "role_en": "Tenant",
+      "kind": "organisation",
+      "name_pool": [
+        "Sundberg Butik AB",
+        "Västberg Studio AB",
+        "Lindfors Kontor AB"
+      ],
+      "address_pool": [
+        "Testvägen 9, 722 20 Västerås"
+      ],
+      "org_number_series": "559014"
+    }
+  ],
+  "facts": [
+    {
+      "fact_id": "fact_landlord_name",
+      "kind": "entity",
+      "label_sv": "Hyresvärdens namn",
+      "label_en": "Landlord name",
+      "keywords_sv": [
+        "hyresvärd",
+        "namn"
+      ],
+      "keywords_en": [
+        "landlord",
+        "name"
+      ],
+      "entity_party_id": "party_landlord",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_tenant_name",
+      "kind": "entity",
+      "label_sv": "Hyresgästens namn",
+      "label_en": "Tenant name",
+      "keywords_sv": [
+        "hyresgäst",
+        "namn"
+      ],
+      "keywords_en": [
+        "tenant",
+        "name"
+      ],
+      "entity_party_id": "party_tenant",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_premises",
+      "kind": "text",
+      "label_sv": "Lokal",
+      "label_en": "Premises",
+      "keywords_sv": [
+        "lokal",
+        "yta"
+      ],
+      "keywords_en": [
+        "premises",
+        "area"
+      ],
+      "variants": [
+        {
+          "value": "butikslokal om 320 kvadratmeter",
+          "explicit_surfaces": [
+            "butikslokal om 320 kvadratmeter"
+          ],
+          "paraphrase_surfaces": [
+            "butikslokal på 320 kvadratmeter"
+          ]
+        },
+        {
+          "value": "kontor om 450 kvadratmeter",
+          "explicit_surfaces": [
+            "kontor om 450 kvadratmeter"
+          ],
+          "paraphrase_surfaces": [
+            "kontorslokal på 450 kvadratmeter"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_address",
+      "kind": "text",
+      "label_sv": "Adress",
+      "label_en": "Address",
+      "keywords_sv": [
+        "adress",
+        "belägenhet"
+      ],
+      "keywords_en": [
+        "address",
+        "location"
+      ],
+      "variants": [
+        {
+          "value": "Exempelgatan 14, 111 20 Stockholm",
+          "explicit_surfaces": [
+            "Exempelgatan 14, 111 20 Stockholm"
+          ],
+          "paraphrase_surfaces": [
+            "Exempelgatan 14 i Stockholm"
+          ]
+        },
+        {
+          "value": "Provgatan 7, 411 20 Göteborg",
+          "explicit_surfaces": [
+            "Provgatan 7, 411 20 Göteborg"
+          ],
+          "paraphrase_surfaces": [
+            "Provgatan 7 i Göteborg"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_rent",
+      "kind": "money",
+      "label_sv": "Hyra",
+      "label_en": "Rent",
+      "keywords_sv": [
+        "hyra",
+        "månadshyra"
+      ],
+      "keywords_en": [
+        "rent",
+        "monthly rent"
+      ],
+      "variants": [
+        {
+          "value": 31000,
+          "explicit_surfaces": [
+            "31 000 SEK per månad",
+            "31 000 kronor per månad"
+          ],
+          "paraphrase_surfaces": [
+            "månadslön om 31 000 kronor",
+            "31 000 kr per månad"
+          ]
+        },
+        {
+          "value": 28500,
+          "explicit_surfaces": [
+            "28 500 SEK per månad",
+            "28 500 kronor per månad"
+          ],
+          "paraphrase_surfaces": [
+            "månadslön om 28 500 kronor",
+            "28 500 kr per månad"
+          ]
+        }
+      ],
+      "unit": "per_month",
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_deposit",
+      "kind": "money",
+      "label_sv": "Deposition",
+      "label_en": "Deposit",
+      "keywords_sv": [
+        "deposition",
+        "säkerhet"
+      ],
+      "keywords_en": [
+        "deposit",
+        "security"
+      ],
+      "variants": [
+        {
+          "value": 93000,
+          "explicit_surfaces": [
+            "93 000 SEK",
+            "93 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "93 000 kr",
+            "ett belopp om 93 000 kronor"
+          ]
+        },
+        {
+          "value": 85500,
+          "explicit_surfaces": [
+            "85 500 SEK",
+            "85 500 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "85 500 kr",
+            "ett belopp om 85 500 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_term_months",
+      "kind": "duration",
+      "label_sv": "Hyrestid",
+      "label_en": "Lease term",
+      "keywords_sv": [
+        "hyrestid",
+        "avtalstid"
+      ],
+      "keywords_en": [
+        "term",
+        "lease term"
+      ],
+      "variants": [
+        {
+          "value": 36,
+          "explicit_surfaces": [
+            "36 månader",
+            "trettiosex (36) månader"
+          ],
+          "paraphrase_surfaces": [
+            "tre år"
+          ]
+        },
+        {
+          "value": 60,
+          "explicit_surfaces": [
+            "60 månader",
+            "en avtalsperiod om 60 månader"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 60 månader",
+            "en avtalsperiod om 60 månader"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    {
+      "fact_id": "fact_index_adjustment",
+      "kind": "percentage",
+      "label_sv": "Indexuppräkning",
+      "label_en": "Index adjustment",
+      "keywords_sv": [
+        "indexuppräkning",
+        "index"
+      ],
+      "keywords_en": [
+        "index adjustment",
+        "index"
+      ],
+      "variants": [
+        {
+          "value": 2,
+          "explicit_surfaces": [
+            "2 procent",
+            "2 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 2 procent",
+            "2 procent av det totala"
+          ]
+        },
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 procent",
+            "3 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 3 procent",
+            "3 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    {
+      "fact_id": "fact_notice_months",
+      "kind": "duration",
+      "label_sv": "Uppsägningstid",
+      "label_en": "Notice period",
+      "keywords_sv": [
+        "uppsägningstid",
+        "uppsägning"
+      ],
+      "keywords_en": [
+        "notice period",
+        "notice"
+      ],
+      "variants": [
+        {
+          "value": 9,
+          "explicit_surfaces": [
+            "9 månader",
+            "nio (9) månader"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 9 månader",
+            "en avtalsperiod om 9 månader"
+          ]
+        },
+        {
+          "value": 6,
+          "explicit_surfaces": [
+            "6 månader",
+            "sex (6) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett halvår"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    {
+      "fact_id": "fact_renewal_option_months",
+      "kind": "duration",
+      "label_sv": "Förlängningsoption",
+      "label_en": "Renewal option",
+      "keywords_sv": [
+        "förlängning",
+        "option"
+      ],
+      "keywords_en": [
+        "renewal",
+        "option"
+      ],
+      "variants": [
+        {
+          "value": 12,
+          "explicit_surfaces": [
+            "12 månader",
+            "tolv (12) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett år"
+          ]
+        },
+        {
+          "value": 24,
+          "explicit_surfaces": [
+            "24 månader",
+            "tjugofyra (24) månader"
+          ],
+          "paraphrase_surfaces": [
+            "två år"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    {
+      "fact_id": "fact_maintenance",
+      "kind": "defined_term",
+      "label_sv": "Underhållsansvar",
+      "label_en": "Maintenance responsibility",
+      "keywords_sv": [
+        "underhåll",
+        "ansvar"
+      ],
+      "keywords_en": [
+        "maintenance",
+        "responsibility"
+      ],
+      "variants": [
+        {
+          "value": "hyresvärden ansvarar för yttre underhåll",
+          "explicit_surfaces": [
+            "hyresvärden ansvarar för yttre underhåll"
+          ],
+          "paraphrase_surfaces": [
+            "hyresvärden svarar för yttre underhåll"
+          ]
+        },
+        {
+          "value": "hyresgästen ansvarar för inre underhåll",
+          "explicit_surfaces": [
+            "hyresgästen ansvarar för inre underhåll"
+          ],
+          "paraphrase_surfaces": [
+            "hyresgästen svarar för inre underhåll"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_insurance",
+      "kind": "money",
+      "label_sv": "Försäkringsbelopp",
+      "label_en": "Insurance amount",
+      "keywords_sv": [
+        "försäkring",
+        "försäkringsbelopp"
+      ],
+      "keywords_en": [
+        "insurance",
+        "insurance amount"
+      ],
+      "variants": [
+        {
+          "value": 5000000,
+          "explicit_surfaces": [
+            "5 000 000 SEK",
+            "5 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "5 000 000 kr",
+            "ett belopp om 5 000 000 kronor"
+          ]
+        },
+        {
+          "value": 3000000,
+          "explicit_surfaces": [
+            "3 000 000 SEK",
+            "3 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "3 000 000 kr",
+            "ett belopp om 3 000 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_sublease",
+      "kind": "defined_term",
+      "label_sv": "Andrahandsuthyrning",
+      "label_en": "Subletting",
+      "keywords_sv": [
+        "andrahandsuthyrning",
+        "uthyrning"
+      ],
+      "keywords_en": [
+        "sublease",
+        "subletting"
+      ],
+      "variants": [
+        {
+          "value": "andrahandsuthyrning kräver skriftligt samtycke",
+          "explicit_surfaces": [
+            "andrahandsuthyrning kräver skriftligt samtycke"
+          ],
+          "paraphrase_surfaces": [
+            "andrahandsuthyrning kräver skriftligt samtycke"
+          ]
+        },
+        {
+          "value": "andrahandsuthyrning är inte tillåten",
+          "explicit_surfaces": [
+            "andrahandsuthyrning är inte tillåten"
+          ],
+          "paraphrase_surfaces": [
+            "andrahandsuthyrning får inte ske utan medgivande"
+          ]
+        }
+      ]
+    }
+  ],
+  "main_clauses": [
+    {
+      "clause_id": "clause_01",
+      "heading_sv": "Avtalsparter",
+      "heading_en": "Parties",
+      "fact_ids": [
+        "fact_landlord_name",
+        "fact_tenant_name"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera avtalsparter och uttryck följande uppgifter tydligt: hyresvärdens namn, hyresgästens namn."
+    },
+    {
+      "clause_id": "clause_02",
+      "heading_sv": "Lokal och adress",
+      "heading_en": "Premises and address",
+      "fact_ids": [
+        "fact_premises",
+        "fact_address"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera lokal och adress och uttryck följande uppgifter tydligt: lokal, adress."
+    },
+    {
+      "clause_id": "clause_03",
+      "heading_sv": "Hyra och deposition",
+      "heading_en": "Rent and deposit",
+      "fact_ids": [
+        "fact_rent",
+        "fact_deposit"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera hyra och deposition och uttryck följande uppgifter tydligt: hyra, deposition."
+    },
+    {
+      "clause_id": "clause_04",
+      "heading_sv": "Hyrestid och uppsägning",
+      "heading_en": "Term and notice",
+      "fact_ids": [
+        "fact_term_months",
+        "fact_notice_months"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera hyrestid och uppsägning och uttryck följande uppgifter tydligt: hyrestid, uppsägningstid."
+    },
+    {
+      "clause_id": "clause_05",
+      "heading_sv": "Indexuppräkning",
+      "heading_en": "Index adjustment",
+      "fact_ids": [
+        "fact_index_adjustment"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera indexuppräkning och uttryck följande uppgifter tydligt: indexuppräkning."
+    },
+    {
+      "clause_id": "clause_06",
+      "heading_sv": "Förlängningsoption",
+      "heading_en": "Renewal option",
+      "fact_ids": [
+        "fact_renewal_option_months"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera förlängningsoption och uttryck följande uppgifter tydligt: förlängningsoption."
+    },
+    {
+      "clause_id": "clause_07",
+      "heading_sv": "Underhåll och försäkring",
+      "heading_en": "Maintenance and insurance",
+      "fact_ids": [
+        "fact_maintenance",
+        "fact_insurance"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera underhåll och försäkring och uttryck följande uppgifter tydligt: underhållsansvar, försäkringsbelopp."
+    },
+    {
+      "clause_id": "clause_08",
+      "heading_sv": "Andrahandsuthyrning",
+      "heading_en": "Subletting",
+      "fact_ids": [
+        "fact_sublease"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera andrahandsuthyrning och uttryck följande uppgifter tydligt: andrahandsuthyrning."
+    },
+    {
+      "clause_id": "clause_09",
+      "heading_sv": "Ändringar och tillägg",
+      "heading_en": "Amendments",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera ändringar och tillägg med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_10",
+      "heading_sv": "Undertecknande",
+      "heading_en": "Signatures",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera undertecknande med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_11",
+      "heading_sv": "Tillämplig lag och tvistlösning",
+      "heading_en": "Governing law and disputes",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera tillämplig lag och tvistlösning med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_12",
+      "heading_sv": "Force majeure",
+      "heading_en": "Force majeure",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera force majeure med sedvanlig avtalsformulering."
+    }
+  ],
+  "extra_main_clauses": [
+    {
+      "clause_id": "clause_13",
+      "heading_sv": "Meddelanden",
+      "heading_en": "Notices",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera meddelanden med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_14",
+      "heading_sv": "Överlåtelse av avtal",
+      "heading_en": "Assignment",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera överlåtelse av avtal med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_15",
+      "heading_sv": "Besiktning",
+      "heading_en": "Inspection",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera besiktning med sedvanlig avtalsformulering."
+    }
+  ],
+  "appendix_clauses": [
+    {
+      "clause_id": "appendix_a_clause_01",
+      "heading_sv": "Bilaga A – Kompletterande villkor",
+      "heading_en": "Appendix A – Supplementary terms",
+      "fact_ids": [
+        "fact_premises",
+        "fact_address"
+      ],
+      "mode": "definition",
+      "instruction_sv": "Reglera bilaga a – kompletterande villkor och uttryck följande uppgifter tydligt: lokal, adress."
+    },
+    {
+      "clause_id": "appendix_a_clause_02",
+      "heading_sv": "Bilaga A – Detaljreglering",
+      "heading_en": "Appendix A – Detailed regulation",
+      "fact_ids": [],
+      "mode": "reference",
+      "distributed_facts": true,
+      "instruction_sv": "Reglera bilaga a – detaljreglering och koppla detaljerna till huvudavtalets bestämmelser."
+    },
+    {
+      "clause_id": "appendix_a_clause_03",
+      "heading_sv": "Bilaga A – Tidigare diskuterade villkor",
+      "heading_en": "Appendix A – Previously discussed terms",
+      "fact_ids": [
+        "fact_rent_alt",
+        "fact_deposit_alt"
+      ],
+      "mode": "distractor",
+      "instruction_sv": "Reglera bilaga a – tidigare diskuterade villkor och uttryck följande uppgifter tydligt: tidigare diskuterad hyra, lägre deposition i tidigare utkast."
+    }
+  ],
+  "amendment_clauses": [
+    {
+      "clause_id": "amendment_1_clause_01",
+      "heading_sv": "Tillägg 1 – Ändrade villkor",
+      "heading_en": "Amendment 1 – Amended terms",
+      "fact_ids": [
+        "fact_rent",
+        "fact_rent_amendment"
+      ],
+      "mode": "contradiction",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – ändrade villkor och uttryck följande uppgifter tydligt: hyra, avvikande hyra i tillägg."
+    },
+    {
+      "clause_id": "amendment_1_clause_02",
+      "heading_sv": "Tillägg 1 – Undantag",
+      "heading_en": "Amendment 1 – Exception",
+      "fact_ids": [
+        "fact_index_adjustment",
+        "fact_index_exception"
+      ],
+      "mode": "exception",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – undantag och uttryck följande uppgifter tydligt: indexuppräkning, undantag från indexuppräkning första året."
+    },
+    {
+      "clause_id": "amendment_1_clause_03",
+      "heading_sv": "Tillägg 1 – Externa dokument",
+      "heading_en": "Amendment 1 – External documents",
+      "fact_ids": [],
+      "mode": "reference",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – externa dokument och hänvisa till externa dokument som inte ingår i avtalspaketet."
+    },
+    {
+      "clause_id": "amendment_1_clause_04",
+      "heading_sv": "Tillägg 1 – Villkorade bestämmelser",
+      "heading_en": "Amendment 1 – Conditional provisions",
+      "fact_ids": [
+        "fact_conditional_rent_free",
+        "fact_rent"
+      ],
+      "mode": "conditional",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – villkorade bestämmelser och uttryck följande uppgifter tydligt: villkorad hyresfri period, hyra."
+    }
+  ],
+  "package": {
+    "appendix": {
+      "document_id": "appendix_a",
+      "title_sv": "Bilaga A – Kompletterande villkor",
+      "title_en": "Appendix A – Supplementary terms",
+      "filename_stem": "appendix_a"
+    },
+    "amendment": {
+      "document_id": "amendment_1",
+      "title_sv": "Tillägg 1 – Ändrade villkor",
+      "title_en": "Amendment 1 – Amended terms",
+      "filename_stem": "amendment_1"
+    }
+  },
+  "variation": {
+    "styles": [
+      "formal",
+      "complex",
+      "plain"
+    ],
+    "document_qualities": [
+      "clean",
+      "line_breaks",
+      "tables",
+      "page_breaks"
+    ]
+  },
+  "distractor_facts": [
+    {
+      "fact_id": "fact_rent_alt",
+      "kind": "money",
+      "label_sv": "Tidigare diskuterad hyra",
+      "label_en": "Earlier discussed rent",
+      "keywords_sv": [
+        "tidigare hyra",
+        "diskuterad hyra"
+      ],
+      "keywords_en": [
+        "earlier rent",
+        "discussed rent"
+      ],
+      "variants": [
+        {
+          "value": 30500,
+          "explicit_surfaces": [
+            "30 500 SEK per månad",
+            "30 500 kronor per månad"
+          ],
+          "paraphrase_surfaces": [
+            "månadslön om 30 500 kronor",
+            "30 500 kr per månad"
+          ]
+        }
+      ],
+      "unit": "per_month",
+      "currency": "SEK",
+      "based_on_fact_id": "fact_rent"
+    },
+    {
+      "fact_id": "fact_deposit_alt",
+      "kind": "money",
+      "label_sv": "Lägre deposition i tidigare utkast",
+      "label_en": "Lower deposit in earlier draft",
+      "keywords_sv": [
+        "tidigare deposition",
+        "lägre deposition"
+      ],
+      "keywords_en": [
+        "earlier deposit",
+        "lower deposit"
+      ],
+      "variants": [
+        {
+          "value": 62000,
+          "explicit_surfaces": [
+            "62 000 SEK",
+            "62 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "62 000 kr",
+            "ett belopp om 62 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK",
+      "based_on_fact_id": "fact_deposit"
+    }
+  ],
+  "contradiction": {
+    "base_fact_id": "fact_rent",
+    "fact": {
+      "fact_id": "fact_rent_amendment",
+      "kind": "money",
+      "label_sv": "Avvikande hyra i tillägg",
+      "label_en": "Differing rent in amendment",
+      "keywords_sv": [
+        "hyra tillägg",
+        "avvikande hyra"
+      ],
+      "keywords_en": [
+        "rent amendment"
+      ],
+      "variants": [
+        {
+          "value": 33000,
+          "explicit_surfaces": [
+            "33 000 SEK per månad",
+            "33 000 kronor per månad"
+          ],
+          "paraphrase_surfaces": [
+            "månadslön om 33 000 kronor",
+            "33 000 kr per månad"
+          ]
+        }
+      ],
+      "unit": "per_month",
+      "currency": "SEK"
+    },
+    "description_sv": "Tillägg 1 anger en högre hyra än huvudavtalet, samtidigt som huvudavtalets hyra står kvar.",
+    "description_en": ""
+  },
+  "exception": {
+    "base_fact_id": "fact_index_adjustment",
+    "fact": {
+      "fact_id": "fact_index_exception",
+      "kind": "percentage",
+      "label_sv": "Undantag från indexuppräkning första året",
+      "label_en": "Index adjustment exception for the first year",
+      "keywords_sv": [
+        "undantag index",
+        "första året"
+      ],
+      "keywords_en": [
+        "index exception",
+        "first year"
+      ],
+      "variants": [
+        {
+          "value": 0,
+          "explicit_surfaces": [
+            "0 procent",
+            "0 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 0 procent",
+            "0 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    "description_sv": "Indexuppräkning sker inte det första året enligt undantaget i Tillägg 1; därefter gäller huvudavtalets procentsats.",
+    "description_en": ""
+  },
+  "missing_information": {
+    "missing_documents": [
+      "appendix_b_miljodeklaration",
+      "side_letter_2026"
+    ],
+    "insufficient_evidence_fact_id": "fact_maintenance",
+    "conditional_fact": {
+      "fact_id": "fact_conditional_rent_free",
+      "kind": "duration",
+      "label_sv": "Villkorad hyresfri period",
+      "label_en": "Conditional rent-free period",
+      "keywords_sv": [
+        "villkorad hyresfri",
+        "hyresfri period"
+      ],
+      "keywords_en": [
+        "conditional rent-free",
+        "rent-free period"
+      ],
+      "variants": [
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 månader",
+            "tre (3) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett kvartal"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    "conditional_governing_fact_id": "fact_rent",
+    "description_sv": "Miljödeklarationen (bilaga B) saknas; underhållsansvarets omfattning för miljöåtgärder kan inte verifieras.",
+    "conditional_description_sv": "Den hyresfria perioden är villkorad av miljödeklarationen i bilaga B, som inte ingår."
+  }
+}

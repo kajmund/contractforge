@@ -1,0 +1,828 @@
+{
+  "contract_type": "nda",
+  "definition_version": "1.0",
+  "title_sv": "Sekretessavtal",
+  "title_en": "Non-Disclosure Agreement",
+  "description_sv": "Ömsesidig sekretess med definition, undantag, vite och återlämnande av material.",
+  "parties": [
+    {
+      "party_id": "party_discloser",
+      "role": "discloser",
+      "role_sv": "Upplysande part",
+      "role_en": "Disclosing party",
+      "kind": "organisation",
+      "name_pool": [
+        "Nordvik Medicin AB",
+        "Arken Data AB",
+        "Sundberg Forskning AB"
+      ],
+      "address_pool": [
+        "Exempelvägen 5, 111 20 Stockholm"
+      ],
+      "org_number_series": "559005"
+    },
+    {
+      "party_id": "party_recipient",
+      "role": "recipient",
+      "role_sv": "Mottagande part",
+      "role_en": "Receiving party",
+      "kind": "organisation",
+      "name_pool": [
+        "Sundberg Analys AB",
+        "Västberg Partner AB",
+        "Lindfors Rådgivning AB"
+      ],
+      "address_pool": [
+        "Provgatan 9, 411 20 Göteborg"
+      ],
+      "org_number_series": "559006"
+    }
+  ],
+  "facts": [
+    {
+      "fact_id": "fact_discloser_name",
+      "kind": "entity",
+      "label_sv": "Upplysande parts namn",
+      "label_en": "Disclosing party name",
+      "keywords_sv": [
+        "upplysande part",
+        "namn"
+      ],
+      "keywords_en": [
+        "disclosing party",
+        "name"
+      ],
+      "entity_party_id": "party_discloser",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_recipient_name",
+      "kind": "entity",
+      "label_sv": "Mottagande parts namn",
+      "label_en": "Receiving party name",
+      "keywords_sv": [
+        "mottagande part",
+        "namn"
+      ],
+      "keywords_en": [
+        "receiving party",
+        "name"
+      ],
+      "entity_party_id": "party_recipient",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_confidential_scope",
+      "kind": "text",
+      "label_sv": "Sekretessens omfattning",
+      "label_en": "Scope of confidentiality",
+      "keywords_sv": [
+        "sekretess",
+        "omfattning"
+      ],
+      "keywords_en": [
+        "confidentiality",
+        "scope"
+      ],
+      "variants": [
+        {
+          "value": "teknisk dokumentation och affärshemligheter",
+          "explicit_surfaces": [
+            "teknisk dokumentation och affärshemligheter"
+          ],
+          "paraphrase_surfaces": [
+            "teknisk dokumentation samt affärshemligheter"
+          ]
+        },
+        {
+          "value": "kunddata och produktplaner",
+          "explicit_surfaces": [
+            "kunddata och produktplaner"
+          ],
+          "paraphrase_surfaces": [
+            "kunddata och produktplaner"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_confidentiality_period",
+      "kind": "duration",
+      "label_sv": "Sekretessperiod",
+      "label_en": "Confidentiality period",
+      "keywords_sv": [
+        "sekretessperiod",
+        "sekretess"
+      ],
+      "keywords_en": [
+        "confidentiality period",
+        "secrecy"
+      ],
+      "variants": [
+        {
+          "value": 5,
+          "explicit_surfaces": [
+            "5 år",
+            "fem (5) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 5 år",
+            "en tid om 5 år"
+          ]
+        },
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 år",
+            "tre (3) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 3 år",
+            "en tid om 3 år"
+          ]
+        }
+      ],
+      "unit": "years"
+    },
+    {
+      "fact_id": "fact_return_period",
+      "kind": "duration",
+      "label_sv": "Återlämningsfrist",
+      "label_en": "Return period",
+      "keywords_sv": [
+        "återlämnande",
+        "förstöring"
+      ],
+      "keywords_en": [
+        "return",
+        "destruction"
+      ],
+      "variants": [
+        {
+          "value": 30,
+          "explicit_surfaces": [
+            "30 dagar",
+            "en frist om 30 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 30 dagar",
+            "en frist om 30 dagar"
+          ]
+        },
+        {
+          "value": 14,
+          "explicit_surfaces": [
+            "14 dagar",
+            "en frist om 14 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 14 dagar",
+            "en frist om 14 dagar"
+          ]
+        }
+      ],
+      "unit": "days"
+    },
+    {
+      "fact_id": "fact_penalty",
+      "kind": "money",
+      "label_sv": "Vitesbelopp",
+      "label_en": "Penalty amount",
+      "keywords_sv": [
+        "vite",
+        "vitesbelopp"
+      ],
+      "keywords_en": [
+        "penalty",
+        "liquidated damages"
+      ],
+      "variants": [
+        {
+          "value": 2000000,
+          "explicit_surfaces": [
+            "2 000 000 SEK",
+            "2 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "2 000 000 kr",
+            "ett belopp om 2 000 000 kronor"
+          ]
+        },
+        {
+          "value": 1500000,
+          "explicit_surfaces": [
+            "1 500 000 SEK",
+            "1 500 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "1 500 000 kr",
+            "ett belopp om 1 500 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_permitted_recipients",
+      "kind": "integer",
+      "label_sv": "Antal behöriga mottagare",
+      "label_en": "Permitted recipients",
+      "keywords_sv": [
+        "mottagare",
+        "behöriga personer"
+      ],
+      "keywords_en": [
+        "recipients",
+        "permitted persons"
+      ],
+      "variants": [
+        {
+          "value": 5,
+          "explicit_surfaces": [
+            "5 personer",
+            "antalet 5 personer"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 5 personer",
+            "sammanlagt 5 personer"
+          ]
+        },
+        {
+          "value": 10,
+          "explicit_surfaces": [
+            "10 personer",
+            "antalet 10 personer"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 10 personer",
+            "sammanlagt 10 personer"
+          ]
+        }
+      ],
+      "unit": "persons"
+    },
+    {
+      "fact_id": "fact_permitted_disclosure",
+      "kind": "text",
+      "label_sv": "Undantag från sekretess",
+      "label_en": "Confidentiality exceptions",
+      "keywords_sv": [
+        "undantag",
+        "offentlig information"
+      ],
+      "keywords_en": [
+        "exceptions",
+        "public information"
+      ],
+      "variants": [
+        {
+          "value": "offentlig information och information som mottagaren redan kände till",
+          "explicit_surfaces": [
+            "offentlig information och information som mottagaren redan kände till"
+          ],
+          "paraphrase_surfaces": [
+            "information som är offentlig eller redan känd av mottagaren"
+          ]
+        },
+        {
+          "value": "information som krävs enligt lag",
+          "explicit_surfaces": [
+            "information som krävs enligt lag"
+          ],
+          "paraphrase_surfaces": [
+            "information som lämnas enligt lagstadgad skyldighet"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_confidential_definition",
+      "kind": "defined_term",
+      "label_sv": "Definition av sekretessbelagd information",
+      "label_en": "Definition of confidential information",
+      "keywords_sv": [
+        "definition",
+        "sekretessbelagd information"
+      ],
+      "keywords_en": [
+        "definition",
+        "confidential information"
+      ],
+      "variants": [
+        {
+          "value": "Sekretessbelagd information",
+          "explicit_surfaces": [
+            "Sekretessbelagd information"
+          ],
+          "paraphrase_surfaces": [
+            "information som märkts som sekretessbelagd"
+          ]
+        },
+        {
+          "value": "Konfidentiell information",
+          "explicit_surfaces": [
+            "Konfidentiell information"
+          ],
+          "paraphrase_surfaces": [
+            "information som parterna betecknat som konfidentiell"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_employee_notice",
+      "kind": "duration",
+      "label_sv": "Anställdas bindningstid",
+      "label_en": "Employee binding period",
+      "keywords_sv": [
+        "anställda",
+        "bindningstid"
+      ],
+      "keywords_en": [
+        "employees",
+        "binding period"
+      ],
+      "variants": [
+        {
+          "value": 1,
+          "explicit_surfaces": [
+            "1 år",
+            "ett (1) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 1 år",
+            "en tid om 1 år"
+          ]
+        },
+        {
+          "value": 2,
+          "explicit_surfaces": [
+            "2 år",
+            "två (2) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 2 år",
+            "en tid om 2 år"
+          ]
+        }
+      ],
+      "unit": "years"
+    },
+    {
+      "fact_id": "fact_governing_law",
+      "kind": "text",
+      "label_sv": "Tillämplig lag",
+      "label_en": "Governing law",
+      "keywords_sv": [
+        "tillämplig lag",
+        "tvist"
+      ],
+      "keywords_en": [
+        "governing law",
+        "dispute"
+      ],
+      "variants": [
+        {
+          "value": "svensk rätt",
+          "explicit_surfaces": [
+            "svensk rätt"
+          ],
+          "paraphrase_surfaces": [
+            "svensk lagstiftning"
+          ]
+        },
+        {
+          "value": "svensk rätt med skiljeförfarande i Stockholm",
+          "explicit_surfaces": [
+            "svensk rätt med skiljeförfarande i Stockholm"
+          ],
+          "paraphrase_surfaces": [
+            "svensk rätt och skiljeförfarande i Stockholm"
+          ]
+        }
+      ]
+    }
+  ],
+  "main_clauses": [
+    {
+      "clause_id": "clause_01",
+      "heading_sv": "Avtalsparter",
+      "heading_en": "Parties",
+      "fact_ids": [
+        "fact_discloser_name",
+        "fact_recipient_name"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera avtalsparter och uttryck följande uppgifter tydligt: upplysande parts namn, mottagande parts namn."
+    },
+    {
+      "clause_id": "clause_02",
+      "heading_sv": "Definition av sekretessbelagd information",
+      "heading_en": "Definition of confidential information",
+      "fact_ids": [
+        "fact_confidential_definition"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera definition av sekretessbelagd information och uttryck följande uppgifter tydligt: definition av sekretessbelagd information."
+    },
+    {
+      "clause_id": "clause_03",
+      "heading_sv": "Sekretessens omfattning",
+      "heading_en": "Scope of confidentiality",
+      "fact_ids": [
+        "fact_confidential_scope"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera sekretessens omfattning och uttryck följande uppgifter tydligt: sekretessens omfattning."
+    },
+    {
+      "clause_id": "clause_04",
+      "heading_sv": "Undantag från sekretess",
+      "heading_en": "Confidentiality exceptions",
+      "fact_ids": [
+        "fact_permitted_disclosure"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera undantag från sekretess och uttryck följande uppgifter tydligt: undantag från sekretess."
+    },
+    {
+      "clause_id": "clause_05",
+      "heading_sv": "Behöriga mottagare",
+      "heading_en": "Permitted recipients",
+      "fact_ids": [
+        "fact_permitted_recipients"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera behöriga mottagare och uttryck följande uppgifter tydligt: antal behöriga mottagare."
+    },
+    {
+      "clause_id": "clause_06",
+      "heading_sv": "Återlämnande och förstöring",
+      "heading_en": "Return and destruction",
+      "fact_ids": [
+        "fact_return_period"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera återlämnande och förstöring och uttryck följande uppgifter tydligt: återlämningsfrist."
+    },
+    {
+      "clause_id": "clause_07",
+      "heading_sv": "Sekretessperiod och vite",
+      "heading_en": "Confidentiality period and penalty",
+      "fact_ids": [
+        "fact_confidentiality_period",
+        "fact_penalty"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera sekretessperiod och vite och uttryck följande uppgifter tydligt: sekretessperiod, vitesbelopp."
+    },
+    {
+      "clause_id": "clause_08",
+      "heading_sv": "Anställdas bindningstid och tillämplig lag",
+      "heading_en": "Employee binding period and governing law",
+      "fact_ids": [
+        "fact_employee_notice",
+        "fact_governing_law"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera anställdas bindningstid och tillämplig lag och uttryck följande uppgifter tydligt: anställdas bindningstid, tillämplig lag."
+    },
+    {
+      "clause_id": "clause_09",
+      "heading_sv": "Ändringar och tillägg",
+      "heading_en": "Amendments",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera ändringar och tillägg med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_10",
+      "heading_sv": "Undertecknande",
+      "heading_en": "Signatures",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera undertecknande med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_11",
+      "heading_sv": "Avtalets varaktighet",
+      "heading_en": "Duration of the agreement",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera avtalets varaktighet med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_12",
+      "heading_sv": "Meddelanden",
+      "heading_en": "Notices",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera meddelanden med sedvanlig avtalsformulering."
+    }
+  ],
+  "extra_main_clauses": [
+    {
+      "clause_id": "clause_13",
+      "heading_sv": "Force majeure",
+      "heading_en": "Force majeure",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera force majeure med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_14",
+      "heading_sv": "Överlåtelse av avtal",
+      "heading_en": "Assignment",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera överlåtelse av avtal med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_15",
+      "heading_sv": "Språk och tolkningsordning",
+      "heading_en": "Language and order of precedence",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera språk och tolkningsordning med sedvanlig avtalsformulering."
+    }
+  ],
+  "appendix_clauses": [
+    {
+      "clause_id": "appendix_a_clause_01",
+      "heading_sv": "Bilaga A – Kompletterande villkor",
+      "heading_en": "Appendix A – Supplementary terms",
+      "fact_ids": [
+        "fact_confidential_scope",
+        "fact_confidentiality_period"
+      ],
+      "mode": "definition",
+      "instruction_sv": "Reglera bilaga a – kompletterande villkor och uttryck följande uppgifter tydligt: sekretessens omfattning, sekretessperiod."
+    },
+    {
+      "clause_id": "appendix_a_clause_02",
+      "heading_sv": "Bilaga A – Detaljreglering",
+      "heading_en": "Appendix A – Detailed regulation",
+      "fact_ids": [],
+      "mode": "reference",
+      "distributed_facts": true,
+      "instruction_sv": "Reglera bilaga a – detaljreglering och koppla detaljerna till huvudavtalets bestämmelser."
+    },
+    {
+      "clause_id": "appendix_a_clause_03",
+      "heading_sv": "Bilaga A – Tidigare diskuterade villkor",
+      "heading_en": "Appendix A – Previously discussed terms",
+      "fact_ids": [
+        "fact_confidentiality_period_alt",
+        "fact_penalty_alt"
+      ],
+      "mode": "distractor",
+      "instruction_sv": "Reglera bilaga a – tidigare diskuterade villkor och uttryck följande uppgifter tydligt: kortare sekretessperiod i tidigare utkast, lägre vite i tidigare utkast."
+    }
+  ],
+  "amendment_clauses": [
+    {
+      "clause_id": "amendment_1_clause_01",
+      "heading_sv": "Tillägg 1 – Ändrade villkor",
+      "heading_en": "Amendment 1 – Amended terms",
+      "fact_ids": [
+        "fact_confidentiality_period",
+        "fact_confidentiality_period_amendment"
+      ],
+      "mode": "contradiction",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – ändrade villkor och uttryck följande uppgifter tydligt: sekretessperiod, avvikande sekretessperiod i tillägg."
+    },
+    {
+      "clause_id": "amendment_1_clause_02",
+      "heading_sv": "Tillägg 1 – Undantag",
+      "heading_en": "Amendment 1 – Exception",
+      "fact_ids": [
+        "fact_return_period",
+        "fact_return_exception"
+      ],
+      "mode": "exception",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – undantag och uttryck följande uppgifter tydligt: återlämningsfrist, förkortad återlämningsfrist vid avtalsbrott."
+    },
+    {
+      "clause_id": "amendment_1_clause_03",
+      "heading_sv": "Tillägg 1 – Externa dokument",
+      "heading_en": "Amendment 1 – External documents",
+      "fact_ids": [],
+      "mode": "reference",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – externa dokument och hänvisa till externa dokument som inte ingår i avtalspaketet."
+    },
+    {
+      "clause_id": "amendment_1_clause_04",
+      "heading_sv": "Tillägg 1 – Villkorade bestämmelser",
+      "heading_en": "Amendment 1 – Conditional provisions",
+      "fact_ids": [
+        "fact_extra_review_days",
+        "fact_return_period"
+      ],
+      "mode": "conditional",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – villkorade bestämmelser och uttryck följande uppgifter tydligt: villkorad tilläggsfrist, återlämningsfrist."
+    }
+  ],
+  "package": {
+    "appendix": {
+      "document_id": "appendix_a",
+      "title_sv": "Bilaga A – Kompletterande villkor",
+      "title_en": "Appendix A – Supplementary terms",
+      "filename_stem": "appendix_a"
+    },
+    "amendment": {
+      "document_id": "amendment_1",
+      "title_sv": "Tillägg 1 – Ändrade villkor",
+      "title_en": "Amendment 1 – Amended terms",
+      "filename_stem": "amendment_1"
+    }
+  },
+  "variation": {
+    "styles": [
+      "formal",
+      "complex",
+      "plain"
+    ],
+    "document_qualities": [
+      "clean",
+      "line_breaks",
+      "tables",
+      "page_breaks"
+    ]
+  },
+  "distractor_facts": [
+    {
+      "fact_id": "fact_confidentiality_period_alt",
+      "kind": "duration",
+      "label_sv": "Kortare sekretessperiod i tidigare utkast",
+      "label_en": "Shorter confidentiality period in earlier draft",
+      "keywords_sv": [
+        "tidigare sekretessperiod",
+        "kortare sekretess"
+      ],
+      "keywords_en": [
+        "earlier confidentiality period",
+        "shorter secrecy"
+      ],
+      "variants": [
+        {
+          "value": 2,
+          "explicit_surfaces": [
+            "2 år",
+            "två (2) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 2 år",
+            "en tid om 2 år"
+          ]
+        }
+      ],
+      "unit": "years",
+      "based_on_fact_id": "fact_confidentiality_period"
+    },
+    {
+      "fact_id": "fact_penalty_alt",
+      "kind": "money",
+      "label_sv": "Lägre vite i tidigare utkast",
+      "label_en": "Lower penalty in earlier draft",
+      "keywords_sv": [
+        "tidigare vite",
+        "lägre vite"
+      ],
+      "keywords_en": [
+        "earlier penalty",
+        "lower penalty"
+      ],
+      "variants": [
+        {
+          "value": 1000000,
+          "explicit_surfaces": [
+            "1 000 000 SEK",
+            "1 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "1 000 000 kr",
+            "ett belopp om 1 000 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK",
+      "based_on_fact_id": "fact_penalty"
+    }
+  ],
+  "contradiction": {
+    "base_fact_id": "fact_confidentiality_period",
+    "fact": {
+      "fact_id": "fact_confidentiality_period_amendment",
+      "kind": "duration",
+      "label_sv": "Avvikande sekretessperiod i tillägg",
+      "label_en": "Differing confidentiality period in amendment",
+      "keywords_sv": [
+        "sekretessperiod tillägg",
+        "avvikande sekretess"
+      ],
+      "keywords_en": [
+        "confidentiality amendment"
+      ],
+      "variants": [
+        {
+          "value": 7,
+          "explicit_surfaces": [
+            "7 år",
+            "sju (7) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 7 år",
+            "en tid om 7 år"
+          ]
+        }
+      ],
+      "unit": "years"
+    },
+    "description_sv": "Tillägg 1 anger en längre sekretessperiod än huvudavtalet, utan att huvudavtalets period upphävs.",
+    "description_en": ""
+  },
+  "exception": {
+    "base_fact_id": "fact_return_period",
+    "fact": {
+      "fact_id": "fact_return_exception",
+      "kind": "duration",
+      "label_sv": "Förkortad återlämningsfrist vid avtalsbrott",
+      "label_en": "Shortened return period on breach",
+      "keywords_sv": [
+        "undantag återlämning",
+        "avtalsbrott"
+      ],
+      "keywords_en": [
+        "return exception",
+        "breach"
+      ],
+      "variants": [
+        {
+          "value": 7,
+          "explicit_surfaces": [
+            "7 dagar",
+            "en frist om 7 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 7 dagar",
+            "en frist om 7 dagar"
+          ]
+        }
+      ],
+      "unit": "days"
+    },
+    "description_sv": "Återlämningsfristen förkortas vid avtalsbrott enligt undantaget i Tillägg 1.",
+    "description_en": ""
+  },
+  "missing_information": {
+    "missing_documents": [
+      "appendix_b_teknisk_bilaga",
+      "side_letter_2026"
+    ],
+    "insufficient_evidence_fact_id": "fact_confidential_scope",
+    "conditional_fact": {
+      "fact_id": "fact_extra_review_days",
+      "kind": "integer",
+      "label_sv": "Villkorad tilläggsfrist",
+      "label_en": "Conditional extra review period",
+      "keywords_sv": [
+        "villkorad frist",
+        "granskningsfrist"
+      ],
+      "keywords_en": [
+        "conditional period",
+        "review period"
+      ],
+      "variants": [
+        {
+          "value": 10,
+          "explicit_surfaces": [
+            "10 dagar",
+            "antalet 10 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 10 dagar",
+            "sammanlagt 10 dagar"
+          ]
+        }
+      ],
+      "unit": "days"
+    },
+    "conditional_governing_fact_id": "fact_return_period",
+    "description_sv": "Den tekniska bilagan (bilaga B) saknas; exakt vilken teknisk dokumentation som omfattas kan inte verifieras.",
+    "conditional_description_sv": "En förlängd granskningsfrist är villkorad av den tekniska bilagan i bilaga B, som inte ingår."
+  }
+}

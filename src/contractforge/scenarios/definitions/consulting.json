@@ -1,0 +1,913 @@
+{
+  "contract_type": "consulting",
+  "definition_version": "1.0",
+  "title_sv": "Konsultavtal",
+  "title_en": "Consulting Agreement",
+  "description_sv": "Konsultuppdrag med arvode, tidsuppskattning, ansvarsbegränsning och sekretess.",
+  "parties": [
+    {
+      "party_id": "party_client",
+      "role": "client",
+      "role_sv": "Uppdragsgivare",
+      "role_en": "Client",
+      "kind": "organisation",
+      "name_pool": [
+        "Nordvik Teknik AB",
+        "Arken Digital AB",
+        "Sundberg Handel AB"
+      ],
+      "address_pool": [
+        "Exempelvägen 8, 111 20 Stockholm",
+        "Provgatan 21, 411 20 Göteborg"
+      ],
+      "org_number_series": "559002"
+    },
+    {
+      "party_id": "party_consultant",
+      "role": "consultant",
+      "role_sv": "Konsult",
+      "role_en": "Consultant",
+      "kind": "organisation",
+      "name_pool": [
+        "Sundberg Konsult AB",
+        "Västberg Rådgivning AB",
+        "Lindfors Analys AB"
+      ],
+      "address_pool": [
+        "Testvägen 3, 722 20 Västerås"
+      ],
+      "org_number_series": "559003"
+    }
+  ],
+  "facts": [
+    {
+      "fact_id": "fact_client_name",
+      "kind": "entity",
+      "label_sv": "Uppdragsgivarens namn",
+      "label_en": "Client name",
+      "keywords_sv": [
+        "uppdragsgivare",
+        "kund"
+      ],
+      "keywords_en": [
+        "client",
+        "customer"
+      ],
+      "entity_party_id": "party_client",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_consultant_name",
+      "kind": "entity",
+      "label_sv": "Konsultens namn",
+      "label_en": "Consultant name",
+      "keywords_sv": [
+        "konsult",
+        "namn"
+      ],
+      "keywords_en": [
+        "consultant",
+        "name"
+      ],
+      "entity_party_id": "party_consultant",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_scope",
+      "kind": "text",
+      "label_sv": "Uppdragets omfattning",
+      "label_en": "Scope",
+      "keywords_sv": [
+        "uppdrag",
+        "omfattning"
+      ],
+      "keywords_en": [
+        "scope",
+        "assignment"
+      ],
+      "variants": [
+        {
+          "value": "systemutveckling och integration",
+          "explicit_surfaces": [
+            "systemutveckling och integration"
+          ],
+          "paraphrase_surfaces": [
+            "utveckling och integration av system"
+          ]
+        },
+        {
+          "value": "projektledning och analys",
+          "explicit_surfaces": [
+            "projektledning och analys"
+          ],
+          "paraphrase_surfaces": [
+            "projektledning samt analysarbete"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_hourly_rate",
+      "kind": "money",
+      "label_sv": "Timarvode",
+      "label_en": "Hourly rate",
+      "keywords_sv": [
+        "timarvode",
+        "arvode"
+      ],
+      "keywords_en": [
+        "hourly rate",
+        "rate"
+      ],
+      "variants": [
+        {
+          "value": 1250,
+          "explicit_surfaces": [
+            "1 250 SEK",
+            "1 250 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "1 250 kr",
+            "ett belopp om 1 250 kronor"
+          ]
+        },
+        {
+          "value": 1150,
+          "explicit_surfaces": [
+            "1 150 SEK",
+            "1 150 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "1 150 kr",
+            "ett belopp om 1 150 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_estimated_hours",
+      "kind": "duration",
+      "label_sv": "Beräknad tidsåtgång",
+      "label_en": "Estimated hours",
+      "keywords_sv": [
+        "tidsuppskattning",
+        "timmar"
+      ],
+      "keywords_en": [
+        "estimated hours",
+        "hours"
+      ],
+      "variants": [
+        {
+          "value": 400,
+          "explicit_surfaces": [
+            "400 timmar",
+            "inom 400 timmar"
+          ],
+          "paraphrase_surfaces": [
+            "en svarstid om 400 timmar"
+          ]
+        },
+        {
+          "value": 320,
+          "explicit_surfaces": [
+            "320 timmar",
+            "inom 320 timmar"
+          ],
+          "paraphrase_surfaces": [
+            "en svarstid om 320 timmar"
+          ]
+        }
+      ],
+      "unit": "hours"
+    },
+    {
+      "fact_id": "fact_start_date",
+      "kind": "date",
+      "label_sv": "Startdatum",
+      "label_en": "Start date",
+      "keywords_sv": [
+        "startdatum",
+        "tillträde"
+      ],
+      "keywords_en": [
+        "start date",
+        "commencement"
+      ],
+      "variants": [
+        {
+          "value": "2026-01-15",
+          "explicit_surfaces": [
+            "15 januari 2026",
+            "2026-01-15"
+          ],
+          "paraphrase_surfaces": [
+            "den 15 januari 2026"
+          ]
+        },
+        {
+          "value": "2026-02-01",
+          "explicit_surfaces": [
+            "1 februari 2026",
+            "2026-02-01"
+          ],
+          "paraphrase_surfaces": [
+            "den 1 februari 2026"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_duration_months",
+      "kind": "duration",
+      "label_sv": "Uppdragsperiod",
+      "label_en": "Assignment period",
+      "keywords_sv": [
+        "avtalstid",
+        "uppdragsperiod"
+      ],
+      "keywords_en": [
+        "term",
+        "duration"
+      ],
+      "variants": [
+        {
+          "value": 6,
+          "explicit_surfaces": [
+            "6 månader",
+            "sex (6) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett halvår"
+          ]
+        },
+        {
+          "value": 9,
+          "explicit_surfaces": [
+            "9 månader",
+            "nio (9) månader"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 9 månader",
+            "en avtalsperiod om 9 månader"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    {
+      "fact_id": "fact_payment_days",
+      "kind": "duration",
+      "label_sv": "Betalningsvillkor",
+      "label_en": "Payment terms",
+      "keywords_sv": [
+        "betalningsvillkor",
+        "betalningsfrist"
+      ],
+      "keywords_en": [
+        "payment terms",
+        "payment days"
+      ],
+      "variants": [
+        {
+          "value": 30,
+          "explicit_surfaces": [
+            "30 dagar",
+            "en frist om 30 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 30 dagar",
+            "en frist om 30 dagar"
+          ]
+        },
+        {
+          "value": 45,
+          "explicit_surfaces": [
+            "45 dagar",
+            "en frist om 45 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 45 dagar",
+            "en frist om 45 dagar"
+          ]
+        }
+      ],
+      "unit": "days"
+    },
+    {
+      "fact_id": "fact_expense_cap",
+      "kind": "money",
+      "label_sv": "Kostnadsram för utlägg",
+      "label_en": "Expense cap",
+      "keywords_sv": [
+        "kostnadsram",
+        "utlägg"
+      ],
+      "keywords_en": [
+        "expense cap",
+        "expenses"
+      ],
+      "variants": [
+        {
+          "value": 50000,
+          "explicit_surfaces": [
+            "50 000 SEK",
+            "50 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "50 000 kr",
+            "ett belopp om 50 000 kronor"
+          ]
+        },
+        {
+          "value": 75000,
+          "explicit_surfaces": [
+            "75 000 SEK",
+            "75 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "75 000 kr",
+            "ett belopp om 75 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK",
+      "description_sv": "Högsta ersättning för utlägg."
+    },
+    {
+      "fact_id": "fact_liability_cap",
+      "kind": "money",
+      "label_sv": "Ansvarsbegränsning",
+      "label_en": "Liability cap",
+      "keywords_sv": [
+        "ansvarsbegränsning",
+        "ansvar"
+      ],
+      "keywords_en": [
+        "liability cap",
+        "liability"
+      ],
+      "variants": [
+        {
+          "value": 1000000,
+          "explicit_surfaces": [
+            "1 000 000 SEK",
+            "1 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "1 000 000 kr",
+            "ett belopp om 1 000 000 kronor"
+          ]
+        },
+        {
+          "value": 1500000,
+          "explicit_surfaces": [
+            "1 500 000 SEK",
+            "1 500 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "1 500 000 kr",
+            "ett belopp om 1 500 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_notice_months",
+      "kind": "duration",
+      "label_sv": "Uppsägningstid",
+      "label_en": "Notice period",
+      "keywords_sv": [
+        "uppsägningstid",
+        "uppsägning"
+      ],
+      "keywords_en": [
+        "notice period",
+        "notice"
+      ],
+      "variants": [
+        {
+          "value": 2,
+          "explicit_surfaces": [
+            "2 månader",
+            "två (2) månader"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 2 månader",
+            "en avtalsperiod om 2 månader"
+          ]
+        },
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 månader",
+            "tre (3) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett kvartal"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    {
+      "fact_id": "fact_confidentiality_years",
+      "kind": "duration",
+      "label_sv": "Sekretessperiod",
+      "label_en": "Confidentiality period",
+      "keywords_sv": [
+        "sekretess",
+        "konfidentialitet"
+      ],
+      "keywords_en": [
+        "confidentiality",
+        "secrecy"
+      ],
+      "variants": [
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 år",
+            "tre (3) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 3 år",
+            "en tid om 3 år"
+          ]
+        },
+        {
+          "value": 5,
+          "explicit_surfaces": [
+            "5 år",
+            "fem (5) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 5 år",
+            "en tid om 5 år"
+          ]
+        }
+      ],
+      "unit": "years"
+    },
+    {
+      "fact_id": "fact_ip_rights",
+      "kind": "defined_term",
+      "label_sv": "Rättigheter till resultat",
+      "label_en": "Intellectual property rights",
+      "keywords_sv": [
+        "immateriella rättigheter",
+        "resultat"
+      ],
+      "keywords_en": [
+        "intellectual property",
+        "results"
+      ],
+      "variants": [
+        {
+          "value": "Uppdragsgivaren äger resultatet",
+          "explicit_surfaces": [
+            "Uppdragsgivaren äger resultatet"
+          ],
+          "paraphrase_surfaces": [
+            "uppdragsgivaren förvärvar samtliga rättigheter till resultatet"
+          ]
+        },
+        {
+          "value": "Konsulten behåller bakgrundsrättigheter",
+          "explicit_surfaces": [
+            "Konsulten behåller bakgrundsrättigheter"
+          ],
+          "paraphrase_surfaces": [
+            "konsulten behåller rättigheter till bakgrundsmaterial"
+          ]
+        }
+      ]
+    }
+  ],
+  "main_clauses": [
+    {
+      "clause_id": "clause_01",
+      "heading_sv": "Avtalsparter",
+      "heading_en": "Parties",
+      "fact_ids": [
+        "fact_client_name",
+        "fact_consultant_name"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera avtalsparter och uttryck följande uppgifter tydligt: uppdragsgivarens namn, konsultens namn."
+    },
+    {
+      "clause_id": "clause_02",
+      "heading_sv": "Uppdragets omfattning",
+      "heading_en": "Scope",
+      "fact_ids": [
+        "fact_scope"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera uppdragets omfattning och uttryck följande uppgifter tydligt: uppdragets omfattning."
+    },
+    {
+      "clause_id": "clause_03",
+      "heading_sv": "Arvode och tidsåtgång",
+      "heading_en": "Fees and estimated hours",
+      "fact_ids": [
+        "fact_hourly_rate",
+        "fact_estimated_hours"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera arvode och tidsåtgång och uttryck följande uppgifter tydligt: timarvode, beräknad tidsåtgång."
+    },
+    {
+      "clause_id": "clause_04",
+      "heading_sv": "Uppdragsperiod och uppsägning",
+      "heading_en": "Term and notice",
+      "fact_ids": [
+        "fact_start_date",
+        "fact_duration_months",
+        "fact_notice_months"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera uppdragsperiod och uppsägning och uttryck följande uppgifter tydligt: startdatum, uppdragsperiod, uppsägningstid."
+    },
+    {
+      "clause_id": "clause_05",
+      "heading_sv": "Betalningsvillkor och utlägg",
+      "heading_en": "Payment terms and expenses",
+      "fact_ids": [
+        "fact_payment_days",
+        "fact_expense_cap"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera betalningsvillkor och utlägg och uttryck följande uppgifter tydligt: betalningsvillkor, kostnadsram för utlägg."
+    },
+    {
+      "clause_id": "clause_06",
+      "heading_sv": "Ansvarsbegränsning",
+      "heading_en": "Limitation of liability",
+      "fact_ids": [
+        "fact_liability_cap"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera ansvarsbegränsning och uttryck följande uppgifter tydligt: ansvarsbegränsning."
+    },
+    {
+      "clause_id": "clause_07",
+      "heading_sv": "Sekretess",
+      "heading_en": "Confidentiality",
+      "fact_ids": [
+        "fact_confidentiality_years"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera sekretess och uttryck följande uppgifter tydligt: sekretessperiod."
+    },
+    {
+      "clause_id": "clause_08",
+      "heading_sv": "Immateriella rättigheter",
+      "heading_en": "Intellectual property",
+      "fact_ids": [
+        "fact_ip_rights"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera immateriella rättigheter och uttryck följande uppgifter tydligt: rättigheter till resultat."
+    },
+    {
+      "clause_id": "clause_09",
+      "heading_sv": "Oberoende konsult",
+      "heading_en": "Independent contractor",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera oberoende konsult med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_10",
+      "heading_sv": "Ändringar och tillägg",
+      "heading_en": "Amendments",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera ändringar och tillägg med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_11",
+      "heading_sv": "Undertecknande",
+      "heading_en": "Signatures",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera undertecknande med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_12",
+      "heading_sv": "Tillämplig lag och tvistlösning",
+      "heading_en": "Governing law and disputes",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera tillämplig lag och tvistlösning med sedvanlig avtalsformulering."
+    }
+  ],
+  "extra_main_clauses": [
+    {
+      "clause_id": "clause_13",
+      "heading_sv": "Force majeure",
+      "heading_en": "Force majeure",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera force majeure med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_14",
+      "heading_sv": "Meddelanden",
+      "heading_en": "Notices",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera meddelanden med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_15",
+      "heading_sv": "Överlåtelse av avtal",
+      "heading_en": "Assignment",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera överlåtelse av avtal med sedvanlig avtalsformulering."
+    }
+  ],
+  "appendix_clauses": [
+    {
+      "clause_id": "appendix_a_clause_01",
+      "heading_sv": "Bilaga A – Kompletterande villkor",
+      "heading_en": "Appendix A – Supplementary terms",
+      "fact_ids": [
+        "fact_scope",
+        "fact_hourly_rate"
+      ],
+      "mode": "definition",
+      "instruction_sv": "Reglera bilaga a – kompletterande villkor och uttryck följande uppgifter tydligt: uppdragets omfattning, timarvode."
+    },
+    {
+      "clause_id": "appendix_a_clause_02",
+      "heading_sv": "Bilaga A – Detaljreglering",
+      "heading_en": "Appendix A – Detailed regulation",
+      "fact_ids": [],
+      "mode": "reference",
+      "distributed_facts": true,
+      "instruction_sv": "Reglera bilaga a – detaljreglering och koppla detaljerna till huvudavtalets bestämmelser."
+    },
+    {
+      "clause_id": "appendix_a_clause_03",
+      "heading_sv": "Bilaga A – Tidigare diskuterade villkor",
+      "heading_en": "Appendix A – Previously discussed terms",
+      "fact_ids": [
+        "fact_discount_rate",
+        "fact_hours_alt"
+      ],
+      "mode": "distractor",
+      "instruction_sv": "Reglera bilaga a – tidigare diskuterade villkor och uttryck följande uppgifter tydligt: diskuterat rabattarvode, ursprunglig tidsuppskattning."
+    }
+  ],
+  "amendment_clauses": [
+    {
+      "clause_id": "amendment_1_clause_01",
+      "heading_sv": "Tillägg 1 – Ändrade villkor",
+      "heading_en": "Amendment 1 – Amended terms",
+      "fact_ids": [
+        "fact_hourly_rate",
+        "fact_hourly_rate_amendment"
+      ],
+      "mode": "contradiction",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – ändrade villkor och uttryck följande uppgifter tydligt: timarvode, avvikande timarvode i tillägg."
+    },
+    {
+      "clause_id": "amendment_1_clause_02",
+      "heading_sv": "Tillägg 1 – Undantag",
+      "heading_en": "Amendment 1 – Exception",
+      "fact_ids": [
+        "fact_notice_months",
+        "fact_notice_exception"
+      ],
+      "mode": "exception",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – undantag och uttryck följande uppgifter tydligt: uppsägningstid, förkortad uppsägningstid vid avtalsbrott."
+    },
+    {
+      "clause_id": "amendment_1_clause_03",
+      "heading_sv": "Tillägg 1 – Externa dokument",
+      "heading_en": "Amendment 1 – External documents",
+      "fact_ids": [],
+      "mode": "reference",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – externa dokument och hänvisa till externa dokument som inte ingår i avtalspaketet."
+    },
+    {
+      "clause_id": "amendment_1_clause_04",
+      "heading_sv": "Tillägg 1 – Villkorade bestämmelser",
+      "heading_en": "Amendment 1 – Conditional provisions",
+      "fact_ids": [
+        "fact_extra_hours",
+        "fact_estimated_hours"
+      ],
+      "mode": "conditional",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – villkorade bestämmelser och uttryck följande uppgifter tydligt: villkorade tilläggstimmar, beräknad tidsåtgång."
+    }
+  ],
+  "package": {
+    "appendix": {
+      "document_id": "appendix_a",
+      "title_sv": "Bilaga A – Kompletterande villkor",
+      "title_en": "Appendix A – Supplementary terms",
+      "filename_stem": "appendix_a"
+    },
+    "amendment": {
+      "document_id": "amendment_1",
+      "title_sv": "Tillägg 1 – Ändrade villkor",
+      "title_en": "Amendment 1 – Amended terms",
+      "filename_stem": "amendment_1"
+    }
+  },
+  "variation": {
+    "styles": [
+      "formal",
+      "complex",
+      "plain"
+    ],
+    "document_qualities": [
+      "clean",
+      "line_breaks",
+      "tables",
+      "page_breaks"
+    ]
+  },
+  "distractor_facts": [
+    {
+      "fact_id": "fact_discount_rate",
+      "kind": "money",
+      "label_sv": "Diskuterat rabattarvode",
+      "label_en": "Discussed discounted rate",
+      "keywords_sv": [
+        "rabattarvode",
+        "tidigare arvode"
+      ],
+      "keywords_en": [
+        "discounted rate",
+        "earlier rate"
+      ],
+      "variants": [
+        {
+          "value": 950,
+          "explicit_surfaces": [
+            "950 SEK",
+            "950 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "950 kr",
+            "ett belopp om 950 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK",
+      "based_on_fact_id": "fact_hourly_rate"
+    },
+    {
+      "fact_id": "fact_hours_alt",
+      "kind": "integer",
+      "label_sv": "Ursprunglig tidsuppskattning",
+      "label_en": "Original time estimate",
+      "keywords_sv": [
+        "tidigare uppskattning",
+        "ursprungliga timmar"
+      ],
+      "keywords_en": [
+        "original estimate",
+        "earlier hours"
+      ],
+      "variants": [
+        {
+          "value": 500,
+          "explicit_surfaces": [
+            "500 timmar",
+            "antalet 500 timmar"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 500 timmar",
+            "sammanlagt 500 timmar"
+          ]
+        }
+      ],
+      "unit": "hours",
+      "based_on_fact_id": "fact_estimated_hours"
+    }
+  ],
+  "contradiction": {
+    "base_fact_id": "fact_hourly_rate",
+    "fact": {
+      "fact_id": "fact_hourly_rate_amendment",
+      "kind": "money",
+      "label_sv": "Avvikande timarvode i tillägg",
+      "label_en": "Differing hourly rate in amendment",
+      "keywords_sv": [
+        "timarvode tillägg",
+        "avvikande arvode"
+      ],
+      "keywords_en": [
+        "rate amendment"
+      ],
+      "variants": [
+        {
+          "value": 1350,
+          "explicit_surfaces": [
+            "1 350 SEK",
+            "1 350 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "1 350 kr",
+            "ett belopp om 1 350 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    "description_sv": "Tillägg 1 anger ett högre timarvode än huvudavtalet, samtidigt som huvudavtalets arvode står kvar.",
+    "description_en": ""
+  },
+  "exception": {
+    "base_fact_id": "fact_notice_months",
+    "fact": {
+      "fact_id": "fact_notice_exception",
+      "kind": "duration",
+      "label_sv": "Förkortad uppsägningstid vid avtalsbrott",
+      "label_en": "Shortened notice period for breach",
+      "keywords_sv": [
+        "undantag uppsägningstid",
+        "avtalsbrott"
+      ],
+      "keywords_en": [
+        "notice exception",
+        "breach"
+      ],
+      "variants": [
+        {
+          "value": 1,
+          "explicit_surfaces": [
+            "1 månader",
+            "ett (1) månader"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 1 månader",
+            "en avtalsperiod om 1 månader"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    "description_sv": "Uppsägningstiden gäller inte vid väsentligt avtalsbrott enligt undantaget i Tillägg 1.",
+    "description_en": ""
+  },
+  "missing_information": {
+    "missing_documents": [
+      "appendix_b_arvodesmodell",
+      "side_letter_2026"
+    ],
+    "insufficient_evidence_fact_id": "fact_expense_cap",
+    "conditional_fact": {
+      "fact_id": "fact_extra_hours",
+      "kind": "integer",
+      "label_sv": "Villkorade tilläggstimmar",
+      "label_en": "Conditional extra hours",
+      "keywords_sv": [
+        "extra timmar",
+        "villkorad omfattning"
+      ],
+      "keywords_en": [
+        "extra hours",
+        "conditional scope"
+      ],
+      "variants": [
+        {
+          "value": 10,
+          "explicit_surfaces": [
+            "10 timmar",
+            "antalet 10 timmar"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 10 timmar",
+            "sammanlagt 10 timmar"
+          ]
+        }
+      ],
+      "unit": "hours"
+    },
+    "conditional_governing_fact_id": "fact_estimated_hours",
+    "description_sv": "Arvodesmodellen (bilaga B) saknas; kostnadsramens närmare tillämpning kan därför inte verifieras.",
+    "conditional_description_sv": "Rätten till tilläggstimmar är villkorad av arvodesmodellen i bilaga B, som inte ingår."
+  }
+}

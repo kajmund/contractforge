@@ -1,0 +1,803 @@
+{
+  "contract_type": "employment",
+  "definition_version": "1.0",
+  "title_sv": "Anställningsavtal",
+  "title_en": "Employment Agreement",
+  "description_sv": "Tillsvidare- eller visstidsanställning med lön, arbetstid, semester och sekretess.",
+  "parties": [
+    {
+      "party_id": "party_employer",
+      "role": "employer",
+      "role_sv": "Arbetsgivare",
+      "role_en": "Employer",
+      "kind": "organisation",
+      "name_pool": [
+        "Nordvik Omsorg AB",
+        "Västmark Teknik AB",
+        "Lindfors Vård AB"
+      ],
+      "address_pool": [
+        "Exempelvägen 12, 111 20 Stockholm",
+        "Provgatan 4, 411 20 Göteborg"
+      ],
+      "org_number_series": "559001"
+    },
+    {
+      "party_id": "party_employee",
+      "role": "employee",
+      "role_sv": "Arbetstagare",
+      "role_en": "Employee",
+      "kind": "individual",
+      "name_pool": [
+        "Elin Sandberg",
+        "Karin Almqvist",
+        "Johan Västberg",
+        "Maja Lindfors"
+      ],
+      "address_pool": [
+        "Testvägen 7, 722 20 Västerås"
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "fact_id": "fact_employee_name",
+      "kind": "entity",
+      "label_sv": "Namn på arbetstagaren",
+      "label_en": "Employee name",
+      "keywords_sv": [
+        "arbetstagare",
+        "namn"
+      ],
+      "keywords_en": [
+        "employee",
+        "name"
+      ],
+      "entity_party_id": "party_employee",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_employment_form",
+      "kind": "defined_term",
+      "label_sv": "Anställningsform",
+      "label_en": "Employment form",
+      "keywords_sv": [
+        "anställningsform",
+        "tillsvidare"
+      ],
+      "keywords_en": [
+        "employment form",
+        "permanent"
+      ],
+      "variants": [
+        {
+          "value": "Tillsvidareanställning",
+          "explicit_surfaces": [
+            "Tillsvidareanställning"
+          ],
+          "paraphrase_surfaces": [
+            "en tillsvidareanställning utan tidsbegränsning"
+          ]
+        },
+        {
+          "value": "Visstidsanställning",
+          "explicit_surfaces": [
+            "Visstidsanställning"
+          ],
+          "paraphrase_surfaces": [
+            "en tidsbegränsad visstidsanställning"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_job_title",
+      "kind": "text",
+      "label_sv": "Befattning",
+      "label_en": "Position",
+      "keywords_sv": [
+        "befattning",
+        "tjänst"
+      ],
+      "keywords_en": [
+        "position",
+        "job title"
+      ],
+      "variants": [
+        {
+          "value": "Systemutvecklare",
+          "explicit_surfaces": [
+            "Systemutvecklare"
+          ],
+          "paraphrase_surfaces": [
+            "befattningen som systemutvecklare"
+          ]
+        },
+        {
+          "value": "Projektledare",
+          "explicit_surfaces": [
+            "Projektledare"
+          ],
+          "paraphrase_surfaces": [
+            "befattningen som projektledare"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_start_date",
+      "kind": "date",
+      "label_sv": "Tillträdesdag",
+      "label_en": "Commencement date",
+      "keywords_sv": [
+        "tillträde",
+        "startdatum"
+      ],
+      "keywords_en": [
+        "commencement",
+        "start date"
+      ],
+      "variants": [
+        {
+          "value": "2026-02-01",
+          "explicit_surfaces": [
+            "1 februari 2026",
+            "2026-02-01"
+          ],
+          "paraphrase_surfaces": [
+            "den 1 februari 2026"
+          ]
+        },
+        {
+          "value": "2026-03-01",
+          "explicit_surfaces": [
+            "1 mars 2026",
+            "2026-03-01"
+          ],
+          "paraphrase_surfaces": [
+            "den 1 mars 2026"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_salary",
+      "kind": "money",
+      "label_sv": "Månadslön",
+      "label_en": "Monthly salary",
+      "keywords_sv": [
+        "lön",
+        "månadslön"
+      ],
+      "keywords_en": [
+        "salary",
+        "monthly salary"
+      ],
+      "variants": [
+        {
+          "value": 41500,
+          "explicit_surfaces": [
+            "41 500 SEK per månad",
+            "41 500 kronor per månad"
+          ],
+          "paraphrase_surfaces": [
+            "månadslön om 41 500 kronor",
+            "41 500 kr per månad"
+          ]
+        },
+        {
+          "value": 40250,
+          "explicit_surfaces": [
+            "40 250 SEK per månad",
+            "40 250 kronor per månad"
+          ],
+          "paraphrase_surfaces": [
+            "månadslön om 40 250 kronor",
+            "40 250 kr per månad"
+          ]
+        }
+      ],
+      "unit": "per_month",
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_working_hours",
+      "kind": "duration",
+      "label_sv": "Arbetstid",
+      "label_en": "Working hours",
+      "keywords_sv": [
+        "arbetstid",
+        "timmar"
+      ],
+      "keywords_en": [
+        "working hours",
+        "hours"
+      ],
+      "variants": [
+        {
+          "value": 40,
+          "explicit_surfaces": [
+            "40 timmar per vecka",
+            "40 timmar i veckan"
+          ],
+          "paraphrase_surfaces": [
+            "en arbetstid om 40 timmar per vecka"
+          ]
+        },
+        {
+          "value": 38,
+          "explicit_surfaces": [
+            "38 timmar per vecka",
+            "38 timmar i veckan"
+          ],
+          "paraphrase_surfaces": [
+            "en arbetstid om 38 timmar per vecka"
+          ]
+        }
+      ],
+      "unit": "hours"
+    },
+    {
+      "fact_id": "fact_probation",
+      "kind": "duration",
+      "label_sv": "Prövotid",
+      "label_en": "Probationary period",
+      "keywords_sv": [
+        "prövotid",
+        "provanställning"
+      ],
+      "keywords_en": [
+        "probation",
+        "probationary period"
+      ],
+      "variants": [
+        {
+          "value": 6,
+          "explicit_surfaces": [
+            "6 månader",
+            "sex (6) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett halvår"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    {
+      "fact_id": "fact_vacation_days",
+      "kind": "duration",
+      "label_sv": "Semesterdagar",
+      "label_en": "Vacation days",
+      "keywords_sv": [
+        "semester",
+        "semesterdagar"
+      ],
+      "keywords_en": [
+        "vacation",
+        "holiday"
+      ],
+      "variants": [
+        {
+          "value": 25,
+          "explicit_surfaces": [
+            "25 dagar",
+            "en frist om 25 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 25 dagar",
+            "en frist om 25 dagar"
+          ]
+        },
+        {
+          "value": 30,
+          "explicit_surfaces": [
+            "30 dagar",
+            "en frist om 30 dagar"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 30 dagar",
+            "en frist om 30 dagar"
+          ]
+        }
+      ],
+      "unit": "days"
+    },
+    {
+      "fact_id": "fact_notice_period",
+      "kind": "duration",
+      "label_sv": "Uppsägningstid",
+      "label_en": "Notice period",
+      "keywords_sv": [
+        "uppsägningstid",
+        "uppsägning"
+      ],
+      "keywords_en": [
+        "notice period",
+        "notice"
+      ],
+      "variants": [
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 månader",
+            "tre (3) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett kvartal"
+          ]
+        },
+        {
+          "value": 6,
+          "explicit_surfaces": [
+            "6 månader",
+            "sex (6) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett halvår"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    {
+      "fact_id": "fact_confidentiality_period",
+      "kind": "duration",
+      "label_sv": "Sekretessperiod",
+      "label_en": "Confidentiality period",
+      "keywords_sv": [
+        "sekretess",
+        "konfidentialitet"
+      ],
+      "keywords_en": [
+        "confidentiality",
+        "secrecy"
+      ],
+      "variants": [
+        {
+          "value": 2,
+          "explicit_surfaces": [
+            "2 år",
+            "två (2) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 2 år",
+            "en tid om 2 år"
+          ]
+        },
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 år",
+            "tre (3) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 3 år",
+            "en tid om 3 år"
+          ]
+        }
+      ],
+      "unit": "years"
+    }
+  ],
+  "main_clauses": [
+    {
+      "clause_id": "clause_01",
+      "heading_sv": "Avtalsparter",
+      "heading_en": "Parties",
+      "fact_ids": [
+        "fact_employee_name"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera avtalsparter och uttryck följande uppgifter tydligt: namn på arbetstagaren."
+    },
+    {
+      "clause_id": "clause_02",
+      "heading_sv": "Anställningsform och befattning",
+      "heading_en": "Employment form and position",
+      "fact_ids": [
+        "fact_employment_form",
+        "fact_job_title"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera anställningsform och befattning och uttryck följande uppgifter tydligt: anställningsform, befattning."
+    },
+    {
+      "clause_id": "clause_03",
+      "heading_sv": "Tillträdesdag",
+      "heading_en": "Commencement date",
+      "fact_ids": [
+        "fact_start_date"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera tillträdesdag och uttryck följande uppgifter tydligt: tillträdesdag."
+    },
+    {
+      "clause_id": "clause_04",
+      "heading_sv": "Lön och arbetstid",
+      "heading_en": "Salary and working hours",
+      "fact_ids": [
+        "fact_salary",
+        "fact_working_hours"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera lön och arbetstid och uttryck följande uppgifter tydligt: månadslön, arbetstid."
+    },
+    {
+      "clause_id": "clause_05",
+      "heading_sv": "Prövotid och semester",
+      "heading_en": "Probation and vacation",
+      "fact_ids": [
+        "fact_probation",
+        "fact_vacation_days"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera prövotid och semester och uttryck följande uppgifter tydligt: prövotid, semesterdagar."
+    },
+    {
+      "clause_id": "clause_06",
+      "heading_sv": "Uppsägningstid",
+      "heading_en": "Notice period",
+      "fact_ids": [
+        "fact_notice_period"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera uppsägningstid och uttryck följande uppgifter tydligt: uppsägningstid."
+    },
+    {
+      "clause_id": "clause_07",
+      "heading_sv": "Sekretess",
+      "heading_en": "Confidentiality",
+      "fact_ids": [
+        "fact_confidentiality_period"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera sekretess och uttryck följande uppgifter tydligt: sekretessperiod."
+    },
+    {
+      "clause_id": "clause_08",
+      "heading_sv": "Lojalitet och bisysslor",
+      "heading_en": "Loyalty and secondary employment",
+      "fact_ids": [],
+      "mode": "explicit",
+      "instruction_sv": "Reglera lojalitet och bisysslor med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_09",
+      "heading_sv": "Övriga anställningsvillkor",
+      "heading_en": "Other employment terms",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera övriga anställningsvillkor med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_10",
+      "heading_sv": "Ändringar och tillägg",
+      "heading_en": "Amendments",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera ändringar och tillägg med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_11",
+      "heading_sv": "Undertecknande",
+      "heading_en": "Signatures",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera undertecknande med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_12",
+      "heading_sv": "Tillämplig lag och tvistlösning",
+      "heading_en": "Governing law and disputes",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera tillämplig lag och tvistlösning med sedvanlig avtalsformulering."
+    }
+  ],
+  "extra_main_clauses": [
+    {
+      "clause_id": "clause_13",
+      "heading_sv": "Force majeure",
+      "heading_en": "Force majeure",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera force majeure med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_14",
+      "heading_sv": "Meddelanden",
+      "heading_en": "Notices",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera meddelanden med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_15",
+      "heading_sv": "Överlåtelse av avtal",
+      "heading_en": "Assignment",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera överlåtelse av avtal med sedvanlig avtalsformulering."
+    }
+  ],
+  "appendix_clauses": [
+    {
+      "clause_id": "appendix_a_clause_01",
+      "heading_sv": "Bilaga A – Kompletterande villkor",
+      "heading_en": "Appendix A – Supplementary terms",
+      "fact_ids": [
+        "fact_job_title",
+        "fact_start_date"
+      ],
+      "mode": "definition",
+      "instruction_sv": "Reglera bilaga a – kompletterande villkor och uttryck följande uppgifter tydligt: befattning, tillträdesdag."
+    },
+    {
+      "clause_id": "appendix_a_clause_02",
+      "heading_sv": "Bilaga A – Detaljreglering",
+      "heading_en": "Appendix A – Detailed regulation",
+      "fact_ids": [],
+      "mode": "reference",
+      "distributed_facts": true,
+      "instruction_sv": "Reglera bilaga a – detaljreglering och koppla detaljerna till huvudavtalets bestämmelser."
+    },
+    {
+      "clause_id": "appendix_a_clause_03",
+      "heading_sv": "Bilaga A – Tidigare diskuterade villkor",
+      "heading_en": "Appendix A – Previously discussed terms",
+      "fact_ids": [
+        "fact_salary_proposal",
+        "fact_probation_proposal"
+      ],
+      "mode": "distractor",
+      "instruction_sv": "Reglera bilaga a – tidigare diskuterade villkor och uttryck följande uppgifter tydligt: tidigare löneförslag, föreslagen prövotid."
+    }
+  ],
+  "amendment_clauses": [
+    {
+      "clause_id": "amendment_1_clause_01",
+      "heading_sv": "Tillägg 1 – Ändrade villkor",
+      "heading_en": "Amendment 1 – Amended terms",
+      "fact_ids": [
+        "fact_salary",
+        "fact_salary_amendment"
+      ],
+      "mode": "contradiction",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – ändrade villkor och uttryck följande uppgifter tydligt: månadslön, avvikande månadslön i tillägg."
+    },
+    {
+      "clause_id": "amendment_1_clause_02",
+      "heading_sv": "Tillägg 1 – Undantag",
+      "heading_en": "Amendment 1 – Exception",
+      "fact_ids": [
+        "fact_notice_period",
+        "fact_notice_exception"
+      ],
+      "mode": "exception",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – undantag och uttryck följande uppgifter tydligt: uppsägningstid, förkortad uppsägningstid vid misskötsel."
+    },
+    {
+      "clause_id": "amendment_1_clause_03",
+      "heading_sv": "Tillägg 1 – Externa dokument",
+      "heading_en": "Amendment 1 – External documents",
+      "fact_ids": [],
+      "mode": "reference",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – externa dokument och hänvisa till externa dokument som inte ingår i avtalspaketet."
+    },
+    {
+      "clause_id": "amendment_1_clause_04",
+      "heading_sv": "Tillägg 1 – Villkorade bestämmelser",
+      "heading_en": "Amendment 1 – Conditional provisions",
+      "fact_ids": [
+        "fact_vacation_extension",
+        "fact_vacation_days"
+      ],
+      "mode": "conditional",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – villkorade bestämmelser och uttryck följande uppgifter tydligt: villkorade extra semesterdagar, semesterdagar."
+    }
+  ],
+  "package": {
+    "appendix": {
+      "document_id": "appendix_a",
+      "title_sv": "Bilaga A – Kompletterande villkor",
+      "title_en": "Appendix A – Supplementary terms",
+      "filename_stem": "appendix_a"
+    },
+    "amendment": {
+      "document_id": "amendment_1",
+      "title_sv": "Tillägg 1 – Ändrade villkor",
+      "title_en": "Amendment 1 – Amended terms",
+      "filename_stem": "amendment_1"
+    }
+  },
+  "variation": {
+    "styles": [
+      "formal",
+      "complex",
+      "plain"
+    ],
+    "document_qualities": [
+      "clean",
+      "line_breaks",
+      "tables",
+      "page_breaks"
+    ]
+  },
+  "distractor_facts": [
+    {
+      "fact_id": "fact_salary_proposal",
+      "kind": "money",
+      "label_sv": "Tidigare löneförslag",
+      "label_en": "Earlier salary proposal",
+      "keywords_sv": [
+        "löneförslag",
+        "provisorisk lön"
+      ],
+      "keywords_en": [
+        "salary proposal",
+        "draft salary"
+      ],
+      "variants": [
+        {
+          "value": 38000,
+          "explicit_surfaces": [
+            "38 000 SEK per månad",
+            "38 000 kronor per månad"
+          ],
+          "paraphrase_surfaces": [
+            "månadslön om 38 000 kronor",
+            "38 000 kr per månad"
+          ]
+        }
+      ],
+      "unit": "per_month",
+      "currency": "SEK",
+      "based_on_fact_id": "fact_salary"
+    },
+    {
+      "fact_id": "fact_probation_proposal",
+      "kind": "duration",
+      "label_sv": "Föreslagen prövotid",
+      "label_en": "Proposed probation",
+      "keywords_sv": [
+        "förslag prövotid",
+        "kortare provtid"
+      ],
+      "keywords_en": [
+        "proposed probation"
+      ],
+      "variants": [
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 månader",
+            "tre (3) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett kvartal"
+          ]
+        }
+      ],
+      "unit": "months",
+      "based_on_fact_id": "fact_probation"
+    }
+  ],
+  "contradiction": {
+    "base_fact_id": "fact_salary",
+    "fact": {
+      "fact_id": "fact_salary_amendment",
+      "kind": "money",
+      "label_sv": "Avvikande månadslön i tillägg",
+      "label_en": "Differing monthly salary in amendment",
+      "keywords_sv": [
+        "månadslön tillägg",
+        "avvikande lön"
+      ],
+      "keywords_en": [
+        "salary amendment"
+      ],
+      "variants": [
+        {
+          "value": 43000,
+          "explicit_surfaces": [
+            "43 000 SEK per månad",
+            "43 000 kronor per månad"
+          ],
+          "paraphrase_surfaces": [
+            "månadslön om 43 000 kronor",
+            "43 000 kr per månad"
+          ]
+        }
+      ],
+      "unit": "per_month",
+      "currency": "SEK"
+    },
+    "description_sv": "Tillägg 1 anger en högre månadslön än huvudavtalet, utan att huvudavtalets belopp formellt upphävs.",
+    "description_en": ""
+  },
+  "exception": {
+    "base_fact_id": "fact_notice_period",
+    "fact": {
+      "fact_id": "fact_notice_exception",
+      "kind": "duration",
+      "label_sv": "Förkortad uppsägningstid vid misskötsel",
+      "label_en": "Shortened notice period for misconduct",
+      "keywords_sv": [
+        "undantag uppsägningstid",
+        "misskötsel"
+      ],
+      "keywords_en": [
+        "notice exception",
+        "misconduct"
+      ],
+      "variants": [
+        {
+          "value": 1,
+          "explicit_surfaces": [
+            "1 månader",
+            "ett (1) månader"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 1 månader",
+            "en avtalsperiod om 1 månader"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    "description_sv": "Uppsägningstiden gäller inte vid grov misskötsel enligt undantaget i Tillägg 1; huvudavtalets uppsägningstid är styrande i övriga fall.",
+    "description_en": ""
+  },
+  "missing_information": {
+    "missing_documents": [
+      "appendix_b_semester",
+      "side_letter_2026"
+    ],
+    "insufficient_evidence_fact_id": "fact_vacation_days",
+    "conditional_fact": {
+      "fact_id": "fact_vacation_extension",
+      "kind": "integer",
+      "label_sv": "Villkorade extra semesterdagar",
+      "label_en": "Conditional extra vacation days",
+      "keywords_sv": [
+        "extra semester",
+        "villkorad semester"
+      ],
+      "keywords_en": [
+        "extra vacation",
+        "conditional"
+      ],
+      "variants": [
+        {
+          "value": 5,
+          "explicit_surfaces": [
+            "5 semesterdagar",
+            "antalet 5 semesterdagar"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 5 semesterdagar",
+            "sammanlagt 5 semesterdagar"
+          ]
+        }
+      ],
+      "unit": "days"
+    },
+    "conditional_governing_fact_id": "fact_vacation_days",
+    "description_sv": "Semesterbilagan (bilaga B) saknas; uppgift om utökad semester kan därför inte verifieras fullt ut.",
+    "conditional_description_sv": "Rätten till ytterligare semesterdagar är villkorad av bilaga B, som inte ingår i avtalspaketet."
+  }
+}

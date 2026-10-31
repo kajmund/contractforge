@@ -1,0 +1,47 @@
+{
+  "main_agreement": {
+    "document_id": "main_agreement",
+    "kind": "main_agreement",
+    "title": "Konsultavtal",
+    "language": "sv",
+    "canonical_text": "SYNTETISK TESTDATA – ContractForge\ncontract_id: contract_0002\ndocument_id: main_agreement\ndokumenttyp: main_agreement\nspråk: sv\njurisdiktion: SE\n\nKonsultavtal\n\n1. Avtalsparter\nParterna i detta avtal är Arken Digital AB, org.nr 559002-0222, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter \"Uppdragsgivaren\") och Lindfors Analys AB, org.nr 559003-6653, med adress Testvägen 3, 722 20 Västerås (hädanefter \"Konsulten\").\n\n2. Uppdragets omfattning\nUppdraget avser systemutveckling och integration.\n\n3. Arvode och tidsåtgång\nKonsulten erhåller ett timarvode om 1 150 SEK för utfört arbete och den beräknade tidsåtgången för uppdraget är 400 timmar.\n\n4. Uppdragsperiod och uppsägning\nUppdraget påbörjas den 1 februari 2026 och löper i 6 månader, med möjlighet till uppsägning med en frist på 3 månader från endera part.\n\n5. Betalningsvillkor och utlägg\nFakturor ska betalas inom 45 dagar från fakturadatum och ersättning för utlägg får inte överstiga 75 000 SEK.\n\n6. Ansvarsbegränsning\nAnsvarsbegränsning gäller upp till ett belopp om 1 000 000 SEK, Uppdragsgivaren äger resultatet, och sekretessperioden gäller i 5 år.\n",
+    "clause_spans": {
+      "clause_01": {
+        "document_id": "main_agreement",
+        "clause_id": "clause_01",
+        "start": 160,
+        "end": 424
+      },
+      "clause_02": {
+        "document_id": "main_agreement",
+        "clause_id": "clause_02",
+        "start": 426,
+        "end": 500
+      },
+      "clause_03": {
+        "document_id": "main_agreement",
+        "clause_id": "clause_03",
+        "start": 502,
+        "end": 650
+      },
+      "clause_04": {
+        "document_id": "main_agreement",
+        "clause_id": "clause_04",
+        "start": 652,
+        "end": 820
+      },
+      "clause_05": {
+        "document_id": "main_agreement",
+        "clause_id": "clause_05",
+        "start": 822,
+        "end": 963
+      },
+      "clause_06": {
+        "document_id": "main_agreement",
+        "clause_id": "clause_06",
+        "start": 965,
+        "end": 1120
+      }
+    }
+  }
+}

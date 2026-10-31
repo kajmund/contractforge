@@ -1,0 +1,943 @@
+{
+  "contract_type": "cooperation",
+  "definition_version": "1.0",
+  "title_sv": "Samarbetsavtal",
+  "title_en": "Cooperation Agreement",
+  "description_sv": "Gemensamt projekt med bidrag, budget, vinstdelning, styrgrupp och utträde.",
+  "parties": [
+    {
+      "party_id": "party_alpha",
+      "role": "partner",
+      "role_sv": "Samarbetspart Alpha",
+      "role_en": "Partner Alpha",
+      "kind": "organisation",
+      "name_pool": [
+        "Nordvik Energi AB",
+        "Arken Logistik AB",
+        "Sundberg Infra AB"
+      ],
+      "address_pool": [
+        "Exempelvägen 51, 111 20 Stockholm"
+      ],
+      "org_number_series": "559015"
+    },
+    {
+      "party_id": "party_beta",
+      "role": "partner",
+      "role_sv": "Samarbetspart Beta",
+      "role_en": "Partner Beta",
+      "kind": "organisation",
+      "name_pool": [
+        "Sundberg Innovation AB",
+        "Västberg Miljö AB",
+        "Lindfors Energi AB"
+      ],
+      "address_pool": [
+        "Provgatan 15, 411 20 Göteborg"
+      ],
+      "org_number_series": "559016"
+    },
+    {
+      "party_id": "party_gamma",
+      "role": "partner",
+      "role_sv": "Finansiär Gamma",
+      "role_en": "Funder Gamma",
+      "kind": "organisation",
+      "name_pool": [
+        "Lindfors Kapital AB",
+        "Västberg Finans AB"
+      ],
+      "address_pool": [
+        "Testvägen 5, 722 20 Västerås"
+      ],
+      "org_number_series": "559017"
+    }
+  ],
+  "facts": [
+    {
+      "fact_id": "fact_alpha_name",
+      "kind": "entity",
+      "label_sv": "Alphas namn",
+      "label_en": "Alpha name",
+      "keywords_sv": [
+        "alpha",
+        "namn"
+      ],
+      "keywords_en": [
+        "alpha",
+        "name"
+      ],
+      "entity_party_id": "party_alpha",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_beta_name",
+      "kind": "entity",
+      "label_sv": "Betas namn",
+      "label_en": "Beta name",
+      "keywords_sv": [
+        "beta",
+        "namn"
+      ],
+      "keywords_en": [
+        "beta",
+        "name"
+      ],
+      "entity_party_id": "party_beta",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_gamma_name",
+      "kind": "entity",
+      "label_sv": "Gammas namn",
+      "label_en": "Gamma name",
+      "keywords_sv": [
+        "gamma",
+        "finansiär"
+      ],
+      "keywords_en": [
+        "gamma",
+        "funder"
+      ],
+      "entity_party_id": "party_gamma",
+      "variants": []
+    },
+    {
+      "fact_id": "fact_cooperation_scope",
+      "kind": "text",
+      "label_sv": "Samarbetets omfattning",
+      "label_en": "Scope of cooperation",
+      "keywords_sv": [
+        "samarbete",
+        "omfattning"
+      ],
+      "keywords_en": [
+        "cooperation",
+        "scope"
+      ],
+      "variants": [
+        {
+          "value": "gemensam utveckling av laddinfrastruktur",
+          "explicit_surfaces": [
+            "gemensam utveckling av laddinfrastruktur"
+          ],
+          "paraphrase_surfaces": [
+            "gemensam utveckling av laddinfrastruktur"
+          ]
+        },
+        {
+          "value": "samarbete om cirkulär logistik",
+          "explicit_surfaces": [
+            "samarbete om cirkulär logistik"
+          ],
+          "paraphrase_surfaces": [
+            "samarbete kring cirkulär logistik"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_term_years",
+      "kind": "duration",
+      "label_sv": "Avtalsperiod",
+      "label_en": "Term",
+      "keywords_sv": [
+        "avtalsperiod",
+        "löptid"
+      ],
+      "keywords_en": [
+        "term",
+        "duration"
+      ],
+      "variants": [
+        {
+          "value": 5,
+          "explicit_surfaces": [
+            "5 år",
+            "fem (5) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 5 år",
+            "en tid om 5 år"
+          ]
+        },
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 år",
+            "tre (3) år"
+          ],
+          "paraphrase_surfaces": [
+            "en avtalsperiod om 3 år",
+            "en tid om 3 år"
+          ]
+        }
+      ],
+      "unit": "years"
+    },
+    {
+      "fact_id": "fact_alpha_contribution",
+      "kind": "money",
+      "label_sv": "Alphas bidrag",
+      "label_en": "Alpha contribution",
+      "keywords_sv": [
+        "alpha bidrag",
+        "kapitaltillskott"
+      ],
+      "keywords_en": [
+        "alpha contribution",
+        "funding"
+      ],
+      "variants": [
+        {
+          "value": 2500000,
+          "explicit_surfaces": [
+            "2 500 000 SEK",
+            "2 500 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "2 500 000 kr",
+            "ett belopp om 2 500 000 kronor"
+          ]
+        },
+        {
+          "value": 3000000,
+          "explicit_surfaces": [
+            "3 000 000 SEK",
+            "3 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "3 000 000 kr",
+            "ett belopp om 3 000 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_beta_contribution",
+      "kind": "money",
+      "label_sv": "Betas bidrag",
+      "label_en": "Beta contribution",
+      "keywords_sv": [
+        "beta bidrag",
+        "kapitaltillskott"
+      ],
+      "keywords_en": [
+        "beta contribution",
+        "funding"
+      ],
+      "variants": [
+        {
+          "value": 1500000,
+          "explicit_surfaces": [
+            "1 500 000 SEK",
+            "1 500 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "1 500 000 kr",
+            "ett belopp om 1 500 000 kronor"
+          ]
+        },
+        {
+          "value": 2000000,
+          "explicit_surfaces": [
+            "2 000 000 SEK",
+            "2 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "2 000 000 kr",
+            "ett belopp om 2 000 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_budget",
+      "kind": "money",
+      "label_sv": "Gemensam budget",
+      "label_en": "Shared budget",
+      "keywords_sv": [
+        "budget",
+        "gemensam budget"
+      ],
+      "keywords_en": [
+        "budget",
+        "shared budget"
+      ],
+      "variants": [
+        {
+          "value": 3000000,
+          "explicit_surfaces": [
+            "3 000 000 SEK",
+            "3 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "3 000 000 kr",
+            "ett belopp om 3 000 000 kronor"
+          ]
+        },
+        {
+          "value": 2500000,
+          "explicit_surfaces": [
+            "2 500 000 SEK",
+            "2 500 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "2 500 000 kr",
+            "ett belopp om 2 500 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    {
+      "fact_id": "fact_alpha_revenue_share",
+      "kind": "percentage",
+      "label_sv": "Alphas vinstandel",
+      "label_en": "Alpha revenue share",
+      "keywords_sv": [
+        "vinstandel",
+        "alpha andel"
+      ],
+      "keywords_en": [
+        "revenue share",
+        "alpha share"
+      ],
+      "variants": [
+        {
+          "value": 50,
+          "explicit_surfaces": [
+            "50 procent",
+            "50 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 50 procent",
+            "50 procent av det totala"
+          ]
+        },
+        {
+          "value": 45,
+          "explicit_surfaces": [
+            "45 procent",
+            "45 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 45 procent",
+            "45 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    {
+      "fact_id": "fact_beta_revenue_share",
+      "kind": "percentage",
+      "label_sv": "Betas vinstandel",
+      "label_en": "Beta revenue share",
+      "keywords_sv": [
+        "vinstandel",
+        "beta andel"
+      ],
+      "keywords_en": [
+        "revenue share",
+        "beta share"
+      ],
+      "variants": [
+        {
+          "value": 50,
+          "explicit_surfaces": [
+            "50 procent",
+            "50 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 50 procent",
+            "50 procent av det totala"
+          ]
+        },
+        {
+          "value": 55,
+          "explicit_surfaces": [
+            "55 procent",
+            "55 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 55 procent",
+            "55 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    {
+      "fact_id": "fact_steering_group",
+      "kind": "integer",
+      "label_sv": "Styrgruppens storlek",
+      "label_en": "Steering group size",
+      "keywords_sv": [
+        "styrgrupp",
+        "ledamöter"
+      ],
+      "keywords_en": [
+        "steering group",
+        "members"
+      ],
+      "variants": [
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 ledamöter",
+            "antalet 3 ledamöter"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 3 ledamöter",
+            "sammanlagt 3 ledamöter"
+          ]
+        },
+        {
+          "value": 2,
+          "explicit_surfaces": [
+            "2 ledamöter",
+            "antalet 2 ledamöter"
+          ],
+          "paraphrase_surfaces": [
+            "totalt 2 ledamöter",
+            "sammanlagt 2 ledamöter"
+          ]
+        }
+      ],
+      "unit": "members"
+    },
+    {
+      "fact_id": "fact_exit_notice",
+      "kind": "duration",
+      "label_sv": "Utträdesavisering",
+      "label_en": "Exit notice",
+      "keywords_sv": [
+        "utträde",
+        "avisering"
+      ],
+      "keywords_en": [
+        "exit",
+        "notice"
+      ],
+      "variants": [
+        {
+          "value": 6,
+          "explicit_surfaces": [
+            "6 månader",
+            "sex (6) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett halvår"
+          ]
+        },
+        {
+          "value": 9,
+          "explicit_surfaces": [
+            "9 månader",
+            "nio (9) månader"
+          ],
+          "paraphrase_surfaces": [
+            "en period om 9 månader",
+            "en avtalsperiod om 9 månader"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    {
+      "fact_id": "fact_ip_ownership",
+      "kind": "defined_term",
+      "label_sv": "Immateriella rättigheter",
+      "label_en": "Intellectual property",
+      "keywords_sv": [
+        "immateriella rättigheter",
+        "resultat"
+      ],
+      "keywords_en": [
+        "intellectual property",
+        "results"
+      ],
+      "variants": [
+        {
+          "value": "resultat ägs gemensamt av parterna",
+          "explicit_surfaces": [
+            "resultat ägs gemensamt av parterna"
+          ],
+          "paraphrase_surfaces": [
+            "parterna äger resultaten gemensamt"
+          ]
+        },
+        {
+          "value": "resultat ägs av den part som tagit fram dem",
+          "explicit_surfaces": [
+            "resultat ägs av den part som tagit fram dem"
+          ],
+          "paraphrase_surfaces": [
+            "resultaten ägs av den part som utvecklat dem"
+          ]
+        }
+      ]
+    },
+    {
+      "fact_id": "fact_dispute_resolution",
+      "kind": "defined_term",
+      "label_sv": "Tvistlösning",
+      "label_en": "Dispute resolution",
+      "keywords_sv": [
+        "tvistlösning",
+        "skiljedom"
+      ],
+      "keywords_en": [
+        "dispute resolution",
+        "arbitration"
+      ],
+      "variants": [
+        {
+          "value": "tvister avgörs genom skiljeförfarande i Stockholm",
+          "explicit_surfaces": [
+            "tvister avgörs genom skiljeförfarande i Stockholm"
+          ],
+          "paraphrase_surfaces": [
+            "tvister avgörs genom skiljeförfarande i Stockholm"
+          ]
+        },
+        {
+          "value": "tvister avgörs av allmän domstol",
+          "explicit_surfaces": [
+            "tvister avgörs av allmän domstol"
+          ],
+          "paraphrase_surfaces": [
+            "tvister prövas av allmän domstol"
+          ]
+        }
+      ]
+    }
+  ],
+  "main_clauses": [
+    {
+      "clause_id": "clause_01",
+      "heading_sv": "Avtalsparter",
+      "heading_en": "Parties",
+      "fact_ids": [
+        "fact_alpha_name",
+        "fact_beta_name",
+        "fact_gamma_name"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera avtalsparter och uttryck följande uppgifter tydligt: alphas namn, betas namn, gammas namn."
+    },
+    {
+      "clause_id": "clause_02",
+      "heading_sv": "Samarbetets omfattning",
+      "heading_en": "Scope of cooperation",
+      "fact_ids": [
+        "fact_cooperation_scope"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera samarbetets omfattning och uttryck följande uppgifter tydligt: samarbetets omfattning."
+    },
+    {
+      "clause_id": "clause_03",
+      "heading_sv": "Bidrag och budget",
+      "heading_en": "Contributions and budget",
+      "fact_ids": [
+        "fact_alpha_contribution",
+        "fact_beta_contribution",
+        "fact_budget"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera bidrag och budget och uttryck följande uppgifter tydligt: alphas bidrag, betas bidrag, gemensam budget."
+    },
+    {
+      "clause_id": "clause_04",
+      "heading_sv": "Vinstdelning",
+      "heading_en": "Revenue sharing",
+      "fact_ids": [
+        "fact_alpha_revenue_share",
+        "fact_beta_revenue_share"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera vinstdelning och uttryck följande uppgifter tydligt: alphas vinstandel, betas vinstandel."
+    },
+    {
+      "clause_id": "clause_05",
+      "heading_sv": "Styrgrupp",
+      "heading_en": "Steering group",
+      "fact_ids": [
+        "fact_steering_group"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera styrgrupp och uttryck följande uppgifter tydligt: styrgruppens storlek."
+    },
+    {
+      "clause_id": "clause_06",
+      "heading_sv": "Avtalsperiod och utträde",
+      "heading_en": "Term and exit",
+      "fact_ids": [
+        "fact_term_years",
+        "fact_exit_notice"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera avtalsperiod och utträde och uttryck följande uppgifter tydligt: avtalsperiod, utträdesavisering."
+    },
+    {
+      "clause_id": "clause_07",
+      "heading_sv": "Immateriella rättigheter",
+      "heading_en": "Intellectual property",
+      "fact_ids": [
+        "fact_ip_ownership"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera immateriella rättigheter och uttryck följande uppgifter tydligt: immateriella rättigheter."
+    },
+    {
+      "clause_id": "clause_08",
+      "heading_sv": "Tvistlösning",
+      "heading_en": "Dispute resolution",
+      "fact_ids": [
+        "fact_dispute_resolution"
+      ],
+      "mode": "explicit",
+      "instruction_sv": "Reglera tvistlösning och uttryck följande uppgifter tydligt: tvistlösning."
+    },
+    {
+      "clause_id": "clause_09",
+      "heading_sv": "Sekretess",
+      "heading_en": "Confidentiality",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera sekretess med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_10",
+      "heading_sv": "Ändringar och tillägg",
+      "heading_en": "Amendments",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera ändringar och tillägg med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_11",
+      "heading_sv": "Undertecknande",
+      "heading_en": "Signatures",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera undertecknande med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_12",
+      "heading_sv": "Tillämplig lag",
+      "heading_en": "Governing law",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera tillämplig lag med sedvanlig avtalsformulering."
+    }
+  ],
+  "extra_main_clauses": [
+    {
+      "clause_id": "clause_13",
+      "heading_sv": "Force majeure",
+      "heading_en": "Force majeure",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera force majeure med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_14",
+      "heading_sv": "Meddelanden",
+      "heading_en": "Notices",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera meddelanden med sedvanlig avtalsformulering."
+    },
+    {
+      "clause_id": "clause_15",
+      "heading_sv": "Överlåtelse av avtal",
+      "heading_en": "Assignment",
+      "fact_ids": [],
+      "mode": "explicit",
+      "optional": true,
+      "instruction_sv": "Reglera överlåtelse av avtal med sedvanlig avtalsformulering."
+    }
+  ],
+  "appendix_clauses": [
+    {
+      "clause_id": "appendix_a_clause_01",
+      "heading_sv": "Bilaga A – Kompletterande villkor",
+      "heading_en": "Appendix A – Supplementary terms",
+      "fact_ids": [
+        "fact_gamma_name",
+        "fact_cooperation_scope"
+      ],
+      "mode": "definition",
+      "instruction_sv": "Reglera bilaga a – kompletterande villkor och uttryck följande uppgifter tydligt: gammas namn, samarbetets omfattning."
+    },
+    {
+      "clause_id": "appendix_a_clause_02",
+      "heading_sv": "Bilaga A – Detaljreglering",
+      "heading_en": "Appendix A – Detailed regulation",
+      "fact_ids": [],
+      "mode": "reference",
+      "distributed_facts": true,
+      "instruction_sv": "Reglera bilaga a – detaljreglering och koppla detaljerna till huvudavtalets bestämmelser."
+    },
+    {
+      "clause_id": "appendix_a_clause_03",
+      "heading_sv": "Bilaga A – Tidigare diskuterade villkor",
+      "heading_en": "Appendix A – Previously discussed terms",
+      "fact_ids": [
+        "fact_alpha_revenue_share_alt",
+        "fact_budget_alt"
+      ],
+      "mode": "distractor",
+      "instruction_sv": "Reglera bilaga a – tidigare diskuterade villkor och uttryck följande uppgifter tydligt: tidigare diskuterad vinstandel, högre budget i tidigare utkast."
+    }
+  ],
+  "amendment_clauses": [
+    {
+      "clause_id": "amendment_1_clause_01",
+      "heading_sv": "Tillägg 1 – Ändrade villkor",
+      "heading_en": "Amendment 1 – Amended terms",
+      "fact_ids": [
+        "fact_alpha_revenue_share",
+        "fact_alpha_revenue_share_amendment"
+      ],
+      "mode": "contradiction",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – ändrade villkor och uttryck följande uppgifter tydligt: alphas vinstandel, avvikande vinstandel i tillägg."
+    },
+    {
+      "clause_id": "amendment_1_clause_02",
+      "heading_sv": "Tillägg 1 – Undantag",
+      "heading_en": "Amendment 1 – Exception",
+      "fact_ids": [
+        "fact_exit_notice",
+        "fact_exit_exception"
+      ],
+      "mode": "exception",
+      "min_difficulty": 5,
+      "max_difficulty": 5,
+      "instruction_sv": "Reglera tillägg 1 – undantag och uttryck följande uppgifter tydligt: utträdesavisering, omedelbart utträde vid avtalsbrott."
+    },
+    {
+      "clause_id": "amendment_1_clause_03",
+      "heading_sv": "Tillägg 1 – Externa dokument",
+      "heading_en": "Amendment 1 – External documents",
+      "fact_ids": [],
+      "mode": "reference",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – externa dokument och hänvisa till externa dokument som inte ingår i avtalspaketet."
+    },
+    {
+      "clause_id": "amendment_1_clause_04",
+      "heading_sv": "Tillägg 1 – Villkorade bestämmelser",
+      "heading_en": "Amendment 1 – Conditional provisions",
+      "fact_ids": [
+        "fact_conditional_contribution",
+        "fact_budget"
+      ],
+      "mode": "conditional",
+      "min_difficulty": 6,
+      "instruction_sv": "Reglera tillägg 1 – villkorade bestämmelser och uttryck följande uppgifter tydligt: villkorat tilläggsbidrag, gemensam budget."
+    }
+  ],
+  "package": {
+    "appendix": {
+      "document_id": "appendix_a",
+      "title_sv": "Bilaga A – Kompletterande villkor",
+      "title_en": "Appendix A – Supplementary terms",
+      "filename_stem": "appendix_a"
+    },
+    "amendment": {
+      "document_id": "amendment_1",
+      "title_sv": "Tillägg 1 – Ändrade villkor",
+      "title_en": "Amendment 1 – Amended terms",
+      "filename_stem": "amendment_1"
+    }
+  },
+  "variation": {
+    "styles": [
+      "formal",
+      "complex",
+      "plain"
+    ],
+    "document_qualities": [
+      "clean",
+      "line_breaks",
+      "tables",
+      "page_breaks"
+    ]
+  },
+  "distractor_facts": [
+    {
+      "fact_id": "fact_alpha_revenue_share_alt",
+      "kind": "percentage",
+      "label_sv": "Tidigare diskuterad vinstandel",
+      "label_en": "Earlier discussed revenue share",
+      "keywords_sv": [
+        "tidigare vinstandel",
+        "diskuterad andel"
+      ],
+      "keywords_en": [
+        "earlier revenue share",
+        "discussed share"
+      ],
+      "variants": [
+        {
+          "value": 40,
+          "explicit_surfaces": [
+            "40 procent",
+            "40 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 40 procent",
+            "40 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent",
+      "based_on_fact_id": "fact_alpha_revenue_share"
+    },
+    {
+      "fact_id": "fact_budget_alt",
+      "kind": "money",
+      "label_sv": "Högre budget i tidigare utkast",
+      "label_en": "Higher budget in earlier draft",
+      "keywords_sv": [
+        "tidigare budget",
+        "högre budget"
+      ],
+      "keywords_en": [
+        "earlier budget",
+        "higher budget"
+      ],
+      "variants": [
+        {
+          "value": 4000000,
+          "explicit_surfaces": [
+            "4 000 000 SEK",
+            "4 000 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "4 000 000 kr",
+            "ett belopp om 4 000 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK",
+      "based_on_fact_id": "fact_budget"
+    }
+  ],
+  "contradiction": {
+    "base_fact_id": "fact_alpha_revenue_share",
+    "fact": {
+      "fact_id": "fact_alpha_revenue_share_amendment",
+      "kind": "percentage",
+      "label_sv": "Avvikande vinstandel i tillägg",
+      "label_en": "Differing revenue share in amendment",
+      "keywords_sv": [
+        "vinstandel tillägg",
+        "avvikande andel"
+      ],
+      "keywords_en": [
+        "revenue share amendment"
+      ],
+      "variants": [
+        {
+          "value": 55,
+          "explicit_surfaces": [
+            "55 procent",
+            "55 %"
+          ],
+          "paraphrase_surfaces": [
+            "en andel om 55 procent",
+            "55 procent av det totala"
+          ]
+        }
+      ],
+      "unit": "percent"
+    },
+    "description_sv": "Tillägg 1 anger en annan vinstandel för Alpha än huvudavtalet, utan att huvudavtalets fördelning upphävs.",
+    "description_en": ""
+  },
+  "exception": {
+    "base_fact_id": "fact_exit_notice",
+    "fact": {
+      "fact_id": "fact_exit_exception",
+      "kind": "duration",
+      "label_sv": "Omedelbart utträde vid avtalsbrott",
+      "label_en": "Immediate exit on breach",
+      "keywords_sv": [
+        "undantag utträde",
+        "avtalsbrott"
+      ],
+      "keywords_en": [
+        "exit exception",
+        "breach"
+      ],
+      "variants": [
+        {
+          "value": 3,
+          "explicit_surfaces": [
+            "3 månader",
+            "tre (3) månader"
+          ],
+          "paraphrase_surfaces": [
+            "ett kvartal"
+          ]
+        }
+      ],
+      "unit": "months"
+    },
+    "description_sv": "Omedelbart utträde får ske vid väsentligt avtalsbrott enligt undantaget i Tillägg 1.",
+    "description_en": ""
+  },
+  "missing_information": {
+    "missing_documents": [
+      "appendix_b_samarbetsplan",
+      "side_letter_2026"
+    ],
+    "insufficient_evidence_fact_id": "fact_budget",
+    "conditional_fact": {
+      "fact_id": "fact_conditional_contribution",
+      "kind": "money",
+      "label_sv": "Villkorat tilläggsbidrag",
+      "label_en": "Conditional extra contribution",
+      "keywords_sv": [
+        "villkorat bidrag",
+        "tilläggsbidrag"
+      ],
+      "keywords_en": [
+        "conditional contribution",
+        "extra funding"
+      ],
+      "variants": [
+        {
+          "value": 500000,
+          "explicit_surfaces": [
+            "500 000 SEK",
+            "500 000 kronor"
+          ],
+          "paraphrase_surfaces": [
+            "500 000 kr",
+            "ett belopp om 500 000 kronor"
+          ]
+        }
+      ],
+      "currency": "SEK"
+    },
+    "conditional_governing_fact_id": "fact_budget",
+    "description_sv": "Samarbetsplanen (bilaga B) saknas; budgetens närmare fördelning kan därför inte verifieras.",
+    "conditional_description_sv": "Tilläggsbidraget är villkorat av samarbetsplanen i bilaga B, som inte ingår i avtalspaketet."
+  }
+}

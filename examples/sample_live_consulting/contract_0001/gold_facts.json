@@ -1,0 +1,343 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "contract_0001",
+  "facts": [
+    {
+      "fact_id": "fact_client_name",
+      "kind": "entity",
+      "value": "Arken Digital AB",
+      "unit": null,
+      "currency": null,
+      "entity_id": "party_client",
+      "status": "active",
+      "precision": "exact",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_01",
+          "start": 202,
+          "end": 218,
+          "quote": "Arken Digital AB"
+        }
+      ],
+      "question_ids": [
+        "q_0001"
+      ],
+      "notes_sv": ""
+    },
+    {
+      "fact_id": "fact_consultant_name",
+      "kind": "entity",
+      "value": "Lindfors Analys AB",
+      "unit": null,
+      "currency": null,
+      "entity_id": "party_consultant",
+      "status": "active",
+      "precision": "exact",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_01",
+          "start": 242,
+          "end": 260,
+          "quote": "Lindfors Analys AB"
+        }
+      ],
+      "question_ids": [
+        "q_0002"
+      ],
+      "notes_sv": ""
+    },
+    {
+      "fact_id": "fact_scope",
+      "kind": "text",
+      "value": "projektledning och analys",
+      "unit": null,
+      "currency": null,
+      "entity_id": null,
+      "status": "active",
+      "precision": "exact",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_02",
+          "start": 319,
+          "end": 344,
+          "quote": "projektledning och analys"
+        }
+      ],
+      "question_ids": [
+        "q_0003"
+      ],
+      "notes_sv": ""
+    },
+    {
+      "fact_id": "fact_hourly_rate",
+      "kind": "money",
+      "value": 1150,
+      "unit": null,
+      "currency": "SEK",
+      "entity_id": null,
+      "status": "active",
+      "precision": "exact",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_03",
+          "start": 386,
+          "end": 395,
+          "quote": "1 150 SEK"
+        }
+      ],
+      "question_ids": [
+        "q_0004",
+        "q_0016"
+      ],
+      "notes_sv": ""
+    },
+    {
+      "fact_id": "fact_estimated_hours",
+      "kind": "duration",
+      "value": 400,
+      "unit": "hours",
+      "currency": null,
+      "entity_id": null,
+      "status": "active",
+      "precision": "exact",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_03",
+          "start": 440,
+          "end": 450,
+          "quote": "400 timmar"
+        }
+      ],
+      "question_ids": [
+        "q_0005"
+      ],
+      "notes_sv": ""
+    },
+    {
+      "fact_id": "fact_start_date",
+      "kind": "date",
+      "value": "2026-01-15",
+      "unit": null,
+      "currency": null,
+      "entity_id": null,
+      "status": "active",
+      "precision": "exact",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_04",
+          "start": 509,
+          "end": 524,
+          "quote": "15 januari 2026"
+        }
+      ],
+      "question_ids": [
+        "q_0006"
+      ],
+      "notes_sv": ""
+    },
+    {
+      "fact_id": "fact_duration_months",
+      "kind": "duration",
+      "value": 6,
+      "unit": "months",
+      "currency": null,
+      "entity_id": null,
+      "status": "active",
+      "precision": "exact",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_04",
+          "start": 541,
+          "end": 550,
+          "quote": "6 månader"
+        }
+      ],
+      "question_ids": [
+        "q_0007",
+        "q_0017"
+      ],
+      "notes_sv": ""
+    },
+    {
+      "fact_id": "fact_payment_days",
+      "kind": "duration",
+      "value": 30,
+      "unit": "days",
+      "currency": null,
+      "entity_id": null,
+      "status": "active",
+      "precision": "exact",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_05",
+          "start": 640,
+          "end": 648,
+          "quote": "30 dagar"
+        }
+      ],
+      "question_ids": [
+        "q_0008"
+      ],
+      "notes_sv": ""
+    },
+    {
+      "fact_id": "fact_expense_cap",
+      "kind": "money",
+      "value": 75000,
+      "unit": null,
+      "currency": "SEK",
+      "entity_id": null,
+      "status": "active",
+      "precision": "exact",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_05",
+          "start": 676,
+          "end": 686,
+          "quote": "75 000 SEK"
+        }
+      ],
+      "question_ids": [
+        "q_0009",
+        "q_0016"
+      ],
+      "notes_sv": ""
+    },
+    {
+      "fact_id": "fact_liability_cap",
+      "kind": "money",
+      "value": 1000000,
+      "unit": null,
+      "currency": "SEK",
+      "entity_id": null,
+      "status": "active",
+      "precision": "exact",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_06",
+          "start": 733,
+          "end": 746,
+          "quote": "1 000 000 SEK"
+        }
+      ],
+      "question_ids": [
+        "q_0010"
+      ],
+      "notes_sv": ""
+    },
+    {
+      "fact_id": "fact_notice_months",
+      "kind": "duration",
+      "value": 3,
+      "unit": "months",
+      "currency": null,
+      "entity_id": null,
+      "status": "active",
+      "precision": "exact",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_04",
+          "start": 570,
+          "end": 579,
+          "quote": "3 månader"
+        }
+      ],
+      "question_ids": [
+        "q_0011",
+        "q_0017"
+      ],
+      "notes_sv": ""
+    },
+    {
+      "fact_id": "fact_confidentiality_years",
+      "kind": "duration",
+      "value": 3,
+      "unit": "years",
+      "currency": null,
+      "entity_id": null,
+      "status": "active",
+      "precision": "exact",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_06",
+          "start": 808,
+          "end": 812,
+          "quote": "3 år"
+        }
+      ],
+      "question_ids": [
+        "q_0012"
+      ],
+      "notes_sv": ""
+    },
+    {
+      "fact_id": "fact_ip_rights",
+      "kind": "defined_term",
+      "value": "Konsulten behåller bakgrundsrättigheter",
+      "unit": null,
+      "currency": null,
+      "entity_id": null,
+      "status": "active",
+      "precision": "exact",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_06",
+          "start": 748,
+          "end": 787,
+          "quote": "Konsulten behåller bakgrundsrättigheter"
+        }
+      ],
+      "question_ids": [
+        "q_0013"
+      ],
+      "notes_sv": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity_id": "party_client",
+      "name": "Arken Digital AB",
+      "role": "client",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_01",
+          "start": 202,
+          "end": 218,
+          "quote": "Arken Digital AB"
+        }
+      ]
+    },
+    {
+      "entity_id": "party_consultant",
+      "name": "Lindfors Analys AB",
+      "role": "consultant",
+      "evidence": [
+        {
+          "document_id": "main_agreement",
+          "clause_id": "clause_01",
+          "start": 242,
+          "end": 260,
+          "quote": "Lindfors Analys AB"
+        }
+      ]
+    }
+  ],
+  "references": [],
+  "anomalies": [],
+  "missing_documents": [],
+  "generated_at": "2026-10-31T10:54:46.220570Z"
+}

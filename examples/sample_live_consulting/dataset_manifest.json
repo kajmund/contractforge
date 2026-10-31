@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "contractforge_version": "0.1.0",
+  "generated_at": "2026-10-31T10:54:46.607634Z",
+  "synthetic": true,
+  "config": {
+    "contract_type": "consulting",
+    "count": 2,
+    "clauses": 6,
+    "difficulty": 1,
+    "language": "sv",
+    "jurisdiction": "SE",
+    "provider": "cerebras",
+    "model": "gpt-oss-120b",
+    "temperature": 0.7,
+    "top_p": null,
+    "max_tokens": 8000,
+    "seed": 2026,
+    "concurrency": 2,
+    "max_repair_attempts": 1,
+    "prompt_version": "v1",
+    "prompt_sha256": "4be2797e5714b053505aa652af45537a4eae3bfb6da4097be036067fde51e0ae",
+    "formats": [
+      "txt",
+      "markdown",
+      "docx",
+      "pdf"
+    ],
+    "contract_id_prefix": "contract"
+  },
+  "contracts": [
+    {
+      "contract_id": "contract_0001",
+      "path": "contract_0001",
+      "status": "ACCEPTED",
+      "manifest_sha256": "adf0b56c2fd5094ed5a2ace7031736a73098733a510039e5493008a1e1e90bc7"
+    },
+    {
+      "contract_id": "contract_0002",
+      "path": "contract_0002",
+      "status": "ACCEPTED",
+      "manifest_sha256": "b0430eb4d5c8dc225a5982981098d0a9efa48b3963c32b0c34059ac523283028"
+    }
+  ],
+  "totals": {
+    "schema_version": "1.0",
+    "generated_at": "2026-10-31T10:54:46.607634Z",
+    "contracts_total": 2,
+    "contracts_accepted": 2,
+    "contracts_rejected": 0,
+    "documents_total": 2,
+    "documents_accepted": 2,
+    "documents_repaired": 0,
+    "documents_rejected": 0,
+    "clauses_total": 12,
+    "facts_total": 26,
+    "questions_total": 36,
+    "questions_validated": 36,
+    "questions_answerable": 36,
+    "questions_insufficient_evidence": 0,
+    "questions_conditional": 0,
+    "questions_conflicting_evidence": 0,
+    "calls_total": 2,
+    "input_tokens": 8868,
+    "output_tokens": 2095,
+    "total_tokens": 10963,
+    "tokens_known": true,
+    "cost_usd": null,
+    "cost_basis": "unknown",
+    "total_seconds": 1.1129251250531524,
+    "documents_per_minute": 107.82396524138936,
+    "clauses_per_minute": 646.9437914483361,
+    "mean_document_latency_ms": 860.3069789824076,
+    "cost_per_accepted_document_usd": null,
+    "cost_per_validated_question_usd": null,
+    "verification_pass_rate": 1.0,
+    "repair_rate": 0.0,
+    "rejection_rate": 0.0
+  },
+  "notes": [
+    "All parties, organisationsnummer, addresses and amounts are synthetic.",
+    "Synthetic test data – not legal advice and not reviewed by a lawyer.",
+    "LLM-generated text is not guaranteed to be bit-identical across runs."
+  ]
+}
