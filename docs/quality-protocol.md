@@ -147,6 +147,35 @@ uppfyller inte grind G8.
 Varje ratare besvarar fyra frågor per blindpost. Alla svar kryssas i ett fast
 alternativ; fritext i `kommentar` ändrar aldrig en kod utan förklarar den.
 
+### 3.0 Rataren ska läsa HELA dokumentet – inte bara evidenscitatet
+
+Evidenscitatet är en **ingång**, inte svaret på om frågan är besvarbar eller om
+svaret är korrekt. En annan klausul kan innehålla ett undantag, en bestämmelse om
+att ett tidigare villkor "ersätts" eller en motsägelse som ändrar vad som gäller.
+
+Därför gäller:
+
+1. Rataren **ska** läsa det **fullständiga dokumentet** i blindposten
+   (`document_text`, hela avtalets kanoniska text) innan Q1–Q4 kodas – inte bara
+   det angivna citatet.
+2. För dokumentpaket ska **alla dokument i paketet** läsas: huvudavtal, bilagor
+   och tillägg. Ett tillägg som ersätter ett villkor i huvudavtalet är en del av
+   texten, inte en referens rataren får bortse från.
+3. Undantag, villkor och senare ändringar som står **i dokumenten** räknas som
+   en del av underlaget. Rataren får **inte** använda information utanför
+   dokumenten (lagtext, egna antaganden om partsavsikter, scenariot) – men får
+   inte heller **bortse** från text som finns i dokumenten.
+4. Om svaret beror på ett undantag eller en ersättning som rataren hittar i ett
+   annat dokument än citatet: koda Q2 = `nej` när facit svarar med det
+   överspelade värdet, och ange i `kommentar` vilket dokument/klausul som avgjorde
+   (`kommentar` krävs för Q2 = `nej` när orsaken är en annan klausul).
+5. `osäker` är förbehållet fall där rataren *inte kan avgöra* – inte för fall där
+   rataren inte har läst klart dokumentet.
+
+Verktyget publicerar `document_text` per dokument i `manifest.json` och
+`document_texts` (alla dokument i paketet) på blindposten, så att rataren alltid
+har hela texten tillgänglig (se 6.1).
+
 ### Q1 – ANSWERABLE: kan frågan besvaras entydigt med dokumenttexten?
 
 > **Fråga till rataren:** Kan frågan besvaras entydigt med *enbart* dokumenttexten
@@ -297,35 +326,64 @@ urval kan alltså inte uppfylla G1 oavsett resultat. Det är skälet till att
 `--count 100` är ett krav och inte en rekommendation: vid `n = 100` räcker det
 med fyra fel för att G1 ska missas.
 
-### 4.3 Inter-rater-överensstämmelse
+### 4.3 Inter-rater-överensstämmelse – per axel
 
-Två mått, båda rapporteras per axel och för alla fyra axlarna sammantaget:
+Oenighet mellan två rater behandlas **separat från kvalitetsmåttet**. Två rater
+kan vara eniga om att svaret är korrekt (Q2 = `ja`) men oense om evidensen räcker
+(Q3 = `ja`/`nej`) – det är en oenighet om *mätbarheten*, inte ett faktum om
+kvaliteten. Ett enda sammanslaget kappa över alla fyra axlarna döljer både
+systematisk oenighet på en axel och att axlarna mäter olika saker.
 
-**Procentuell överensstämmelse** – andelen poster där raterna valt samma kod
-(bland annat enighet):
+**Krav: överensstämmelse beräknas och rapporteras per axel.**
+
+För varje axel `a ∈ {Q1, Q2, Q3, Q4}` och varje stratum `g` (kategori,
+svårighetsgrad, totalt) beräknas:
 
 ```
-P₀ = (antal poster där raterna är eniga) / (antal poster kodade av båda raterna)
+P₀(a,g) = (antal poster där raterna valt samma kod) / (antal poster kodade av båda)
+pₑ(a,g) = Σ_c (n₁c · n₂c) / N²          (marginalerna per kod c på axeln)
+κ(a,g)  = (P₀(a,g) − pₑ(a,g)) / (1 − pₑ(a,g))
 ```
 
-**Cohens kappa** – korrigerar för den enighet som slumpen skulle ge givet
-marginalerna:
+`ej_tillamplig` på Q4 utesluts ur parvisa beräkningar där raterna inte båda
+angett axeln som tillämplig; `n` anges alltid. För grupper med `N < 10`
+rapporteras `P₀`, `κ` och `n`, men KI/tolkning markeras `otillräckligt underlag`.
 
-```
-P₀  = observerad enighet (se ovan)
-pₑ  = Σ_c (n₁c · n₂c) / N²
+**Rapporten ska innehålla följande tabell (samtliga axlar, ej sammanslagna):**
 
-      n₁c = antal poster där ratare 1 valde kod c
-      n₂c = antal poster där ratare 2 valde kod c
-      N   = antal poster kodade av båda raterna
+| Axel | N | Enighet P₀ | κ | Tolkning (Landis & Koch) |
+|------|--:|-----------:|--:|--------------------------|
+| Q1 ANSWERABLE | … | … | … | … |
+| Q2 ANSWER_CORRECT | … | … | … | … |
+| Q3 EVIDENCE_SUFFICIENT | … | … | … | … |
+| Q4 ANOMALY_HANDLING | … | … | … | … |
 
-κ  = (P₀ − pₑ) / (1 − pₑ)
-```
+Avvikelsegrindarna (G1–G5) bedöms **per axel**:
 
-Tolkning (Landis & Koch, redovisas i rapporten): `< 0,41` låg, `0,41–0,60`
-måttlig, `0,61–0,80` betydande, `> 0,80` i stort sett fullständig. Frågor med
-`ej_tillamplig` på Q4 hålls utanför Q4-kappan eftersom en ratare kan välja
-`ej_tillamplig` där den andra bedömer `ja`; rapporten anger `n` i varje kappa.
+- **G5a** gäller Q2 (axeln som avgör om facit får citeras som oberoende bevis):
+  `P₀ ≥ 90 %` och `κ ≥ 0,70`.
+- **G5b–G5d** gäller Q1, Q3 respektive Q4 var för sig: `κ ≥ 0,60` och
+  `P₀ ≥ 80 %`. Uppfylls inte en axels tröskel ska rapporten **inte** sammanfatta
+  mätningen med ett gemensamt "kappa" utan med vilken axel som är otillräckligt
+  kalibrerad.
+- Ett **gemensamt kappa över alla fyra axlarna får redovisas endast som
+  information** (`κ_allas`), aldrig som grind eller som underlag för slutsats om
+  enskilda axlar. Koderna betyder olika saker per axel, så det gemensamma värdet
+  har ingen självständig betydelse.
+
+**Oenighetsanalys (obligatorisk i rapporten).** Varje oenig post klassas i exakt
+en av tre typer, räknat per axel:
+
+| Typ | Definition | Åtgärd |
+|-----|------------|--------|
+| **felavvikelse** | Raterna är eniga om de andra axlarna men oense på denna (t.ex. Q2 = `ja`/`ja`, Q3 = `ja`/`nej`). | Facit *kan* vara korrekt men underlaget är otillräckligt: åtgärdas i frågegeneratorn/evidensvalet, inte i facitvärdet. |
+| **gränsfall** | Ena rataren har kodat `osäker` och den andra en fast kod. | Redovisas separat; räknas som `osäker` i felprocenten enligt 4.1 och kräver tredje ratare. |
+| **faktaoenighet** | Raterna har olika fast kod på samma axel (`ja`/`nej`). | Tredje rataren avgör; posten klassas i en felorsak (4.4) och felprocenten räknas på avgörandet. |
+
+Rapporten redovisar antal och andel per typ och axel. En mätning där
+*felavvikelser* dominerar på Q3 men Q2-kappan är god får **inte** sammanfattas
+som "facit är korrekt" – slutsatsen ska då vara att evidensvalet är den svaga
+länken.
 
 ### 4.4 Felorsaksklassificering
 
@@ -372,15 +430,58 @@ villkor är uppfyllda för det publicerade urvalet:
 | G2 | Q3 EVIDENCE_SUFFICIENT, tillräcklighet (andel `ja`) | punktestimat **≥ 90 %** **och** Wilson 95 % KI nedre gräns **≥ 85 %** |
 | G3 | Q1 ANSWERABLE, klassning | andel `ja` där facit säger `ANSWERABLE` **≥ 95 %**; andel `nej` där facit säger `INSUFFICIENT_EVIDENCE`/`CONFLICTING_EVIDENCE` **≥ 85 %** |
 | G4 | Q4 ANOMALY_HANDLING (poster där axeln är tillämplig) | andel `ja` **≥ 85 %**, och `N ≥ 10` |
-| G5 | Inter-rater-överensstämmelse på Q2 (alla rater) | procent **≥ 90 %**; Cohen's κ **≥ 0,70** |
+| G5a | Inter-rater-överensstämmelse på **Q2** (axeln bakom G1) | procent **≥ 90 %**; Cohen's κ **≥ 0,70** |
+| G5b | Inter-rater-överensstämmelse på **Q1** | procent **≥ 80 %**; Cohen's κ **≥ 0,60** |
+| G5c | Inter-rater-överensstämmelse på **Q3** | procent **≥ 80 %**; Cohen's κ **≥ 0,60** |
+| G5d | Inter-rater-överensstämmelse på **Q4** (tillämpliga poster) | procent **≥ 80 %**; Cohen's κ **≥ 0,60** |
 | G6 | Felorsaker | **100 %** av alla poster kodade `nej`/`osäker` har en av de fyra orsakerna, och varje `validatorlucka` har ett namngivet motbevis (vilken regel som inte fångade felet) i rapporten |
 | G7 | Urvalsintegritet | varje stratum med ≥ 10 giltiga frågor i populationen har ≥ 1 bedömd post; alla blindposter (100 frågor × 2 rater = 200 kodningar) är kodade |
 | G8 | Blindning | blindkopian innehåller inte scenario, gold, `precision`, kategori eller svårighetsgrad, och blindningen intygas i rapporten |
 
-Grindarna gäller **urvalet**, inte hela korpusen (se [Omfattning](#8-omfattning-och-begränsningar)).
+Grindarna gäller **urvalet**, inte hela korpusen (se
+[Omfattning](#8-omfattning-och-begränsningar)). Ett eventuellt
+populationsviktat tal (5.4) får **inte** användas för att kryssa i en grind.
+Överensstämmelse bedöms **per axel**; ett sammanslaget kappa över alla fyra
+axlarna redovisas som information men är aldrig en grind (4.3).
 Om en tröskel missas får facit citeras med mätningen som **indikation**, aldrig
 som oberoende bevis; rapportens slutsats ska då ange exakta avvikelser och
 vilken åtgärd (frågegenerering, validator, scenario) som följer.
+
+### 5.4 Populationsviktning – urvalet får inte blandas ihop med hela korpusen
+
+Urvalet är **stratifierat**, inte ett likformigt stickprov. Ett obearbetat
+felprocent över urvalet beskriver därför **urvalet**, inte de 1 723 giltiga
+frågorna. Vill man uppskatta felprocenten i hela populationen måste urvalet
+viktas om med de anatomiska vikterna `w_s = N_s / N` (stratumets andel av
+populationen):
+
+```
+w_s       = N_s / N              (stratumets andel av populationen)
+p̂_s       = k_s / n_s            (andel "ja" bland bedömda poster i stratum s)
+p̂_viktat  = Σ_s w_s · p̂_s
+```
+
+Regler:
+
+1. **Standardredovisningen är den oviktade urvalsfelprocenten** med Wilson-KI.
+   Den är exakt för urvalet och den får citeras som
+   *"X % av det publicerade urvalet"*.
+2. **Populationsskattningen kräver vikterna** och redovisas som ett **separat**
+   tal, märkt `skattning för populationen`, med stratumvikterna i rapporten.
+   Den kräver att **varje stratum i populationen är representerat** i urvalet
+   (G7). Saknas ett stratum får ingen populationsskattning göras – då rapporteras
+   endast urvalsvärdet och bristen namnges.
+3. Populationsskattningen har **större osäkerhet** än urvalsvärdet eftersom den
+   viktar små strata tungt: standardfel med stratifierat urval
+   `SE = sqrt(Σ_s w_s² · p̂_s(1−p̂_s)/n_s)`, och 95 %-KI rapporteras som
+   `p̂_viktat ± 1,959964 · SE` (för intervall i procent används Wilson på den
+   oviktade basen; båda redovisas om de skiljer sig).
+4. **Slutsatsen måste ange vilket tal som avses.** Grindarna G1–G4 bedöms på
+   **urvalsvärdet** (det frysta urvalet är mätprotokollets enhet); en
+   populationsskattning får aldrig användas för att kryssa i en grind.
+5. Ett nytt eller ändrat urval kräver **ny rapport** med egen
+   `selection_sha256`. Ett viktat tal från ett urval får inte tillämpas på ett
+   annat.
 
 ### 5.3 Publicerad rapport
 
@@ -448,7 +549,8 @@ Output-katalogen innehåller (format `manifest.json` schema 1.0, `sample_version
 │                     # questions[].{sample_id, row, contract_id, question_id,
 │                     # category, difficulty, answerability, language, question,
 │                     # expected_answer, expected_answer_structured, evidence,
-│                     # evidence_quote, evidence_quotes, document_title, document_text}
+│                     # evidence_quote, evidence_quotes, document_title,
+│                     # document_text, document_texts {document_id: text}}
 ├── selection.json    # urvalet verifierbart: opaka sample_id -> (contract_id,
 │                     # question_id), stratum-metadata och selection_sha256
 ├── ratings.csv       # blind ifyllningsblankett: sample_id, question,
@@ -587,6 +689,37 @@ svenska avtal ska dokumenteras i rapporten.
   facit ger bra svar. Det är en annan mätning (se README:s benchmarkavsnitt).
 - `provider=mock`-dataset får mätas, men mätningens resultat får aldrig citeras
   som modellresultat.
+
+## 9. Nästa mätning: villkor, motsägelser och otillräcklig evidens (nivå 5–6)
+
+Den första mätningen ska **förbli ett fryst kvalitetsprov av consulting-datasetet**
+(nivå 2) och får inte blandas ihop med nivå 5–6. Det är ett medvetet val: att
+ändra populationen mitt i en mätning gör resultatet otydligt.
+
+Nivå 5–6 kräver ett **eget** prov med eget arkiv och egen rapport, eftersom
+bedömningen då handlar om annat:
+
+| Fråga | Varför nivå 5–6 är en egen mätning |
+|-------|-------------------------------------|
+| Q1 ANSWERABLE | Populationssanningen är inte alltid `ANSWERABLE`; `CONDITIONAL`, `CONFLICTING_EVIDENCE` och `INSUFFICIENT_EVIDENCE` är **förväntade** svar och måste kodas mot rätt klass, inte som fel. |
+| Q2 ANSWER_CORRECT | Svaret kan vara *rätt villkorat* ("om bilaga B gäller …") utan att vara ett enskilt värde; korrekthet är då att **rätt klass** anges. |
+| Q3 EVIDENCE_SUFFICIENT | Evidensen kan med flit peka på en **saknad** bilaga. Q3 ska då bedöma om frånvaron är korrekt deklarerad, inte om citatet räcker. |
+| Q4 ANOMALY_HANDLING | På nivå 2 är axeln nästan alltid `ej_tillamplig`; på nivå 5–6 är den huvudfrågan (undantag, motsägelse, tillägg som ersätter). |
+
+Praktiska krav för det provet (samma verktyg, nytt arkiv/seed):
+
+1. Generera och frys ett nivå 5–6-arkiv (alla 10 avtalstyper, båda svårighetsgraderna),
+   publicera det som release-asset med SHA-256 och verifiera med
+   `contractforge validate`.
+2. Utöka bedömningsblanketten med **klassaxeln** – en kod per post för vilken
+   answerability som är korrekt (`ANSWERABLE` / `CONDITIONAL` /
+   `CONFLICTING_EVIDENCE` / `INSUFFICIENT_EVIDENCE`) – och mät G3 mot den.
+3. Separata grindar: Q1-klassning är den centrala axeln; Q2 handlar om att klassen
+   är rätt, inte om att ett värde finns.
+4. Rapporten får **inte** jämföra felprocenten med nivå 2-mätningen som ett
+   "försämringsmått" – populationerna är olika.
+5. Nivå 5–6 är de fall som är mest värdefulla för svårare testkorpora; mätningen
+   bör därför publiceras **innan** de används som testdata i externa experiment.
 
 ## Referenser
 

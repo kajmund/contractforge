@@ -247,6 +247,13 @@ deterministiska valideraren (rapportmall:
 [docs/quality-report-mall.md](docs/quality-report-mall.md)). Status: **antagen
 men ej mätt.** v0.1.1 är fryst som referens.
 
+**Innan raterna börjar** (protokollet 4.3, 5.4 och 3.0): överensstämmelse mäts
+och rapporteras **per axel** (Q1–Q4 var för sig; ett sammanslaget kappa är
+endast information), raterna ska läsa **hela dokumentpaketet** – ett undantag i
+en annan klausul kan ändra svaret – och en eventuell
+populationsskattning för de 1 723 frågorna viktas separat med stratumvikter
+(urvalsvärdet är standard och det som grindarna bedöms på).
+
 Ett färdigt mätpaket finns: [`examples/qsample_live_100/`](examples/qsample_live_100/)
 – 100 blinda frågor från live-datasetet (källa `cerebras_consulting_100.zip`,
 SHA-256 `43448450…ae7e`, urvals-seed 2026, `selection_sha256`

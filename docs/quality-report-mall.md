@@ -143,18 +143,40 @@ grupp.
 | 5 | `…` | `…` % | `…` – `…` | `…` | `…` % | `…` – `…` | `…` | `…` % |
 | 6 | `…` | `…` % | `…` – `…` | `…` | `…` % | `…` – `…` | `…` | `…` % |
 
-## 7. Inter-rater-överensstämmelse
+## 7. Inter-rater-överensstämmelse – per axel
 
-| Axel | Poster kodade av båda | Eniga | P₀ (procent) | pₑ | Cohen's κ | Tolkning |
-|------|----------------------:|------:|---:|---:|---:|----------|
-| Q1 ANSWERABLE | `…` | `…` | `…` % | `…` | `…` | låg/måttlig/betydande/fullständig |
-| Q2 ANSWER_CORRECT | `…` | `…` | `…` % | `…` | `…` | … |
-| Q3 EVIDENCE_SUFFICIENT | `…` | `…` | `…` % | `…` | `…` | … |
-| Q4 ANOMALY_HANDLING | `…` | `…` | `…` % | `…` | `…` | … |
-| **Sammantaget** | `…` | `…` | `…` % | `…` | `…` | … |
+Överensstämmelse redovisas **per axel** (protokollet 4.3). Ett sammanslaget
+kappa får stå **endast som information** och används aldrig som grind.
+
+| Axel | N (kodade av båda) | Eniga | P₀ | pₑ | Cohen's κ | Tolkning | Grind |
+|------|-------------------:|------:|---:|---:|---:|----------|-------|
+| Q1 ANSWERABLE | `…` | `…` | `…` % | `…` | `…` | låg/måttlig/betydande/fullständig | G5b: ja / nej |
+| Q2 ANSWER_CORRECT | `…` | `…` | `…` % | `…` | `…` | … | G5a: ja / nej |
+| Q3 EVIDENCE_SUFFICIENT | `…` | `…` | `…` % | `…` | `…` | … | G5c: ja / nej |
+| Q4 ANOMALY_HANDLING | `…` | `…` | `…` % | `…` | `…` | … | G5d: ja / nej |
+| *(information: alla axlar sammantaget – ej grind)* | `…` | `…` | `…` % | `…` | `…` | … | – |
+
+### 7.1 Oenighetsanalys (obligatorisk)
+
+| Axel | Felavvikelse | Gränsfall | Faktaoenighet | Summa |
+|------|-------------:|----------:|--------------:|------:|
+| Q1 ANSWERABLE | `…` | `…` | `…` | `…` |
+| Q2 ANSWER_CORRECT | `…` | `…` | `…` | `…` |
+| Q3 EVIDENCE_SUFFICIENT | `…` | `…` | `…` | `…` |
+| Q4 ANOMALY_HANDLING | `…` | `…` | `…` | `…` |
 
 Oenighet avgjord av tredje rataren: `antal` poster.
 `oenighet kvar` (alla tre svar olika, räknade som `osäker`): `antal` poster.
+
+Om *felavvikelser* dominerar på Q3 medan Q2-kappan är god: slutsatsen ska vara
+att evidensvalet är den svaga länken – **inte** att "facit är korrekt".
+
+## 7.2 Fullständig dokumentläsning (protokollet 3.0)
+
+- Bekräfta att raterna läst **hela dokumentet/paketet** (inte bara citatet): ja / nej
+- Antal poster där ett undantag eller en ersättning i **annat dokument** ändrade
+  svaret: `…` (poster: `B-…`)
+- Av dessa: korrekt fångade av facit `…`, missade av facit `…`
 
 ## 8. Felorsaker
 
@@ -181,6 +203,20 @@ Motbevis för varje `validatorlucka` (vilken regel i
 
 - `B-…`: `…`
 
+## 8.2 Populationsskattning (om varje stratum representeras)
+
+Urvalsvärdet i avsnitt 5 är standardredovisningen. En **separat** skattning för
+hela populationen kräver att varje stratum i populationen har minst en bedömd
+post (G7); annars skrivs "ingen populationsskattning – stratum `…` saknas".
+
+| Stratum (kategori/svårighet/answerability) | N_s (population) | n_s (bedömda) | p̂_s | w_s | w_s · p̂_s |
+|-------------------------------------------|-----------------:|--------------:|----:|---:|----------:|
+| `…` | `…` | `…` | `…` | `…` | `…` |
+
+- p̂_viktat = `…` % (oviktat urvalsvärde: `…` %)
+- SE (stratifierat) = `…` %; 95 % KI = `…` – `…`
+- Populationsskattningen används **inte** för grindarna (5.4).
+
 ## 9. Grindstatus
 
 | Grind | Krav | Uppmätt | Uppfylld |
@@ -189,7 +225,10 @@ Motbevis för varje `validatorlucka` (vilken regel i
 | G2 Q3 tillräcklighet | punkt ≥ 90 % **och** Wilson nedre ≥ 85 % | `…` % / `…` % | ja / nej |
 | G3 Q1 klassning | `ANSWERABLE` ⇒ ja ≥ 95 %; `INSUFFICIENT`/`CONFLICTING` ⇒ nej ≥ 85 % | `…` % / `…` % | ja / nej |
 | G4 Q4 anomalihantering | andel ja ≥ 85 % och `N ≥ 10` | `…` % (N = `…`) | ja / nej |
-| G5 Q2 inter-rater | procent ≥ 90 % och κ ≥ 0,70 | `…` % / `…` | ja / nej |
+| G5a Q2 inter-rater | procent ≥ 90 % och κ ≥ 0,70 | `…` % / `…` | ja / nej |
+| G5b Q1 inter-rater | procent ≥ 80 % och κ ≥ 0,60 | `…` % / `…` | ja / nej |
+| G5c Q3 inter-rater | procent ≥ 80 % och κ ≥ 0,60 | `…` % / `…` | ja / nej |
+| G5d Q4 inter-rater | procent ≥ 80 % och κ ≥ 0,60 | `…` % / `…` | ja / nej |
 | G6 Felorsaker klassificerade | 100 % av felposterna | `…` % | ja / nej |
 | G7 Urvalsintegritet | stratifierat urval; alla stratum ≥ 10 har ≥ 1 post; 200 kodningar | `…` | ja / nej |
 | G8 Blindning | blindkopior enligt 2.3, intygat i avsnitt 2 och 3 | ja / nej | ja / nej |
@@ -197,7 +236,8 @@ Motbevis för varje `validatorlucka` (vilken regel i
 
 ## 10. Slutsats
 
-Vad mätningen bevisar: `…`
+Vad mätningen bevisar (urvalsvärdet; populationsskattningen redovisas separat
+och används inte för grindar): `…`
 
 Vad mätningen **inte** bevisar (urvalets omfattning, ej testade kategorier,
 datasetspecifika resultat): `…`

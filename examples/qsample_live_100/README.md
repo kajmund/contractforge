@@ -15,6 +15,14 @@ genererades från.
 | `selection.json` | Urvalet: vilka frågor som drogs (opaka id:n + härkomst) och `selection_sha256` |
 | `manifest.json` | Koordinatorns kopia: förväntat svar, evidensspann och dokumentets fulla text |
 
+**Läs hela dokumentet – och hela paketet.** Evidenscitatet är en ingång, inte
+hela underlaget. Läs `document_texts` (alla dokument i avtalet: huvudavtal,
+bilagor och tillägg) innan du kodar Q1–Q4. Ett undantag, en motsägelse eller ett
+tillägg i en annan klausul kan ändra vad som gäller; om svaret beror på en sådan
+bestämmelse ska du koda Q2 = `nej` när förväntat svar anger det överspelade
+värdet och skriva i `comment` vilket dokument/klausul som avgjorde. Se
+`docs/quality-protocol.md` avsnitt 3.0.
+
 `evidence_quote` innehåller ett eller flera citat. När frågan har flera
 evidensspann visas de i radavdelat format där varje del är en exakt avskrift ur
 dokumentet (delarna är åtskilda av en rad med `---`); varje del kan slås upp
@@ -79,4 +87,4 @@ Ett resultat utan dessa värden kan inte hänföras till en bestämd källa. Är
 Fält i `manifest.json`: `evidence[].start`/`end` är teckenoffsets i
 `document_text` (start inklusiv, end exklusiv) och `evidence_quote` är exakt den
 delsträngen. Har en fråga flera spann är de sammanfogade med en rad som bara
-innehåller `---`. Urvalsmanifestet skapades 2026-10-31T15:06:37.499418+00:00.
+innehåller `---`. Urvalsmanifestet skapades 2026-10-31T15:13:35.414810+00:00.

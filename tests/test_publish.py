@@ -555,3 +555,20 @@ def test_stratified_sample_is_deterministic_and_respects_strata():
     assert [item.sort_key for item in first] == [item.sort_key for item in second]
     # The rare half (50 % of the pool) must get its proportional share: 5 items.
     assert sum(1 for item in first if item.question.category.value == "rare") == 5
+
+
+def test_packet_publishes_the_whole_document_package(dataset, tmp_path):
+    """A rater must be able to check an exception in another document (3.0)."""
+
+    _, archive = dataset
+    out = publish_question_sample(archive, tmp_path / "s", count=8, seed=2)
+
+    for question in _read_manifest(out)["questions"]:
+        package = question["document_texts"]
+        assert package, "every question must ship its document package"
+        assert package[question["evidence"][0]["document_id"]] == question["document_text"]
+        for quote in question["evidence_quotes"]:
+            assert any(quote in text for text in package.values())
+    readme = (out / "README.md").read_text(encoding="utf-8")
+    assert "document_texts" in readme
+    assert "3.0" in readme

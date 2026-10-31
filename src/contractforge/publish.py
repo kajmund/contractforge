@@ -145,6 +145,16 @@ class _PoolQuestion:
     def document_text(self) -> str:
         return self.canonical[self.document_id]
 
+    def document_package(self) -> dict[str, str]:
+        """Every document of the contract, so a rater can check other clauses.
+
+        A question is judged against the whole package: an amendment or an
+        appendix can contain the exception that decides the answer
+        (docs/quality-protocol.md 3.0).
+        """
+
+        return dict(sorted(self.canonical.items()))
+
     def evidence_quotes(self) -> list[str]:
         """The exact canonical slice for every evidence span, in order."""
 
@@ -406,6 +416,7 @@ def _question_record(row: int, item: _PoolQuestion) -> dict[str, Any]:
         "evidence_quotes": item.evidence_quotes(),
         "document_title": item.document_title,
         "document_text": item.document_text,
+        "document_texts": item.document_package(),
     }
     leaked = _forbidden_fields(record)
     if leaked:
@@ -601,6 +612,14 @@ genererades från.
 | `ratings.csv` | Ifyllningsbar bedömningsblankett, en rad per fråga (UTF-8 med BOM, semikolon) |
 | `selection.json` | Urvalet: vilka frågor som drogs (opaka id:n + härkomst) och `selection_sha256` |
 | `manifest.json` | Koordinatorns kopia: förväntat svar, evidensspann och dokumentets fulla text |
+
+**Läs hela dokumentet – och hela paketet.** Evidenscitatet är en ingång, inte
+hela underlaget. Läs `document_texts` (alla dokument i avtalet: huvudavtal,
+bilagor och tillägg) innan du kodar Q1–Q4. Ett undantag, en motsägelse eller ett
+tillägg i en annan klausul kan ändra vad som gäller; om svaret beror på en sådan
+bestämmelse ska du koda Q2 = `nej` när förväntat svar anger det överspelade
+värdet och skriva i `comment` vilket dokument/klausul som avgjorde. Se
+`docs/quality-protocol.md` avsnitt 3.0.
 
 `evidence_quote` innehåller ett eller flera citat. När frågan har flera
 evidensspann visas de i radavdelat format där varje del är en exakt avskrift ur
