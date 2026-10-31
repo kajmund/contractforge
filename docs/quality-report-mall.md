@@ -242,7 +242,37 @@ post (G7); annars skrivs "ingen populationsskattning – stratum `…` saknas".
 - SE (stratifierat) = `…` %; 95 % KI = `…` – `…`
 - Populationsskattningen används **inte** för grindarna (5.4).
 
-## 8.3 Ratare, blanketter och oberoende (protokollet 7.4–7.5)
+## 8.3 Ratare, blanketter och oberoende (protokollet 7.4–7.5, 7.7)
+
+**Granskar- och tidslogg** (`rater_log.json`, obligatorisk – saknas den är G8 ej uppfylld):
+
+| rater_id | Namn | Typ | Kvalifikation | Blankett | SHA-256 | Utlämnad | Inlämnad | Isolerad (intygat) | Tidigare exponering |
+|---|---|---|---|---|---|---|---|---|---|
+| A | `…` | human | `…` | `ratings_A.csv` | `…` | `…` | `…` | ja/nej | none |
+| B | `…` | human | `…` | `ratings_B.csv` | `…` | `…` | `…` | ja/nej | none |
+
+**Adjudikering** (`adjudication.csv`, skild från förstahandskodningen):
+
+| Fält | Värde |
+|------|-------|
+| Tredje ratare (namn, typ) | `…` |
+| Antal poster avgjorda efter inlämning | `…` |
+| Varav förblev oeniga (`oenighet kvar`) | `…` |
+| SHA-256 för frysta individuella blanketter | `…` / `…` |
+| P₀/κ beräknat **före** adjudikering | ja / nej |
+
+**Jämförelse mot den frysta AI-mätningen** (per post, per axel – aldrig i N):
+
+| Axel | Poster jämförda | Människa = modell | Modell underkände, människa godkände | Människa underkände, modell godkände |
+|------|----------------:|------------------:|------------------------------------:|-------------------------------------:|
+| Q1 | `…` | `…` | `…` | `…` |
+| Q2 | `…` | `…` | `…` | `…` |
+| Q3 | `…` | `…` | `…` | `…` |
+
+Kandidatposter från den preliminära mätningen (`cfq-…`, 8 st): bekräftade av människan `…`, avfärdade `…`.
+Modellpassen är **inte** oberoende observationer; deras koder bidrar aldrig till N i en grind.
+
+## 8.4 Ratare, blanketter och oberoende – detaljer
 
 | Fält | Värde |
 |------|-------|

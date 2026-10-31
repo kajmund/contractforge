@@ -92,6 +92,23 @@ jobs:
           path: /tmp/smoke
           retention-days: 7
 
+  review-gate:
+    name: review findings F1-F12 hold on this commit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+
+      - name: Review checks (F1-F12)
+        run: python benchmarks/review_checks.py
+
   integration-gate:
     name: integration gate (question generation == dataset validation)
     runs-on: ubuntu-latest

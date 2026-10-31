@@ -261,6 +261,10 @@ hashar, och `score-ratings` beräknar felprocent, Wilson-KI, överensstämmelse
 alltid på de **ursprungliga individuella** koderna; en efterhandsbedömning får
 bara avgöra postens kvalitet, aldrig kappavärdet.
 
+De tolv granskningsfynden från v0.1.0 återtestas separat och reproducerbart med
+`python benchmarks/review_checks.py` (en kontroll per fynd, körs även i CI).
+Se även [`docs/publishing-2026-10-31.md`](docs/publishing-2026-10-31.md).
+
 En **preliminär modellbaserad omgång** är genomförd (gpt-oss-120b + qwen-3.8-27b,
 två pass, 100 frågor): [`docs/quality-report-ai-preliminary.md`](docs/quality-report-ai-preliminary.md).
 Den är en prioriteringslista för den mänskliga granskningen – inte en

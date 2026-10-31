@@ -768,20 +768,6 @@ och därmed bli icke-oberoende. Kravet:
    enskilda poster och får inte veta hur många fel den andra hittat – förrän båda
    lämnat in sin fullständiga kodning.
 
-### 7.6 Mänsklig + modellbaserad mätning (valfri, rekommenderad jämförelse)
-
-Man kan låta två mänskliga granskare göra den primära mätningen och *dessutom* två
-modeller koda samma urval. Då gäller:
-
-1. De två mätningarna rapporteras **separat** (egen tabell per ratarpar), aldrig
-   sammanslagna. Modellmätningen är preliminär och får inte ersätta den mänskliga.
-2. Samma blindkopior används för båda paren (nya hashar om nya blanketter skapas).
-3. Jämförelsen rapporterar hur väl modellernas koder och de mänskliga koderna
-   överensstämmer per axel – men ett högt värde bevisar inte att modellerna har
-   rätt, bara att de är eniga.
-4. Grindarna G1–G5 bedöms på den **mänskliga** mätningen när en sådan finns;
-   modellmätningen får status **preliminär/indikation**.
-
 ### 7.5 Efter inlämning: konsensus får aldrig ersätta de individuella bedömningarna
 
 Efter kodningen följer, i den här ordningen:
@@ -801,6 +787,69 @@ Efter kodningen följer, i den här ordningen:
 
 En rapport som beräknar kappa på efterhandsjämkade svar är ogiltig och räknas inte
 som genomförd mätning.
+
+### 7.6 Mänsklig + modellbaserad mätning (valfri, rekommenderad jämförelse)
+
+Man kan låta två mänskliga granskare göra den primära mätningen och *dessutom* två
+modeller koda samma urval. Då gäller:
+
+1. De två mätningarna rapporteras **separat** (egen tabell per ratarpar), aldrig
+   sammanslagna. Modellmätningen är preliminär och får inte ersätta den mänskliga.
+2. Samma blindkopior används för båda paren (nya hashar om nya blanketter skapas).
+3. Jämförelsen rapporterar hur väl modellernas koder och de mänskliga koderna
+   överensstämmer per axel – men ett högt värde bevisar inte att modellerna har
+   rätt, bara att de är eniga.
+4. Grindarna G1–G5 bedöms på den **mänskliga** mätningen när en sådan finns;
+   modellmätningen får status **preliminär/indikation**.
+
+### 7.7 Den mänskliga körningen – orörda blanketter, spårbarhet, åtskild adjudikering
+
+Kraven nedan är obligatoriska för den mätning som ska bedömas mot grindarna.
+
+**1. Orörda blanketter.** De mänskliga raterna får alltid blanketter direkt ur
+`publish-questions` (eller en fryst kopia vars SHA-256 dokumenteras), aldrig en
+fil som varit ifylld av någon annan eller redigerad i efterhand. Ett paket som
+återanvänts av en tidigare ratare får inte användas för en ny primärmätning.
+
+**2. Ingen förhandsinformation.** En granskare som har sett urvalet, kandidat-id:n,
+modellresultat eller den preliminära rapporten får **inte** räknas som blind
+förstahandsgranskare. Det gäller även den som sett `docs/quality-report-ai-preliminary.md`.
+En sådan person kan delta som **tredje ratare i adjudikeringen** (7.5), men aldrig
+som A eller B.
+
+**3. Obligatorisk logg per blankett** (`rater_log.json`, skrivs av koordinatorn):
+
+| Fält | Krav |
+|------|------|
+| `rater_id` | `A` / `B` (neutralt id, aldrig namn i blanketten) |
+| `name`, `kind` (`human`), `qualifications` | granskarens namn, juridiskt relevant erfarenhet |
+| `sheet_file`, `sheet_sha256` | exakt den fil som kodades |
+| `received_at`, `completed_at` | ISO-8601 med tidszon, när blanketten utlämnades respektive lämnades in |
+| `isolation_attested` | intyg: ingen kontakt med den andra rataren, inga modellresultat sedda |
+| `prior_exposure` | om granskaren sett urvalet/modellresultat tidigare (`none` krävs för A/B) |
+
+Loggen publiceras med rapporten. Saknas den räknas G8 som ej uppfylld.
+
+**4. Adjudikering åtskild från förstahandskodningen.** Se 7.5: de individuella
+koderna fryses först (hashas), därefter beräknas överensstämmelsen, och först
+därefter får en tredje ratare eller en dokumenterad konsensusbiläggning avgöra
+oeniga poster. Adjudikeringen skrivs i en **egen fil** (`adjudication.csv`) med
+`sample_id`, tredje ratarens fyra koder och motivering – aldrig i A:s eller B:s
+blanketter.
+
+**5. Jämförelse mot modellmätningen.** Jämförelsen görs **per post, per axel** mot
+den frysta AI-körningen (7.6):
+
+- jämför `sample_id`-visa koder (människa vs modell) per axel – inte aggregerade
+  nyckeltal;
+- jämför **felorsaker** för de poster där någon part underkänt facit;
+- redovisa hur många av den preliminära mätningens kandidatposter som
+  människan bekräftar respektive avfärdar.
+
+Modellpassen är **inte oberoende observationer**: de kördes på samma underlag, via
+samma leverantör, i två pass av samma typ. Deras koder får därför aldrig läggas in
+i P₀/κ tillsammans med de mänskliga, och de får inte öka N i någon grind.
+Enighet mellan modell och människa redovisas som deskriptiv statistik.
 
 ## 8. Omfattning och begränsningar
 

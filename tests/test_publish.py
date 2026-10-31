@@ -604,3 +604,25 @@ def test_shipped_ai_review_sheets_are_scored_by_the_engine(tmp_path):
     assert payload["completeness"]["complete"] is True
     assert payload["reviewer"]["assessment_type"] == "modellbaserad oberoende bedömning"
     assert payload["axes"]["Q2"]["n"] == 100
+
+
+def test_review_findings_script_reports_all_checks():
+    """The F1–F12 re-test must stay green and machine-readable."""
+
+    import subprocess
+    import sys
+
+    root = Path(__file__).resolve().parents[1]
+    completed = subprocess.run(
+        [sys.executable, str(root / "benchmarks" / "review_checks.py"), "--json"],
+        capture_output=True,
+        text=True,
+        cwd=root,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stdout[-2000:] + completed.stderr[-2000:]
+    payload = json.loads(completed.stdout)
+    assert payload["all_passed"] is True
+    assert {check["finding"] for check in payload["checks"]} == {
+        f"F{i}" for i in range(1, 13)
+    }
