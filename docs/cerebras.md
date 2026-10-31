@@ -45,6 +45,52 @@ Provider (Protocol)
 - Kastar `ProviderError` efter uttömda retries, `ConfigError` om nyckeln saknas
   när providern skapas och `GenerationError` om modellens JSON inte kan användas.
 
+## Vilka modeller kan användas?
+
+ContractForge är modellagnostisk: `--model` (eller `CONTRACTFORGE_MODEL`) skickas
+orörd till `POST /chat/completions`. Vilka modeller som **faktiskt är
+tillgängliga på ditt Cerebras-konto** varierar med konto, plan och tidpunkt –
+verifiera alltid mot API:t innan en körning:
+
+```bash
+curl -s https://api.cerebras.ai/v1/models \
+  -H "Authorization: Bearer $CEREBRAS_API_KEY" | python3 -m json.tool
+```
+
+Vid verifieringen 2026-10-31 svarade kontot med två modeller:
+
+| Modell-id | Verifierat i ContractForge | Anmärkning |
+|-----------|----------------------------|------------|
+| `gpt-oss-120b` | Ja – produktionsval, 100-avtalskörningen bakom `cerebras_consulting_100.zip` | Standard (`CONTRACTFORGE_MODEL`) |
+| `qwen-3.8-27b` | Ja – smoke-test + 3-avtalskörning med `validate` = PASS | Se nedan |
+
+Andra id:n (t.ex. `llama-3.3-70b`, `qwen-3-32b`, `zai-glm-4.6`) gav
+`404 model_not_found` på samma nyckel vid samma tillfälle. Lita inte på
+README-exempel från andra projekt – fråga `/models`.
+
+### Så fungerar `qwen-3.8-27b` med ContractForge
+
+- **Strukturerad JSON:** fungerar (`response_format: json_object`). Svaret är en
+  ren JSON-sträng som ContractForge parsar; inga kodändringar behövs.
+- **Resonemangstokens:** modellen returnerar ett `reasoning`-fält vid sidan av
+  `content` och `finish_reason: length`/`stop` beror på den totala
+  completion-budgeten (inklusive resonemang). Vid korta `max_tokens` kan allt gå
+  åt till resonemang och `content` bli tomt → `ProviderError: no message
+  content`. Använd därför **minst 8 000 output-tokens** för avtalsgenerering:
+
+  ```bash
+  CONTRACTFORGE_MAX_TOKENS=8000 contractforge generate \
+    --type consulting --count 3 --clauses 8 --difficulty 2 \
+    --provider cerebras --model qwen-3.8-27b --output ./dataset
+  ```
+
+- **Verifierat** (2026-10-31): 3 konsultavtal, seed 4242 → 3/3 godkända, 54
+  validerade golden-frågor, 27 163 tokens, `validate` = PASS.
+- **Kostnad och hastighet:** samma principer som för andra modeller – priser
+  konfigureras explicit och latens mäts per anrop. `gpt-oss-120b` var snabbare i
+  smoke-testet (~0,5–0,6 s mot ~0,4–0,7 s beroende på resonemangsmängd), men
+  skillnaderna är för små för att dra slutsatser av utan ett benchmark.
+
 ## Promptversioner
 
 Promptarna ligger i `src/contractforge/generation/prompts/<version>/` och

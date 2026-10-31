@@ -180,7 +180,7 @@ att evidensvalet är den svaga länken – **inte** att "facit är korrekt".
 
 ## 8. Felorsaker och åtgärder
 
-Varje post som kodats `nej`/`osäker` på minst en axel har exakt en av de **sju**
+Varje post som kodats `nej`/`osäker` på minst en axel har exakt en av de **sex**
 orsakerna (protokollet 4.4). Summan ska vara lika med antalet felaktiga poster.
 
 | Orsak | Roll | Antal | Andel av fel | Poster (blind-id) |
@@ -275,7 +275,7 @@ systematiska fel.
 | G5b Q1 inter-rater | procent ≥ 80 % och κ ≥ 0,60 | `…` % / `…` | ja / nej |
 | G5c Q3 inter-rater | procent ≥ 80 % och κ ≥ 0,60 | `…` % / `…` | ja / nej |
 | G5d Q4 inter-rater | procent ≥ 80 % och κ ≥ 0,60 | `…` % / `…` | ja / nej |
-| G6 Felorsaker klassificerade | 100 % av felposterna, en av sju orsaker, åtgärdstabell ifylld | `…` % | ja / nej |
+| G6 Felorsaker klassificerade | 100 % av felposterna, en av sex orsaker, åtgärdstabell ifylld | `…` % | ja / nej |
 | G7 Urvalsintegritet | stratifierat urval; alla stratum ≥ 10 har ≥ 1 post; 200 kodningar | `…` | ja / nej |
 | G8 Blindning | blindkopior enligt 2.3, intygat i avsnitt 2 och 3 | ja / nej | ja / nej |
 | **Samtliga** | alla ovan | | ja / nej |

@@ -401,7 +401,7 @@ grundval av vad som är lätt att åtgärda:
 | `genereringsfel` | Dokumenttexten själv är felaktig eller tillhör inte scenariot: fel belopp/part/datum skrivet (inte bara felaktigt återgivet i facit), text som motsäger sig själv utan avsiktlig anomali, eller en klausul som saknas. | Endast när raterna kan peka på en diskrepans **i dokumentet** (t.ex. mot en annan klausul), inte mot facit. Åtgärd: generering/validering. |
 | `juridisk_tolkning` | Frågan kräver en juridisk bedömning som går utöver vad dokumenten entydigt säger: ett villkor är tolkningsbart, två giltiga regler kan samverka på olika sätt, eller svaret beror på rättstillämpning utanför texten. | Får användas endast när texten är korrekt och facit inte självklart följer av den. Räknas **inte** som ett facitfel i Q2-statistiken men redovisas separat; åtgärd: frågan bör klassas som `CONDITIONAL`/`INSUFFICIENT_EVIDENCE` eller formuleras om. |
 
-De sju orsakerna mappar till varsin typ av åtgärd och **styr vilket nästa steg
+De **sex** orsakerna mappar till varsin typ av åtgärd och **styr vilket nästa steg
 som väljs om en grind fallerar**:
 
 | Orsak | Åtgärd (nästa steg) |
@@ -453,7 +453,7 @@ villkor är uppfyllda för det publicerade urvalet:
 | G5b | Inter-rater-överensstämmelse på **Q1** | procent **≥ 80 %**; Cohen's κ **≥ 0,60** |
 | G5c | Inter-rater-överensstämmelse på **Q3** | procent **≥ 80 %**; Cohen's κ **≥ 0,60** |
 | G5d | Inter-rater-överensstämmelse på **Q4** (tillämpliga poster) | procent **≥ 80 %**; Cohen's κ **≥ 0,60** |
-| G6 | Felorsaker | **100 %** av alla poster kodade `nej`/`osäker` har exakt en av de **sju** orsakerna (4.4), varje `validatorlucka`/`genereringsfel` har ett namngivet motbevis (vilken regel som inte fångade felet), och rapporten innehåller åtgärdstabellen orsak × axel |
+| G6 | Felorsaker | **100 %** av alla poster kodade `nej`/`osäker` har exakt en av de **sex** orsakerna (4.4), varje `validatorlucka`/`genereringsfel` har ett namngivet motbevis (vilken regel som inte fångade felet), och rapporten innehåller åtgärdstabellen orsak × axel |
 | G7 | Urvalsintegritet | varje stratum med ≥ 10 giltiga frågor i populationen har ≥ 1 bedömd post; alla blindposter (100 frågor × 2 rater = 200 kodningar) är kodade |
 | G8 | Blindning | blindkopian innehåller inte scenario, gold, `precision`, kategori eller svårighetsgrad, och blindningen intygas i rapporten |
 
@@ -768,6 +768,20 @@ och därmed bli icke-oberoende. Kravet:
    enskilda poster och får inte veta hur många fel den andra hittat – förrän båda
    lämnat in sin fullständiga kodning.
 
+### 7.6 Mänsklig + modellbaserad mätning (valfri, rekommenderad jämförelse)
+
+Man kan låta två mänskliga granskare göra den primära mätningen och *dessutom* två
+modeller koda samma urval. Då gäller:
+
+1. De två mätningarna rapporteras **separat** (egen tabell per ratarpar), aldrig
+   sammanslagna. Modellmätningen är preliminär och får inte ersätta den mänskliga.
+2. Samma blindkopior används för båda paren (nya hashar om nya blanketter skapas).
+3. Jämförelsen rapporterar hur väl modellernas koder och de mänskliga koderna
+   överensstämmer per axel – men ett högt värde bevisar inte att modellerna har
+   rätt, bara att de är eniga.
+4. Grindarna G1–G5 bedöms på den **mänskliga** mätningen när en sådan finns;
+   modellmätningen får status **preliminär/indikation**.
+
 ### 7.5 Efter inlämning: konsensus får aldrig ersätta de individuella bedömningarna
 
 Efter kodningen följer, i den här ordningen:
@@ -814,6 +828,13 @@ som genomförd mätning.
   vem som var tredje ratare, och en uttrycklig mening om vad resultatet gäller:
   *"modellbaserad bedömning av N = 100 frågor"* eller
   *"mänsklig juridisk bedömning av N = 100 frågor"*.
+- **Valfria ratarmodeller hos Cerebras (t.ex. två olika):** ContractForge är
+  modellagnostisk; `score-ratings --rater-a-kind model --rater-a-name "<modell>"`
+  (och motsvarande för B) registrerar exakt vilka modeller som dömde, och
+  rapporten anger dem. Vilka modeller som är tillgängliga på kontot varierar –
+  verifiera via `/v1/models` (se [cerebras.md](cerebras.md)). Två olika modeller
+  ger en snabbare **preliminär** mätning, men klassas alltid som modellbaserad;
+  en jämförelse mot mänskliga rater är en egen mätning (7.6).
 - Vid oenighet som tredje rataren inte avgör (alla tre svar olika) räknas posten
   som `osäker` i felprocenten och redovisas separat som `oenighet kvar`.
 - Protokollet mäter **facit**; det mäter inte om ett AI-system som använder

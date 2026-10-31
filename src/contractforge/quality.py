@@ -52,6 +52,9 @@ YES = "ja"
 NO = "nej"
 UNSURE = "osäker"
 NOT_APPLICABLE = "ej_tillamplig"
+#: The six error causes of protocol 4.4. Must stay identical to the tables in
+#: docs/quality-protocol.md and docs/quality-report-mall.md; tests check the count.
+CAUSE_COUNT = 6
 CAUSES = (
     "frågeformulering",
     "facitvärde",

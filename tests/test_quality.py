@@ -397,6 +397,58 @@ def test_reference_wilson_helper_stays_in_sync():
         )
 
 
+def test_cause_list_is_the_documented_six():
+    """Code, protocol and report template must agree on the error causes."""
+
+    from contractforge.quality import CAUSE_COUNT, CAUSES
+
+    assert len(CAUSES) == CAUSE_COUNT == 6
+    assert set(CAUSES) == {
+        "frågeformulering",
+        "facitvärde",
+        "evidensspann",
+        "validatorlucka",
+        "genereringsfel",
+        "juridisk_tolkning",
+    }
+    protocol = (Path(__file__).resolve().parents[1] / "docs" / "quality-protocol.md").read_text(
+        encoding="utf-8"
+    )
+    template = (
+        Path(__file__).resolve().parents[1] / "docs" / "quality-report-mall.md"
+    ).read_text(encoding="utf-8")
+    for cause in CAUSES:
+        assert f"`{cause}`" in protocol, cause
+        assert f"`{cause}`" in template, cause
+    assert "sju orsaker" not in protocol
+    assert "sju orsaker" not in template
+
+
+def test_rater_models_are_recorded_verbatim(tmp_path):
+    """Two different models must appear as such in the score and the report."""
+
+    packet = _write_packet(tmp_path)
+    sheet_a, sheet_b = _perfect_round(packet)
+
+    payload = score_round(
+        ScoreInput(
+            ratings_dir=packet,
+            sheet_a=sheet_a,
+            sheet_b=sheet_b,
+            rater_a_kind="model",
+            rater_a_name="gpt-oss-120b",
+            rater_b_kind="model",
+            rater_b_name="qwen-3.8-27b",
+        )
+    )
+
+    assert payload["reviewer"]["rater_a"] == {"kind": "model", "name": "gpt-oss-120b"}
+    assert payload["reviewer"]["rater_b"] == {"kind": "model", "name": "qwen-3.8-27b"}
+    report = (packet / "quality_report_draft.md").read_text(encoding="utf-8")
+    assert "gpt-oss-120b" in report and "qwen-3.8-27b" in report
+    assert "modellbaserad" in report
+
+
 def test_axes_constant_is_complete():
     assert set(AXES) == {"Q1", "Q2", "Q3", "Q4"}
     assert set(AXIS_COLUMNS) == set(AXES)
