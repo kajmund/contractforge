@@ -254,6 +254,13 @@ en annan klausul kan ändra svaret – och en eventuell
 populationsskattning för de 1 723 frågorna viktas separat med stratumvikter
 (urvalsvärdet är standard och det som grindarna bedöms på).
 
+Verktyget stödjer hela flödet: `publish-questions` skriver två **separata,
+slumpmässigt ordnade** blanketter (`ratings_A.csv`, `ratings_B.csv`) med egna
+hashar, och `score-ratings` beräknar felprocent, Wilson-KI, överensstämmelse
+**per axel**, oenighetstyper och en rapportutkast. Överensstämmelsen beräknas
+alltid på de **ursprungliga individuella** koderna; en efterhandsbedömning får
+bara avgöra postens kvalitet, aldrig kappavärdet.
+
 Ett färdigt mätpaket finns: [`examples/qsample_live_100/`](examples/qsample_live_100/)
 – 100 blinda frågor från live-datasetet (källa `cerebras_consulting_100.zip`,
 SHA-256 `43448450…ae7e`, urvals-seed 2026, `selection_sha256`

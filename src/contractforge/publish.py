@@ -43,7 +43,13 @@ from .export.loader import (
     load_contract_dir,
 )
 from .models import EvidenceSpan, ExpectedAnswer, GoldenQuestion, utc_now
-from .utils import atomic_write_json, atomic_write_text, sha256_file, sha256_text
+from .utils import (
+    atomic_write_json,
+    atomic_write_text,
+    sha256_bytes,
+    sha256_file,
+    sha256_text,
+)
 
 PUBLISH_SCHEMA_VERSION = "1.0"
 SAMPLE_VERSION = "v1"
@@ -70,6 +76,9 @@ MANIFEST_FILENAME = "manifest.json"
 RATINGS_FILENAME = "ratings.csv"
 README_FILENAME = "README.md"
 SELECTION_FILENAME = "selection.json"
+RATERS_FILENAME = "raters.json"
+#: Neutral rater ids: they identify a sheet, never a person or a model.
+RATER_IDS = ("A", "B")
 
 # Semicolon-separated, UTF-8 with BOM, because Excel opens the file in the
 # rater's locale and would otherwise merge all columns into one.
@@ -473,6 +482,7 @@ def publish_question_sample(
     corpus_sha256: str | None = None,
     force: bool = False,
     stratified: bool = True,
+    blind_sheets: bool = True,
 ) -> Path:
     """Write a blind rater packet for a deterministic question sample.
 
@@ -569,7 +579,53 @@ def publish_question_sample(
         output / RATINGS_FILENAME, _ratings_csv(questions), encoding=RATINGS_ENCODING
     )
     atomic_write_text(output / README_FILENAME, _readme(manifest))
+    if blind_sheets:
+        write_blind_sheets(questions, output, seed=seed)
     return output
+
+
+def write_blind_sheets(
+    questions: list[dict[str, Any]], out_dir: Path, *, seed: int
+) -> dict[str, Any]:
+    """Write one randomly ordered blind sheet per rater (protocol 7.4).
+
+    Each rater gets an independent order derived from the selection seed and a
+    neutral rater id, so the two raters cannot infer which questions belong to
+    the same contract. The sheet hashes are written to ``raters.json`` so a
+    report can prove which version each rater coded.
+    """
+
+    import random as _random
+
+    sheets: dict[str, Any] = {
+        "schema_version": PUBLISH_SCHEMA_VERSION,
+        "kind": "rater_sheets",
+        "created_at": utc_now().isoformat(),
+        "order_seed": seed,
+        "shuffle": "random.Random('<selection-seed>:<rater-id>').shuffle",
+        "current": RATINGS_FILENAME,
+        "raters": {},
+    }
+    orders: list[list[str]] = []
+    for rater_id in RATER_IDS:
+        ordered = list(questions)
+        _random.Random(f"{seed}:{rater_id}").shuffle(ordered)
+        orders.append([record["sample_id"] for record in ordered])
+        filename = rater_sheet_filename(rater_id)
+        text = _ratings_csv(ordered)
+        atomic_write_text(out_dir / filename, text, encoding=RATINGS_ENCODING)
+        sheets["raters"][rater_id] = {
+            "file": filename,
+            "sha256": sha256_bytes(text.encode(RATINGS_ENCODING)),
+            "sample_ids": orders[-1],
+        }
+    sheets["orders_identical"] = len(orders) == 2 and orders[0] == orders[1]
+    atomic_write_json(out_dir / RATERS_FILENAME, sheets)
+    return sheets
+
+
+def rater_sheet_filename(rater_id: str) -> str:
+    return f"ratings_{rater_id}.csv"
 
 
 def selection_sha256(questions: list[dict[str, Any]]) -> str:
@@ -702,7 +758,9 @@ __all__ = [
     "SAMPLE_KIND",
     "SAMPLE_VERSION",
     "build_question_pool",
+    "rater_sheet_filename",
     "format_expected_answer",
     "publish_question_sample",
     "sample_id",
+    "write_blind_sheets",
 ]

@@ -169,6 +169,38 @@ def _build_parser() -> argparse.ArgumentParser:
     stats.add_argument("dataset")
     add_json_flag(stats)
 
+    score = sub.add_parser(
+        "score-ratings",
+        help="beräkna kvalitetsresultat från ifyllda granskningsblanketter",
+    )
+    score.add_argument("ratings_dir", help="mätpaketets katalog (manifest.json m.fl.)")
+    score.add_argument("--rater-a", required=True, help="ifylld blankett för ratare A")
+    score.add_argument("--rater-b", required=True, help="ifylld blankett för ratare B")
+    score.add_argument(
+        "--rater-a-kind", choices=["human", "model"], default="model"
+    )
+    score.add_argument(
+        "--rater-b-kind", choices=["human", "model"], default="model"
+    )
+    score.add_argument("--rater-a-name", default="ratare A")
+    score.add_argument("--rater-b-name", default="ratare B")
+    score.add_argument(
+        "--causes",
+        default=None,
+        help="CSV/JSON med sample_id;cause för varje felpost (krävs för G6)",
+    )
+    score.add_argument(
+        "--consensus",
+        default=None,
+        help="CSV med sample_id;Q1_answerable;Q2_answer_correct;... från tredje ratare",
+    )
+    score.add_argument(
+        "--population",
+        default=None,
+        help="JSON {stratum: antal} för hela populationen (krävs för viktad skattning)",
+    )
+    add_json_flag(score)
+
     list_types = sub.add_parser("list-types", help="lista avtalstyper")
     add_json_flag(list_types)
 
@@ -195,6 +227,15 @@ def _build_parser() -> argparse.ArgumentParser:
         action="store_true",
         default=False,
         help="tillåt att skriva till en befintlig, icke-tom katalog",
+    )
+    publish.add_argument(
+        "--blind-sheets",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help=(
+            "skriv två separata, slumpmässigt ordnade blanketter (ratings_A.csv, "
+            "ratings_B.csv) med egna hashar – standard och krav enligt protokollet"
+        ),
     )
     publish.add_argument(
         "--stratified",
@@ -546,6 +587,66 @@ def _cmd_stats(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def _cmd_score_ratings(args: argparse.Namespace) -> int:
+    from ..quality import ScoreInput, score_round
+
+    ratings_dir = Path(args.ratings_dir)
+    if not ratings_dir.is_dir():
+        raise DatasetNotFoundError(f"mätpaketet finns inte: {ratings_dir}")
+    payload = score_round(
+        ScoreInput(
+            ratings_dir=ratings_dir,
+            sheet_a=Path(args.rater_a),
+            sheet_b=Path(args.rater_b),
+            causes=Path(args.causes) if args.causes else None,
+            consensus=Path(args.consensus) if args.consensus else None,
+            population=Path(args.population) if args.population else None,
+            rater_a_kind=args.rater_a_kind,
+            rater_a_name=args.rater_a_name,
+            rater_b_kind=args.rater_b_kind,
+            rater_b_name=args.rater_b_name,
+        )
+    )
+    result = {
+        "status": "ok",
+        "command": "score-ratings",
+        "output_dir": str(ratings_dir),
+        "score_file": str(ratings_dir / "quality_score.json"),
+        "draft_report": str(ratings_dir / "quality_report_draft.md"),
+        "assessment_type": payload["reviewer"]["assessment_type"],
+        "gates_all_met": payload["gates_all_met"],
+        "evaluation_status": payload["status"],
+        "axes": {
+            axis: {
+                "n": data["n"],
+                "proportion_yes": data["proportion_yes"],
+                "wilson_95": data["wilson_95"],
+                "agreement_p0": data["agreement"]["p0"],
+                "kappa": data["agreement"]["kappa"],
+            }
+            for axis, data in payload["axes"].items()
+        },
+        "gates": payload["gates"],
+        "unclassified_error_posts": payload["errors"]["unclassified_posts"],
+        "population_estimate": payload["population_estimate"],
+        "caveat": payload["reviewer"]["caveat"],
+    }
+    if _json_mode(args):
+        _emit(result, json_mode=True)
+    else:
+        print(f"Bedömning: {result['assessment_type']}")
+        print(f"Status: {payload['status']} (alla grindar uppfyllda: {payload['gates_all_met']})")
+        for axis, data in payload["axes"].items():
+            share = data["proportion_yes"]
+            share_text = f"{share:.1%}" if share is not None else "–"
+            kappa = data["agreement"]["kappa"]
+            kappa_text = f"{kappa:.2f}" if kappa is not None else "–"
+            print(f"  {axis}: n={data['n']} ja={share_text} kappa={kappa_text}")
+        print(f"Rapport: {ratings_dir / 'quality_report_draft.md'}")
+        print(result["caveat"])
+    return EXIT_OK
+
+
 def _cmd_list_types(args: argparse.Namespace) -> int:
     registry = load_registry()
     types = registry.types()
@@ -570,6 +671,7 @@ def _cmd_publish_questions(args: argparse.Namespace) -> int:
         corpus_sha256=args.corpus_sha256,
         force=bool(args.force),
         stratified=bool(getattr(args, "stratified", True)),
+        blind_sheets=bool(getattr(args, "blind_sheets", True)),
     )
     manifest = read_json(output / "manifest.json")
     sampling = manifest["sampling"]
@@ -586,7 +688,14 @@ def _cmd_publish_questions(args: argparse.Namespace) -> int:
         "sample_version": manifest["sample_version"],
         "selection_sha256": manifest["selection_sha256"],
         "stratified": sampling["stratified"],
-        "files": ["manifest.json", "ratings.csv", "selection.json", "README.md"],
+        "rater_sheets": {
+            rater_id: record["sha256"]
+            for rater_id, record in (read_json(output / "raters.json").get("raters", {}).items()
+                                     if (output / "raters.json").is_file()
+                                     else {})
+        },
+        "files": ["manifest.json", "selection.json", "raters.json", "ratings_A.csv",
+                  "ratings_B.csv", "ratings.csv", "README.md"],
     }
     if _json_mode(args):
         _emit(payload, json_mode=True)
@@ -597,7 +706,8 @@ def _cmd_publish_questions(args: argparse.Namespace) -> int:
             f"(seed {payload['seed']}, begärt {payload['count']})"
         )
         print(f"Källa: {manifest['source_name']} sha256 {manifest['source_sha256']}")
-        print("Filer: manifest.json, ratings.csv, README.md")
+        print("Filer: manifest.json, selection.json, raters.json, ratings_A.csv,")
+        print("       ratings_B.csv, README.md (ratings.csv är en neutral kopia)")
     return EXIT_OK
 
 
@@ -610,6 +720,7 @@ def _dispatch(args: argparse.Namespace) -> int:
         "export": _cmd_export,
         "stats": _cmd_stats,
         "list-types": _cmd_list_types,
+        "score-ratings": _cmd_score_ratings,
         "publish-questions": _cmd_publish_questions,
     }
     if args.command not in handlers:

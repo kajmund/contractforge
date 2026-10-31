@@ -87,4 +87,4 @@ Ett resultat utan dessa värden kan inte hänföras till en bestämd källa. Är
 Fält i `manifest.json`: `evidence[].start`/`end` är teckenoffsets i
 `document_text` (start inklusiv, end exklusiv) och `evidence_quote` är exakt den
 delsträngen. Har en fråga flera spann är de sammanfogade med en rad som bara
-innehåller `---`. Urvalsmanifestet skapades 2026-10-31T15:13:35.414810+00:00.
+innehåller `---`. Urvalsmanifestet skapades 2026-10-31T15:23:26.943701+00:00.

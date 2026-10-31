@@ -398,11 +398,30 @@ grundval av vad som är lätt att åtgärda:
 | `facitvärde` | Det förväntade värdet är fel, ofullständigt, har fel enhet eller avser fel part/villkor; eller klassningen (`CONDITIONAL`/`CONFLICTING_EVIDENCE`/`INSUFFICIENT_EVIDENCE`) är fel. | Q1/Q2. |
 | `evidensspann` | Spannets valda text räcker inte som underlag (fel klausul, saknar avgörande värde, kräver scenariot), medan värdet i sig är rätt. | Q3. |
 | `validatorlucka` | Frågan passerar `question_support_problems` men bedöms fel/otillräcklig av raterna, och orsaken är **inte** `frågeformulering`, `facitvärde` eller `evidensspann`. Regeln fångar då inte den här typen av fel. | Kräver att de tre övriga orsakerna uttryckligen uteslutits. En `validatorlucka` är alltid underlag för en åtgärd i validatorn. |
+| `genereringsfel` | Dokumenttexten själv är felaktig eller tillhör inte scenariot: fel belopp/part/datum skrivet (inte bara felaktigt återgivet i facit), text som motsäger sig själv utan avsiktlig anomali, eller en klausul som saknas. | Endast när raterna kan peka på en diskrepans **i dokumentet** (t.ex. mot en annan klausul), inte mot facit. Åtgärd: generering/validering. |
+| `juridisk_tolkning` | Frågan kräver en juridisk bedömning som går utöver vad dokumenten entydigt säger: ett villkor är tolkningsbart, två giltiga regler kan samverka på olika sätt, eller svaret beror på rättstillämpning utanför texten. | Får användas endast när texten är korrekt och facit inte självklart följer av den. Räknas **inte** som ett facitfel i Q2-statistiken men redovisas separat; åtgärd: frågan bör klassas som `CONDITIONAL`/`INSUFFICIENT_EVIDENCE` eller formuleras om. |
+
+De sju orsakerna mappar till varsin typ av åtgärd och **styr vilket nästa steg
+som väljs om en grind fallerar**:
+
+| Orsak | Åtgärd (nästa steg) |
+|-------|---------------------|
+| `frågeformulering` | Frågemallarna i `questions/` (tydlighet, vad som efterfrågas). |
+| `facitvärde` | Gold-byggaren/scenariofakta (`gold/`, `scenarios/`) – facit måste säga samma som dokumentet. |
+| `evidensspann` | Evidensvalslogiken (`gold/` spannval, `questions/` evidenssamling). |
+| `validatorlucka` | Valideraren (`validation/`) – en regel saknas och ska namnges. |
+| `genereringsfel` | Generering/mock/scenario + validering (reparationsloopen fångade inte felet). |
+| `juridisk_tolkning` | Klassning/answerability i scenariot och frågegeneratorn. |
 
 En post där tredje rataren dömer svaret korrekt får ingen orsak – den är inte ett
 fel, bara en oenighet. Kvarvarande `validatorluckor` är det som protokollet är
 till för att hitta: fel som den deterministiska regeln inte ser, och som därför
 inte fångas av någon befintlig check.
+
+Rapporten redovisar en **åtgärdstabell** (antal per orsak × axel) så att en
+fallerad grind direkt pekar på rätt komponent. Roller:
+`facitvärde`/`evidensspann` = facitfel, `frågeformulering`/`juridisk_tolkning` =
+mätbarhetsproblem, `genereringsfel`/`validatorlucka` = systemfel.
 
 ## 5. Grindar
 
@@ -434,7 +453,7 @@ villkor är uppfyllda för det publicerade urvalet:
 | G5b | Inter-rater-överensstämmelse på **Q1** | procent **≥ 80 %**; Cohen's κ **≥ 0,60** |
 | G5c | Inter-rater-överensstämmelse på **Q3** | procent **≥ 80 %**; Cohen's κ **≥ 0,60** |
 | G5d | Inter-rater-överensstämmelse på **Q4** (tillämpliga poster) | procent **≥ 80 %**; Cohen's κ **≥ 0,60** |
-| G6 | Felorsaker | **100 %** av alla poster kodade `nej`/`osäker` har en av de fyra orsakerna, och varje `validatorlucka` har ett namngivet motbevis (vilken regel som inte fångade felet) i rapporten |
+| G6 | Felorsaker | **100 %** av alla poster kodade `nej`/`osäker` har exakt en av de **sju** orsakerna (4.4), varje `validatorlucka`/`genereringsfel` har ett namngivet motbevis (vilken regel som inte fångade felet), och rapporten innehåller åtgärdstabellen orsak × axel |
 | G7 | Urvalsintegritet | varje stratum med ≥ 10 giltiga frågor i populationen har ≥ 1 bedömd post; alla blindposter (100 frågor × 2 rater = 200 kodningar) är kodade |
 | G8 | Blindning | blindkopian innehåller inte scenario, gold, `precision`, kategori eller svårighetsgrad, och blindningen intygas i rapporten |
 
@@ -524,7 +543,14 @@ contractforge publish-questions <zip> --count 100 --seed <seed> --output <dir>
 | `--seed` | Heltal som styr urvals-RNG:n. Loggas i `manifest.json` och i rapporten. |
 | `--output` | Katalog som skrivs. Ett befintligt, icke-tomt utdata kräver `--force`; ingenting skrivs tyst över. |
 | `--corpus-sha256 <hex>` | **Obligatorisk i protokollets mätning.** Förväntat SHA-256 för källan; kommandot avbryter (`ValidationError`) om hashen inte stämmer. Utan flaggan binds urvalet bara i efterhand – se 6.2. |
-| `--json` | Maskinläsbart resultat (`sample_size`, `pool_size`, `source_sha256`, `corpus_manifest_sha256`, `seed`, `count`, `sample_version`, skrivna filer). |
+| `--json` | Maskinläsbart resultat (`sample_size`, `pool_size`, `source_sha256`, `corpus_manifest_sha256`, `seed`, `count`, `sample_version`, `selection_sha256`, rater-blanketternas hashar, skrivna filer). |
+| `--stratified` / `--no-stratified` | Stratifierat urval är standard (6.3). `--no-stratified` ger det likformiga urvalet och får bara ge status **indikation**. |
+| `--blind-sheets` / `--no-blind-sheets` | Skriver `ratings_A.csv` + `ratings_B.csv` med olika ordning och `raters.json` (standard: på, krävs av 7.4). |
+
+Utdata i mätningen: `manifest.json` (koordinatorns kopia), `selection.json`
+(opaka id:n, härkomst, `selection_sha256`), `raters.json` (blanketthashar och
+ordningar), `ratings_A.csv`, `ratings_B.csv`, `ratings.csv` (neutral kopia) och
+`README.md`.
 
 `--corpus-sha256` är kravet som gör urvalet *bundet i förväg*: körs kommandot mot
 ett annat arkiv än det publicerade avbryts det i stället för att producera ett
@@ -623,6 +649,35 @@ urval därifrån mäter inte `contradiction`, `conditional` eller
 `insufficient_evidence`. Det ska stå i rapporten, och en mätning över de
 kategorierna kräver ett dataset med nivå 5–6.
 
+### 6.4b Så körs mätningen (exakta kommandon)
+
+```bash
+# 1. Hämta och verifiera det frysta arkivet
+gh release download v0.2.0 --pattern cerebras_consulting_100.zip   # eller v0.2.1
+shasum -a 256 cerebras_consulting_100.zip    # 4344845098…ae7e
+unzip -q cerebras_consulting_100.zip -d corpus
+contractforge validate corpus                 # måste ge PASS
+
+# 2. Publicera (eller återanvänd det publicerade) mätpaketet
+contractforge publish-questions cerebras_consulting_100.zip \
+  --output qa_packet --count 100 --seed 2026 \
+  --corpus-sha256 4344845099a39dbdc7d09c54f6d50cf03e74d1f831c78eda34cb67182893ae7e
+# -> ratings_A.csv och ratings_B.csv med olika ordning + raters.json med hashar
+
+# 3. Två oberoende rater kodar var sin blankett (isolerat, se 7.4)
+
+# 4. Beräkna resultatet
+contractforge score-ratings qa_packet \
+  --rater-a ratings_A.ifylld.csv --rater-b ratings_B.ifylld.csv \
+  --rater-a-kind model --rater-b-kind model \
+  --causes causes.csv --population population.json
+```
+
+`qa_packet/ratings.csv` är bara en neutral kopia av urvalet och ska inte delas ut;
+raterna får `ratings_A.csv` respektive `ratings_B.csv`.
+Det publicerade paketet finns redan i `examples/qsample_live_100/` med exakt dessa
+filer (och `selection_sha256 1272bd8a…f650`).
+
 ### 6.4 Nytt urval kräver nytt seed eller nytt arkiv
 
 - **Samma `(source, seed, count, sample_version)` ⇒ samma urval**, byte för byte,
@@ -641,6 +696,13 @@ kategorierna kräver ett dataset med nivå 5–6.
 
 ## 7. Analysflöde i praktiken
 
+**Verktyget gör de flesta stegen åt granskaren.** `publish-questions` skriver
+två separata, slumpmässigt ordnade blanketter (`ratings_A.csv`, `ratings_B.csv`) och
+en `raters.json` med deras SHA-256 och ordningar; `score-ratings` beräknar sedan
+felprocent, Wilson-KI, överensstämmelse **per axel**, oenighetstyper, grindar och en
+rapportutkast. Resten av avsnittet beskriver fortfarande det manuella flödet, som
+är det som gäller när verktyget inte kan användas.
+
 1. Hämta det frysta arkivet, kontrollera SHA-256 mot det publicerade värdet och
    kör `contractforge validate <uppackad katalog>` – ska ge `PASS`. Ett dataset
    som inte validerar får inte mätas.
@@ -651,21 +713,80 @@ kategorierna kräver ett dataset med nivå 5–6.
    standard, se 6.3); därefter: kontrollera `pool_size` och
    `excluded_questions`. Anteckna risken för kategorier som saknas i urvalet.
 4. Gör två blinda kopior (2.3) med neutrala blind-id:n; beräkna deras SHA-256.
-5. Dela blindkopian med två oberoende ratare. Raterna ser inte varandras svar
-   förrän båda kodat klart, och får inte diskutera enskilda poster före kodning.
+5. Utfärda två separata, slumpmässigt ordnade blanketter (7.4) och dela dem med
+   två oberoende ratare. Raterna arbetar isolerat och ser inte varandras svar
+   förrän båda kodat klart.
 6. Koda 200 poster (100 frågor × 2 rater) mot de fyra axlarna. Varje ratare
    skriver `{blind_id, Q1, Q2, Q3, Q4, kommentar}` – i praktiken `ratings.csv`
    fylld med `;`-separerade värden, eller motsvarande JSON-rader.
-7. Beräkna enighet och kappa. Vid oenighet ser en **tredje ratare** samma
-   blindpost; tredje ratarens kod gäller för den posten och fältet `decisor` sätts.
+7. Frys de individuella blanketterna och beräkna enighet och kappa **per axel**
+   på dem (7.5). Först därefter avgör en **tredje ratare** oeniga poster; dennes
+   kod gäller för postens kvalitet och fältet `decisor` sätts – aldrig i
+   överensstämmelseberäkningen.
 8. Klassificera felorsak per felaktig post (4.4).
 9. Beräkna felprocent, Wilson-KI och gruppstatistik. Jämför mot grindarna (5.2).
 10. Publicera rapporten enligt mallen och sätt status.
 
 Räkneuttalanden (felprocent, KI, kappa) ska upprepas av en andra person eller
-verifieras med ett skript som publiceras tillsammans med rapporten. Protokollet
+verifieras med ett skript som publiceras tillsammans med rapporten. Med
+`score-ratings` är skriptet en del av ContractForge; publicera
+`quality_score.json` tillsammans med rapporten så att talen kan kontrolleras.
+
+```bash
+contractforge score-ratings examples/qsample_live_100 \
+  --rater-a ratings_A.ifylld.csv --rater-b ratings_B.ifylld.csv \
+  --rater-a-kind model --rater-a-name "<modell>" \
+  --rater-b-kind model --rater-b-name "<modell>" \
+  --causes causes.csv [--consensus consensus.csv] [--population population.json]
+```
+
+Kommandot vägrar köra om inga poster är kodade, kräver en orsak för varje felpost
+(G6), rapporterar okodade poster (G7) och skriver
+`quality_score.json` + `quality_report_draft.md`. Utkastet ska föras över i mallen
+och granskas av en människa innan det publiceras.
+ Protokollet
 mäter facit, inte ratarna; ratarnas egen kompetens och tidigare erfarenhet av
 svenska avtal ska dokumenteras i rapporten.
+
+### 7.4 Två separata, slumpmässigt ordnade blanketter – och ingen kontakt
+
+Radordningen i `ratings.csv` följer urvalets avtalsordning. Om båda raterna får
+samma ordning kan de dra slutsatser om vilka frågor som hör ihop (samma avtal)
+och därmed bli icke-oberoende. Kravet:
+
+1. Utfärda **två separata blanketter** ur samma urval – en per ratare.
+2. Varje blankett **slumpas om** med sitt eget ratarspecifika seed:
+   `random.Random("<urvals-seed>:<ratar-id>").shuffle`, där `ratar-id` är ett
+   neutralt id (`A`, `B`) och **inte** anger vem rataren är.
+3. Blanketterna får **olika ordning** (verifieras: ordningen får inte vara
+   identisk) och kolumnordningen ska vara densamma i båda, så svaren kan slås
+   ihop på `blind_id`.
+4. Blanketternas **SHA-256** skrivs i rapporten (tillsammans med
+   `selection_sha256`), så att det går att bevisa vilken version respektive
+   ratare kodade.
+5. Raterna arbetar **isolerat**: de ser inte varandras svar, får inte diskutera
+   enskilda poster och får inte veta hur många fel den andra hittat – förrän båda
+   lämnat in sin fullständiga kodning.
+
+### 7.5 Efter inlämning: konsensus får aldrig ersätta de individuella bedömningarna
+
+Efter kodningen följer, i den här ordningen:
+
+1. **Frys de individuella blanketterna först.** Deras SHA-256 och koderna per
+   `blind_id` sparas innan något annat görs.
+2. **Beräkna överensstämmelsen på de ursprungliga, individuella koderna** – per
+   axel (4.3). Detta är ett faktum om mätningen och får inte ändras i efterhand.
+3. **Först därefter** får en oenig post lösas: tredje ratare, eller (om
+   protokollet så medger) en dokumenterad konsensusdiskussion.
+4. En konsensuskod får **enbart** användas för att avgöra postens *kvalitet*
+   (Q2/Q3-felprocent och felorsak). Den får **aldrig** räknas in i P₀ eller κ och
+   aldrig skrivas in i en individuell kodning.
+5. Rapporten redovisar **både** den individuella överensstämmelsen och det
+   konsensuslösningsförfarande som använts, med antal lösta poster, vem som var
+   tredje ratare och hur många poster som förblev oeniga (`oenighet kvar`).
+
+En rapport som beräknar kappa på efterhandsjämkade svar är ogiltig och räknas inte
+som genomförd mätning.
 
 ## 8. Omfattning och begränsningar
 
@@ -683,6 +804,16 @@ svenska avtal ska dokumenteras i rapporten.
   ratare, andra dataset och en tredje oberoende mätning på annan avtalstyp är
   krav för vidare påståenden; se [Grindar](#5-grindar) och
   [docs/decisions.md](decisions.md).
+- **Ratarnas art måste anges i rapporten.** Är en eller båda ratarna AI-modeller
+  ska mätningen betecknas som en **modellbaserad oberoende bedömning** – aldrig
+  som mänsklig juridisk granskning. Två olika modeller kan dela systematiska fel
+  (samma fördomar om svensk avtalssvenska, samma tunnelseende på villkor och
+  undantag), så en hög överensstämmelse mellan två modeller bevisar inte
+  mänsklig korrekthet. Rapporten ska ange: modellnamn och version för varje
+  ratare, om de är mänskliga granskare (och deras erfarenhet) eller modeller,
+  vem som var tredje ratare, och en uttrycklig mening om vad resultatet gäller:
+  *"modellbaserad bedömning av N = 100 frågor"* eller
+  *"mänsklig juridisk bedömning av N = 100 frågor"*.
 - Vid oenighet som tredje rataren inte avgör (alla tre svar olika) räknas posten
   som `osäker` i felprocenten och redovisas separat som `oenighet kvar`.
 - Protokollet mäter **facit**; det mäter inte om ett AI-system som använder

@@ -178,18 +178,42 @@ att evidensvalet är den svaga länken – **inte** att "facit är korrekt".
   svaret: `…` (poster: `B-…`)
 - Av dessa: korrekt fångade av facit `…`, missade av facit `…`
 
-## 8. Felorsaker
+## 8. Felorsaker och åtgärder
 
-Varje post som kodats `nej`/`osäker` på minst en axel har exakt en orsak
-(protokollet 4.4). Summan av kolumnen ska vara lika med antalet felaktiga poster.
+Varje post som kodats `nej`/`osäker` på minst en axel har exakt en av de **sju**
+orsakerna (protokollet 4.4). Summan ska vara lika med antalet felaktiga poster.
 
-| Orsak | Antal | Andel av fel | Poster (blind-id) |
-|-------|------:|-------------:|-------------------|
-| `frågeformulering` | `…` | `…` % | `B-…` |
-| `facitvärde` | `…` | `…` % | `B-…` |
-| `evidensspann` | `…` | `…` % | `B-…` |
-| `validatorlucka` | `…` | `…` % | `B-…` |
-| **Totalt** | `…` | 100 % | |
+| Orsak | Roll | Antal | Andel av fel | Poster (blind-id) |
+|-------|------|------:|-------------:|-------------------|
+| `frågeformulering` | mätbarhetsproblem | `…` | `…` % | `B-…` |
+| `facitvärde` | facitfel | `…` | `…` % | `B-…` |
+| `evidensspann` | facitfel (evidens) | `…` | `…` % | `B-…` |
+| `validatorlucka` | systemfel | `…` | `…` % | `B-…` |
+| `genereringsfel` | systemfel (generering) | `…` | `…` % | `B-…` |
+| `juridisk_tolkning` | mätbarhetsproblem | `…` | `…` % | `B-…` |
+| **Totalt** | | `…` | 100 % | |
+
+### 8.1 Åtgärdstabell (orsak × axel)
+
+| Orsak | Q1 | Q2 | Q3 | Q4 | Nästa åtgärd |
+|-------|---:|---:|---:|---:|--------------|
+| `frågeformulering` | `…` | `…` | `…` | `…` | Frågemallar |
+| `facitvärde` | `…` | `…` | `…` | `…` | Gold/scenario |
+| `evidensspann` | `…` | `…` | `…` | `…` | Evidensval |
+| `validatorlucka` | `…` | `…` | `…` | `…` | Valideraren |
+| `genereringsfel` | `…` | `…` | `…` | `…` | Generering + loop |
+| `juridisk_tolkning` | `…` | `…` | `…` | `…` | Klassning/fråga |
+
+### 8.1.1 Om en grind fallerar
+
+| Fallerad grind | Orsak som ska dominera | Första åtgärd |
+|----------------|------------------------|---------------|
+| G1 (Q2 korrekthet) | `facitvärde`, `genereringsfel` | Stoppa användning som bevis; åtgärda gold/generering innan ny mätning. |
+| G2 (Q3 tillräcklighet) | `evidensspann` | Facit kan vara korrekt av rätt anledning men underlaget otillräckligt: åtgärda evidensvalet. |
+| G3 (Q1 klassning) | `juridisk_tolkning`, `facitvärde` | Review av answerability-klassning. |
+| G4 (Q4 undantag) | `facitvärde`, `genereringsfel` | Undantags-/motsägelselogiken. |
+| G5a (Q2-överensstämmelse) | – | Raterna är osäkra: förtydliga frågor/protokoll, tredje ratare. |
+| G6 (felklassificering) | – | Ofullständig analys, inte kvalitetsresultat. |
 
 Frågor som verktyget uteslutit ur urvalspoolen (ej bedömbara via paketet –
 saknar förväntat svar, saknar evidens eller har spann utanför texten):
@@ -198,8 +222,9 @@ saknar förväntat svar, saknar evidens eller har spann utanför texten):
 |-------------|-------|-----------------|
 | `…` | `…` | ja / nej |
 
-Motbevis för varje `validatorlucka` (vilken regel i
-`question_support_problems` som inte fångade felet, och varför):
+Motbevis för varje `validatorlucka`/`genereringsfel` (vilken regel i
+`question_support_problems` eller vilka checks i `validate_package` som inte
+fångade felet, och varför):
 
 - `B-…`: `…`
 
@@ -217,6 +242,27 @@ post (G7); annars skrivs "ingen populationsskattning – stratum `…` saknas".
 - SE (stratifierat) = `…` %; 95 % KI = `…` – `…`
 - Populationsskattningen används **inte** för grindarna (5.4).
 
+## 8.3 Ratare, blanketter och oberoende (protokollet 7.4–7.5)
+
+| Fält | Värde |
+|------|-------|
+| Ratare A | människa / AI-modell: `…` (namn, version) |
+| Ratare B | människa / AI-modell: `…` (namn, version) |
+| Tredje ratare | människa / AI-modell: `…` (namn, version) |
+| Bedömningens art | **modellbaserad oberoende bedömning** / mänsklig juridisk bedömning |
+| Blindkopia A SHA-256 | `…` |
+| Blindkopia B SHA-256 | `…` |
+| Ordningen olika i A och B | ja / nej (krav: ja) |
+| Raterna arbetade isolerat (intygas) | ja / nej |
+| P₀/κ beräknat **före** eventuell konsensus | ja / nej (krav: ja) |
+| Konsensus/tredje ratare använd endast för postens kvalitet | ja / nej |
+| Poster lösta efter inlämning | `…` (varav oeniga kvar: `…`) |
+
+Om någon ratare är en AI-modell gäller: slutsatsen får citeras som
+*modellbaserad bedömning*, **aldrig** som mänsklig juridisk granskning eller som
+bevis på juridisk korrekthet hos en annan AI-modell. Två modeller kan dela
+systematiska fel.
+
 ## 9. Grindstatus
 
 | Grind | Krav | Uppmätt | Uppfylld |
@@ -229,7 +275,7 @@ post (G7); annars skrivs "ingen populationsskattning – stratum `…` saknas".
 | G5b Q1 inter-rater | procent ≥ 80 % och κ ≥ 0,60 | `…` % / `…` | ja / nej |
 | G5c Q3 inter-rater | procent ≥ 80 % och κ ≥ 0,60 | `…` % / `…` | ja / nej |
 | G5d Q4 inter-rater | procent ≥ 80 % och κ ≥ 0,60 | `…` % / `…` | ja / nej |
-| G6 Felorsaker klassificerade | 100 % av felposterna | `…` % | ja / nej |
+| G6 Felorsaker klassificerade | 100 % av felposterna, en av sju orsaker, åtgärdstabell ifylld | `…` % | ja / nej |
 | G7 Urvalsintegritet | stratifierat urval; alla stratum ≥ 10 har ≥ 1 post; 200 kodningar | `…` | ja / nej |
 | G8 Blindning | blindkopior enligt 2.3, intygat i avsnitt 2 och 3 | ja / nej | ja / nej |
 | **Samtliga** | alla ovan | | ja / nej |
@@ -238,6 +284,10 @@ post (G7); annars skrivs "ingen populationsskattning – stratum `…` saknas".
 
 Vad mätningen bevisar (urvalsvärdet; populationsskattningen redovisas separat
 och används inte för grindar): `…`
+
+Vad mätningen **inte** bevisar: `…` (t.ex. att facit är juridiskt korrekt utanför
+urvalet, att den gäller andra avtalstyper/nivåer, eller – om raterna är modeller
+– att den gäller mänsklig juridisk korrekthet).
 
 Vad mätningen **inte** bevisar (urvalets omfattning, ej testade kategorier,
 datasetspecifika resultat): `…`
