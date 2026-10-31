@@ -122,6 +122,15 @@ def _build_parser() -> argparse.ArgumentParser:
     generate = sub.add_parser("generate", help="generera ett dataset")
     add_generation_options(generate)
     generate.add_argument("--output", required=True, help="datasetkatalog")
+    generate.add_argument(
+        "--force",
+        action="store_true",
+        default=False,
+        help=(
+            "tillåt att en befintlig, icke-tom katalog som inte är ett "
+            "ContractForge-dataset skrivs över"
+        ),
+    )
 
     benchmark = sub.add_parser("benchmark", help="reproducerbar benchmark")
     add_generation_options(benchmark)
@@ -129,6 +138,12 @@ def _build_parser() -> argparse.ArgumentParser:
         "--output", default="benchmarks/results", help="katalog för benchmarkrapporter"
     )
     benchmark.add_argument("--benchmark-id", default=None)
+    benchmark.add_argument(
+        "--force",
+        action="store_true",
+        default=False,
+        help="tillåt att en befintlig, icke-tom katalog skrivs över",
+    )
 
     validate = sub.add_parser("validate", help="verifiera ett exporterat dataset")
     validate.add_argument("dataset")
@@ -304,8 +319,10 @@ def _cmd_generate(args: argparse.Namespace) -> int:
         request,
         output,
         progress=lambda message: _log(message, quiet=args.quiet),
+        force=bool(getattr(args, "force", False)),
     )
     manifest = load_dataset_manifest(outcome.dataset_root)
+    validation = outcome.validation_report
     payload = {
         "status": "ok",
         "command": "generate",
@@ -313,6 +330,11 @@ def _cmd_generate(args: argparse.Namespace) -> int:
         "stats": outcome.stats.model_dump(mode="json"),
         "config": manifest.config.model_dump(mode="json") if manifest else None,
         "rejected": [result.contract_id for result in outcome.rejected],
+        "questions_rejected": len(outcome.rejected_questions),
+        "validation": {
+            "status": validation.status.value if validation else "SKIP",
+            "contracts_checked": validation.contracts_checked if validation else 0,
+        },
     }
     if json_mode:
         _emit(payload, json_mode=True)
@@ -321,6 +343,12 @@ def _cmd_generate(args: argparse.Namespace) -> int:
         _print_stats(outcome.stats)
         if outcome.rejected:
             print(f"Kasserade: {len(outcome.rejected)} (se rejected/ i datasetet)")
+        if outcome.rejected_questions:
+            print(
+                f"Avvisade golden-frågor: {len(outcome.rejected_questions)} "
+                "(exporteras inte som validerade)"
+            )
+        print(f"Datasetvalidering: {payload['validation']['status']}")
     return EXIT_OK
 
 
@@ -334,6 +362,7 @@ def _cmd_benchmark(args: argparse.Namespace) -> int:
         Path(args.output),
         benchmark_id=args.benchmark_id,
         progress=lambda message: _log(message, quiet=args.quiet),
+        force=bool(getattr(args, "force", False)),
     )
     payload = {
         "status": "ok",

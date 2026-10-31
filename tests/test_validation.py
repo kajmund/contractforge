@@ -24,16 +24,19 @@ from contractforge.models import (
     ArtifactRecord,
     CheckStatus,
     ClauseMode,
+    ClauseSpec,
     CostSummary,
     DatasetContractRecord,
     DatasetManifest,
     DatasetStats,
     DocumentRecord,
     DocumentStatus,
+    EvidencePrecision,
     FactKind,
     GeneratedClause,
     GoldenQuestion,
     GoldSet,
+    Language,
     LoadedContract,
     Manifest,
     PackageVerification,
@@ -43,7 +46,7 @@ from contractforge.models import (
     VerificationSummary,
 )
 from contractforge.questions import generate_and_verify_questions
-from contractforge.utils import read_json, sha256_file, sha256_text
+from contractforge.utils import find_span, read_json, sha256_file, sha256_text
 from contractforge.validation import semantic, validate_package
 from contractforge.validation.dataset import validate_dataset
 
@@ -101,6 +104,54 @@ def check_with(verification: PackageVerification, check_id: str):
     matches = [check for check in all_checks(verification) if check.check_id == check_id]
     assert len(matches) == 1, f"expected exactly one {check_id}, got {len(matches)}"
     return matches[0]
+
+
+def contradictory_rate_scenario() -> Scenario:
+    """Difficulty 5 scenario with a *declared* hourly-rate contradiction.
+
+    The main agreement states ``fact_hourly_rate`` (950 SEK) and an appendix
+    fact states a different rate, declared as an intentional contradiction.
+    The anomaly names the base rate so the deviation is explained, and it does
+    not name ``fact_notice_period`` — other facts get no such excuse.
+    """
+
+    scenario = make_consulting_scenario(difficulty=5)
+    amendment = make_fact(
+        "fact_hourly_rate_appendix",
+        1500,
+        kind=FactKind.MONEY,
+        currency="SEK",
+        label_sv="Timarvode i bilaga",
+        explicit_surfaces=["1 500 SEK"],
+        keywords_sv=["timarvode"],
+    )
+    document = scenario.documents[0]
+    clauses = [
+        *document.clauses,
+        ClauseSpec(
+            clause_id="clause_06",
+            document_id="main_agreement",
+            order=6,
+            heading_sv="Bilagetimarvode",
+            fact_ids=["fact_hourly_rate_appendix"],
+            mode=ClauseMode.EXPLICIT,
+        ),
+    ]
+    anomaly = Anomaly(
+        anomaly_id="anomaly_rate_conflict",
+        kind=AnomalyKind.INTENTIONAL_CONTRADICTION,
+        fact_ids=["fact_hourly_rate", "fact_hourly_rate_appendix"],
+        governing_fact_id="fact_hourly_rate",
+        answerability=Answerability.CONFLICTING_EVIDENCE,
+        description_sv="Huvudavtal och bilaga anger olika timarvoden.",
+    )
+    return scenario.model_copy(
+        update={
+            "facts": [*scenario.facts, amendment],
+            "documents": [document.model_copy(update={"clauses": clauses})],
+            "anomalies": [anomaly],
+        }
+    )
 
 
 def conflicting_scenario() -> Scenario:
@@ -244,7 +295,10 @@ def test_correct_value_plus_distractor_only_warns() -> None:
     package = set_clause_text(
         package,
         "clause_03",
-        "Uppsägningstiden är tre (3) månader, alternativt sex (6) månader.",
+        (
+            "Enligt ett tidigare utkast diskuterades en uppsägningstid om sex (6) månader; "
+            "den avtalade uppsägningstiden är tre (3) månader."
+        ),
     )
     rendered = make_rendered_documents(scenario, package)
     verification = validate_package(scenario, package, rendered)
@@ -254,7 +308,259 @@ def test_correct_value_plus_distractor_only_warns() -> None:
     )
     assert semantic_check.status is CheckStatus.WARN
     assert "sex (6) månader" in semantic_check.message
+    assert "icke-bindande" in semantic_check.message
+    assert semantic_check.details["operator"] == ["non_binding"]
     assert verification.status is DocumentStatus.ACCEPTED
+
+
+# ---------------------------------------------------------------------------
+# Operator-aware semantics: replacing values are binding (review finding F3)
+# ---------------------------------------------------------------------------
+
+HOURLY_RATE_CHECK_ID = (
+    "document.main_agreement.clause.clause_02.fact.fact_hourly_rate.semantic"
+)
+
+
+def clause_02_verification(text: str) -> PackageVerification:
+    """Verify a package where the explicit hourly-rate clause carries ``text``."""
+
+    scenario, package, _rendered = bundle()
+    package = set_clause_text(package, "clause_02", text)
+    rendered = make_rendered_documents(scenario, package)
+    return validate_package(scenario, package, rendered)
+
+
+def test_replacing_value_after_correct_value_fails() -> None:
+    verification = clause_02_verification(
+        "Timarvode är 950 SEK. Detta villkor ersätts härmed: "
+        "det avtalade beloppet är 9 999 SEK."
+    )
+    check = check_with(verification, HOURLY_RATE_CHECK_ID)
+    assert check.status is CheckStatus.FAIL
+    assert "9 999 SEK" in check.message
+    assert "ersätts" in check.message
+    assert "icke-bindande distraktor" in check.message
+    assert check.details["conflicts"] == ["9 999 SEK"]
+    assert check.details["operator"] == ["binding"]
+    assert verification.status is DocumentStatus.REJECTED
+    assert verification.documents[0].status is DocumentStatus.REJECTED
+
+
+def test_replacing_value_message_locates_deviating_span() -> None:
+    text = (
+        "Timarvode är 950 SEK. Detta villkor ersätts härmed: "
+        "det avtalade beloppet är 9 999 SEK."
+    )
+    scenario, package, _rendered = bundle()
+    package = set_clause_text(package, "clause_02", text)
+    rendered = make_rendered_documents(scenario, package)
+    verification = validate_package(scenario, package, rendered)
+    conflict_span = next(
+        quantity
+        for quantity in semantic.extract_quantities(text)
+        if quantity.value == 9999
+    )
+    assert text[conflict_span.start : conflict_span.end] == "9 999 SEK"
+    check = check_with(verification, HOURLY_RATE_CHECK_ID)
+    assert check.details["conflicts"] == [conflict_span.surface]
+    # The deviating span maps onto real canonical text: gold and repair feedback
+    # may only cite characters that exist in the rendered clause.
+    rendered_document = rendered["main_agreement"]
+    canonical_text = rendered_document.canonical_text
+    clause_span = rendered_document.clause_spans["clause_02"]
+    found = find_span(
+        canonical_text, conflict_span.surface, clause_span.start, clause_span.end
+    )
+    assert found is not None
+    assert canonical_text[slice(*found)] == "9 999 SEK"
+
+
+def test_earlier_draft_alternative_value_only_warns() -> None:
+    verification = clause_02_verification(
+        "Återkommande konsultarvode är 950 SEK per timme. Enligt ett tidigare utkast "
+        "diskuterades ett alternativt timarvode om 9 999 SEK; det avtalade timarvodet "
+        "är 950 SEK."
+    )
+    check = check_with(verification, HOURLY_RATE_CHECK_ID)
+    assert check.status is CheckStatus.WARN
+    assert "9 999 SEK" in check.message
+    assert "icke-bindande" in check.message
+    assert check.details["operator"] == ["non_binding"]
+    assert verification.status is DocumentStatus.ACCEPTED
+
+
+def test_declared_contradiction_anomaly_allows_deviating_value() -> None:
+    scenario = contradictory_rate_scenario()
+    package = clean_package(scenario)
+    package = set_clause_text(
+        package,
+        "clause_02",
+        "Timarvode är 950 SEK. En bilaga anger ett timarvode om 9 999 SEK.",
+    )
+    rendered = make_rendered_documents(scenario, package)
+    verification = validate_package(scenario, package, rendered)
+    check = check_with(verification, HOURLY_RATE_CHECK_ID)
+    assert check.status is CheckStatus.WARN
+    assert "avsiktlig motsägelse" in check.message
+    assert check.details["declared_anomalies"] == ["anomaly_rate_conflict"]
+    assert verification.status is DocumentStatus.ACCEPTED
+
+
+def test_declared_anomaly_for_other_fact_does_not_allow_deviation() -> None:
+    scenario = contradictory_rate_scenario()
+    package = clean_package(scenario)
+    package = set_clause_text(
+        package,
+        "clause_03",
+        "Uppsägningstiden är tre (3) månader. Detta villkor ersätts härmed: "
+        "uppsägningstiden är sex (6) månader.",
+    )
+    rendered = make_rendered_documents(scenario, package)
+    verification = validate_package(scenario, package, rendered)
+    check = check_with(
+        verification,
+        "document.main_agreement.clause.clause_03.fact.fact_notice_period.semantic",
+    )
+    assert check.status is CheckStatus.FAIL
+    assert "sex (6) månader" in check.message
+    assert verification.status is DocumentStatus.REJECTED
+
+
+def test_replacing_value_in_english_fails() -> None:
+    scenario = make_consulting_scenario()
+    scenario = scenario.model_copy(
+        update={
+            "language": Language.EN,
+            "facts": [
+                fact.model_copy(
+                    update={
+                        "explicit_surfaces": ["950 SEK", "SEK 950"],
+                        "keywords_en": ["hourly rate"],
+                        "label_en": "Hourly rate",
+                    }
+                )
+                if fact.fact_id == "fact_hourly_rate"
+                else fact
+                for fact in scenario.facts
+            ],
+        }
+    )
+    package = clean_package(scenario)
+    package = set_clause_text(
+        package,
+        "clause_02",
+        "The hourly rate is 950 SEK. This term is replaced by 9 999 SEK.",
+    )
+    rendered = make_rendered_documents(scenario, package)
+    verification = validate_package(scenario, package, rendered)
+    check = check_with(verification, HOURLY_RATE_CHECK_ID)
+    assert check.status is CheckStatus.FAIL
+    assert "9 999 SEK" in check.message
+    assert check.details["operator"] == ["binding"]
+    assert verification.status is DocumentStatus.REJECTED
+
+
+def test_english_earlier_draft_alternative_only_warns() -> None:
+    scenario = make_consulting_scenario()
+    scenario = scenario.model_copy(
+        update={
+            "language": Language.EN,
+            "facts": [
+                fact.model_copy(
+                    update={
+                        "explicit_surfaces": ["950 SEK", "SEK 950"],
+                        "keywords_en": ["hourly rate"],
+                        "label_en": "Hourly rate",
+                    }
+                )
+                if fact.fact_id == "fact_hourly_rate"
+                else fact
+                for fact in scenario.facts
+            ],
+        }
+    )
+    package = clean_package(scenario)
+    package = set_clause_text(
+        package,
+        "clause_02",
+        "The hourly rate is 950 SEK. An earlier draft discussed an alternative hourly "
+        "rate of 9 999 SEK, which is not binding.",
+    )
+    rendered = make_rendered_documents(scenario, package)
+    verification = validate_package(scenario, package, rendered)
+    check = check_with(verification, HOURLY_RATE_CHECK_ID)
+    assert check.status is CheckStatus.WARN
+    assert check.details["operator"] == ["non_binding"]
+    assert verification.status is DocumentStatus.ACCEPTED
+
+
+def test_one_binding_conflict_among_distractors_fails() -> None:
+    verification = clause_02_verification(
+        "Enligt ett tidigare utkast diskuterades 8 000 SEK. Timarvode är 950 SEK. "
+        "Beloppet höjs till 9 999 SEK från och med nu."
+    )
+    check = check_with(verification, HOURLY_RATE_CHECK_ID)
+    assert check.status is CheckStatus.FAIL
+    assert check.details["conflicts"] == ["8 000 SEK", "9 999 SEK"]
+    assert check.details["operator"] == ["non_binding", "binding"]
+    assert verification.status is DocumentStatus.REJECTED
+
+
+def test_unexplained_deviating_value_fails_closed() -> None:
+    verification = clause_02_verification("Timarvode är 950 SEK eller 9 999 SEK.")
+    check = check_with(verification, HOURLY_RATE_CHECK_ID)
+    assert check.status is CheckStatus.FAIL
+    assert check.details["operator"] == ["ambiguous"]
+    assert verification.status is DocumentStatus.REJECTED
+
+
+@pytest.mark.parametrize(
+    ("sentence", "expected"),
+    [
+        ("Detta villkor ersätts härmed: det avtalade beloppet är 9 999 SEK.", semantic.BINDING),
+        ("Beloppet ändras till 9 999 SEK.", semantic.BINDING),
+        ("Beloppet höjs till 9 999 SEK.", semantic.BINDING),
+        ("Enligt ett tidigare utkast diskuterades 9 999 SEK.", semantic.NON_BINDING),
+        ("Ett alternativt belopp om 9 999 SEK har inte godkänts.", semantic.NON_BINDING),
+        ("This term is replaced by 9 999 SEK.", semantic.BINDING),
+        ("An earlier draft stated 9 999 SEK.", semantic.NON_BINDING),
+        ("Another provision mentions 9 999 SEK.", semantic.AMBIGUOUS),
+    ],
+)
+def test_assess_operator_classifies_markers(sentence: str, expected: str) -> None:
+    span = next(
+        (quantity.start, quantity.end)
+        for quantity in semantic.extract_quantities(sentence)
+        if quantity.value == 9999
+    )
+    assert semantic.assess_operator(sentence, None, span) == expected
+
+
+def test_assess_operator_binding_beats_distractor_frame() -> None:
+    sentence = (
+        "Det tidigare värdet 8 000 SEK ersätts härmed: det avtalade beloppet är 9 999 SEK."
+    )
+    span = next(
+        (quantity.start, quantity.end)
+        for quantity in semantic.extract_quantities(sentence)
+        if quantity.value == 9999
+    )
+    assert semantic.assess_operator(sentence, None, span) == semantic.BINDING
+
+
+def test_assess_operator_ignores_neighbouring_sentence() -> None:
+    text = (
+        "Enligt ett tidigare utkast diskuterades 8 000 SEK. "
+        "Beloppet är 9 999 SEK."
+    )
+    span = next(
+        (quantity.start, quantity.end)
+        for quantity in semantic.extract_quantities(text)
+        if quantity.value == 9999
+    )
+    assert semantic.assess_operator(text, None, span) == semantic.AMBIGUOUS
+
 
 
 # ---------------------------------------------------------------------------
@@ -542,6 +848,73 @@ def test_expected_fact_coverage_fails_for_unsupported_fact() -> None:
 # ---------------------------------------------------------------------------
 
 
+def co_located_duration_scenario() -> Scenario:
+    """One clause states two duration facts with different values (6 and 3 months)."""
+
+    scenario = make_consulting_scenario()
+    duration = make_fact(
+        "fact_duration_months",
+        6,
+        kind=FactKind.DURATION,
+        unit="months",
+        label_sv="Uppdragsperiod",
+        explicit_surfaces=["sex (6) månader"],
+        keywords_sv=["uppdragsperiod"],
+    )
+    document = scenario.documents[0]
+    clauses = list(document.clauses)
+    clauses[2] = clauses[2].model_copy(
+        update={
+            "heading_sv": "Uppdragsperiod och uppsägning",
+            "fact_ids": ["fact_notice_period", "fact_duration_months"],
+        }
+    )
+    document = document.model_copy(update={"clauses": clauses})
+    return scenario.model_copy(
+        update={
+            "facts": [*scenario.facts, duration],
+            "documents": [document],
+        }
+    )
+
+
+def test_co_located_facts_of_same_unit_do_not_conflict() -> None:
+    scenario = co_located_duration_scenario()
+    package = clean_package(scenario)
+    rendered = make_rendered_documents(scenario, package)
+    verification = validate_package(scenario, package, rendered)
+    for fact_id in ("fact_notice_period", "fact_duration_months"):
+        check = check_with(
+            verification,
+            f"document.main_agreement.clause.clause_03.fact.{fact_id}.semantic",
+        )
+        assert check.status is CheckStatus.PASS, check.message
+    assert verification.status is DocumentStatus.ACCEPTED
+
+
+def test_replacement_value_after_co_located_facts_fails() -> None:
+    scenario = co_located_duration_scenario()
+    package = clean_package(scenario)
+    package = set_clause_text(
+        package,
+        "clause_03",
+        (
+            "Följande villkor gäller: uppdragsperiod uppgår till sex (6) månader och "
+            "uppsägningstid fastställs till tre (3) månader. "
+            "Uppsägningstiden ersätts härmed av nio (9) månader."
+        ),
+    )
+    rendered = make_rendered_documents(scenario, package)
+    verification = validate_package(scenario, package, rendered)
+    check = check_with(
+        verification,
+        "document.main_agreement.clause.clause_03.fact.fact_notice_period.semantic",
+    )
+    assert check.status is CheckStatus.FAIL
+    assert "nio (9) månader" in check.message
+    assert verification.status is DocumentStatus.REJECTED
+
+
 def test_intentional_missing_fact_is_skipped() -> None:
     scenario = intentionally_missing_scenario()
     package = clean_package(scenario)
@@ -600,7 +973,66 @@ def test_gold_evidence_quote_mismatch_fails() -> None:
         verification, "gold.fact.fact_notice_period.evidence"
     )
     assert check.status is CheckStatus.FAIL
-    assert "matchar inte slice" in check.message
+    assert "exakt" in check.message
+    assert "slice" in check.message
+
+
+def test_gold_exact_span_must_not_be_widened() -> None:
+    scenario, package, rendered = bundle()
+    gold = build_gold_set(scenario, package, rendered)
+    broken_facts = []
+    for gold_fact in gold.facts:
+        if gold_fact.fact_id == "fact_hourly_rate":
+            original = gold_fact.evidence[0]
+            widened = original.model_copy(
+                update={
+                    "start": original.start - 5,
+                    "end": original.end + 5,
+                    "quote": original.quote,
+                }
+            )
+            broken_facts.append(gold_fact.model_copy(update={"evidence": [widened]}))
+        else:
+            broken_facts.append(gold_fact)
+    broken_gold = gold.model_copy(update={"facts": broken_facts})
+    verification = validate_package(scenario, package, rendered, gold=broken_gold)
+    check = check_with(verification, "gold.fact.fact_hourly_rate.evidence")
+    assert check.status is CheckStatus.FAIL
+    assert "exakt" in check.message
+
+
+def test_gold_paraphrase_evidence_allows_tolerant_quote_match() -> None:
+    scenario = make_consulting_scenario()
+    document = scenario.documents[0]
+    clauses = list(document.clauses)
+    clauses[2] = clauses[2].model_copy(update={"mode": ClauseMode.PARAPHRASE})
+    scenario = scenario.model_copy(
+        update={"documents": [document.model_copy(update={"clauses": clauses})]}
+    )
+    package = clean_package(scenario)
+    package = set_clause_text(package, "clause_03", "Uppsägningstiden är ett kvartal.")
+    rendered = make_rendered_documents(scenario, package)
+    gold = build_gold_set(scenario, package, rendered)
+    paraphrase_fact = gold.fact("fact_notice_period")
+    assert paraphrase_fact.precision is EvidencePrecision.PARAPHRASE
+    original = paraphrase_fact.evidence[0]
+    clause_span = rendered["main_agreement"].clause_spans["clause_03"]
+    new_start = max(original.start - 3, clause_span.start)
+    new_end = min(original.end + 3, clause_span.end)
+    assert (new_start, new_end) != (original.start, original.end)
+    widened = original.model_copy(
+        update={"start": new_start, "end": new_end, "quote": original.quote}
+    )
+    broken_facts = [
+        fact.model_copy(update={"evidence": [widened]})
+        if fact.fact_id == "fact_notice_period"
+        else fact
+        for fact in gold.facts
+    ]
+    broken_gold = gold.model_copy(update={"facts": broken_facts})
+    verification = validate_package(scenario, package, rendered, gold=broken_gold)
+    check = check_with(verification, "gold.fact.fact_notice_period.evidence")
+    assert check.status is CheckStatus.PASS
 
 
 def test_gold_value_mismatch_fails() -> None:
@@ -952,6 +1384,23 @@ def _build_dataset(root: Path, *, tamper_txt: bool = False, tamper_hash: bool = 
     return contract_dir
 
 
+def _refresh_dataset_hashes(root: Path) -> None:
+    """Recompute manifest hashes after intentionally corrupting a payload."""
+
+    contract_dir = root / "contract_0001"
+    manifest = read_json(contract_dir / "manifest.json")
+    for artifact in manifest["artifacts"]:
+        path = contract_dir / artifact["path"]
+        artifact["sha256"] = sha256_file(path)
+        artifact["size_bytes"] = path.stat().st_size
+    _write_json(contract_dir / "manifest.json", manifest)
+    dataset_manifest = read_json(root / "dataset_manifest.json")
+    dataset_manifest["contracts"][0]["manifest_sha256"] = sha256_file(
+        contract_dir / "manifest.json"
+    )
+    _write_json(root / "dataset_manifest.json", dataset_manifest)
+
+
 def test_dataset_valid_dataset_passes(tmp_path, monkeypatch) -> None:  # noqa: ANN001
     _install_fake_loader(monkeypatch)
     _build_dataset(tmp_path)
@@ -1122,3 +1571,73 @@ def test_dataset_rejects_approved_contract_marked_rejected(tmp_path, monkeypatch
     )
     assert check.status is CheckStatus.FAIL
     assert "REJECTED" in check.message
+
+
+def test_dataset_rejects_widened_exact_gold_span(tmp_path, monkeypatch) -> None:  # noqa: ANN001
+    _install_fake_loader(monkeypatch)
+    _build_dataset(tmp_path)
+    contract_dir = tmp_path / "contract_0001"
+    gold_payload = read_json(contract_dir / "gold_facts.json")
+    widened = False
+    for fact in gold_payload["facts"]:
+        if fact["precision"] != "exact" or not fact["evidence"]:
+            continue
+        span = fact["evidence"][0]
+        if span["start"] < 5:
+            continue
+        span["start"] -= 5
+        span["end"] += 5
+        widened = True
+        break
+    assert widened
+    _write_json(contract_dir / "gold_facts.json", gold_payload)
+    _refresh_dataset_hashes(tmp_path)
+    report = validate_dataset(tmp_path)
+    assert report.status is CheckStatus.FAIL
+    failures = [
+        check
+        for check in report.checks
+        if check.status is CheckStatus.FAIL and check.check_id.endswith(".gold.evidence")
+    ]
+    assert failures
+    assert any("exakt" in check.message for check in failures)
+
+
+def test_dataset_question_evidence_quote_must_equal_slice(tmp_path, monkeypatch) -> None:  # noqa: ANN001
+    _install_fake_loader(monkeypatch)
+    _build_dataset(tmp_path)
+    contract_dir = tmp_path / "contract_0001"
+    questions = read_json(contract_dir / "golden_questions.json")
+    rendered = read_json(contract_dir / "rendered.json")
+    widened = False
+    for question in questions:
+        for span in question["evidence"]:
+            document = rendered.get(span["document_id"])
+            if document is None:
+                continue
+            clause_id = span.get("clause_id")
+            clause_span = (
+                document["clause_spans"].get(clause_id) if clause_id else None
+            )
+            new_end = span["end"] + 2
+            if new_end > len(document["canonical_text"]):
+                continue
+            if clause_span is not None and new_end > clause_span["end"]:
+                continue
+            span["end"] = new_end
+            widened = True
+            break
+        if widened:
+            break
+    assert widened
+    _write_json(contract_dir / "golden_questions.json", questions)
+    _refresh_dataset_hashes(tmp_path)
+    report = validate_dataset(tmp_path)
+    assert report.status is CheckStatus.FAIL
+    failures = [
+        check
+        for check in report.checks
+        if check.status is CheckStatus.FAIL and check.check_id.endswith(".questions")
+    ]
+    assert failures
+    assert any("exakt" in check.message for check in failures)

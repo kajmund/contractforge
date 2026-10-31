@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "contractforge_version": "0.1.0",
-  "generated_at": "2026-10-31T10:54:46.607634Z",
+  "generated_at": "2026-10-31T13:27:02.320360Z",
   "synthetic": true,
   "config": {
     "contract_type": "consulting",
@@ -17,7 +17,7 @@
     "max_tokens": 8000,
     "seed": 2026,
     "concurrency": 2,
-    "max_repair_attempts": 1,
+    "max_repair_attempts": 2,
     "prompt_version": "v1",
     "prompt_sha256": "4be2797e5714b053505aa652af45537a4eae3bfb6da4097be036067fde51e0ae",
     "formats": [
@@ -26,25 +26,49 @@
       "docx",
       "pdf"
     ],
-    "contract_id_prefix": "contract"
+    "contract_id_prefix": "contract",
+    "package": true,
+    "variation_overrides": {},
+    "scenario_definitions": [
+      {
+        "contract_type": "consulting",
+        "path": "scenarios/definitions/consulting.json",
+        "sha256": "47d82357cb0c2ff724e974462ec00924dad271ca673d1a2236a1803c24ecf024"
+      }
+    ],
+    "runtime": {
+      "contractforge_version": "0.1.0",
+      "python_version": "3.10.8",
+      "python_implementation": "CPython",
+      "platform": "macOS-15.7.4-arm64-arm-64bit",
+      "git_commit": "172feceffac6bb0f2d5bb90f12cdaf655c9ee4bf",
+      "git_dirty": true,
+      "dependencies": {
+        "pydantic": "2.14.2",
+        "httpx": "0.28.1",
+        "python-docx": "1.2.0",
+        "reportlab": "5.1.0"
+      }
+    }
   },
   "contracts": [
     {
       "contract_id": "contract_0001",
       "path": "contract_0001",
       "status": "ACCEPTED",
-      "manifest_sha256": "adf0b56c2fd5094ed5a2ace7031736a73098733a510039e5493008a1e1e90bc7"
+      "manifest_sha256": "8abbad0ca282084962744df60e6e51c81d175d9db5a7f8efa314e3540f385c7b"
     },
     {
       "contract_id": "contract_0002",
       "path": "contract_0002",
       "status": "ACCEPTED",
-      "manifest_sha256": "b0430eb4d5c8dc225a5982981098d0a9efa48b3963c32b0c34059ac523283028"
+      "manifest_sha256": "63651c1b018d813cbe22be97ec90e0ed0ce77fa2593442f8ae543188bd105de9"
     }
   ],
+  "rejected": [],
   "totals": {
     "schema_version": "1.0",
-    "generated_at": "2026-10-31T10:54:46.607634Z",
+    "generated_at": "2026-10-31T13:27:02.320360Z",
     "contracts_total": 2,
     "contracts_accepted": 2,
     "contracts_rejected": 0,
@@ -56,26 +80,61 @@
     "facts_total": 26,
     "questions_total": 36,
     "questions_validated": 36,
+    "questions_rejected": 0,
     "questions_answerable": 36,
     "questions_insufficient_evidence": 0,
     "questions_conditional": 0,
     "questions_conflicting_evidence": 0,
     "calls_total": 2,
-    "input_tokens": 8868,
-    "output_tokens": 2095,
-    "total_tokens": 10963,
+    "input_tokens": 8873,
+    "output_tokens": 1893,
+    "total_tokens": 10766,
     "tokens_known": true,
     "cost_usd": null,
     "cost_basis": "unknown",
-    "total_seconds": 1.1129251250531524,
-    "documents_per_minute": 107.82396524138936,
-    "clauses_per_minute": 646.9437914483361,
-    "mean_document_latency_ms": 860.3069789824076,
+    "total_seconds": 2.2888152499999705,
+    "documents_per_minute": 52.428871224971765,
+    "clauses_per_minute": 314.5732273498306,
+    "mean_document_latency_ms": 1746.3455204997445,
     "cost_per_accepted_document_usd": null,
     "cost_per_validated_question_usd": null,
     "verification_pass_rate": 1.0,
     "repair_rate": 0.0,
     "rejection_rate": 0.0
+  },
+  "run": {
+    "contract_id_prefix": "contract",
+    "count": 2,
+    "contract_ids": [
+      "contract_0001",
+      "contract_0002"
+    ],
+    "data_files": [
+      "contract_0001/gold_facts.json",
+      "contract_0001/golden_questions.json",
+      "contract_0001/llm_calls.json",
+      "contract_0001/main_agreement.docx",
+      "contract_0001/main_agreement.md",
+      "contract_0001/main_agreement.pdf",
+      "contract_0001/main_agreement.txt",
+      "contract_0001/manifest.json",
+      "contract_0001/raw/contract_0001_main_agreement_a1.json",
+      "contract_0001/rendered.json",
+      "contract_0001/scenario.json",
+      "contract_0001/verification.json",
+      "contract_0002/gold_facts.json",
+      "contract_0002/golden_questions.json",
+      "contract_0002/llm_calls.json",
+      "contract_0002/main_agreement.docx",
+      "contract_0002/main_agreement.md",
+      "contract_0002/main_agreement.pdf",
+      "contract_0002/main_agreement.txt",
+      "contract_0002/manifest.json",
+      "contract_0002/raw/contract_0002_main_agreement_a1.json",
+      "contract_0002/rendered.json",
+      "contract_0002/scenario.json",
+      "contract_0002/verification.json"
+    ]
   },
   "notes": [
     "All parties, organisationsnummer, addresses and amounts are synthetic.",

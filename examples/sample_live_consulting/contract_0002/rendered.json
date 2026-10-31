@@ -4,43 +4,43 @@
     "kind": "main_agreement",
     "title": "Konsultavtal",
     "language": "sv",
-    "canonical_text": "SYNTETISK TESTDATA – ContractForge\ncontract_id: contract_0002\ndocument_id: main_agreement\ndokumenttyp: main_agreement\nspråk: sv\njurisdiktion: SE\n\nKonsultavtal\n\n1. Avtalsparter\nParterna i detta avtal är Arken Digital AB, org.nr 559002-0222, med adress Exempelvägen 8, 111 20 Stockholm (hädanefter \"Uppdragsgivaren\") och Lindfors Analys AB, org.nr 559003-6653, med adress Testvägen 3, 722 20 Västerås (hädanefter \"Konsulten\").\n\n2. Uppdragets omfattning\nUppdraget avser systemutveckling och integration.\n\n3. Arvode och tidsåtgång\nKonsulten erhåller ett timarvode om 1 150 SEK för utfört arbete och den beräknade tidsåtgången för uppdraget är 400 timmar.\n\n4. Uppdragsperiod och uppsägning\nUppdraget påbörjas den 1 februari 2026 och löper i 6 månader, med möjlighet till uppsägning med en frist på 3 månader från endera part.\n\n5. Betalningsvillkor och utlägg\nFakturor ska betalas inom 45 dagar från fakturadatum och ersättning för utlägg får inte överstiga 75 000 SEK.\n\n6. Ansvarsbegränsning\nAnsvarsbegränsning gäller upp till ett belopp om 1 000 000 SEK, Uppdragsgivaren äger resultatet, och sekretessperioden gäller i 5 år.\n",
+    "canonical_text": "SYNTETISK TESTDATA – ContractForge\ncontract_id: contract_0002\ndocument_id: main_agreement\ndokumenttyp: main_agreement\nspråk: sv\njurisdiktion: SE\n\nKonsultavtal\n\n1. Avtalsparter\nParterna i detta avtal är Arken Digital AB, org.nr 559002-0135, med adress Exempelvägen 8, 111 20 Stockholm (uppdragsgivare) samt Västberg Rådgivning AB, org.nr 559003-4082, med adress Testvägen 3, 722 20 Västerås (konsult).\n\n2. Uppdragets omfattning\nUppdraget omfattar projektledning och analys.\n\n3. Arvode och tidsåtgång\nTimarvodet är 1 250 SEK per timme. Den beräknade tidsåtgången är 320 timmar.\n\n4. Uppdragsperiod och uppsägning\nUppdraget påbörjas den 1 februari 2026 och löper i 6 månader. Uppsägning sker med en uppsägningstid om 3 månader.\n\n5. Betalningsvillkor och utlägg\nFakturor skall betalas inom 45 dagar från fakturadatum. Kostnadsram för utlägg är 75 000 SEK.\n\n6. Ansvarsbegränsning\nAnsvarsbegränsning är 1 000 000 SEK. Konsulten behåller bakgrundsrättigheter. Sekretessperioden gäller i 5 år.\n",
     "clause_spans": {
       "clause_01": {
         "document_id": "main_agreement",
         "clause_id": "clause_01",
         "start": 160,
-        "end": 424
+        "end": 400
       },
       "clause_02": {
         "document_id": "main_agreement",
         "clause_id": "clause_02",
-        "start": 426,
-        "end": 500
+        "start": 402,
+        "end": 472
       },
       "clause_03": {
         "document_id": "main_agreement",
         "clause_id": "clause_03",
-        "start": 502,
-        "end": 650
+        "start": 474,
+        "end": 575
       },
       "clause_04": {
         "document_id": "main_agreement",
         "clause_id": "clause_04",
-        "start": 652,
-        "end": 820
+        "start": 577,
+        "end": 723
       },
       "clause_05": {
         "document_id": "main_agreement",
         "clause_id": "clause_05",
-        "start": 822,
-        "end": 963
+        "start": 725,
+        "end": 850
       },
       "clause_06": {
         "document_id": "main_agreement",
         "clause_id": "clause_06",
-        "start": 965,
-        "end": 1120
+        "start": 852,
+        "end": 984
       }
     }
   }

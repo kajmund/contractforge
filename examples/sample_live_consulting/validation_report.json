@@ -1,0 +1,283 @@
+{
+  "root": "examples/sample_live_consulting",
+  "generated_at": "2026-10-31T13:27:02.329566Z",
+  "contracts_checked": 2,
+  "contracts_passed": 2,
+  "contracts_failed": 0,
+  "checks": [
+    {
+      "check_id": "dataset.contract.contract_0001.synthetic",
+      "status": "PASS",
+      "message": "scenariot är markerat syntetiskt.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0001.manifest.identity",
+      "status": "PASS",
+      "message": "manifestets identitet, synthetic-flagga och status stämmer.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0001.verification",
+      "status": "PASS",
+      "message": "avtalet är godkänt (status ACCEPTED).",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0001.manifest.hashes",
+      "status": "PASS",
+      "message": "alla 11 artefakthashar stämmer.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0001.rendered.documents",
+      "status": "PASS",
+      "message": "rendered.json innehåller alla 1 dokument.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0001.rendered.spans",
+      "status": "PASS",
+      "message": "alla spann i rendered.json är giltiga.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0001.canonical_text",
+      "status": "PASS",
+      "message": ".txt matchar canonical_text för 1 dokument.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0001.gold.present",
+      "status": "PASS",
+      "message": "gold innehåller 13 fakta, 2 entiteter.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0001.gold.contract_id",
+      "status": "PASS",
+      "message": "gold.contract_id matchar scenariot.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0001.gold.values",
+      "status": "PASS",
+      "message": "gold täcker alla 13 scenario-fakta med rätt värden.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0001.gold.evidence",
+      "status": "PASS",
+      "message": "alla gold-evidensspann är giltiga och quote matchar slice.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0001.gold.question_ids",
+      "status": "PASS",
+      "message": "gold.question_ids pekar på befintliga frågor.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0001.questions.present",
+      "status": "PASS",
+      "message": "avtalet har 18 golden questions.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0001.questions",
+      "status": "PASS",
+      "message": "alla 18 frågor är giltiga och stöds av kanonisk text.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.synthetic",
+      "status": "PASS",
+      "message": "scenariot är markerat syntetiskt.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.manifest.identity",
+      "status": "PASS",
+      "message": "manifestets identitet, synthetic-flagga och status stämmer.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.verification",
+      "status": "PASS",
+      "message": "avtalet är godkänt (status ACCEPTED).",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.manifest.hashes",
+      "status": "PASS",
+      "message": "alla 11 artefakthashar stämmer.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.rendered.documents",
+      "status": "PASS",
+      "message": "rendered.json innehåller alla 1 dokument.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.rendered.spans",
+      "status": "PASS",
+      "message": "alla spann i rendered.json är giltiga.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.canonical_text",
+      "status": "PASS",
+      "message": ".txt matchar canonical_text för 1 dokument.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.gold.present",
+      "status": "PASS",
+      "message": "gold innehåller 13 fakta, 2 entiteter.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.gold.contract_id",
+      "status": "PASS",
+      "message": "gold.contract_id matchar scenariot.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.gold.values",
+      "status": "PASS",
+      "message": "gold täcker alla 13 scenario-fakta med rätt värden.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.gold.evidence",
+      "status": "PASS",
+      "message": "alla gold-evidensspann är giltiga och quote matchar slice.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.gold.question_ids",
+      "status": "PASS",
+      "message": "gold.question_ids pekar på befintliga frågor.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.questions.present",
+      "status": "PASS",
+      "message": "avtalet har 18 golden questions.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.contract.contract_0002.questions",
+      "status": "PASS",
+      "message": "alla 18 frågor är giltiga och stöds av kanonisk text.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.rejected",
+      "status": "PASS",
+      "message": "inga kasserade avtal (rejected/ saknas).",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.manifest.synthetic",
+      "status": "PASS",
+      "message": "dataset-manifestet är syntetiskt.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.manifest.contracts",
+      "status": "PASS",
+      "message": "dataset-manifestet listar alla 2 avtal.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.manifest.records",
+      "status": "PASS",
+      "message": "alla manifest-poster, hashar och statusar stämmer.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.manifest.totals",
+      "status": "PASS",
+      "message": "dataset-manifestets totals stämmer.",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    },
+    {
+      "check_id": "dataset.expect_min_contracts",
+      "status": "PASS",
+      "message": "datasetet innehåller 2 avtal (minst 2 förväntade).",
+      "document_id": null,
+      "clause_id": null,
+      "details": {}
+    }
+  ],
+  "status": "PASS",
+  "errors": []
+}

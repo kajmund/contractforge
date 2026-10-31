@@ -20,8 +20,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_01",
-        "start": 202,
-        "end": 218,
+        "start": 194,
+        "end": 210,
         "quote": "Arken Digital AB"
       }
     ],
@@ -52,8 +52,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_01",
-        "start": 242,
-        "end": 260,
+        "start": 215,
+        "end": 233,
         "quote": "Lindfors Analys AB"
       }
     ],
@@ -84,8 +84,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_02",
-        "start": 319,
-        "end": 344,
+        "start": 280,
+        "end": 305,
         "quote": "projektledning och analys"
       }
     ],
@@ -116,8 +116,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_03",
-        "start": 386,
-        "end": 395,
+        "start": 347,
+        "end": 356,
         "quote": "1 150 SEK"
       }
     ],
@@ -148,8 +148,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_03",
-        "start": 440,
-        "end": 450,
+        "start": 401,
+        "end": 411,
         "quote": "400 timmar"
       }
     ],
@@ -180,8 +180,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_04",
-        "start": 509,
-        "end": 524,
+        "start": 470,
+        "end": 485,
         "quote": "15 januari 2026"
       }
     ],
@@ -212,8 +212,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_04",
-        "start": 541,
-        "end": 550,
+        "start": 498,
+        "end": 507,
         "quote": "6 månader"
       }
     ],
@@ -244,8 +244,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_05",
-        "start": 640,
-        "end": 648,
+        "start": 622,
+        "end": 630,
         "quote": "30 dagar"
       }
     ],
@@ -276,8 +276,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_05",
-        "start": 676,
-        "end": 686,
+        "start": 674,
+        "end": 684,
         "quote": "75 000 SEK"
       }
     ],
@@ -308,8 +308,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_06",
-        "start": 733,
-        "end": 746,
+        "start": 741,
+        "end": 754,
         "quote": "1 000 000 SEK"
       }
     ],
@@ -340,8 +340,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_04",
-        "start": 570,
-        "end": 579,
+        "start": 550,
+        "end": 559,
         "quote": "3 månader"
       }
     ],
@@ -372,8 +372,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_06",
-        "start": 808,
-        "end": 812,
+        "start": 816,
+        "end": 820,
         "quote": "3 år"
       }
     ],
@@ -404,8 +404,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_06",
-        "start": 748,
-        "end": 787,
+        "start": 756,
+        "end": 795,
         "quote": "Konsulten behåller bakgrundsrättigheter"
       }
     ],
@@ -434,8 +434,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_01",
-        "start": 202,
-        "end": 218,
+        "start": 194,
+        "end": 210,
         "quote": "Arken Digital AB"
       }
     ],
@@ -464,8 +464,8 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_01",
-        "start": 242,
-        "end": 260,
+        "start": 215,
+        "end": 233,
         "quote": "Lindfors Analys AB"
       }
     ],
@@ -497,15 +497,15 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_03",
-        "start": 386,
-        "end": 395,
+        "start": 347,
+        "end": 356,
         "quote": "1 150 SEK"
       },
       {
         "document_id": "main_agreement",
         "clause_id": "clause_05",
-        "start": 676,
-        "end": 686,
+        "start": 674,
+        "end": 684,
         "quote": "75 000 SEK"
       }
     ],
@@ -537,15 +537,15 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_04",
-        "start": 541,
-        "end": 550,
+        "start": 498,
+        "end": 507,
         "quote": "6 månader"
       },
       {
         "document_id": "main_agreement",
         "clause_id": "clause_04",
-        "start": 570,
-        "end": 579,
+        "start": 550,
+        "end": 559,
         "quote": "3 månader"
       }
     ],
@@ -577,15 +577,15 @@
       {
         "document_id": "main_agreement",
         "clause_id": "clause_01",
-        "start": 202,
-        "end": 218,
+        "start": 194,
+        "end": 210,
         "quote": "Arken Digital AB"
       },
       {
         "document_id": "main_agreement",
         "clause_id": "clause_01",
-        "start": 242,
-        "end": 260,
+        "start": 215,
+        "end": 233,
         "quote": "Lindfors Analys AB"
       }
     ],

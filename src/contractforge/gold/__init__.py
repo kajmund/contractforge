@@ -35,7 +35,7 @@ from ..models import (
     Scenario,
     TextSpan,
 )
-from ..utils import find_span
+from ..utils import find_span, normalize_for_search
 
 __all__ = ["build_gold_set"]
 
@@ -114,15 +114,18 @@ def _dedupe_evidence(spans: list[EvidenceSpan]) -> list[EvidenceSpan]:
 
 
 def _intentionally_missing_facts(scenario: Scenario) -> set[str]:
-    """Facts the scenario deliberately leaves unregulated (level 5/6).
+    """Facts the scenario deliberately leaves unregulated (level 6).
 
-    These get *no* evidence: inventing a span for information the scenario says
-    is missing would make facit claim something the text does not support.
+    Only ``MISSING_INFORMATION`` facts get no evidence: inventing a span for
+    information the scenario says is missing would make facit claim something
+    the text does not support. Facts of ``AMBIGUITY``/``CONDITIONAL`` anomalies
+    are still stated in the text (e.g. the conditional value "10 timmar") and
+    keep their normal value evidence.
     """
 
     missing: set[str] = set()
     for anomaly in scenario.anomalies:
-        if anomaly.kind.value in ("missing_information", "ambiguity"):
+        if anomaly.kind.value == "missing_information":
             missing.update(anomaly.fact_ids)
     return missing
 
@@ -280,7 +283,7 @@ def _gold_facts(
                     question_ids=[],
                     notes_sv=(
                         "avsiktligt oreglerat enligt scenariots "
-                        "missing_information/ambiguity-anomali; ingen evidens krävs"
+                        "missing_information-anomali; ingen evidens krävs"
                     ),
                 )
             )
@@ -393,49 +396,171 @@ def _resolve(
     return None, None, None
 
 
+def _document_identity_needles(
+    scenario: Scenario, target_document_id: str
+) -> list[str]:
+    """Verbatim strings that name the target *document* in body text.
+
+    ``document_id`` is included because the canonical metadata header lists only
+    the *source* document id, so a target id in the slice must come from the
+    body. Titles are preferred (searched first).
+    """
+
+    for document in scenario.documents:
+        if document.document_id == target_document_id:
+            return [
+                needle
+                for needle in dict.fromkeys(
+                    [document.title_sv, document.title_en, document.document_id]
+                )
+                if needle and needle.strip()
+            ]
+    return [target_document_id] if target_document_id.strip() else []
+
+
+def _clause_identity_needles(
+    scenario: Scenario, target_clause_id: str | None
+) -> list[str]:
+    """Verbatim strings that name the target *clause* (its headings)."""
+
+    if target_clause_id is None:
+        return []
+    for document in scenario.documents:
+        for clause in document.clauses:
+            if clause.clause_id == target_clause_id:
+                return [
+                    needle
+                    for needle in dict.fromkeys([clause.heading_sv, clause.heading_en])
+                    if needle and needle.strip()
+                ]
+    return []
+
+
+def _first_needle_span(
+    text: str, needles: list[str], start: int, end: int
+) -> tuple[str, tuple[int, int]] | None:
+    for needle in needles:
+        found = find_span(text, needle, start, end)
+        if found is not None:
+            return needle, found
+    return None
+
+
+def _all_needle_spans(
+    text: str, needles: list[str], start: int, end: int
+) -> list[tuple[str, tuple[int, int]]]:
+    """All occurrences of ``needles`` in ``text[start:end]``, in scan order."""
+
+    spans: list[tuple[str, tuple[int, int]]] = []
+    for needle in needles:
+        position = start
+        while position < end:
+            found = find_span(text, needle, position, end)
+            if found is None:
+                break
+            spans.append((needle, found))
+            position = found[0] + 1
+    return spans
+
+
+def _slice_names_any(text: str, start: int, end: int, needles: list[str]) -> bool:
+    slice_text = normalize_for_search(text[start:end])[0]
+    return any(
+        normalize_for_search(needle)[0]
+        and normalize_for_search(needle)[0] in slice_text
+        for needle in needles
+    )
+
+
 def _reference_evidence(
     scenario: Scenario,
     rendered: dict[str, RenderedDocument],
     source_document_id: str,
     source_clause_id: str | None,
     target_document_id: str,
+    target_clause_id: str | None = None,
 ) -> list[EvidenceSpan]:
-    if source_clause_id is not None:
-        rendered_document = rendered.get(source_document_id)
-        if rendered_document is not None:
-            span = _clause_evidence(rendered_document, source_clause_id)
-            if span is not None:
-                return [span]
+    """Return a span proving that the source text really names the target.
+
+    Review finding F2 requires the evidence slice to name the target:
+
+    * same-document reference: a span containing the target clause heading (or
+      the document title) is enough;
+    * cross-document reference: the span must name the target *document*
+      (title_sv/title_en/document_id). If the source clause also names the
+      target clause heading, a broader span covering both is returned (stronger
+      evidence). A clause-heading-only hit is never accepted across documents:
+      such a heading can be the source document's own heading and does not say
+      which document is meant.
+    * no textual support -> ``[]``; callers omit in-package references and keep
+      empty evidence only for declared ``missing_documents`` (F6).
+    """
+
     rendered_document = rendered.get(source_document_id)
     if rendered_document is None:
         return []
-    # Try to pin the target document title/id literally in the source document.
-    target_spec = next(
-        (spec for spec in scenario.documents if spec.document_id == target_document_id),
-        None,
-    )
-    needles: list[str] = [target_document_id]
-    if target_spec is not None:
-        needles.extend(
-            [target_spec.title(scenario.language), target_spec.title_sv, target_spec.title_en]
-        )
-    for needle in needles:
-        if not needle or not needle.strip():
+    canonical = rendered_document.canonical_text
+    document_needles = _document_identity_needles(scenario, target_document_id)
+    clause_needles = _clause_identity_needles(scenario, target_clause_id)
+    cross_document = source_document_id != target_document_id
+    clause_region: tuple[str, int, int] | None = None
+    if source_clause_id is not None:
+        span = _clause_span(rendered_document, source_clause_id)
+        if span is not None:
+            clause_region = (source_clause_id, span.start, span.end)
+
+    if cross_document:
+        if clause_region is not None:
+            clause_id, start, end = clause_region
+            document_hits = _all_needle_spans(canonical, document_needles, start, end)
+            if document_hits:
+                clause_hits = (
+                    _all_needle_spans(canonical, clause_needles, start, end)
+                    if clause_needles
+                    else []
+                )
+                if clause_hits:
+                    # Prefer the closest (narrowest) document-heading pair so
+                    # the slice is minimal (e.g. ”Anställningsavtal” avsnitt
+                    # ”Lön och arbetstid”) instead of spanning the whole clause.
+                    pairs = [
+                        (
+                            min(document_span[1][0], clause_span[1][0]),
+                            max(document_span[1][1], clause_span[1][1]),
+                        )
+                        for document_span in document_hits
+                        for clause_span in clause_hits
+                    ]
+                    span_start, span_end = min(
+                        pairs, key=lambda pair: pair[1] - pair[0]
+                    )
+                else:
+                    span_start, span_end = document_hits[0][1]
+                return [_evidence(rendered_document, span_start, span_end, clause_id)]
+        document_hit = _first_needle_span(canonical, document_needles, 0, len(canonical))
+        if document_hit is not None and _slice_names_any(
+            canonical, document_hit[1][0], document_hit[1][1], document_needles
+        ):
+            owner = _clause_at(rendered_document, document_hit[1][0], document_hit[1][1])
+            return [
+                _evidence(rendered_document, document_hit[1][0], document_hit[1][1], owner)
+            ]
+        return []
+
+    # Same document: the target clause heading or the document title both name
+    # the target; search the source clause first, then the whole document.
+    needles = [*clause_needles, *document_needles]
+    regions: list[tuple[str | None, int, int]] = []
+    if clause_region is not None:
+        regions.append((clause_region[0], clause_region[1], clause_region[2]))
+    regions.append((None, 0, len(canonical)))
+    for owned_clause_id, start, end in regions:
+        hit = _first_needle_span(canonical, needles, start, end)
+        if hit is None:
             continue
-        found = find_span(rendered_document.canonical_text, needle)
-        if found is None:
-            continue
-        clause_id = _clause_at(rendered_document, found[0], found[1])
-        return [_evidence(rendered_document, found[0], found[1], clause_id)]
-    # Document-level fallback: the first clause span of the source document is
-    # still a genuine span in the canonical text.
-    for clause in scenario.documents:
-        if clause.document_id != source_document_id:
-            continue
-        for spec_clause in clause.clauses:
-            span = _clause_evidence(rendered_document, spec_clause.clause_id)
-            if span is not None:
-                return [span]
+        found_start, found_end = hit[1]
+        owner = owned_clause_id or _clause_at(rendered_document, found_start, found_end)
+        return [_evidence(rendered_document, found_start, found_end, owner)]
     return []
 
 
@@ -463,6 +588,23 @@ def _gold_references(
         )
         if key in seen:
             return
+        evidence = _reference_evidence(
+            scenario,
+            rendered,
+            source_document_id,
+            source_clause_id,
+            target_document_id,
+            target_clause_id,
+        )
+        if not evidence and target_document_id not in set(scenario.missing_documents):
+            # F2c/F6: an in-package reference that the source text never names
+            # cannot be supported by a real span. Facit must not claim it (and
+            # validation would reject an empty span), so it is omitted here.
+            # References to declared *missing* documents are kept with no
+            # evidence because they are unsupported by definition; validation
+            # explicitly allows evidence=[] for those. The unanchored
+            # relation templates themselves are a scenario-generator concern (F6).
+            return
         seen.add(key)
         references.append(
             GoldReference(
@@ -471,13 +613,7 @@ def _gold_references(
                 target_document_id=target_document_id,
                 target_clause_id=target_clause_id,
                 kind=kind,
-                evidence=_reference_evidence(
-                    scenario,
-                    rendered,
-                    source_document_id,
-                    source_clause_id,
-                    target_document_id,
-                ),
+                evidence=evidence,
             )
         )
 

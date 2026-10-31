@@ -895,6 +895,26 @@ class CostSummary(StrictModel):
 # ---------------------------------------------------------------------------
 
 
+class ScenarioDefinitionRecord(StrictModel):
+    """Identity of one contract-type definition file used for a run."""
+
+    contract_type: str
+    path: str
+    sha256: str
+
+
+class RuntimeIdentity(StrictModel):
+    """Runtime that produced a dataset, so a run can be reproduced and audited."""
+
+    contractforge_version: str = ""
+    python_version: str = ""
+    python_implementation: str = ""
+    platform: str = ""
+    git_commit: str | None = None
+    git_dirty: bool | None = None
+    dependencies: dict[str, str] = Field(default_factory=dict)
+
+
 class GenerationConfigSnapshot(StrictModel):
     contract_type: ContractType
     count: int = 1
@@ -914,6 +934,12 @@ class GenerationConfigSnapshot(StrictModel):
     prompt_sha256: str = ""
     formats: list[DocumentFormat] = Field(default_factory=list)
     contract_id_prefix: str = "contract"
+    # Complete scenario inputs: two runs that differ only here must not produce
+    # identical config snapshots.
+    package: bool = True
+    variation_overrides: dict[str, Any] = Field(default_factory=dict)
+    scenario_definitions: list[ScenarioDefinitionRecord] = Field(default_factory=list)
+    runtime: RuntimeIdentity = Field(default_factory=RuntimeIdentity)
 
 
 class ArtifactRecord(StrictModel):
@@ -996,6 +1022,7 @@ class DatasetStats(StrictModel):
     facts_total: int = 0
     questions_total: int = 0
     questions_validated: int = 0
+    questions_rejected: int = 0
     questions_answerable: int = 0
     questions_insufficient_evidence: int = 0
     questions_conditional: int = 0
@@ -1018,6 +1045,15 @@ class DatasetStats(StrictModel):
     rejection_rate: float = 0.0
 
 
+class RunRecord(StrictModel):
+    """What one generation run owns inside its output directory."""
+
+    contract_id_prefix: str
+    count: int
+    contract_ids: list[str] = Field(default_factory=list)
+    data_files: list[str] = Field(default_factory=list)
+
+
 class DatasetManifest(StrictModel):
     schema_version: str = SCHEMA_VERSION
     contractforge_version: str
@@ -1025,7 +1061,9 @@ class DatasetManifest(StrictModel):
     synthetic: bool = True
     config: GenerationConfigSnapshot
     contracts: list[DatasetContractRecord] = Field(default_factory=list)
+    rejected: list[str] = Field(default_factory=list)
     totals: DatasetStats = Field(default_factory=DatasetStats)
+    run: RunRecord | None = None
     notes: list[str] = Field(default_factory=list)
 
 
@@ -1057,6 +1095,7 @@ class BenchmarkReport(StrictModel):
     seed: int | None
     config: GenerationConfigSnapshot
     stats: DatasetStats
+    details: dict[str, Any] = Field(default_factory=dict)
     notes: list[str] = Field(default_factory=list)
 
 
@@ -1075,6 +1114,7 @@ class ContractResult(StrictModel):
     verification: PackageVerification
     gold: GoldSet
     questions: list[GoldenQuestion] = Field(default_factory=list)
+    rejected_questions: list[GoldenQuestion] = Field(default_factory=list)
     llm_calls: list[LLMCallRecord] = Field(default_factory=list)
     cost: CostSummary = Field(default_factory=CostSummary)
     config: GenerationConfigSnapshot

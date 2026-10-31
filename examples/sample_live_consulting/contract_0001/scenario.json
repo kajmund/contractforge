@@ -11,7 +11,7 @@
       "party_id": "party_client",
       "name": "Arken Digital AB",
       "role": "client",
-      "org_number": "559002-3658",
+      "org_number": "559002-9054",
       "address": "Exempelvägen 8, 111 20 Stockholm",
       "synthetic": true
     },
@@ -19,7 +19,7 @@
       "party_id": "party_consultant",
       "name": "Lindfors Analys AB",
       "role": "consultant",
-      "org_number": "559003-9380",
+      "org_number": "559003-8029",
       "address": "Testvägen 3, 722 20 Västerås",
       "synthetic": true
     }

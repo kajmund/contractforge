@@ -30,10 +30,11 @@ No LLM is involved. An advisory judge may be attached externally; see
 from __future__ import annotations
 
 import re
+from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import date, datetime
 from fractions import Fraction
-from typing import Any, Protocol
+from typing import Any, Literal, Protocol
 
 from ..models import CheckResult, CheckStatus, Fact, FactKind, Language
 from ..utils import find_span
@@ -785,10 +786,40 @@ def _text_semantic_needles(fact: Fact) -> list[str]:
     return []
 
 
+def _sibling_canonical_values(
+    facts: Iterable[Fact], unit: str
+) -> set[tuple[str, Fraction]]:
+    """``(unit, value)`` pairs of sibling facts, for conflict exclusion."""
+
+    values: set[tuple[str, Fraction]] = set()
+    for sibling in facts:
+        sibling_quantity = canonical_quantity_for_fact(sibling)
+        if sibling_quantity is not None and sibling_quantity.unit == unit:
+            values.add((unit, sibling_quantity.value))
+    return values
+
+
 def analyze_fact(
-    fact: Fact, text: str, language: Language | str = Language.SV
+    fact: Fact,
+    text: str,
+    language: Language | str = Language.SV,
+    *,
+    co_located_facts: Iterable[Fact] = (),
+    conflicts_with_facts: Iterable[Fact] = (),
 ) -> FactAnalysis:
-    """Analyse how ``fact`` is expressed in one clause body text."""
+    """Analyse how ``fact`` is expressed in one clause body text.
+
+    ``co_located_facts`` are the *other* facts the clause is expected to state.
+    A clause may legitimately carry several numeric facts of the same canonical
+    unit (a probation period of 6 months next to 25 vacation days); those
+    values are correct sibling facts, not distractors, so they are excluded from
+    :attr:`FactAnalysis.conflicts`.
+
+    ``conflicts_with_facts`` are the exception: facts the scenario declares as
+    intentionally contradicting ``fact``. Their values stay in
+    :attr:`FactAnalysis.conflicts` so callers see both sides of the declared
+    contradiction.
+    """
 
     language = _coerce_language(language)
     explicit = _find_surface(text, list(fact.explicit_surfaces))
@@ -812,10 +843,14 @@ def analyze_fact(
             semantic_quantity = matches[0]
             semantic_span = (matches[0].start, matches[0].end)
         if canonical.unit in (DURATION, MONEY, PERCENT):
+            sibling_values = _sibling_canonical_values(co_located_facts, canonical.unit)
+            sibling_values -= _sibling_canonical_values(conflicts_with_facts, canonical.unit)
             conflicts = tuple(
                 quantity
                 for quantity in quantities
-                if quantity.unit == canonical.unit and quantity.value != canonical.value
+                if quantity.unit == canonical.unit
+                and quantity.value != canonical.value
+                and (quantity.unit, quantity.value) not in sibling_values
             )
     else:
         needles = _text_semantic_needles(fact)
@@ -852,6 +887,299 @@ def analyze_fact(
         quantities=tuple(quantities),
         all_list_values_present=all_list_values_present,
     )
+
+
+# ---------------------------------------------------------------------------
+# Operator assessment: is a deviating value binding or merely mentioned?
+# ---------------------------------------------------------------------------
+
+BINDING = "binding"
+NON_BINDING = "non_binding"
+AMBIGUOUS = "ambiguous"
+
+OperatorVerdict = Literal["binding", "non_binding", "ambiguous"]
+
+
+@dataclass(frozen=True)
+class OperatorAssessment:
+    """Verdict for one deviating quantity together with the evidence behind it."""
+
+    verdict: OperatorVerdict
+    sentence: str
+    markers: tuple[str, ...] = ()
+
+    @property
+    def binding(self) -> bool:
+        return self.verdict == BINDING
+
+    @property
+    def non_binding(self) -> bool:
+        return self.verdict == NON_BINDING
+
+
+# Phrases that frame a number as something merely discussed, earlier, optional,
+# conditional or explicitly not applicable. Matching is done on lower case text
+# with whitespace collapsed, so a marker may span a line break.
+_NON_BINDING_MARKERS: tuple[str, ...] = (
+    # Swedish
+    "diskuterat",
+    "diskuterades",
+    "diskuterad",
+    "diskussion",
+    "ursprunglig",
+    "ursprungligen",
+    "tidigare",
+    "alternativt",
+    "alternativ",
+    "skulle kunna",
+    "förslag",
+    "utkast",
+    "ej bindande",
+    "icke bindande",
+    "inte bindande",
+    "under förhandling",
+    "preliminär",
+    "om vi",
+    "villkorat av",
+    "avviker från",
+    "se dock",
+    "undantag",
+    "dock inte",
+    "inte gäller",
+    "gäller inte",
+    "inte avtalad",
+    "inte avtalat",
+    "inte godkänd",
+    "inte godkänts",
+    "har inte godkänts",
+    "äldre",
+    "härrör",
+    "samtal",
+    "förhandlingar",
+    # English
+    "discussed",
+    "original",
+    "previously",
+    "previous",
+    "draft",
+    "proposal",
+    "suggested",
+    "non-binding",
+    "not binding",
+    "conditional",
+    "subject to",
+    "except",
+    "does not apply",
+    "do not apply",
+    "not agreed",
+    "not approved",
+)
+
+# Phrases that amend, replace or supersede a value: the number they govern is
+# the operative one, so a deviating value inside such a sentence is binding.
+_BINDING_MARKERS: tuple[str, ...] = (
+    # Swedish
+    "ersätts",
+    "ersätter",
+    "ersatt",
+    "ändras till",
+    "ändras från",
+    "ändrat",
+    "gäller i stället",
+    "i stället",
+    "ska i stället vara",
+    "härefter",
+    "hädanefter",
+    "justeras till",
+    "justerad",
+    "uppgår nu till",
+    "uppgår till",
+    "från och med nu",
+    "slutligt",
+    "överenskommits till",
+    "överenskommits om",
+    "gäller från",
+    "reduceras till",
+    "höjs till",
+    "sänks till",
+    "tillägget anger",
+    "gällande belopp är",
+    "som nu gäller",
+    # English
+    "is replaced",
+    "are replaced",
+    "replaced by",
+    "replaces",
+    "shall instead",
+    "amended to",
+    "amended",
+    "henceforth",
+    "now amounts to",
+    "supersedes",
+    "superseded by",
+    "as of now",
+)
+
+# Abbreviations whose period must not end a sentence.
+_ABBREVIATIONS: frozenset[str] = frozenset(
+    {
+        "ab",
+        "hb",
+        "kb",
+        "ek",
+        "ek.",
+        "ekon.",
+        "m.fl",
+        "m.m",
+        "bl.a",
+        "t.ex",
+        "fr.o.m",
+        "t.o.m",
+        "d.v.s",
+        "dvs",
+        "jfr",
+        "nr",
+        "ang",
+        "kap",
+        "mom",
+        "p",
+        "§",
+        "no.",
+        "inc",
+        "ltd",
+        "co",
+        "plc",
+        "asa",
+    }
+)
+_SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+")
+_WS_RE = re.compile(r"\s+")
+
+
+def _normalized_lower(text: str) -> tuple[str, list[int]]:
+    """Lower case ``text`` collapsing whitespace, keeping an offset map."""
+
+    chars: list[str] = []
+    offsets: list[int] = []
+    pending_space = False
+    for index, char in enumerate(text):
+        if char.isspace():
+            pending_space = bool(chars)
+            continue
+        if pending_space:
+            chars.append(" ")
+            offsets.append(index)
+            pending_space = False
+        chars.append(char.lower())
+        offsets.append(index)
+    return "".join(chars), offsets
+
+
+def _sentence_bounds(text: str) -> list[tuple[int, int]]:
+    """Sentence spans in ``text``; periods in abbreviations do not split."""
+
+    bounds: list[tuple[int, int]] = []
+    start = 0
+    for match in _SENTENCE_SPLIT_RE.finditer(text):
+        sentence = text[start : match.start()]
+        last_word = re.search(r"([\wÅÄÖåäö§]+)\.$", sentence)
+        if last_word is not None and last_word.group(1).lower() in _ABBREVIATIONS:
+            continue
+        bounds.append((start, match.start()))
+        start = match.end()
+    if start < len(text):
+        bounds.append((start, len(text)))
+    stripped = [(span[0], span[1]) for span in bounds if text[span[0] : span[1]].strip()]
+    return stripped or [(0, len(text))]
+
+
+def _sentence_containing(text: str, position: int) -> tuple[int, int]:
+    for start, end in _sentence_bounds(text):
+        if start <= position < end:
+            return start, end
+    return 0, len(text)
+
+
+def _find_markers(haystack: str, markers: tuple[str, ...]) -> list[str]:
+    found: list[str] = []
+    for marker in markers:
+        if marker in haystack and marker not in found:
+            found.append(marker)
+    return found
+
+
+def _operator_target(text: str, position: int) -> str:
+    """The sentence around ``position``, narrowed to its sub-clause if any.
+
+    A distractor frame in a sibling sub-clause must not whitewash an explicit
+    replacement: in "Avtalet ersätts härmed; timarvodet är 9 999 SEK" the value
+    sits in the second sub-clause, which carries no distractor frame.
+    """
+
+    start, end = _sentence_containing(text, position)
+    target = text[start:end]
+    relative = position - start
+    cut = max(target.rfind(separator, 0, relative) for separator in (";", ":"))
+    return target[cut + 1 :] if cut > 0 else target
+
+
+def assess_quantity_operator(
+    text: str,
+    fact: Fact | None,
+    quantity: Quantity,
+    language: Language | str = Language.SV,
+) -> OperatorAssessment:
+    """Assess the operator around ``quantity`` and return the matched markers."""
+
+    del fact  # The verdict is textual; the fact only labels the caller's check.
+    del language  # Marker lexicons cover both languages; wording decides.
+    # A replacement frame usually sits in a sibling sub-clause of the same
+    # sentence ("Detta villkor ersätts härmed: beloppet är 9 999 SEK"), so the
+    # whole sentence is checked first; the narrower sub-clause is used when the
+    # sentence names both an earlier and a current value.
+    start, end = _sentence_containing(text, quantity.start)
+    candidates = (text[start:end], _operator_target(text, quantity.start))
+    haystacks = [(_normalized_lower(target)[0], target) for target in candidates]
+    for haystack, target in haystacks:
+        binding = _find_markers(haystack, _BINDING_MARKERS)
+        if binding:
+            return OperatorAssessment(BINDING, target.strip(), tuple(binding))
+    for haystack, target in haystacks:
+        non_binding = _find_markers(haystack, _NON_BINDING_MARKERS)
+        if non_binding:
+            return OperatorAssessment(NON_BINDING, target.strip(), tuple(non_binding))
+    return OperatorAssessment(AMBIGUOUS, candidates[0].strip(), ())
+
+
+def assess_operator(
+    text: str,
+    fact: Fact | None,
+    quantity_span: tuple[int, int],
+    language: Language | str = Language.SV,
+) -> OperatorVerdict:
+    """Decide whether a deviating value is binding, non-binding or ambiguous.
+
+    The decision is deterministic and purely textual. It looks at the sentence
+    (or the sub-clause after ``;``/``:``) that contains ``quantity_span`` and
+    either finds a distractor frame ("diskuterades", "tidigare utkast",
+    "not binding", ...) or a replacement/amendment frame ("ersätts härmed",
+    "is replaced by", ...).
+
+    A *binding* marker always wins over a non-binding one: "det tidigare värdet
+    ersätts härmed av 9 999 SEK" both mentions the past and establishes a new
+    obligation, and the new obligation is what the text actually says.
+
+    Returns ``"ambiguous"`` when neither side is signalled so the caller can
+    fail closed: an unexplained deviating number in a clause that should state
+    a known value is treated as binding. Gold is never consulted; only the
+    wording decides, which keeps the check independent of the generator.
+    """
+
+    if quantity_span[1] <= quantity_span[0] or quantity_span[0] < 0:
+        return AMBIGUOUS
+    start = quantity_span[0]
+    probe = Quantity(Fraction(0), PLAIN, start, quantity_span[1], text[start : quantity_span[1]])
+    return assess_quantity_operator(text, fact, probe, language).verdict
 
 
 # ---------------------------------------------------------------------------
@@ -943,10 +1271,15 @@ def advisory_llm_checks(
 
 
 __all__ = [
+    "AMBIGUOUS",
+    "BINDING",
     "DURATION",
     "FactAnalysis",
     "MONEY",
+    "NON_BINDING",
     "NUMERIC_UNITS",
+    "OperatorAssessment",
+    "OperatorVerdict",
     "PERCENT",
     "PLAIN",
     "CanonicalQuantity",
@@ -955,6 +1288,8 @@ __all__ = [
     "SemanticJudge",
     "advisory_llm_checks",
     "analyze_fact",
+    "assess_operator",
+    "assess_quantity_operator",
     "canonical_quantity_for_fact",
     "display_conflicts",
     "display_expected",

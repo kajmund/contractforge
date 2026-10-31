@@ -36,8 +36,6 @@ from ..models import (
 from ..utils import normalize_for_search, read_json, sha256_file, sha256_text
 from . import _span_problems, semantic
 
-__all__ = ["validate_dataset"]
-
 _ANSWERABILITY_BY_CATEGORY: dict[QuestionCategory, frozenset[Answerability]] = {
     QuestionCategory.CONTRADICTION: frozenset({Answerability.CONFLICTING_EVIDENCE}),
     QuestionCategory.ABSENCE: frozenset(
@@ -133,11 +131,92 @@ def _evidence_text(
     return "\n".join(parts)
 
 
-def _question_answer_problems(
+def _relation_source_problems(
+    question: GoldenQuestion,
+    rendered: dict[str, RenderedDocument],
+    source_texts: list[str],
+    target: str,
+) -> list[str]:
+    """A relation answer must be expressed in the document the question cites.
+
+    ``source_texts`` are the canonical texts of the documents the evidence spans
+    point at. A target that is only mentioned in some *other* document does not
+    support "this source document refers to that document".
+    """
+
+    document_conditions = [
+        condition[len("document:") :]
+        for condition in question.expected_answer.conditions
+        if condition.startswith("document:")
+    ]
+    missing_conditions = {
+        condition[len("missing_document:") :]
+        for condition in question.expected_answer.conditions
+        if condition.startswith("missing_document:")
+    }
+    for document_id in document_conditions:
+        if document_id in missing_conditions:
+            # The target is declared missing: only the scenario declaration is
+            # evidence, so the answer must be that exact id (never a rendered
+            # title the dataset cannot verify).
+            if target.strip() != document_id:
+                return [
+                    f"relationssvaret {target!r} avviker från det deklarerat saknade "
+                    f"dokumentet {document_id!r}"
+                ]
+            if any(_value_in_text(document_id, text) for text in source_texts):
+                return []
+            return [
+                f"relationssvaret {target!r} saknas i källdokumentets kanoniska text"
+            ]
+        document = rendered.get(document_id)
+        if document is None:
+            continue
+        if any(_value_in_text(document.title, text) for text in source_texts):
+            return []
+        return [
+            f"relationssvaret {target!r} matchar inte titeln på {document_id!r} "
+            f"({document.title!r}) i källdokumentets kanoniska text"
+        ]
+    if document_conditions:
+        return [f"relationssvaret {target!r} saknar källdokument i evidensen"]
+    if any(_value_in_text(target, text) for text in source_texts):
+        return []
+    return [f"relationssvaret {target!r} saknas i källdokumentets kanoniska text"]
+
+
+def question_support_problems(
     question: GoldenQuestion,
     rendered: dict[str, RenderedDocument],
     gold_facts: dict[str, Any],
+    *,
+    scenario_facts: dict[str, Any] | None = None,
 ) -> list[str]:
+    """Canonical-text support rules shared by question generation and dataset validation.
+
+    This is the **single** rule set for "is the expected answer really supported
+    by the documents". :mod:`contractforge.questions` calls it while generating
+    and ``validate_dataset`` calls it when re-reading an exported dataset, so a
+    question the generator accepts can never be rejected by the dataset validator
+    for unchanged data.
+
+    Rules:
+
+    * an ``ANSWERABLE`` question must carry evidence spans;
+    * every expected value must literally occur in the evidence text, or be
+      covered by a gold span of one of its ``required_facts``;
+    * ``COMPLETENESS`` values may live anywhere in the canonical text (those
+      questions span several documents by construction);
+    * a relation answer must be expressed in the source document the evidence
+      spans point at, and must match that document's title;
+    * any other expected text must occur in the evidence text, for
+      ``ANSWERABLE`` and ``CONDITIONAL`` questions.
+
+    ``scenario_facts`` is optional. The generator passes it so a gold value that
+    disagrees with the scenario truth can never support a claim; the dataset
+    validator verifies gold against the scenario separately.
+    """
+
     problems: list[str] = []
     evidence_text = _evidence_text(question.evidence, rendered)
     if question.answerability is Answerability.ANSWERABLE and not question.evidence:
@@ -149,6 +228,12 @@ def _question_answer_problems(
     for value in claims:
         if _value_in_text(value, evidence_text):
             continue
+        if question.category is QuestionCategory.COMPLETENESS:
+            canonical_text = "\n".join(
+                document.canonical_text for document in rendered.values()
+            )
+            if _value_in_text(value, canonical_text):
+                continue
         supported = False
         for fact_id in question.required_facts:
             gold_fact = gold_facts.get(fact_id)
@@ -156,6 +241,12 @@ def _question_answer_problems(
                 continue
             if not _values_equal(gold_fact.value, value):
                 continue
+            if scenario_facts is not None:
+                scenario_fact = scenario_facts.get(fact_id)
+                if scenario_fact is not None and not _values_equal(
+                    gold_fact.value, scenario_fact.value
+                ):
+                    continue
             if all(
                 any(_span_covers(span, gold_span) for span in question.evidence)
                 for gold_span in gold_fact.evidence
@@ -165,23 +256,32 @@ def _question_answer_problems(
         if not supported:
             problems.append(f"förväntat svar {value!r} stöds inte av canonical text")
     if question.expected_answer.text:
+        source_texts = [
+            rendered[span.document_id].canonical_text
+            for span in question.evidence
+            if span.document_id in rendered
+        ]
         if question.category is QuestionCategory.RELATION:
-            if not any(
-                _value_in_text(question.expected_answer.text, document.canonical_text)
-                for span in question.evidence
-                if span.document_id in rendered
-                for document in (rendered[span.document_id],)
-            ):
-                problems.append(
-                    f"relationssvaret {question.expected_answer.text!r} saknas i källdokumentet"
+            problems.extend(
+                _relation_source_problems(
+                    question, rendered, source_texts, question.expected_answer.text
                 )
-        elif question.answerability is Answerability.ANSWERABLE and not _value_in_text(
-            question.expected_answer.text, evidence_text
-        ):
+            )
+        elif question.answerability in (
+            Answerability.ANSWERABLE,
+            Answerability.CONDITIONAL,
+        ) and not _value_in_text(question.expected_answer.text, evidence_text):
             problems.append(
                 f"förväntat svar {question.expected_answer.text!r} saknas i evidensen"
             )
     return problems
+
+
+# Backwards-compatible private alias: the dataset check and the generator must
+# never drift apart again, so there is exactly one implementation.
+_question_answer_problems = question_support_problems
+
+__all__ = ["question_support_problems", "validate_dataset"]
 
 
 # ---------------------------------------------------------------------------
@@ -365,7 +465,7 @@ def _gold_checks(loaded: LoadedContract, prefix: str) -> list[CheckResult]:
     intentionally_missing = {
         fact_id
         for anomaly in loaded.scenario.anomalies
-        if anomaly.kind.value in ("missing_information", "ambiguity")
+        if anomaly.kind.value == "missing_information"
         for fact_id in anomaly.fact_ids
     }
     for fact in loaded.scenario.facts:
@@ -409,7 +509,14 @@ def _gold_checks(loaded: LoadedContract, prefix: str) -> list[CheckResult]:
     evidence_problems: list[str] = []
     for gold_fact in gold.facts:
         label = f"gold.faktum {gold_fact.fact_id}"
-        evidence_problems.extend(_span_problems(gold_fact.evidence, loaded.rendered, label))
+        evidence_problems.extend(
+            _span_problems(
+                gold_fact.evidence,
+                loaded.rendered,
+                label,
+                require_exact_quote=gold_fact.precision is EvidencePrecision.EXACT,
+            )
+        )
         if not gold_fact.evidence and gold_fact.fact_id not in intentionally_missing:
             evidence_problems.append(f"{label} saknar evidensspann")
     for entity in gold.entities:
@@ -422,11 +529,12 @@ def _gold_checks(loaded: LoadedContract, prefix: str) -> list[CheckResult]:
         evidence_problems.extend(
             _span_problems(anomaly.evidence, loaded.rendered, f"gold.anomali {anomaly.anomaly_id}")
         )
+    declared_missing = set(loaded.scenario.missing_documents)
     for index, reference in enumerate(gold.references):
         evidence_problems.extend(
             _span_problems(reference.evidence, loaded.rendered, f"gold.referens {index}")
         )
-        if not reference.evidence:
+        if not reference.evidence and reference.target_document_id not in declared_missing:
             evidence_problems.append(f"gold.referens {index} saknar evidensspann")
     if evidence_problems:
         checks.append(
@@ -498,7 +606,14 @@ def _question_checks(loaded: LoadedContract, prefix: str) -> list[CheckResult]:
     unvalidated: list[str] = []
     for question in questions:
         label = f"fråga {question.question_id}"
-        problems.extend(_span_problems(question.evidence, loaded.rendered, label))
+        problems.extend(
+            _span_problems(
+                question.evidence,
+                loaded.rendered,
+                label,
+                require_exact_quote=True,
+            )
+        )
         if not question.validated:
             unvalidated.append(question.question_id)
         for fact_id in question.required_facts:
@@ -512,9 +627,12 @@ def _question_checks(loaded: LoadedContract, prefix: str) -> list[CheckResult]:
             )
         if question.validated:
             problems.extend(
-                [f"{label}: {problem}" for problem in _question_answer_problems(
-                    question, loaded.rendered, gold_facts
-                )]
+                [
+                    f"{label}: {problem}"
+                    for problem in question_support_problems(
+                        question, loaded.rendered, gold_facts
+                    )
+                ]
             )
     if unvalidated:
         checks.append(

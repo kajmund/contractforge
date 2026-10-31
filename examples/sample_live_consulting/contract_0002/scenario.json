@@ -11,15 +11,15 @@
       "party_id": "party_client",
       "name": "Arken Digital AB",
       "role": "client",
-      "org_number": "559002-0222",
+      "org_number": "559002-0135",
       "address": "Exempelvägen 8, 111 20 Stockholm",
       "synthetic": true
     },
     {
       "party_id": "party_consultant",
-      "name": "Lindfors Analys AB",
+      "name": "Västberg Rådgivning AB",
       "role": "consultant",
-      "org_number": "559003-6653",
+      "org_number": "559003-4082",
       "address": "Testvägen 3, 722 20 Västerås",
       "synthetic": true
     }
@@ -57,7 +57,7 @@
     {
       "fact_id": "fact_consultant_name",
       "kind": "entity",
-      "value": "Lindfors Analys AB",
+      "value": "Västberg Rådgivning AB",
       "unit": null,
       "currency": null,
       "entity_id": "party_consultant",
@@ -65,10 +65,10 @@
       "label_en": "Consultant name",
       "description_sv": "",
       "explicit_surfaces": [
-        "Lindfors Analys AB"
+        "Västberg Rådgivning AB"
       ],
       "paraphrase_surfaces": [
-        "Lindfors Analys AB"
+        "Västberg Rådgivning AB"
       ],
       "keywords_sv": [
         "konsult",
@@ -86,7 +86,7 @@
     {
       "fact_id": "fact_scope",
       "kind": "text",
-      "value": "systemutveckling och integration",
+      "value": "projektledning och analys",
       "unit": null,
       "currency": null,
       "entity_id": null,
@@ -94,10 +94,10 @@
       "label_en": "Scope",
       "description_sv": "",
       "explicit_surfaces": [
-        "systemutveckling och integration"
+        "projektledning och analys"
       ],
       "paraphrase_surfaces": [
-        "utveckling och integration av system"
+        "projektledning samt analysarbete"
       ],
       "keywords_sv": [
         "uppdrag",
@@ -115,7 +115,7 @@
     {
       "fact_id": "fact_hourly_rate",
       "kind": "money",
-      "value": 1150,
+      "value": 1250,
       "unit": null,
       "currency": "SEK",
       "entity_id": null,
@@ -123,12 +123,12 @@
       "label_en": "Hourly rate",
       "description_sv": "",
       "explicit_surfaces": [
-        "1 150 SEK",
-        "1 150 kronor"
+        "1 250 SEK",
+        "1 250 kronor"
       ],
       "paraphrase_surfaces": [
-        "1 150 kr",
-        "ett belopp om 1 150 kronor"
+        "1 250 kr",
+        "ett belopp om 1 250 kronor"
       ],
       "keywords_sv": [
         "timarvode",
@@ -146,7 +146,7 @@
     {
       "fact_id": "fact_estimated_hours",
       "kind": "duration",
-      "value": 400,
+      "value": 320,
       "unit": "hours",
       "currency": null,
       "entity_id": null,
@@ -154,11 +154,11 @@
       "label_en": "Estimated hours",
       "description_sv": "",
       "explicit_surfaces": [
-        "400 timmar",
-        "inom 400 timmar"
+        "320 timmar",
+        "inom 320 timmar"
       ],
       "paraphrase_surfaces": [
-        "en svarstid om 400 timmar"
+        "en svarstid om 320 timmar"
       ],
       "keywords_sv": [
         "tidsuppskattning",
@@ -390,7 +390,7 @@
     {
       "fact_id": "fact_ip_rights",
       "kind": "defined_term",
-      "value": "Uppdragsgivaren äger resultatet",
+      "value": "Konsulten behåller bakgrundsrättigheter",
       "unit": null,
       "currency": null,
       "entity_id": null,
@@ -398,10 +398,10 @@
       "label_en": "Intellectual property rights",
       "description_sv": "",
       "explicit_surfaces": [
-        "Uppdragsgivaren äger resultatet"
+        "Konsulten behåller bakgrundsrättigheter"
       ],
       "paraphrase_surfaces": [
-        "uppdragsgivaren förvärvar samtliga rättigheter till resultatet"
+        "konsulten behåller rättigheter till bakgrundsmaterial"
       ],
       "keywords_sv": [
         "immateriella rättigheter",
@@ -530,7 +530,7 @@
   ],
   "variation": {
     "language": "sv",
-    "style": "complex",
+    "style": "plain",
     "directness": "explicit",
     "structure": "single_clause",
     "reference_modes": [],

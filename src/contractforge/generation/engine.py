@@ -6,6 +6,12 @@ heading and text), then builds a :class:`~contractforge.models.GeneratedPackage`
 in *spec* order, never in model output order. Every call is recorded as an
 :class:`~contractforge.models.LLMCallRecord` with sanitized request metadata so
 scenario/document payloads do not leak into exported call logs.
+
+A call is recorded as soon as the provider *answers*, before the answer is
+parsed: output that fails validation was still paid for. When a document fails
+validation, the error carries the attempt's calls
+(:attr:`~contractforge.errors.GenerationError.calls`) so the pipeline can book
+them instead of silently reporting zero tokens and zero cost.
 """
 
 from __future__ import annotations
@@ -65,7 +71,14 @@ class DocumentGenerator:
                 attempt=attempt,
                 feedback=feedback,
             )
-            response = self.provider.complete(request)
+            try:
+                response = self.provider.complete(request)
+            except GenerationError as exc:
+                # No response was produced, but earlier documents in this
+                # attempt were paid for: they stay bookable through the error.
+                raise exc.with_calls(calls) from None
+            # Book the call before parsing: a response that fails validation was
+            # still paid for, and losing it would under-report tokens and cost.
             calls.append(
                 LLMCallRecord(
                     call_id=_call_id(scenario, spec.document_id, attempt),
@@ -85,7 +98,10 @@ class DocumentGenerator:
                     raw=response.raw,
                 )
             )
-            documents.append(_build_document(scenario, spec, response.text))
+            try:
+                documents.append(_build_document(scenario, spec, response.text))
+            except GenerationError as exc:
+                raise exc.with_calls(calls) from None
 
         return GenerationOutcome(
             package=GeneratedPackage(contract_id=scenario.contract_id, documents=documents),

@@ -328,9 +328,15 @@ class MockProvider:
         if not model:
             raise ConfigError("a mock model id is required")
         self.model = model
+        self.closed = False
 
     def __repr__(self) -> str:
         return f"MockProvider(model={self.model!r})"
+
+    def close(self) -> None:
+        """Mirror the real provider lifecycle; the offline provider holds no sockets."""
+
+        self.closed = True
 
     def complete(self, request: LLMRequest) -> LLMResponse:
         scenario = _scenario_from_metadata(request.metadata)
@@ -424,6 +430,9 @@ def _clause_text(
             parts.append(intro)
     if expressible:
         parts.append(_facts_sentence(scenario, document, clause, expressible, anomalies, language))
+    reference = _reference_clause_sentence(scenario, clause, language)
+    if reference:
+        parts.append(reference)
     if missing:
         parts.append(_missing_information_sentence(missing, language))
     if not parts:
@@ -883,6 +892,78 @@ def _exception_condition_text(scenario: Scenario, clause: ClauseSpec, language: 
         noun = "clause" if len(quoted) == 1 else "clauses"
         return f"{noun} {_join_list(quoted, language)}"
     return "huvudregeln" if language is Language.SV else "the general rule"
+
+
+def _reference_clause_sentence(
+    scenario: Scenario, clause: ClauseSpec, language: Language
+) -> str:
+    """Spell out a clause-level reference to another document's provision.
+
+    Clauses that only refer must never carry fact surfaces; this sentence is
+    pure reference text and names the target document title verbatim, which is
+    what makes document/clause references verifiable against the canonical text.
+    Targets already named by :func:`_reference_text` (``reference`` clauses) are
+    skipped so the clause does not say the same thing twice.
+    """
+
+    if not clause.reference_to:
+        return ""
+    expressed = _reference_target_ids(clause)
+    trailing: list[str] = []
+    for reference in clause.reference_to:
+        target = _split_clause_reference(scenario, reference)
+        if target is None or target[1] in expressed:
+            continue
+        document_id, clause_id = target
+        try:
+            target_document = scenario.document(document_id)
+        except KeyError:  # pragma: no cover - scenario validation forbids this
+            continue
+        title = _quote(target_document.title(language), language)
+        heading = ""
+        if clause_id is not None:
+            try:
+                target_heading = scenario.clause(clause_id).heading(language)
+            except KeyError:  # pragma: no cover - scenario validation forbids this
+                target_heading = ""
+            # An appendix clause often repeats the document title; naming both
+            # reads like a stutter ("”Bilaga A” avsnitt ”Bilaga A”").
+            if target_heading and target_heading != target_document.title(language):
+                heading = _quote(target_heading, language)
+        if language is Language.SV:
+            section = f" avsnitt {heading}" if heading else ""
+            trailing.append(f"Närmare bestämmelser framgår av {title}{section}.")
+        else:
+            section = f", section {heading}" if heading else ""
+            trailing.append(f"Further provisions are set out in {title}{section}.")
+    return " ".join(trailing)
+
+
+def _reference_target_ids(clause: ClauseSpec) -> set[str]:
+    """Clause ids that :func:`_reference_text` already names in the clause text."""
+
+    if clause.mode is not ClauseMode.REFERENCE:
+        return set()
+    return set(clause.depends_on) | set(clause.reference_to)
+
+
+def _split_clause_reference(
+    scenario: Scenario, reference: str
+) -> tuple[str, str | None] | None:
+    """Split a clause reference into ``(document_id, clause_id | None)``."""
+
+    if reference.startswith("fact:"):
+        return None
+    if ":" in reference:
+        document_id, clause_id = reference.split(":", 1)
+        return document_id, clause_id
+    if any(document.document_id == reference for document in scenario.documents):
+        return reference, None
+    # Bare clause id: ``ClauseSpec.reference_to`` stores clause ids directly.
+    for document in scenario.documents:
+        if any(clause.clause_id == reference for clause in document.clauses):
+            return document.document_id, reference
+    return None
 
 
 def _reference_text(

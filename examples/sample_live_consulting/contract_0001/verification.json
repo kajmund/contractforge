@@ -17,7 +17,7 @@
         {
           "check_id": "document.main_agreement.rendered.present",
           "status": "PASS",
-          "message": "kanonisk text finns för main_agreement (814 tecken).",
+          "message": "kanonisk text finns för main_agreement (822 tecken).",
           "document_id": "main_agreement",
           "clause_id": null,
           "details": {}
@@ -256,15 +256,11 @@
         },
         {
           "check_id": "document.main_agreement.clause.clause_04.fact.fact_duration_months.semantic",
-          "status": "WARN",
-          "message": "fact_duration_months: rätt värde 6 months finns i clause_04, men även avvikande värden '3 månader'. Distraktorvärden får inte ersätta det operativa värdet.",
+          "status": "PASS",
+          "message": "fact_duration_months: operativt värde 6 months verifieras i clause_04.",
           "document_id": "main_agreement",
           "clause_id": "clause_04",
-          "details": {
-            "conflicts": [
-              "3 månader"
-            ]
-          }
+          "details": {}
         },
         {
           "check_id": "document.main_agreement.clause.clause_04.fact.fact_notice_months",
@@ -276,15 +272,11 @@
         },
         {
           "check_id": "document.main_agreement.clause.clause_04.fact.fact_notice_months.semantic",
-          "status": "WARN",
-          "message": "fact_notice_months: rätt värde 3 months finns i clause_04, men även avvikande värden '6 månader'. Distraktorvärden får inte ersätta det operativa värdet.",
+          "status": "PASS",
+          "message": "fact_notice_months: operativt värde 3 months verifieras i clause_04.",
           "document_id": "main_agreement",
           "clause_id": "clause_04",
-          "details": {
-            "conflicts": [
-              "6 månader"
-            ]
-          }
+          "details": {}
         },
         {
           "check_id": "document.main_agreement.clause.clause_05.heading_present",
@@ -480,11 +472,11 @@
     {
       "check_id": "package.entity.party_client.org_number",
       "status": "WARN",
-      "message": "organisationsnummer '559002-3658' för 'Arken Digital AB' återfinns inte i texten; kontrollera om det ska anges.",
+      "message": "organisationsnummer '559002-9054' för 'Arken Digital AB' återfinns inte i texten; kontrollera om det ska anges.",
       "document_id": null,
       "clause_id": null,
       "details": {
-        "org_number": "559002-3658"
+        "org_number": "559002-9054"
       }
     },
     {
@@ -521,11 +513,11 @@
     {
       "check_id": "package.entity.party_consultant.org_number",
       "status": "WARN",
-      "message": "organisationsnummer '559003-9380' för 'Lindfors Analys AB' återfinns inte i texten; kontrollera om det ska anges.",
+      "message": "organisationsnummer '559003-8029' för 'Lindfors Analys AB' återfinns inte i texten; kontrollera om det ska anges.",
       "document_id": null,
       "clause_id": null,
       "details": {
-        "org_number": "559003-9380"
+        "org_number": "559003-8029"
       }
     },
     {
@@ -582,7 +574,7 @@
     "documents_rejected": 0,
     "checks_total": 66,
     "checks_failed": 0,
-    "checks_warned": 8
+    "checks_warned": 6
   },
   "attempts": 1
 }

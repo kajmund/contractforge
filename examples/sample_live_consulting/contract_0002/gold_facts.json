@@ -28,7 +28,7 @@
     {
       "fact_id": "fact_consultant_name",
       "kind": "entity",
-      "value": "Lindfors Analys AB",
+      "value": "Västberg Rådgivning AB",
       "unit": null,
       "currency": null,
       "entity_id": "party_consultant",
@@ -38,9 +38,9 @@
         {
           "document_id": "main_agreement",
           "clause_id": "clause_01",
-          "start": 319,
-          "end": 337,
-          "quote": "Lindfors Analys AB"
+          "start": 306,
+          "end": 328,
+          "quote": "Västberg Rådgivning AB"
         }
       ],
       "question_ids": [
@@ -51,7 +51,7 @@
     {
       "fact_id": "fact_scope",
       "kind": "text",
-      "value": "systemutveckling och integration",
+      "value": "projektledning och analys",
       "unit": null,
       "currency": null,
       "entity_id": null,
@@ -61,9 +61,9 @@
         {
           "document_id": "main_agreement",
           "clause_id": "clause_02",
-          "start": 467,
-          "end": 499,
-          "quote": "systemutveckling och integration"
+          "start": 446,
+          "end": 471,
+          "quote": "projektledning och analys"
         }
       ],
       "question_ids": [
@@ -74,7 +74,7 @@
     {
       "fact_id": "fact_hourly_rate",
       "kind": "money",
-      "value": 1150,
+      "value": 1250,
       "unit": null,
       "currency": "SEK",
       "entity_id": null,
@@ -84,9 +84,9 @@
         {
           "document_id": "main_agreement",
           "clause_id": "clause_03",
-          "start": 563,
-          "end": 572,
-          "quote": "1 150 SEK"
+          "start": 513,
+          "end": 522,
+          "quote": "1 250 SEK"
         }
       ],
       "question_ids": [
@@ -98,7 +98,7 @@
     {
       "fact_id": "fact_estimated_hours",
       "kind": "duration",
-      "value": 400,
+      "value": 320,
       "unit": "hours",
       "currency": null,
       "entity_id": null,
@@ -108,9 +108,9 @@
         {
           "document_id": "main_agreement",
           "clause_id": "clause_03",
-          "start": 639,
-          "end": 649,
-          "quote": "400 timmar"
+          "start": 564,
+          "end": 574,
+          "quote": "320 timmar"
         }
       ],
       "question_ids": [
@@ -131,8 +131,8 @@
         {
           "document_id": "main_agreement",
           "clause_id": "clause_04",
-          "start": 708,
-          "end": 723,
+          "start": 633,
+          "end": 648,
           "quote": "1 februari 2026"
         }
       ],
@@ -154,8 +154,8 @@
         {
           "document_id": "main_agreement",
           "clause_id": "clause_04",
-          "start": 736,
-          "end": 745,
+          "start": 661,
+          "end": 670,
           "quote": "6 månader"
         }
       ],
@@ -178,8 +178,8 @@
         {
           "document_id": "main_agreement",
           "clause_id": "clause_05",
-          "start": 880,
-          "end": 888,
+          "start": 785,
+          "end": 793,
           "quote": "45 dagar"
         }
       ],
@@ -201,8 +201,8 @@
         {
           "document_id": "main_agreement",
           "clause_id": "clause_05",
-          "start": 952,
-          "end": 962,
+          "start": 839,
+          "end": 849,
           "quote": "75 000 SEK"
         }
       ],
@@ -225,8 +225,8 @@
         {
           "document_id": "main_agreement",
           "clause_id": "clause_06",
-          "start": 1036,
-          "end": 1049,
+          "start": 896,
+          "end": 909,
           "quote": "1 000 000 SEK"
         }
       ],
@@ -248,8 +248,8 @@
         {
           "document_id": "main_agreement",
           "clause_id": "clause_04",
-          "start": 793,
-          "end": 802,
+          "start": 713,
+          "end": 722,
           "quote": "3 månader"
         }
       ],
@@ -272,8 +272,8 @@
         {
           "document_id": "main_agreement",
           "clause_id": "clause_06",
-          "start": 1115,
-          "end": 1119,
+          "start": 979,
+          "end": 983,
           "quote": "5 år"
         }
       ],
@@ -285,7 +285,7 @@
     {
       "fact_id": "fact_ip_rights",
       "kind": "defined_term",
-      "value": "Uppdragsgivaren äger resultatet",
+      "value": "Konsulten behåller bakgrundsrättigheter",
       "unit": null,
       "currency": null,
       "entity_id": null,
@@ -295,9 +295,9 @@
         {
           "document_id": "main_agreement",
           "clause_id": "clause_06",
-          "start": 1051,
-          "end": 1082,
-          "quote": "Uppdragsgivaren äger resultatet"
+          "start": 911,
+          "end": 950,
+          "quote": "Konsulten behåller bakgrundsrättigheter"
         }
       ],
       "question_ids": [
@@ -324,7 +324,7 @@
           "clause_id": "clause_01",
           "start": 227,
           "end": 238,
-          "quote": "559002-0222"
+          "quote": "559002-0135"
         },
         {
           "document_id": "main_agreement",
@@ -337,28 +337,28 @@
     },
     {
       "entity_id": "party_consultant",
-      "name": "Lindfors Analys AB",
+      "name": "Västberg Rådgivning AB",
       "role": "consultant",
       "evidence": [
         {
           "document_id": "main_agreement",
           "clause_id": "clause_01",
-          "start": 319,
-          "end": 337,
-          "quote": "Lindfors Analys AB"
+          "start": 306,
+          "end": 328,
+          "quote": "Västberg Rådgivning AB"
         },
         {
           "document_id": "main_agreement",
           "clause_id": "clause_01",
-          "start": 346,
-          "end": 357,
-          "quote": "559003-6653"
+          "start": 337,
+          "end": 348,
+          "quote": "559003-4082"
         },
         {
           "document_id": "main_agreement",
           "clause_id": "clause_01",
-          "start": 370,
-          "end": 398,
+          "start": 361,
+          "end": 389,
           "quote": "Testvägen 3, 722 20 Västerås"
         }
       ]
@@ -367,5 +367,5 @@
   "references": [],
   "anomalies": [],
   "missing_documents": [],
-  "generated_at": "2026-10-31T10:54:46.504748Z"
+  "generated_at": "2026-10-31T13:27:02.167895Z"
 }

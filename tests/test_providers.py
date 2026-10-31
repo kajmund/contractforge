@@ -280,6 +280,154 @@ def test_success_body_without_choices_raises_provider_error():
         provider.complete(_request())
 
 
+class FakeTime:
+    """Deterministic clock+sleep pair: sleeping advances the clock, costs no time."""
+
+    def __init__(self) -> None:
+        self.now = 0.0
+        self.sleeps: list[float] = []
+
+    def clock(self) -> float:
+        return self.now
+
+    def sleep(self, seconds: float) -> None:
+        self.sleeps.append(seconds)
+        self.now += seconds
+
+
+def _cerebras_with_fake_time(handler, **overrides):
+    fake = FakeTime()
+    provider = _cerebras(handler, sleep=fake.sleep, clock=fake.clock, **overrides)
+    return provider, fake
+
+
+def test_retry_after_is_jittered_around_the_header_value():
+    calls = {"count": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls["count"] += 1
+        if calls["count"] == 1:
+            return httpx.Response(429, headers={"retry-after": "1"}, text="rate limited")
+        return httpx.Response(200, json=_ok_body())
+
+    provider, fake = _cerebras_with_fake_time(handler, max_retries=1)
+    provider.complete(_request())
+
+    assert len(fake.sleeps) == 1
+    # Retry-After 1 s with +-10 % jitter: never the bare header value.
+    assert 0.9 <= fake.sleeps[0] <= 1.1
+
+
+def test_retry_after_is_capped_at_300_seconds_even_after_jitter():
+    calls = {"count": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls["count"] += 1
+        if calls["count"] == 1:
+            return httpx.Response(429, headers={"retry-after": "1000"}, text="slow down")
+        return httpx.Response(200, json=_ok_body())
+
+    provider, fake = _cerebras_with_fake_time(handler, max_retries=1)
+    provider.complete(_request())
+
+    assert fake.sleeps == [300.0]
+
+
+def test_retry_after_exhausted_reports_the_wait_in_details():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(429, headers={"retry-after": "2"}, text="rate limited")
+
+    provider = _cerebras(handler, max_retries=0)
+    with pytest.raises(ProviderError) as excinfo:
+        provider.complete(_request())
+
+    assert excinfo.value.details["retryable"] is True
+    assert 1.8 <= excinfo.value.details["retry_after_s"] <= 2.2
+    assert excinfo.value.attempts == 1
+
+
+def test_cooldown_from_one_thread_delays_a_concurrent_request():
+    """A 429 in one thread must pause every other thread using the provider."""
+
+    import threading
+
+    now = {"t": 0.0}
+    sleeps: list[float] = []
+    started: list[float] = []
+    lock = threading.Lock()
+
+    def clock() -> float:
+        return now["t"]
+
+    def sleep(seconds: float) -> None:
+        with lock:
+            sleeps.append(seconds)
+            # Advance the shared clock so the cooldown can actually elapse.
+            now["t"] += seconds
+
+    def now_value() -> float:
+        with lock:
+            return now["t"]
+
+    state = {"calls": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        with lock:
+            started.append(now["t"])
+            state["calls"] += 1
+            first = state["calls"] == 1
+        if first:
+            return httpx.Response(429, headers={"retry-after": "0.2"}, text="rate limited")
+        return httpx.Response(200, json=_ok_body())
+
+    provider = _cerebras(handler, max_retries=1, sleep=sleep, clock=clock)
+    outcomes: list[str] = []
+
+    def worker() -> None:
+        try:
+            outcomes.append(provider.complete(_request()).text)
+        except BaseException as exc:  # pragma: no cover - only on failure
+            outcomes.append(f"error: {exc!r}")
+
+    threads = [threading.Thread(target=worker) for _ in range(2)]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join(timeout=10)
+    assert not any(thread.is_alive() for thread in threads)
+
+    assert outcomes == [OK_TEXT, OK_TEXT]
+    # Thread 1: 429 -> cooldown (a positive sleep). Thread 2 then waits for the
+    # same cooldown before its request, which succeeds.
+    assert len(started) == 3
+    assert sleeps and all(seconds > 0 for seconds in sleeps)
+    assert now_value() >= 0.18
+
+
+def test_cooldown_waits_exactly_once_for_the_armed_delay():
+    from contractforge.providers.cerebras import _Cooldown
+
+    fake = FakeTime()
+    cooldown = _Cooldown(clock=fake.clock, sleep=fake.sleep)
+
+    assert cooldown.remaining() == 0.0
+    assert cooldown.arm(5.0) == 5.0
+    assert cooldown.remaining() == pytest.approx(5.0)
+
+    cooldown.wait()
+    assert fake.sleeps == [5.0]
+    assert cooldown.remaining() == 0.0
+    # A second wait after the cooldown elapsed does not sleep again.
+    cooldown.wait()
+    assert fake.sleeps == [5.0]
+
+    # Extending an active cooldown extends the deadline, never shortens it.
+    fake.now = 100.0
+    assert cooldown.arm(2.0) == 2.0
+    assert cooldown.arm(1.0) == pytest.approx(2.0)
+    assert cooldown.remaining() == pytest.approx(2.0)
+
+
 def test_usage_total_is_derived_when_missing_but_parts_are_present():
     def handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(200, json=_ok_body(total_tokens=None))
@@ -314,9 +462,106 @@ def test_empty_api_key_raises_config_error_in_constructor():
         )
 
 
+def test_http_error_body_credentials_are_redacted_in_message_details_and_str():
+    secret = "csk-review-secret-1234567890abcdef"
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            400,
+            text=(
+                '{"error": "bad request", "echo": '
+                f'"Authorization: Bearer {secret}"'
+            ),
+        )
+
+    provider = _cerebras(handler)
+    with pytest.raises(ProviderError) as excinfo:
+        provider.complete(_request())
+    exc = excinfo.value
+
+    assert "[REDACTED]" in exc.message
+    assert secret not in exc.message
+    assert secret not in json.dumps(exc.details)
+    assert "[REDACTED]" in json.dumps(exc.details)
+    assert secret not in str(exc)
+    assert secret not in json.dumps(exc.to_dict())
+    assert exc.details["status_code"] == 400
+    assert exc.details["retryable"] is False
+
+
+def test_retryable_error_body_credentials_are_redacted():
+    secret = "csk-review-secret-1234567890abcdef"
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(503, text=f"upstream said: Bearer {secret}")
+
+    provider = _cerebras(handler, max_retries=0)
+    with pytest.raises(ProviderError) as excinfo:
+        provider.complete(_request())
+
+    assert secret not in excinfo.value.message
+    assert secret not in json.dumps(excinfo.value.to_dict())
+    assert "[REDACTED]" in excinfo.value.message
+
+
+def test_raw_response_is_scrubbed_of_credentials_the_provider_echoes_back():
+    secret = "csk-review-secret-1234567890abcdef"
+    body = _ok_body()
+    body["echo"] = f"Authorization: Bearer {secret}"
+    body["authorization"] = f"Bearer {secret}"
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=body)
+
+    provider = _cerebras(handler)
+    response = provider.complete(_request())
+
+    assert secret not in json.dumps(response.model_dump(mode="json"))
+    assert "[REDACTED]" in json.dumps(response.raw)
+    assert secret not in json.dumps(response.raw)
+
+
+def test_error_messages_from_contractforge_errors_are_scrubbed_everywhere():
+    secret = "csk-review-secret-1234567890abcdef"
+    error = ProviderError(
+        f"upstream echoed Bearer {secret}",
+        details={"echo": f"Bearer {secret}", "nested": {"api_key": secret}},
+    )
+    assert secret not in error.message
+    assert secret not in json.dumps(error.to_dict())
+    assert secret not in str(error)
+
+
 def test_unknown_provider_raises_config_error():
     with pytest.raises(ConfigError, match="unknown provider"):
         create_provider(Settings(provider="openai"))
+
+
+def test_provider_close_is_idempotent_and_usable_as_context_manager():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=_ok_body())
+
+    with _cerebras(handler) as provider:
+        assert provider.complete(_request()).text == OK_TEXT
+    provider.close()  # closing twice must not raise
+
+
+def test_closed_provider_refuses_to_complete():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=_ok_body())
+
+    provider = _cerebras(handler)
+    provider.close()
+    with pytest.raises(ProviderError, match="closed"):
+        provider.complete(_request())
+
+
+def test_mock_provider_can_be_closed_for_a_uniform_lifecycle():
+    provider = MockProvider()
+    assert provider.closed is False
+    provider.close()
+    assert provider.closed is True
+    provider.close()
 
 
 def test_api_key_never_leaks_into_response_or_repr():

@@ -1,38 +1,38 @@
 {
-  "id": "chatcmpl-36b6454e-e73e-4a1d-845f-be73fcaea5cc",
+  "id": "chatcmpl-dac3b054-feba-467b-ad38-69a94904be66",
   "choices": [
     {
       "finish_reason": "stop",
       "index": 0,
       "message": {
-        "content": "{\"document_id\":\"main_agreement\",\"clauses\":[{\"clause_id\":\"clause_01\",\"heading\":\"Avtalsparter\",\"text\":\"Parterna i detta avtal är Arken Digital AB som uppdragsgivare och Lindfors Analys AB som konsult.\"},{\"clause_id\":\"clause_02\",\"heading\":\"Uppdragets omfattning\",\"text\":\"Uppdraget omfattar projektledning och analys.\"},{\"clause_id\":\"clause_03\",\"heading\":\"Arvode och tidsåtgång\",\"text\":\"Timarvodet är 1 150 SEK per timme och den beräknade tidsåtgången är 400 timmar.\"},{\"clause_id\":\"clause_04\",\"heading\":\"Uppdragsperiod och uppsägning\",\"text\":\"Uppdraget påbörjas den 15 januari 2026 och löper under 6 månader. Uppsägningstid är 3 månader.\"},{\"clause_id\":\"clause_05\",\"heading\":\"Betalningsvillkor och utlägg\",\"text\":\"Fakturor ska betalas inom 30 dagar. Kostnadsram för utlägg är 75 000 SEK.\"},{\"clause_id\":\"clause_06\",\"heading\":\"Ansvarsbegränsning\",\"text\":\"Ansvarsbegränsning är 1 000 000 SEK. Konsulten behåller bakgrundsrättigheter. Sekretess gäller i 3 år.\"}]}",
-        "reasoning": "We need to produce JSON with document_id main_agreement and clauses with given IDs, headings, texts. Directness explicit, so we must use explicit surfaces exactly as given. For each clause, heading may be planned heading. Use \"Avtalsparter\" etc. Use explicit surfaces for facts.\n\nClause 1: heading \"Avtalsparter\". Text must include client name and consultant name as explicit surfaces: \"Arken Digital AB\" and \"Lindfors Analys AB\". Should state that parties are Arken Digital AB (client) and Lindfors Analys AB (consultant). Must be continuous prose, no list.\n\nClause 2: heading \"Uppdragets omfattning\". Use explicit surface \"projektledning och analys\". Text: describe scope.\n\nClause 3: heading \"Arvode och tidsåtgång\". Use explicit surfaces for hourly rate: either \"1 150 SEK\" or \"1 150 kronor\". Choose one. Use \"400 timmar\". Must be explicit. So \"Timarvode är 1 150 SEK per timme och den beräknade tidsåtgången är 400 timmar.\"\n\nClause 4: heading \"Uppdragsperiod och uppsägning\". Use explicit surfaces for start date: \"15 januari 2026\" or \"2026-01-15\". Use \"6 månader\" for duration and \"3 månader\" for notice. Use them verbatim. So text: \"Uppdraget påbörjas den 15 januari 2026 och löper under 6 månader. Uppsägningstid är 3 månader.\"\n\nClause 5: heading \"Betalningsvillkor och utlägg\". Use explicit surfaces: \"30 dagar\" for payment, \"75 000 SEK\" for expense cap. Text: \"Fakturor betalas inom 30 dagar. Kostnadsram för utlägg är 75 000 SEK.\"\n\nClause 6: heading \"Ansvarsbegränsning\". Use explicit surfaces: \"1 000 000 SEK\" for liability cap, \"Konsulten behåller bakgrundsrättigheter\" for IP rights, \"3 år\" for confidentiality. Text: \"Ansvarsbegränsning är 1 000 000 SEK. Konsulten behåller bakgrundsrättigheter. Sekretess gäller i 3 år.\"\n\nMake sure no extra punctuation weirdness, but fine.\n\nAll headings in Swedish. Use no markdown.\n\nNow produce JSON. Ensure proper escaping of quotes. Use plain strings.\n\n",
+        "content": "{\"document_id\":\"main_agreement\",\"clauses\":[{\"clause_id\":\"clause_01\",\"heading\":\"Avtalsparter\",\"text\":\"Avtalsparterna är Arken Digital AB och Lindfors Analys AB.\"},{\"clause_id\":\"clause_02\",\"heading\":\"Uppdragets omfattning\",\"text\":\"Uppdraget omfattar projektledning och analys.\"},{\"clause_id\":\"clause_03\",\"heading\":\"Arvode och tidsåtgång\",\"text\":\"Timarvodet är 1 150 SEK per timme och den beräknade tidsåtgången är 400 timmar.\"},{\"clause_id\":\"clause_04\",\"heading\":\"Uppdragsperiod och uppsägning\",\"text\":\"Uppdraget påbörjas den 15 januari 2026 och löper i 6 månader. Uppsägning sker med en uppsägningstid om 3 månader.\"},{\"clause_id\":\"clause_05\",\"heading\":\"Betalningsvillkor och utlägg\",\"text\":\"Betalning ska erläggas inom 30 dagar från fakturadatum. Utlägg ersätts upp till 75 000 SEK.\"},{\"clause_id\":\"clause_06\",\"heading\":\"Ansvarsbegränsning\",\"text\":\"Ansvarigheten är begränsad till 1 000 000 SEK. Konsulten behåller bakgrundsrättigheter. Sekretess gäller i 3 år.\"}]}",
+        "reasoning": "We need to produce JSON with document_id \"main_agreement\" and six clauses. Each clause must be explicit mode, so we must use explicit_surfaces exactly as given. Need headings as planned_heading (or alternative?). Use planned_heading. Provide clause text with required facts.\n\nClause 01 heading \"Avtalsparter\". Text: Should state the parties: \"Avtalsparterna är Arken Digital AB (uppdragsgivare) och Lindfors Analys AB (konsult).\" Use explicit surfaces: \"Arken Digital AB\" and \"Lindfors Analys AB\". Ensure Swedish.\n\nClause 02 heading \"Uppdragets omfattning\". Text: Should include \"projektledning och analys\". Use explicit surface exactly \"projektledning och analys\". So: \"Uppdraget omfattar projektledning och analys.\"\n\nClause 03 heading \"Arvode och tidsåtgång\". Need timarvode explicit surfaces: \"1 150 SEK\" (or \"1 150 kronor\"). Choose one. Use exact. Also \"400 timmar\". Use explicit surfaces. So: \"Timarvodet är 1 150 SEK per timme och den beräknade tidsåtgången är 400 timmar.\"\n\nClause 04 heading \"Uppdragsperiod och uppsägning\". Include start date explicit surfaces: \"15 januari 2026\" (or \"2026-01-15\"). Use \"15 januari 2026\". Duration: \"6 månader\". Notice: \"3 månader\". So: \"Uppdraget påbörjas den 15 januari 2026 och löper i 6 månader. Uppsägning sker med en uppsägningstid om 3 månader.\"\n\nClause 05 heading \"Betalningsvillkor och utlägg\". Include payment days: \"30 dagar\". Expense cap: \"75 000 SEK\". Use explicit surfaces. Text: \"Betalning ska erläggas inom 30 dagar från fakturadatum. Utlägg ersätts upp till 75 000 SEK.\"\n\nClause 06 heading \"Ansvarsbegränsning\". Include liability cap: \"1 000 000 SEK\". Include IP rights explicit: \"Konsulten behåller bakgrundsrättigheter\". Confidentiality years: \"3 år\". Text: \"Ansvarigheten är begränsad till 1 000 000 SEK. Konsulten behåller bakgrundsrättigheter. Sekretess gäller i 3 år.\"\n\nMake sure each clause text is continuous prose, not bullet list. Provide JSON.\n\nCheck no extra fields. Ensure strings are proper.\n\nNow produce JSON.",
         "role": "assistant"
       }
     }
   ],
-  "created": 1793444085,
+  "created": 1793453220,
   "model": "gpt-oss-120b",
   "system_fingerprint": "fp_6fdb8c40f91e0c236df5",
   "object": "chat.completion",
   "usage": {
-    "total_tokens": 5258,
-    "completion_tokens": 828,
+    "total_tokens": 5285,
+    "completion_tokens": 855,
     "completion_tokens_details": {
       "accepted_prediction_tokens": 0,
       "rejected_prediction_tokens": 0,
-      "reasoning_tokens": 517
+      "reasoning_tokens": 539
     },
     "prompt_tokens": 4430,
     "prompt_tokens_details": {
-      "cached_tokens": 640
+      "cached_tokens": 0
     }
   },
   "time_info": {
-    "created": 1793444085.660918,
-    "queue_time": 0.00330576199999999,
-    "prompt_time": 0.055536866,
-    "completion_time": 0.389214816,
-    "total_time": 0.4504821300506592
+    "created": 1793453220.739261,
+    "queue_time": 0.02403820000000001,
+    "prompt_time": 0.063576224,
+    "completion_time": 0.391994168,
+    "total_time": 0.5040833950042725
   }
 }

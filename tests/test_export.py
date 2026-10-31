@@ -694,6 +694,38 @@ def test_stats_known_cost_and_derived_costs(tmp_path: Path) -> None:
     assert stats.documents_per_minute == pytest.approx(1.0)
 
 
+def test_stats_latency_is_weighted_by_call_count(tmp_path: Path) -> None:
+    """mean_document_latency_ms is sum(mean * calls) / sum(calls), not a mean of means."""
+
+    few = _result().model_copy(
+        update={
+            "cost": CostSummary(calls=2, mean_latency_ms=1000.0, tokens_known=False),
+        }
+    )
+    many = _result(contract_id="contract_0002", seed=43).model_copy(
+        update={
+            "cost": CostSummary(calls=10, mean_latency_ms=100.0, tokens_known=False),
+        }
+    )
+    loaded = load_dataset(_export_dataset(tmp_path, [few, many]))
+
+    stats = compute_stats(loaded)
+
+    # Naive mean of means would be 550.0; the weighted mean is
+    # (2*1000 + 10*100) / 12 = 250.0.
+    assert stats.calls_total == 12
+    assert stats.mean_document_latency_ms == pytest.approx(250.0)
+
+
+def test_stats_rejected_questions_are_counted(tmp_path: Path) -> None:
+    loaded = load_dataset(_export_dataset(tmp_path, [_result()]))
+
+    stats = compute_stats(loaded)
+
+    assert stats.questions_rejected == 0
+    assert stats.questions_total == stats.questions_validated
+
+
 def test_stats_partial_unknown_cost_is_none(tmp_path: Path) -> None:
     known = _result().model_copy(
         update={
@@ -845,3 +877,165 @@ def test_write_dataset_manifest_requires_contract_manifest(tmp_path: Path) -> No
             loaded,
             compute_stats(loaded),
         )
+
+
+# ---------------------------------------------------------------------------
+# F8: only facts the scenario declares *missing* may lack gold evidence
+# ---------------------------------------------------------------------------
+
+
+def _difficulty6_dataset(tmp_path: Path) -> Path:
+    """A real level-6 dataset (mock provider): ambiguity + missing information."""
+
+    from contractforge.config import Settings
+    from contractforge.models import ContractType, Language, ScenarioRequest
+    from contractforge.pipeline import generate_dataset
+
+    settings = Settings.from_env().with_overrides(provider="mock", formats=[DocumentFormat.TXT])
+    root = tmp_path / "level6"
+    generate_dataset(
+        settings,
+        ScenarioRequest(
+            contract_type=ContractType.CONSULTING,
+            count=1,
+            clauses=10,
+            difficulty=6,
+            language=Language.SV,
+            seed=77,
+        ),
+        root,
+        progress=lambda _message: None,
+    )
+    return root
+
+
+def test_level6_conditional_fact_has_evidence_and_is_verifiable(tmp_path: Path) -> None:
+    """A CONDITIONAL (ambiguity) fact is expressed in the text, so gold must cite it."""
+
+    from contractforge.export.loader import load_dataset
+
+    root = _difficulty6_dataset(tmp_path)
+    (loaded,) = load_dataset(root)
+    conditional_ids = {
+        fact_id
+        for anomaly in loaded.scenario.anomalies
+        if anomaly.kind.value == "ambiguity"
+        for fact_id in anomaly.fact_ids
+    }
+    assert conditional_ids, "nivå 6 måste ha en ambiguity-anomali"
+
+    gold_facts = {fact.fact_id: fact for fact in loaded.gold.facts}
+    for fact_id in conditional_ids:
+        gold_fact = gold_facts[fact_id]
+        assert gold_fact.evidence, f"{fact_id} är uttryckt i texten och måste ha evidens"
+        scenario_fact = loaded.scenario.fact(fact_id)
+        for span in gold_fact.evidence:
+            document = loaded.rendered[span.document_id]
+            assert document.canonical_text[span.start : span.end] == span.quote
+
+    # And the value really is expressed in the conditional clause text.
+    scenario_fact = loaded.scenario.fact(next(iter(conditional_ids)))
+    expressed = [
+        scenario_fact.explicit_surfaces[0],
+        *scenario_fact.explicit_surfaces[1:],
+        *scenario_fact.paraphrase_surfaces,
+    ]
+    canonical = "\n".join(document.canonical_text for document in loaded.rendered.values())
+    assert any(surface.lower() in canonical.lower() for surface in expressed)
+
+
+def test_gold_fact_without_evidence_fails_unless_declared_missing(tmp_path: Path) -> None:
+    """The dataset validator refuses unregulated facts; only missing_information is exempt."""
+
+    from contractforge.export.loader import find_contract_dirs
+    from contractforge.utils import atomic_write_json, read_json, sha256_file
+    from contractforge.validation.dataset import validate_dataset
+
+    root = _difficulty6_dataset(tmp_path)
+    (contract_dir,) = find_contract_dirs(root)
+    gold_path = contract_dir / "gold_facts.json"
+    gold = read_json(gold_path)
+
+    exempt = {
+        fact_id
+        for anomaly in read_json(contract_dir / "scenario.json")["anomalies"]
+        if anomaly["kind"] == "missing_information"
+        for fact_id in anomaly["fact_ids"]
+    }
+    candidate = next(
+        fact for fact in gold["facts"] if fact["evidence"] and fact["fact_id"] not in exempt
+    )
+    fact_id = candidate["fact_id"]
+    candidate["evidence"] = []
+    atomic_write_json(gold_path, gold)
+
+    manifest_path = contract_dir / "manifest.json"
+    manifest = read_json(manifest_path)
+    for artifact in manifest["artifacts"]:
+        path = contract_dir / artifact["path"]
+        artifact["sha256"] = sha256_file(path)
+        artifact["size_bytes"] = path.stat().st_size
+    atomic_write_json(manifest_path, manifest)
+    dataset_manifest_path = root / "dataset_manifest.json"
+    dataset_manifest = read_json(dataset_manifest_path)
+    for record in dataset_manifest["contracts"]:
+        record["manifest_sha256"] = sha256_file(manifest_path)
+    atomic_write_json(dataset_manifest_path, dataset_manifest)
+
+    report = validate_dataset(root)
+    failures = [check for check in report.checks if check.status.value == "FAIL"]
+    assert report.status.value == "FAIL"
+    assert any(
+        check.check_id.endswith("gold.evidence") and fact_id in check.message
+        for check in failures
+    ), [(check.check_id, check.message) for check in failures]
+
+
+def test_rejected_contract_keeps_sanitized_calls_cost_and_raw(tmp_path: Path) -> None:
+    """A rejected attempt must stay auditable without leaking credentials."""
+
+    from contractforge.export.store import write_rejected_contract
+    from contractforge.models import DocumentStatus, LLMCallRecord, LLMRequest, Usage
+
+    secret = "csk-review-secret-1234567890abcdef"
+    result = _result(status=DocumentStatus.REJECTED)
+    result = result.model_copy(
+        update={
+            "llm_calls": [
+                LLMCallRecord(
+                    call_id="contract_0001_main_agreement_a1",
+                    purpose="generate_document",
+                    contract_id="contract_0001",
+                    document_id="main_agreement",
+                    request=LLMRequest(
+                        provider="cerebras",
+                        model="gpt-oss-120b",
+                        prompt_version="v1",
+                        system="system",
+                        user="user",
+                    ),
+                    response_text='{"broken": true}',
+                    usage=Usage(input_tokens=30, output_tokens=60, total_tokens=90),
+                    latency_ms=12.0,
+                    provider="cerebras",
+                    model="gpt-oss-120b",
+                    raw={"echo": f"Authorization: Bearer {secret}"},
+                )
+            ],
+        }
+    )
+
+    path = write_rejected_contract(result, tmp_path)
+
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    assert payload["status"] == "REJECTED"
+    assert payload["llm_calls"][0]["usage"]["total_tokens"] == 90
+    assert "cost" in payload and "config" in payload
+    assert "raw" not in payload["llm_calls"][0]
+    raw_files = sorted((tmp_path / "rejected" / "raw").glob("*.json"))
+    assert raw_files, "raw provider responses must be kept for debugging"
+    blob = path.read_text(encoding="utf-8") + "".join(
+        raw.read_text(encoding="utf-8") for raw in raw_files
+    )
+    assert secret not in blob
+    assert "[REDACTED]" in blob

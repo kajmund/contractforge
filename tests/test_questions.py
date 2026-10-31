@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import json
+
+import pytest
 from factories import (
     make_consulting_scenario,
     make_fact,
@@ -9,13 +12,17 @@ from factories import (
     make_rendered_documents,
 )
 
+from contractforge.config import Settings
+from contractforge.generation.engine import DocumentGenerator
 from contractforge.gold import build_gold_set
 from contractforge.models import (
     Anomaly,
     AnomalyKind,
     Answerability,
     ClauseSpec,
+    ContractType,
     DocKind,
+    DocumentFormat,
     DocumentSpec,
     EvidenceSpan,
     FactKind,
@@ -25,8 +32,18 @@ from contractforge.models import (
     Relation,
     RelationKind,
     Scenario,
+    ScenarioRequest,
 )
-from contractforge.questions import generate_and_verify_questions
+from contractforge.providers.mock import MockProvider
+from contractforge.questions import (
+    DOCUMENT_PREFIX,
+    MISSING_PREFIX,
+    generate_and_verify_questions,
+)
+from contractforge.rendering.canonical import render_package
+from contractforge.scenarios.generator import ScenarioGenerator
+from contractforge.scenarios.registry import load_registry
+from contractforge.utils import find_span
 
 PARTY_TEXT = "Parterna Nordvik Teknik AB och Sundberg Konsult AB ingår avtalet."
 
@@ -530,3 +547,561 @@ def test_answerable_questions_have_supported_answers() -> None:
             assert question.expected_answer.text.lower() in text.lower() or (
                 question.category is QuestionCategory.RELATION
             )
+
+
+# ---------------------------------------------------------------------------
+# One validator: accepted by the generator == accepted by validate_dataset
+# ---------------------------------------------------------------------------
+#
+# Regression gate for the original review finding: level 5-6 datasets were
+# exported as approved but rejected by the project's own dataset validator,
+# because question generation and dataset validation used two different rule
+# sets. ``contractforge.validation.dataset.question_support_problems`` is now
+# the only rule set; these tests prove the two code paths agree on real,
+# exported datasets.
+
+CONTRACT_TYPES = [contract.value for contract in ContractType]
+HARD_DIFFICULTIES = [5, 6]
+
+
+def _mock_settings():
+    from contractforge.config import Settings
+
+    return Settings.from_env().with_overrides(provider="mock", formats=[DocumentFormat.TXT])
+
+
+def _request(contract_type: str, difficulty: int, seed: int) -> ScenarioRequest:
+    return ScenarioRequest(
+        contract_type=ContractType(contract_type),
+        count=1,
+        clauses=10,
+        difficulty=difficulty,
+        language=Language.SV,
+        seed=seed,
+    )
+
+
+@pytest.mark.parametrize("contract_type", CONTRACT_TYPES)
+@pytest.mark.parametrize("difficulty", HARD_DIFFICULTIES)
+def test_accepted_questions_always_pass_dataset_validation(
+    contract_type: str, difficulty: int, tmp_path
+) -> None:
+    """A generated level 5-6 dataset must be accepted by ``validate_dataset``."""
+
+    from contractforge.export.loader import find_contract_dirs, load_contract_dir
+    from contractforge.pipeline import generate_dataset
+    from contractforge.validation.dataset import question_support_problems
+
+    root = tmp_path / "dataset"
+    outcome = generate_dataset(
+        _mock_settings(),
+        _request(contract_type, difficulty, seed=7),
+        root,
+        progress=lambda _message: None,
+    )
+
+    assert outcome.validation_report is not None
+    failures = [
+        (check.check_id, check.message)
+        for check in outcome.validation_report.checks
+        if check.status.value == "FAIL"
+    ]
+    assert outcome.validation_report.status.value == "PASS", failures
+
+    # What was exported is exactly what the validator re-verified.
+    assert outcome.results, "datasetet innehåller inget godkänt avtal"
+    exported = sum(len(result.questions) for result in outcome.results)
+    assert exported > 0
+    assert outcome.stats.questions_total == exported
+    assert outcome.stats.questions_validated == exported
+
+    # Re-applying the shared rule set to every exported question is a no-op.
+    for contract_dir in find_contract_dirs(root):
+        loaded = load_contract_dir(contract_dir)
+        gold_facts = (
+            {fact.fact_id: fact for fact in loaded.gold.facts} if loaded.gold else {}
+        )
+        for question in loaded.questions:
+            assert question.validated
+            assert question_support_problems(question, loaded.rendered, gold_facts) == []
+
+
+@pytest.mark.parametrize("contract_type", CONTRACT_TYPES)
+@pytest.mark.parametrize("difficulty", HARD_DIFFICULTIES)
+def test_rejected_questions_are_reported_and_never_exported(
+    contract_type: str, difficulty: int, tmp_path
+) -> None:
+    """Question rejections are visible statistics, not silently dropped work."""
+
+    from contractforge.pipeline import generate_dataset
+
+    outcome = generate_dataset(
+        _mock_settings(),
+        _request(contract_type, difficulty, seed=11),
+        tmp_path / "dataset",
+        progress=lambda _message: None,
+    )
+    rejected_ids = {question.question_id for question in outcome.rejected_questions}
+    exported_ids = {
+        question.question_id for result in outcome.results for question in result.questions
+    }
+    assert not (rejected_ids & exported_ids), "en kasserad fråga får aldrig exporteras"
+    assert outcome.stats.questions_rejected == len(outcome.rejected_questions)
+    assert outcome.stats.questions_rejected == len(rejected_ids)
+    for question in outcome.rejected_questions:
+        assert not question.validated
+        assert question.validation_notes
+
+
+def test_dataset_validator_rejects_the_same_unsupported_claim_as_the_generator(tmp_path) -> None:
+    """The inverse direction: a claim the generator rejects also fails validation.
+
+    One question in a real dataset is rewritten to expect a value no document
+    contains (hashes refreshed, exactly like ``contractforge generate-questions``
+    does). The dataset must FAIL, with the same "stöds inte" wording the
+    generator uses for the same rule.
+    """
+
+    import contractforge.questions as questions_module
+    from contractforge.export.loader import find_contract_dirs, load_contract_dir
+    from contractforge.pipeline import generate_dataset
+    from contractforge.utils import atomic_write_json, sha256_file
+    from contractforge.validation.dataset import question_support_problems, validate_dataset
+
+    root = tmp_path / "dataset"
+    generate_dataset(
+        _mock_settings(),
+        ScenarioRequest(
+            contract_type=ContractType.CONSULTING,
+            count=1,
+            clauses=8,
+            difficulty=5,
+            language=Language.SV,
+            seed=3,
+        ),
+        root,
+        progress=lambda _message: None,
+    )
+    (contract_dir,) = find_contract_dirs(root)
+    questions = load_contract_dir(contract_dir).questions
+    target = next(
+        question
+        for question in questions
+        if question.category is QuestionCategory.FACT_EXTRACTION
+        and question.expected_answer.value is not None
+    )
+    tampered = target.model_copy(
+        update={
+            "expected_answer": target.expected_answer.model_copy(update={"value": 987654321})
+        }
+    )
+    rewritten = [tampered if q.question_id == target.question_id else q for q in questions]
+    atomic_write_json(
+        contract_dir / "golden_questions.json",
+        [question.model_dump(mode="json") for question in rewritten],
+    )
+    manifest = load_contract_dir(contract_dir)
+    manifest_path = contract_dir / "manifest.json"
+    payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    for artifact in payload["artifacts"]:
+        path = contract_dir / artifact["path"]
+        artifact["sha256"] = sha256_file(path)
+        artifact["size_bytes"] = path.stat().st_size
+    atomic_write_json(manifest_path, payload)
+    dataset_manifest_path = root / "dataset_manifest.json"
+    dataset_payload = json.loads(dataset_manifest_path.read_text(encoding="utf-8"))
+    for record in dataset_payload["contracts"]:
+        record["manifest_sha256"] = sha256_file(manifest_path)
+    atomic_write_json(dataset_manifest_path, dataset_payload)
+
+    report = validate_dataset(root)
+    failures = [check for check in report.checks if check.status.value == "FAIL"]
+    assert report.status.value == "FAIL"
+    assert any("stöds inte" in check.message for check in failures), [
+        (check.check_id, check.message) for check in failures
+    ]
+
+    # The generator's own entry point reports the identical problem for the
+    # identical question, because both call question_support_problems.
+    gold_facts = (
+        {fact.fact_id: fact for fact in manifest.gold.facts} if manifest.gold else {}
+    )
+    generator_problems = questions_module.verify_question_support(
+        tampered, manifest.rendered, manifest.gold
+    )
+    shared_problems = question_support_problems(tampered, manifest.rendered, gold_facts)
+    assert generator_problems == shared_problems
+    assert generator_problems
+    assert any("stöds inte" in problem for problem in generator_problems)
+
+
+# ---------------------------------------------------------------------------
+# F2: cross references must be observable in the canonical text
+# ---------------------------------------------------------------------------
+
+_MOCK_SETTINGS = Settings.from_env(
+    {
+        "CONTRACTFORGE_PROVIDER": "mock",
+        "CONTRACTFORGE_FORMATS": "txt",
+        "CONTRACTFORGE_CONCURRENCY": "1",
+    }
+)
+_PACKAGE_CACHE: dict[tuple[str, int, int], tuple] = {}
+
+
+@pytest.fixture(scope="module")
+def package_contract():
+    """Build scenario -> mock text -> rendered -> gold -> questions, cached."""
+
+    registry = load_registry()
+    generator = ScenarioGenerator(registry)
+    document_generator = DocumentGenerator(MockProvider(), _MOCK_SETTINGS)
+
+    def build(
+        contract_type: ContractType,
+        difficulty: int,
+        seed: int = 7,
+    ):
+        key = (contract_type.value, difficulty, seed)
+        if key not in _PACKAGE_CACHE:
+            scenario = generator.generate(
+                ScenarioRequest(
+                    contract_type=contract_type,
+                    difficulty=difficulty,
+                    seed=seed,
+                    clauses=10,
+                    package=True,
+                    language=Language.SV,
+                )
+            )
+            outcome = document_generator.generate(scenario)
+            rendered = render_package(scenario, outcome.package)
+            gold = build_gold_set(scenario, outcome.package, rendered)
+            questions = generate_and_verify_questions(scenario, gold, rendered)
+            _PACKAGE_CACHE[key] = (scenario, gold, rendered, questions)
+        return _PACKAGE_CACHE[key]
+
+    return build
+
+
+def _resolve_relation_token(
+    scenario: Scenario, token: str
+) -> tuple[str | None, str | None]:
+    if token.startswith("fact:"):
+        fact_id = token[len("fact:") :]
+        for document in scenario.documents:
+            for clause in document.clauses:
+                if fact_id in clause.fact_ids:
+                    return document.document_id, clause.clause_id
+        return None, None
+    if token in scenario.missing_documents:
+        return token, None
+    if ":" in token:
+        document_id, clause_id = token.split(":", 1)
+        scenario.document(document_id)
+        scenario.clause(clause_id)
+        return document_id, clause_id
+    if any(document.document_id == token for document in scenario.documents):
+        return token, None
+    clause = scenario.clause(token)
+    return clause.document_id, clause.clause_id
+
+
+def relations_without_text_support(scenario: Scenario, gold: GoldSet) -> list[str]:
+    """Reproducible inventory: relations whose target is never named in text.
+
+    A relation is text-supported when a gold reference for the same resolved
+    source/target pair carries evidence. Declared missing documents are exempt:
+    they have no canonical text by definition.
+    """
+
+    keys = {
+        (
+            reference.source_document_id,
+            reference.source_clause_id,
+            reference.target_document_id,
+            reference.target_clause_id,
+        )
+        for reference in gold.references
+        if reference.evidence
+    }
+    unsupported: list[str] = []
+    for relation in scenario.relations:
+        if relation.target in scenario.missing_documents:
+            continue
+        source_document, source_clause = _resolve_relation_token(scenario, relation.source)
+        target_document, target_clause = _resolve_relation_token(scenario, relation.target)
+        if (source_document, source_clause, target_document, target_clause) in keys:
+            continue
+        # Document-level gold references may carry clause_id=None.
+        if any(
+            (document_id, target_document, clause_id) in keys
+            for document_id, clause_id in [(source_document, target_clause)]
+        ):
+            continue
+        unsupported.append(relation.relation_id)
+    return unsupported
+
+
+@pytest.mark.parametrize("contract_type", list(ContractType))
+@pytest.mark.parametrize("difficulty", [1, 2, 3, 4, 5, 6])
+def test_relations_have_text_support(package_contract, contract_type, difficulty):
+    """No in-package relation may exist only as metadata (review finding F2)."""
+
+    scenario, gold, _rendered, _questions = package_contract(contract_type, difficulty)
+    assert relations_without_text_support(scenario, gold) == []
+    for reference in gold.references:
+        if not reference.evidence:
+            assert reference.target_document_id in scenario.missing_documents
+
+
+@pytest.mark.parametrize("contract_type", list(ContractType))
+@pytest.mark.parametrize("difficulty", [3, 4, 5, 6])
+def test_relation_questions_cite_the_target_title(
+    package_contract, contract_type, difficulty
+):
+    scenario, _gold, rendered, outcome = package_contract(contract_type, difficulty)
+    relation_questions = [
+        question
+        for question in outcome.accepted
+        if question.category is QuestionCategory.RELATION
+    ]
+    assert relation_questions
+    for question in relation_questions:
+        assert question.evidence
+        target_ids = [
+            condition[len(DOCUMENT_PREFIX) :]
+            for condition in question.expected_answer.conditions
+            if condition.startswith(DOCUMENT_PREFIX)
+        ]
+        assert len(target_ids) == 1
+        target = rendered.get(target_ids[0])
+        assert target is not None
+        assert question.expected_answer.text == target.title
+        # The cited evidence must contain the target document title (document
+        # references) or the target clause heading (clause references), as the
+        # gold reference evidence is a narrow span on exactly that mention.
+        target_spec = scenario.document(target_ids[0])
+        headings = [
+            heading
+            for clause in target_spec.clauses
+            for heading in (clause.heading_sv, clause.heading_en)
+            if heading
+        ]
+        slices = [
+            rendered[span.document_id].canonical_text[span.start : span.end]
+            for span in question.evidence
+            if span.document_id in rendered
+        ]
+        assert any(
+            find_span(slice_text, target.title) is not None
+            or any(find_span(slice_text, heading) is not None for heading in headings)
+            for slice_text in slices
+        )
+        # The evidence lives in the *source* document, not in the target.
+        assert all(span.document_id != target.document_id for span in question.evidence)
+
+
+@pytest.mark.parametrize("contract_type", list(ContractType))
+@pytest.mark.parametrize("difficulty", [3, 4, 5, 6])
+def test_relation_questions_are_deduplicated(package_contract, contract_type, difficulty):
+    _scenario, _gold, rendered, outcome = package_contract(contract_type, difficulty)
+    relation_questions = [
+        question
+        for question in outcome.accepted
+        if question.category is QuestionCategory.RELATION
+    ]
+    pairs = set()
+    for question in relation_questions:
+        target_id = next(
+            condition[len(DOCUMENT_PREFIX) :]
+            for condition in question.expected_answer.conditions
+            if condition.startswith(DOCUMENT_PREFIX)
+        )
+        source_documents = frozenset(
+            span.document_id
+            for span in question.evidence
+            if span.document_id in rendered
+        )
+        pair = (source_documents, target_id)
+        assert pair not in pairs, question.question_id
+        pairs.add(pair)
+        assert target_id not in source_documents
+
+
+@pytest.mark.parametrize("contract_type", list(ContractType))
+@pytest.mark.parametrize("difficulty", [3, 4, 5, 6])
+def test_cross_document_comparison_questions(package_contract, contract_type, difficulty):
+    """Package questions combine two documents (F2/F10).
+
+    The generator keeps one distractor base fact in the main agreement and the
+    distractor itself in the appendix, so every package always has at least one
+    comparably-typed value on each side. The question must name both documents
+    and cite evidence from both, otherwise it would be answerable from one
+    document alone.
+    """
+
+    _scenario, _gold, rendered, outcome = package_contract(contract_type, difficulty)
+    comparison_questions = [
+        question
+        for question in outcome.accepted
+        if question.category is QuestionCategory.COMPARISON
+    ]
+    cross_document = [
+        question
+        for question in comparison_questions
+        if "Jämför dokumenten" in question.question
+    ]
+    assert cross_document, [q.question for q in comparison_questions]
+    for question in cross_document:
+        evidence_documents = {span.document_id for span in question.evidence}
+        assert len(evidence_documents) >= 2
+        mentioned = [
+            document_id
+            for document_id in rendered
+            if rendered[document_id].title.casefold() in question.question.casefold()
+        ]
+        assert len(mentioned) >= 2
+        assert set(mentioned).issubset(evidence_documents)
+        assert any(
+            rendered[document_id].title.casefold() in question.question.casefold()
+            for document_id in evidence_documents
+        )
+
+
+@pytest.mark.parametrize("contract_type", list(ContractType))
+def test_level_five_has_conflicting_evidence_question(package_contract, contract_type):
+    _scenario, _gold, _rendered, outcome = package_contract(contract_type, 5)
+    assert any(
+        question.answerability is Answerability.CONFLICTING_EVIDENCE
+        for question in outcome.accepted
+    )
+
+
+@pytest.mark.parametrize("contract_type", list(ContractType))
+def test_level_six_has_conditional_or_insufficient_question(package_contract, contract_type):
+    _scenario, _gold, _rendered, outcome = package_contract(contract_type, 6)
+    answerabilities = {question.answerability for question in outcome.accepted}
+    assert (
+        Answerability.INSUFFICIENT_EVIDENCE in answerabilities
+        or Answerability.CONDITIONAL in answerabilities
+    )
+
+
+# ---------------------------------------------------------------------------
+# F2 regression: cross-document evidence must name the target, and references
+# to declared missing documents must stay unsupported (level 6).
+# ---------------------------------------------------------------------------
+
+
+def _reference_names_target(
+    scenario: Scenario,
+    rendered,
+    reference,
+) -> bool:
+    target_document = scenario.document(reference.target_document_id)
+    names = [target_document.title_sv, target_document.title_en]
+    if reference.target_clause_id:
+        target_clause = scenario.clause(reference.target_clause_id)
+        names.extend([target_clause.heading_sv, target_clause.heading_en])
+    names = [name for name in names if name and name.strip()]
+    slices = [
+        rendered[span.document_id].canonical_text[span.start : span.end]
+        for span in reference.evidence
+        if span.document_id in rendered
+    ]
+    return bool(slices) and all(
+        any(find_span(slice_text, name) is not None for name in names)
+        for slice_text in slices
+    )
+
+
+@pytest.mark.parametrize("difficulty", [5, 6])
+def test_employment_cross_document_reference_evidence_names_target(
+    package_contract, difficulty
+):
+    """The concrete review case: amendment_1 -> main_agreement (employment)."""
+
+    scenario, gold, rendered, _questions = package_contract(
+        ContractType.EMPLOYMENT, difficulty
+    )
+    references = [
+        reference
+        for reference in gold.references
+        if reference.source_document_id == "amendment_1"
+        and reference.target_document_id == "main_agreement"
+    ]
+    assert references
+    for reference in references:
+        assert reference.evidence
+        assert _reference_names_target(scenario, rendered, reference), reference
+
+
+@pytest.mark.parametrize("contract_type", list(ContractType))
+@pytest.mark.parametrize("difficulty", [5, 6])
+def test_cross_document_references_name_their_target(
+    package_contract, contract_type, difficulty
+):
+    """Every cross-document in-package reference must name where it points."""
+
+    scenario, gold, rendered, _questions = package_contract(contract_type, difficulty)
+    cross_document = [
+        reference
+        for reference in gold.references
+        if reference.source_document_id != reference.target_document_id
+        and reference.target_document_id not in scenario.missing_documents
+    ]
+    assert cross_document
+    for reference in cross_document:
+        assert reference.evidence
+        assert _reference_names_target(scenario, rendered, reference), reference
+
+
+@pytest.mark.parametrize("contract_type", list(ContractType))
+def test_missing_document_references_are_unsupported_by_design(
+    package_contract, contract_type
+):
+    """Level 6 references to declared missing documents have no evidence.
+
+    This is intentional: the document does not exist, so there is no canonical
+    text to cite. The relation must not become a relation question; instead the
+    missing document yields an ``INSUFFICIENT_EVIDENCE`` question with a
+    ``missing_document:`` premise.
+    """
+
+    scenario, gold, _rendered, outcome = package_contract(contract_type, 6)
+    missing_references = [
+        reference
+        for reference in gold.references
+        if reference.target_document_id in scenario.missing_documents
+    ]
+    assert missing_references, scenario.missing_documents
+    for reference in missing_references:
+        assert reference.evidence == []
+        assert reference.target_document_id in scenario.missing_documents
+
+    relation_answers = {
+        question.expected_answer.text
+        for question in outcome.accepted
+        if question.category is QuestionCategory.RELATION
+    }
+    assert not relation_answers.intersection(scenario.missing_documents)
+
+    insufficient = [
+        question
+        for question in outcome.accepted
+        if question.answerability is Answerability.INSUFFICIENT_EVIDENCE
+        and any(
+            condition.startswith(MISSING_PREFIX)
+            for condition in question.expected_answer.conditions
+        )
+    ]
+    assert insufficient
+    for question in insufficient:
+        missing_ids = {
+            condition[len(MISSING_PREFIX) :]
+            for condition in question.expected_answer.conditions
+            if condition.startswith(MISSING_PREFIX)
+        }
+        assert missing_ids
+        assert missing_ids.issubset(scenario.missing_documents)

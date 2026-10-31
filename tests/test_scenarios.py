@@ -152,7 +152,10 @@ def assert_reference_integrity(scenario) -> None:
             for dependency in clause.depends_on:
                 assert dependency in clause_id_set
             for reference in clause.reference_to:
-                assert reference in clause_id_set
+                # A clause may refer to another clause or to a whole document;
+                # the document case is what makes the reference text-verifiable.
+                assert reference in clause_id_set or reference in document_id_set
+            assert len(set(clause.reference_to)) == len(clause.reference_to)
         for referenced in document.references_documents:
             assert referenced in document_id_set or referenced in scenario.missing_documents
 
@@ -616,6 +619,125 @@ def test_org_numbers_are_clearly_synthetic(registry, generator, contract_type, d
     assert len(numbers) == len(set(numbers))
 
 
+def _luhn_valid(digits: str) -> bool:
+    total = 0
+    for position, char in enumerate(reversed(digits)):
+        value = int(char)
+        if position % 2 == 1:
+            value *= 2
+            if value > 9:
+                value -= 9
+        total += value
+    return total % 10 == 0
+
+
+@pytest.mark.parametrize("contract_type", ALL_TYPES)
+@pytest.mark.parametrize("difficulty", DIFFICULTIES)
+def test_org_numbers_fail_luhn_check(generator, contract_type, difficulty):
+    """Synthetic org numbers must never look like a real, valid org number."""
+
+    scenario = generate(generator, contract_type, difficulty)
+    numbers = [party.org_number for party in scenario.parties if party.org_number]
+    assert numbers
+    for number in numbers:
+        digits = number.replace("-", "")
+        assert len(digits) == 10
+        assert not _luhn_valid(digits), f"{number} passes the Luhn check"
+
+
+def test_org_numbers_fail_luhn_check_over_many_generated_parties(generator):
+    """2000 parties: the 5590xx-xxxx format holds and none is Luhn-valid."""
+
+    numbers: list[str] = []
+    for contract_type in ALL_TYPES:
+        for seed in range(150):
+            scenario = generate(generator, contract_type, 3, seed=seed)
+            numbers.extend(
+                party.org_number for party in scenario.parties if party.org_number
+            )
+    assert len(numbers) >= 2000
+    for number in numbers:
+        assert SYNTHETIC_ORG_NUMBER_RE.fullmatch(number), number
+        assert not _luhn_valid(number.replace("-", "")), number
+    # A deliberately wrong check digit must still vary between numbers.
+    assert len({number[-1] for number in numbers}) > 1
+
+
+# ---------------------------------------------------------------------------
+# Document references are anchored in a clause that names the target
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize("contract_type", ALL_TYPES)
+@pytest.mark.parametrize("difficulty", [3, 4, 5, 6])
+def test_package_document_references_are_anchored_in_a_clause(generator, contract_type, difficulty):
+    """Every in-package document is referenced from a main-agreement clause.
+
+    A document-level reference alone is not verifiable, so the generator records
+    the reference on a clause as well; the clause text then names the document.
+    """
+
+    scenario = generate(generator, contract_type, difficulty)
+    main = scenario.document("main_agreement")
+    document_ids = {document.document_id for document in scenario.documents}
+    anchored = {
+        reference
+        for clause in main.clauses
+        for reference in clause.reference_to
+        if reference in document_ids
+    }
+    # Declared-missing documents are only listed on the document, never anchored.
+    missing = set(scenario.missing_documents)
+    assert set(main.references_documents) == anchored | (missing & set(main.references_documents))
+    for document in scenario.documents:
+        if document.document_id == "main_agreement":
+            continue
+        assert document.document_id in anchored
+        assert document.document_id in main.references_documents
+
+
+@pytest.mark.parametrize("contract_type", ALL_TYPES)
+@pytest.mark.parametrize("difficulty", [3, 4, 5, 6])
+def test_document_reference_has_a_references_relation_from_that_clause(
+    generator, contract_type, difficulty
+):
+    scenario = generate(generator, contract_type, difficulty)
+    document_ids = {document.document_id for document in scenario.documents}
+    document_relations = [
+        relation
+        for relation in scenario.relations
+        if relation.kind is RelationKind.REFERENCES and relation.target in document_ids
+    ]
+    assert document_relations
+    for relation in document_relations:
+        source_document_id, source_clause_id = relation.source.split(":", 1)
+        assert source_document_id == "main_agreement"
+        clause = scenario.clause(source_clause_id)
+        assert relation.target in clause.reference_to
+
+
+@pytest.mark.parametrize("contract_type", ALL_TYPES)
+@pytest.mark.parametrize("difficulty", [3, 4, 5, 6])
+def test_distributed_reference_clauses_stay_fact_free(
+    generator, contract_type, difficulty
+):
+    """Clauses emptied by fact distribution only point at the appendix clause.
+
+    They must stay without facts (the facts now live in the appendix), so the
+    document reference that the generator anchors on them is pure reference text.
+    """
+
+    scenario = generate(generator, contract_type, difficulty)
+    distributed = [
+        clause
+        for clause in all_clauses(scenario)
+        if clause.mode is ClauseMode.REFERENCE and clause.depends_on
+    ]
+    for clause in distributed:
+        assert not clause.fact_ids
+        assert clause.reference_to
+
+
 @pytest.mark.parametrize("contract_type", ALL_TYPES)
 @pytest.mark.parametrize("difficulty", DIFFICULTIES)
 def test_language_and_synthetic_metadata(generator, contract_type, difficulty):
@@ -717,7 +839,6 @@ def test_level_four_has_relations_and_distribution(generator, contract_type):
     assert scenario.relations
     relation_kinds = {relation.kind for relation in scenario.relations}
     assert RelationKind.DEPENDS_ON in relation_kinds
-    assert RelationKind.CLARIFIES in relation_kinds
     main = scenario.document("main_agreement")
     appendix = scenario.document("appendix_a")
     appendix_clause_ids = {clause.clause_id for clause in appendix.clauses}
@@ -730,7 +851,8 @@ def test_level_four_has_relations_and_distribution(generator, contract_type):
     for clause in distributed:
         assert not clause.fact_ids
         assert set(clause.depends_on).issubset(appendix_clause_ids)
-        assert set(clause.reference_to).issubset(appendix_clause_ids)
+        # The clause may additionally name the appendix as a whole document.
+        assert set(clause.reference_to) <= appendix_clause_ids | {"appendix_a"}
         for target_id in clause.depends_on:
             target = scenario.clause(target_id)
             assert target.fact_ids
@@ -1006,3 +1128,147 @@ def test_clause_heading_en_present_for_all_documents(generator):
             assert clause.heading_sv
             assert clause.heading_en
             assert clause.instruction_sv
+
+
+# ---------------------------------------------------------------------------
+# Text-anchored cross references (F2)
+# ---------------------------------------------------------------------------
+
+
+def _resolve_scenario_token(
+    scenario, token: str
+) -> tuple[str | None, str | None]:
+    """Resolve a relation token to ``(document_id, clause_id | None)``."""
+
+    if token.startswith("fact:"):
+        fact_id = token[len("fact:") :]
+        for document in scenario.documents:
+            for clause in document.clauses:
+                if fact_id in clause.fact_ids:
+                    return document.document_id, clause.clause_id
+        return None, None
+    if token in scenario.missing_documents:
+        return token, None
+    if ":" in token:
+        document_id, clause_id = token.split(":", 1)
+        scenario.document(document_id)
+        scenario.clause(clause_id)
+        return document_id, clause_id
+    if any(document.document_id == token for document in scenario.documents):
+        return token, None
+    clause = scenario.clause(token)
+    return clause.document_id, clause.clause_id
+
+
+def _assert_relations_are_text_anchored(scenario) -> None:
+    """Every in-package cross reference must be nameable by its source clause.
+
+    A reference whose source clause does not declare the target in
+    ``reference_to`` (or whose source document does not declare a document
+    reference) can never be supported by the generated text, which is exactly
+    the false-evidence problem F2 describes.
+    """
+
+    for relation in scenario.relations:
+        assert not relation.source.startswith("fact:"), relation.relation_id
+        assert not relation.target.startswith("fact:"), relation.relation_id
+        if relation.target in scenario.missing_documents:
+            # Declared missing documents have no canonical text; validation
+            # explicitly allows those references without evidence.
+            continue
+        source_document_id, source_clause_id = _resolve_scenario_token(
+            scenario, relation.source
+        )
+        assert source_document_id is not None
+        assert source_clause_id is not None, relation.relation_id
+        source_clause = scenario.clause(source_clause_id)
+        target_document_id, target_clause_id = _resolve_scenario_token(
+            scenario, relation.target
+        )
+        assert target_document_id is not None
+        if target_clause_id is not None:
+            assert target_clause_id in source_clause.reference_to, relation.relation_id
+        else:
+            assert target_document_id in source_clause.reference_to or (
+                target_document_id in scenario.document(source_document_id).references_documents
+            ), relation.relation_id
+
+
+@pytest.mark.parametrize("contract_type", ALL_TYPES)
+@pytest.mark.parametrize("difficulty", [3, 4, 5, 6])
+def test_relations_are_anchored_in_source_clauses(generator, contract_type, difficulty):
+    scenario = generate(generator, contract_type, difficulty)
+    _assert_relations_are_text_anchored(scenario)
+
+
+@pytest.mark.parametrize("contract_type", ALL_TYPES)
+def test_level_five_anomaly_relations_target_main_document(registry, generator, contract_type):
+    definition = registry.get(contract_type)
+    scenario = generate(generator, contract_type, 5)
+    by_id = {relation.relation_id: relation for relation in scenario.relations}
+    conflict = by_id["rel_conflict_amendment"]
+    exception = by_id["rel_exception_condition"]
+    main_clause = scenario.document("main_agreement").clauses
+    for relation, base_fact_id in (
+        (conflict, definition.contradiction.base_fact_id),
+        (exception, definition.exception.base_fact_id),
+    ):
+        target_document, target_clause = _resolve_scenario_token(scenario, relation.target)
+        assert target_document == "main_agreement", relation.relation_id
+        # A document-level target is what gold can evidence with the document
+        # title; a bare clause heading would not name the target document.
+        assert target_clause is None
+        assert any(base_fact_id in clause.fact_ids for clause in main_clause)
+        source_clause = scenario.clause(relation.source.split(":", 1)[1])
+        assert "main_agreement" in source_clause.reference_to
+    assert conflict.kind is RelationKind.CONFLICTS_WITH
+    assert exception.kind is RelationKind.CONDITIONS
+
+
+@pytest.mark.parametrize("contract_type", ALL_TYPES)
+def test_level_six_conditional_relation_targets_main_document(registry, generator, contract_type):
+    definition = registry.get(contract_type)
+    scenario = generate(generator, contract_type, 6)
+    relation = next(
+        relation
+        for relation in scenario.relations
+        if relation.relation_id == "rel_conditional_governing"
+    )
+    governing_fact_id = definition.missing_information.conditional_governing_fact_id
+    target_document, target_clause = _resolve_scenario_token(scenario, relation.target)
+    assert target_document == "main_agreement"
+    assert target_clause is None
+    assert any(
+        governing_fact_id in clause.fact_ids
+        for clause in scenario.document("main_agreement").clauses
+    )
+    source_clause = scenario.clause(relation.source.split(":", 1)[1])
+    assert "main_agreement" in source_clause.reference_to
+
+
+@pytest.mark.parametrize("contract_type", ALL_TYPES)
+@pytest.mark.parametrize("difficulty", [5, 6])
+def test_governing_facts_stay_in_the_main_agreement(registry, generator, contract_type, difficulty):
+    definition = registry.get(contract_type)
+    scenario = generate(generator, contract_type, difficulty)
+    if difficulty == 5:
+        governing = {
+            definition.contradiction.base_fact_id,
+            definition.exception.base_fact_id,
+        }
+    else:
+        governing = {
+            definition.missing_information.conditional_governing_fact_id,
+        }
+    for clause in scenario.document("main_agreement").clauses:
+        governing -= set(clause.fact_ids)
+    assert not governing
+
+
+@pytest.mark.parametrize("contract_type", ALL_TYPES)
+@pytest.mark.parametrize("difficulty", DIFFICULTIES)
+def test_relations_never_use_fact_tokens(contract_type, generator, difficulty):
+    scenario = generate(generator, contract_type, difficulty)
+    for relation in scenario.relations:
+        assert not relation.source.startswith("fact:"), relation.relation_id
+        assert not relation.target.startswith("fact:"), relation.relation_id

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "contractforge_version": "0.1.0",
-  "generated_at": "2026-10-31T10:54:46.505723Z",
+  "generated_at": "2026-10-31T13:27:02.174484Z",
   "synthetic": true,
   "contract_id": "contract_0002",
   "contract_type": "consulting",
@@ -27,7 +27,7 @@
     "max_tokens": 8000,
     "seed": 2027,
     "concurrency": 2,
-    "max_repair_attempts": 1,
+    "max_repair_attempts": 2,
     "prompt_version": "v1",
     "prompt_sha256": "4be2797e5714b053505aa652af45537a4eae3bfb6da4097be036067fde51e0ae",
     "formats": [
@@ -36,37 +36,60 @@
       "docx",
       "pdf"
     ],
-    "contract_id_prefix": "contract"
+    "contract_id_prefix": "contract",
+    "package": false,
+    "variation_overrides": {},
+    "scenario_definitions": [
+      {
+        "contract_type": "consulting",
+        "path": "scenarios/definitions/consulting.json",
+        "sha256": "47d82357cb0c2ff724e974462ec00924dad271ca673d1a2236a1803c24ecf024"
+      }
+    ],
+    "runtime": {
+      "contractforge_version": "0.1.0",
+      "python_version": "3.10.8",
+      "python_implementation": "CPython",
+      "platform": "macOS-15.7.4-arm64-arm-64bit",
+      "git_commit": "172feceffac6bb0f2d5bb90f12cdaf655c9ee4bf",
+      "git_dirty": true,
+      "dependencies": {
+        "pydantic": "2.14.2",
+        "httpx": "0.28.1",
+        "python-docx": "1.2.0",
+        "reportlab": "5.1.0"
+      }
+    }
   },
   "documents": [
     {
       "document_id": "main_agreement",
       "kind": "main_agreement",
       "title": "Konsultavtal",
-      "canonical_sha256": "bdb2637c95f8cb932a95f4008087cfccd300a2be8c7dc72ccef332e0931011af",
+      "canonical_sha256": "21573373c9002aae4479602202a673be84fa08b18738eba745a2cb361040164f",
       "files": [
         {
           "path": "main_agreement.txt",
-          "sha256": "bdb2637c95f8cb932a95f4008087cfccd300a2be8c7dc72ccef332e0931011af",
-          "size_bytes": 1164,
+          "sha256": "21573373c9002aae4479602202a673be84fa08b18738eba745a2cb361040164f",
+          "size_bytes": 1022,
           "kind": "document"
         },
         {
           "path": "main_agreement.md",
-          "sha256": "97d93227ad2f4e41fd95ef31d45c8ea2e0c054b52ae537812e675e13970120c1",
-          "size_bytes": 1202,
+          "sha256": "b2a9ede2d4d63cf38ba88289568c6f0e2efa1e9fe102fda1f944f56bb1646bc8",
+          "size_bytes": 1060,
           "kind": "document"
         },
         {
           "path": "main_agreement.docx",
-          "sha256": "cbfeb1240287fafc5908d18a3f2440e6a4ace7f37420bc937569fd2775573230",
-          "size_bytes": 37326,
+          "sha256": "edebd4e078fb204c0e0bb095616a881e27c700636ad5b6dfa4b973646bf1c3b7",
+          "size_bytes": 37268,
           "kind": "document"
         },
         {
           "path": "main_agreement.pdf",
-          "sha256": "b345636fede54068c98bfaa6bd23279c32fd22799c3a5f4bb249e98a90158f24",
-          "size_bytes": 2642,
+          "sha256": "0705038cc114df6daf760aaa22ab7d56c9d269a9bd213a5f19f3c4c1f0ae8cd9",
+          "size_bytes": 2554,
           "kind": "document"
         }
       ]
@@ -75,68 +98,68 @@
   "artifacts": [
     {
       "path": "gold_facts.json",
-      "sha256": "d3141ecb862ee7d586c294876456256910029f1ab3a384e63c38572fc918b587",
-      "size_bytes": 8351,
+      "sha256": "cb81be6f577d03f9b1c2a505fa83129826a9fd109fa364bb65cc0fbd3814f4c0",
+      "size_bytes": 8373,
       "kind": "gold_facts"
     },
     {
       "path": "golden_questions.json",
-      "sha256": "ce7e7fdb950d189e532d9c297b61cbfb2a5b5016158144d90436bff4d52b1e87",
-      "size_bytes": 15660,
+      "sha256": "ada4829a93fd47ac8cd6986112002d3df1f37242d59e6e5eca6bf1da3d4942cf",
+      "size_bytes": 15700,
       "kind": "golden_questions"
     },
     {
       "path": "llm_calls.json",
-      "sha256": "7bec310d44ae49680251ad0ae43e6402c659596a397edc9178f34ba0ee608898",
-      "size_bytes": 19496,
+      "sha256": "52c6962e9a6fa486564000a4c9f919301a0541d259e55a72ee845491cac4b4e8",
+      "size_bytes": 19349,
       "kind": "llm_calls"
     },
     {
       "path": "main_agreement.docx",
-      "sha256": "cbfeb1240287fafc5908d18a3f2440e6a4ace7f37420bc937569fd2775573230",
-      "size_bytes": 37326,
+      "sha256": "edebd4e078fb204c0e0bb095616a881e27c700636ad5b6dfa4b973646bf1c3b7",
+      "size_bytes": 37268,
       "kind": "document"
     },
     {
       "path": "main_agreement.md",
-      "sha256": "97d93227ad2f4e41fd95ef31d45c8ea2e0c054b52ae537812e675e13970120c1",
-      "size_bytes": 1202,
+      "sha256": "b2a9ede2d4d63cf38ba88289568c6f0e2efa1e9fe102fda1f944f56bb1646bc8",
+      "size_bytes": 1060,
       "kind": "document"
     },
     {
       "path": "main_agreement.pdf",
-      "sha256": "b345636fede54068c98bfaa6bd23279c32fd22799c3a5f4bb249e98a90158f24",
-      "size_bytes": 2642,
+      "sha256": "0705038cc114df6daf760aaa22ab7d56c9d269a9bd213a5f19f3c4c1f0ae8cd9",
+      "size_bytes": 2554,
       "kind": "document"
     },
     {
       "path": "main_agreement.txt",
-      "sha256": "bdb2637c95f8cb932a95f4008087cfccd300a2be8c7dc72ccef332e0931011af",
-      "size_bytes": 1164,
+      "sha256": "21573373c9002aae4479602202a673be84fa08b18738eba745a2cb361040164f",
+      "size_bytes": 1022,
       "kind": "document"
     },
     {
       "path": "raw/contract_0002_main_agreement_a1.json",
-      "sha256": "099d356560e56bcc0746534b2317ef3106928928935a1084285f1884364a8ec1",
-      "size_bytes": 5602,
+      "sha256": "b35ca423847635059fe37aaaf990b8dc673fd044018d245fd81de7d54b93b3ad",
+      "size_bytes": 4606,
       "kind": "raw_response"
     },
     {
       "path": "rendered.json",
-      "sha256": "8d4419034ab7686b1d180af671c8635a5878b0a3f7357455e1750a8d5c461d53",
-      "size_bytes": 2272,
+      "sha256": "8cf077a8239b6ad8000cd52b1106567fb05071c6788fdb868e716cbb83357cec",
+      "size_bytes": 2125,
       "kind": "other"
     },
     {
       "path": "scenario.json",
-      "sha256": "4f1b5e26901a22c8838e409094b6f7d174c97b038c75736eee79e60e9fa5ef2f",
-      "size_bytes": 14533,
+      "sha256": "be2ed7e28a31e2853cacc67d6da5bb5faf43789791f6b6b069f6c2e75e52a3f8",
+      "size_bytes": 14545,
       "kind": "scenario"
     },
     {
       "path": "verification.json",
-      "sha256": "5007b83ec95d516ab52c4921256191f61d0fb76fea0068d9e2d7c0e2cfa53bb8",
-      "size_bytes": 21338,
+      "sha256": "c4e0d871733c69484f1f4e65841d53ad0a26eda88563bac565fc8ed4e5249198",
+      "size_bytes": 21019,
       "kind": "verification"
     }
   ],
@@ -147,20 +170,20 @@
     "documents_repaired": 0,
     "documents_rejected": 0,
     "checks_failed": 0,
-    "checks_warned": 4
+    "checks_warned": 2
   },
   "cost": {
     "calls": 1,
-    "input_tokens": 4438,
-    "output_tokens": 1267,
-    "total_tokens": 5705,
+    "input_tokens": 4443,
+    "output_tokens": 1038,
+    "total_tokens": 5481,
     "tokens_known": true,
     "cost_usd": null,
     "cost_basis": "unknown",
-    "mean_latency_ms": 1000.4061249783263
+    "mean_latency_ms": 2128.220832999432
   },
   "timings": {
-    "total_seconds": 1.0117110830033198
+    "total_seconds": 2.143269958000019
   },
   "notes": [
     "All parties, organisationsnummer, addresses and amounts are synthetic.",

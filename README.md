@@ -277,10 +277,25 @@ dataset/
 │   ├── llm_calls.json            # saniterade anrop (prompt, usage, latens)
 │   ├── raw/<call_id>.json        # råsvar för felsökning
 │   └── manifest.json             # konfiguration, modell, promptversion, hashar, kostnad
-├── dataset_manifest.json         # alla avtal, status, hashar, totals
+├── dataset_manifest.json         # alla avtal, status, hashar, totals, run-identitet
 ├── stats.json                    # aggregerad statistik
-└── rejected/<contract_id>.json   # kasserade avtal – aldrig godkända
+├── validation_report.json        # resultatet av den slutliga datasetvalideringen
+├── run.json                      # vilka filer körningen äger (säker återkörning)
+├── .contractforge                # markör: katalogen är ett ContractForge-dataset
+└── rejected/<contract_id>.json   # kasserade avtal – aldrig godkända (med
+                                  # saniterade anrop, usage, kostnad och raw/)
 ```
+
+**Skrivsäkerhet.** `generate` vägrar skriva i en katalog som inte är tom och som
+inte är ett ContractForge-dataset (exit-kod 2) – ingenting raderas. Använd en ny
+`--output`, eller `--force` om du uttryckligen accepterar att ersätta katalogen.
+En tidigare ContractForge-körning i samma katalog städas endast för de filer som
+listas i dess manifest; andra filer lämnas orörda, och ett byte av
+`contract_id`-prefix kräver en ny katalog.
+
+**Slutlig validering.** Efter export kör `generate` samma validering som
+`contractforge validate`. Blir resultatet inte `PASS` avslutas körningen med
+exit-kod 3 – ett inkonsekvent dataset kan aldrig rapporteras som lyckat.
 
 ## Export
 
@@ -312,12 +327,21 @@ CEREBRAS_API_KEY=... .venv/bin/contractforge benchmark \
 ```
 
 Rapporten redovisar: dokument/minut, klausuler/minut, genomsnittlig
-genereringslatens, tokenförbrukning, faktisk kostnad (endast om en explicit
-prisuppgift angetts), andel godkända/reparerade/kasserade dokument, kostnad per
-godkänt dokument och kostnad per validerad golden-fråga.
+genereringslatens (viktat över alla anrop), tokenförbrukning, faktisk kostnad
+(endast om en explicit prisuppgift angetts), andel godkända/reparerade/kasserade
+dokument, kostnad per godkänt dokument och kostnad per validerad golden-fråga.
+
+Rapporten är **verifierbar**: `details` innehåller SHA-256 för
+`dataset_manifest.json`, alla avtals manifest-hashar, valideringsresultatet,
+antal accepterade/avvisade golden-frågor, körmiljö (`python_version`, `platform`,
+`contractforge_version`, `git_commit`, beroenden) och latensens
+beräkningsmetod. En rapport utan motsvarande corpus kan inte bindas till sin
+data.
 
 Inga priser eller prestandaantaganden är hårdkodade för en viss
 Cerebras-modell. Utan `pricing.json` rapporteras kostnad som `unknown`.
+Se [`docs/reproducibility.md`](docs/reproducibility.md) för exakt vilka fält som
+gör en körning återskapbar och hur ett publicerat dataset verifieras.
 
 Senaste mätningarna (fullständig rapport i
 [`docs/benchmarks.md`](docs/benchmarks.md) och
@@ -325,16 +349,31 @@ Senaste mätningarna (fullständig rapport i
 
 | Körning | Provider | Avtal | Godkända | Reparerade dokument | Dokument/min | Token | Kostnad |
 |---------|----------|-------|----------|---------------------|--------------|-------|---------|
-| Offline pipeline | mock | 100 | 100 | 0 | 1 119 | okänd | okänd |
-| Live Cerebras | `gpt-oss-120b` | 100 | 100 | 14 | 174 | 688 885 | okänd¹ |
+| Offline pipeline | mock | 100 | 100 | 0 | 981 | okänd | okänd |
+| Live Cerebras | `gpt-oss-120b` | 100 | 100 | 11 | 48,5 | 675 874 | okänd¹ |
 
 ¹ Ingen prisuppgift angavs. Med `pricing.json` beräknas faktisk kostnad per
-godkänt dokument och per validerad golden-fråga. Live-körningen tog 34,4 s med
-4 parallella anrop och 1 091 ms genomsnittlig anropstid.
+godkänt dokument och per validerad golden-fråga. Live-körningen tog 123,6 s med
+4 parallella anrop och 4 215 ms genomsnittlig anropstid (viktat över alla
+112 anrop); 89 dokument godkändes på första försöket, 11 reparerades.
 
-Ett live-genererat exempeldataset finns i
+**Livekörningens dataset-arkiv** publiceras som release-asset:
+`cerebras_consulting_100.zip`, SHA-256
+`51554ba465aabf6c4e319da4559fce5d82b330a9083f054c522fd3607442e390`.
+Packa upp och kör `contractforge validate <katalog>` – resultatet ska vara
+`PASS` för alla 100 avtal.
+
+**Live-körningens dataset-arkiv publiceras separat** som en ZIP-release-asset med
+publicerad SHA-256; en livebenchmark får bara citeras som verifierad när arkivet
+är tillgängligt och `contractforge validate` ger `PASS` på det.
+
+Ett litet live-genererat exempeldataset finns i
 [`examples/sample_live_consulting/`](examples/sample_live_consulting/) och kan
 valideras med `contractforge validate examples/sample_live_consulting`.
+
+> Rapporterna under `benchmarks/results/` som skapades före
+> verifierbarhetsändringen saknar `details`; de kan inte bindas till en corpus.
+> Se [`docs/benchmarks.md`](docs/benchmarks.md) för vilka körningar som gäller.
 
 ## Reproducerbarhet och kostnad
 
@@ -343,6 +382,12 @@ valideras med `contractforge validate examples/sample_live_consulting`.
   leverantören inte garanterar deterministisk inferens. Det dokumenteras i
   manifestet.
 - Promptar är versionshanterade (`prompt_version` + `prompt_sha256` i manifestet).
+- Alla scenarioingångar sparas: typ, antal, klausuler, svårighetsgrad, språk,
+  jurisdiktion, `package`, variationsöverskridanden, seed och SHA-256 för
+  avtalstypens definition.
+- Körmiljön sparas (`runtime`): ContractForge-version, Python, plattform,
+  Git-commit, dirty-flagga och beroendeversioner.
+- Beroenden kan låsas exakt: `pip install -c constraints.txt -e ".[dev]"`.
 - Kostnad beräknas endast från en explicit `PricingTable` (JSON). Exempelformat:
   [`examples/pricing.example.json`](examples/pricing.example.json). Fyll i
   aktuella priser från leverantörens prislista – inga priser gissas av
@@ -355,7 +400,11 @@ valideras med `contractforge validate examples/sample_live_consulting`.
 - Dokumenten märks som syntetisk testdata i metadata/manifest och i den
   kanoniska textens huvud – utan att störa klausultexterna.
 - Inga externa dokumentkorpusar krävs.
-- API-nycklar sparas aldrig i dataset, manifest eller loggar.
+- Syntetiska organisationsnummer använder serien `5590xx` och är medvetet
+  **Luhn-ogiltiga**, så de kan inte vara en verklig organisations identitet.
+- API-nycklar sparas aldrig i dataset, manifest, loggar eller felmeddelanden:
+  providersvars, undantag och progress-rader redigeras (`[REDACTED]`) innan de
+  kan skrivas till disk.
 - Generatorn påstår inte att syntetiska villkor är rättsligt giltiga enbart för
   att formuleringen är realistisk.
 
@@ -391,9 +440,12 @@ contractforge/
 │   ├── export/           # datasetlayout, manifest, ZIP/JSONL, statistik
 │   ├── models.py         # delad domänmodell (pydantic, strict)
 │   ├── config.py         # inställningar via env + CLI
-│   ├── pipeline.py       # orkestrering + reparationsloop
-│   └── benchmark.py      # reproducerbar benchmark
-├── tests/                # enhetstester + integration (mock) + live-markering
+│   ├── runtime.py        # körmiljö i manifest/rapport (Python, commit, beroenden)
+│   ├── sanitize.py       # sekretessredigering av fel, loggar och råsvar
+│   ├── pipeline.py       # orkestrering, reparationsloop, slutlig datasetvalidering
+│   └── benchmark.py      # reproducerbar, verifierbar benchmark
+├── tests/                # 1 754 tester: enhet, integration (mock) och live
+├── constraints.txt       # exakt låsta beroenden
 ├── examples/
 ├── docs/
 └── benchmarks/
@@ -408,8 +460,14 @@ make test           # pytest, utan live/slow
 make benchmark-offline
 ```
 
-CI (GitHub Actions) kör ruff, hela testsviten utan nätverksanrop samt ett
-offline end-to-end-smoke-test med mock-providern.
+CI (GitHub Actions) kör på Python 3.10, 3.11 och 3.12:
+
+- `ruff` och hela testsviten utan nätverksanrop (1 754 tester, ~12 s),
+- ett offline end-to-end-smoke-test som genererar och validerar alla 10
+  avtalstyper × nivå 1–6,
+- en integrationsgrind som kräver att varje dataset får `PASS` och att antalet
+  exporterade frågor är lika med antalet validerade frågor – ingen fråga får
+  accepteras av generatorn men underkännas av datasetvalideringen.
 
 Live-tester mot Cerebras är markerade `@pytest.mark.live` och hoppas över när
 `CEREBRAS_API_KEY` saknas:

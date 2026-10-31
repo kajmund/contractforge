@@ -54,16 +54,157 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -e ".[dev]"
 
-      - name: Generate 10 contracts with the deterministic mock provider
+      - name: Generate and validate 10 contract types x difficulty 1-6
         run: |
-          contractforge generate --type consulting --count 10 --clauses 8 \
-            --difficulty 2 --language sv --provider mock --seed 7 \
-            --output /tmp/dataset --json > /tmp/generate.json
-          contractforge validate /tmp/dataset --json > /tmp/validate.json
+          set -euo pipefail
+          rm -rf /tmp/smoke && mkdir -p /tmp/smoke
+          for contract_type in $(contractforge list-types --json | python -c \
+              'import json,sys; print(" ".join(json.load(sys.stdin)["types"]))'); do
+            for difficulty in 1 2 3 4 5 6; do
+              name="${contract_type}_d${difficulty}"
+              contractforge generate --type "$contract_type" --count 1 --clauses 10 \
+                --difficulty "$difficulty" --language sv --provider mock --seed 1 \
+                --formats txt --output "/tmp/smoke/$name" --json > "/tmp/smoke/$name.generate.json"
+              contractforge validate "/tmp/smoke/$name" --json > "/tmp/smoke/$name.validate.json"
+            done
+          done
           python - <<'PY'
+          import glob
           import json
-          report = json.load(open("/tmp/validate.json"))["report"]
-          assert report["status"] == "PASS", report
-          assert report["contracts_checked"] == 10, report
-          print("offline smoke ok")
+
+          failures = []
+          for path in sorted(glob.glob("/tmp/smoke/*.validate.json")):
+              report = json.load(open(path))["report"]
+              if report["status"] != "PASS":
+                  failures.append(
+                      (path, [c["check_id"] + ": " + c["message"]
+                              for c in report["checks"] if c["status"] == "FAIL"][:3])
+                  )
+          assert not failures, failures
+          print(f"offline smoke ok: {len(glob.glob('/tmp/smoke/*.validate.json'))} datasets PASS")
+          PY
+
+      - name: Upload smoke datasets on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-smoke-failures
+          path: /tmp/smoke
+          retention-days: 7
+
+  integration-gate:
+    name: integration gate (question generation == dataset validation)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+
+      - name: Gate - every dataset PASS and exported questions == validated questions
+        run: |
+          python - <<'PY'
+          """Integration gate for the review finding that level 5-6 datasets were
+          exported as approved but rejected by the project's own validator.
+
+          Generates every contract type at every difficulty with the mock
+          provider, then requires for each dataset:
+            * dataset validation status PASS;
+            * exported questions == validated questions, and
+            * accepted-by-generator == accepted-by-validate_dataset (no question
+              may survive generation but fail dataset validation).
+          """
+          import shutil
+          import sys
+          import tempfile
+          from pathlib import Path
+
+          from contractforge.config import Settings
+          from contractforge.export.loader import find_contract_dirs, load_contract_dir
+          from contractforge.models import ContractType, Language, ScenarioRequest
+          from contractforge.pipeline import generate_dataset
+          from contractforge.validation.dataset import question_support_problems
+
+          settings = Settings.from_env().with_overrides(provider="mock", formats=["txt"])
+          root = Path(tempfile.mkdtemp(prefix="cf_gate_"))
+          failures = []
+          cases = 0
+          try:
+              for contract_type in ContractType:
+                  for difficulty in range(1, 7):
+                      cases += 1
+                      label = f"{contract_type.value} d{difficulty}"
+                      target = root / f"{contract_type.value}_{difficulty}"
+                      request = ScenarioRequest(
+                          contract_type=contract_type,
+                          count=1,
+                          clauses=10,
+                          difficulty=difficulty,
+                          language=Language.SV,
+                          seed=1,
+                      )
+                      try:
+                          outcome = generate_dataset(
+                              settings, request, target, progress=lambda _message: None
+                          )
+                      except Exception as exc:  # noqa: BLE001 - gate reports every failure
+                          failures.append(f"{label}: {type(exc).__name__}: {exc}")
+                          continue
+                      report = outcome.validation_report
+                      if report is None or report.status.value != "PASS":
+                          details = [
+                              f"{check.check_id}: {check.message}"
+                              for check in (report.checks if report else [])
+                              if check.status.value == "FAIL"
+                          ]
+                          failures.append(f"{label}: dataset status != PASS {details[:3]}")
+                          continue
+                      exported = sum(len(result.questions) for result in outcome.results)
+                      if exported != outcome.stats.questions_total:
+                          failures.append(
+                              f"{label}: exporterade {exported} frågor men stats.questions_total "
+                              f"{outcome.stats.questions_total}"
+                          )
+                      if exported != outcome.stats.questions_validated:
+                          failures.append(
+                              f"{label}: exporterade {exported} frågor men "
+                              f"questions_validated {outcome.stats.questions_validated}"
+                          )
+                      if not exported:
+                          failures.append(f"{label}: inga frågor exporterade")
+                      for contract_dir in find_contract_dirs(target):
+                          loaded = load_contract_dir(contract_dir)
+                          gold_facts = (
+                              {fact.fact_id: fact for fact in loaded.gold.facts}
+                              if loaded.gold
+                              else {}
+                          )
+                          for question in loaded.questions:
+                              if not question.validated:
+                                  failures.append(
+                                      f"{label}: {question.question_id} exporterad utan "
+                                      "validated=True"
+                                  )
+                              problems = question_support_problems(
+                                  question, loaded.rendered, gold_facts
+                              )
+                              if problems:
+                                  failures.append(
+                                      f"{label}: {question.question_id} accepterad av generatorn "
+                                      f"men underkänd av validate_dataset: {problems[:2]}"
+                                  )
+          finally:
+              shutil.rmtree(root, ignore_errors=True)
+
+          if failures:
+              print(f"integration gate: {len(failures)} failure(s) av {cases} kombinationer")
+              for failure in failures[:25]:
+                  print(" -", failure)
+              sys.exit(1)
+          print(f"integration gate ok: {cases} kombinationer (10 typer x nivå 1-6) PASS")
           PY

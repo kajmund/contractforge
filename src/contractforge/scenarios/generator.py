@@ -84,6 +84,36 @@ def _unique(values: list[str]) -> list[str]:
     return result
 
 
+def _luhn_valid(digits: str) -> bool:
+    """Return whether ``digits`` passes the Luhn (mod 10) check."""
+
+    total = 0
+    for position, char in enumerate(reversed(digits)):
+        value = int(char)
+        if position % 2 == 1:
+            value *= 2
+            if value > 9:
+                value -= 9
+        total += value
+    return total % 10 == 0
+
+
+def _wrong_check_digit(payload: str, rng: random.Random) -> str:
+    """Return a digit that makes ``payload + digit`` fail the Luhn check.
+
+    A controlled series must never be mistakable for a real organisation
+    number, so the check digit is *deliberately* wrong instead of drawn freely
+    (a free draw would be Luhn-valid one time in ten). Excluding the single
+    correct digit keeps the numbers varied while they always fail Luhn.
+    """
+
+    correct = next(
+        (digit for digit in range(10) if _luhn_valid(payload + str(digit))), None
+    )
+    wrong = [digit for digit in range(10) if digit != correct]
+    return str(rng.choice(wrong))
+
+
 @dataclass
 class _ClauseDraft:
     """Mutable clause plan entry used while composing the package."""
@@ -160,6 +190,7 @@ class _ScenarioBuilder:
         self.appendix_drafts: list[_ClauseDraft] = []
         self.amendment_drafts: list[_ClauseDraft] = []
         self.distributions: list[_DistributionRecord] = []
+        self.document_reference_clauses: set[str] = set()
         self.clause_documents: dict[str, str] = {}
         self.documents: list[DocumentSpec] = []
         self.appendix_document_id: str | None = None
@@ -178,6 +209,9 @@ class _ScenarioBuilder:
             self.appendix_drafts = self._build_drafts(self.definition.appendix_clauses)
         self.amendment_drafts = self._build_drafts(self.definition.amendment_clauses)
         self._distribute_facts()
+        self._anchor_semantic_references()
+        self.documents = self._assemble_documents()
+        document_anchors = self._anchor_document_references()
         self.documents = self._assemble_documents()
 
         variation = self._build_variation()
@@ -192,7 +226,7 @@ class _ScenarioBuilder:
             facts=self.facts,
             documents=self.documents,
             variation=variation,
-            relations=self._build_relations(),
+            relations=self._build_relations(document_anchors),
             anomalies=self._build_anomalies(),
             missing_documents=self._missing_documents(),
             synthetic=True,
@@ -235,7 +269,12 @@ class _ScenarioBuilder:
         if series is None:  # guarded by the definition model
             raise ScenarioError(f"organisation party {party_id} has no org_number_series")
         for _ in range(1000):
-            candidate = f"{series}-{self.rng.randint(0, 9999):04d}"
+            # ``5590xx-XXXX``: the 10-digit number is body (9 digits) + one
+            # check digit. The check digit is chosen to be wrong, so every
+            # generated number fails the Luhn check and cannot be a real org.nr.
+            body = f"{series}{self.rng.randint(0, 999):03d}"
+            check = _wrong_check_digit(body, self.rng)
+            candidate = f"{body[:6]}-{body[6:]}{check}"
             if candidate not in used:
                 used.add(candidate)
                 return candidate
@@ -394,10 +433,16 @@ class _ScenarioBuilder:
     def _distribute_facts(self) -> None:
         if self.request.difficulty < MIN_DISTRIBUTION_DIFFICULTY:
             return
+        # Facts that carry a documented anomaly stay in the main agreement: the
+        # amendment/exception clause must be able to name the main clause that
+        # holds the governing value, otherwise the relation is unobservable.
+        protected = self._protected_distribution_fact_ids()
         eligible = [
             index
             for index, draft in enumerate(self.main_drafts)
-            if draft.fact_ids and draft.mode in (ClauseMode.EXPLICIT, ClauseMode.PARAPHRASE)
+            if draft.fact_ids
+            and draft.mode in (ClauseMode.EXPLICIT, ClauseMode.PARAPHRASE)
+            and not protected.intersection(draft.fact_ids)
         ]
         if not eligible:
             return
@@ -420,6 +465,68 @@ class _ScenarioBuilder:
                     fact_ids=moved,
                 )
             )
+
+    def _protected_distribution_fact_ids(self) -> set[str]:
+        """Facts that must stay in the main agreement.
+
+        Two reasons:
+        * a level 5/6 anomaly clause must be able to name the clause holding the
+          governing fact, otherwise the relation is unobservable;
+        * at least one distractor's base fact is kept in the main agreement so a
+          cross-document comparison question always has one value on each side
+          (main agreement vs appendix), which is the F2/F10 package-question
+          requirement.
+        """
+
+        difficulty = self.request.difficulty
+        protected: set[str] = set()
+        anchor = next(
+            (
+                spec.based_on_fact_id
+                for spec in self.definition.distractor_facts
+                if spec.based_on_fact_id is not None
+            ),
+            None,
+        )
+        if anchor is not None:
+            protected.add(anchor)
+        if difficulty == 5:
+            protected.update(
+                {
+                    self.definition.contradiction.base_fact_id,
+                    self.definition.exception.base_fact_id,
+                }
+            )
+        elif difficulty == 6:
+            protected.add(
+                self.definition.missing_information.conditional_governing_fact_id
+            )
+        return protected
+
+    def _anchor_semantic_references(self) -> None:
+        """Anchor contradiction/exception/conditional clauses in the main text.
+
+        A ``CONFLICTS_WITH``/``CONDITIONS`` relation is only verifiable when the
+        source clause names the target. The target is the main agreement *as a
+        document*: gold's narrow reference span can then be the document title
+        ("Anställningsavtal"), which unambiguously identifies the target, while
+        a bare clause heading would not say which document it belongs to. The
+        governing facts are protected from distribution, so the semantic target
+        really is the main agreement; the answerability stays in the declared
+        :class:`Anomaly` objects.
+        """
+
+        difficulty = self.request.difficulty
+        anchor_modes: list[ClauseMode] = []
+        if difficulty == 5:
+            anchor_modes = [ClauseMode.CONTRADICTION, ClauseMode.EXCEPTION]
+        elif difficulty == 6:
+            anchor_modes = [ClauseMode.CONDITIONAL]
+        for mode in anchor_modes:
+            draft = self._find_amendment_draft(mode)
+            if draft is None:
+                continue
+            draft.reference_to = _unique(draft.reference_to + [MAIN_DOCUMENT_ID])
 
     def _distribution_target(self) -> _ClauseDraft:
         for draft in self.appendix_drafts:
@@ -551,6 +658,7 @@ class _ScenarioBuilder:
         self, document_id: str, drafts: list[_ClauseDraft]
     ) -> list[ClauseSpec]:
         all_clause_ids = set(self.clause_documents)
+        all_document_ids = {document.document_id for document in self.documents}
         clauses: list[ClauseSpec] = []
         for order, draft in enumerate(drafts, start=1):
             depends_on = [
@@ -558,8 +666,12 @@ class _ScenarioBuilder:
                 for dependency in draft.depends_on
                 if dependency in all_clause_ids and dependency != draft.clause_id
             ]
+            # ``reference_to`` holds clause ids; a whole document is a valid
+            # reference target too (the clause text names the document title).
             reference_to = [
-                reference for reference in draft.reference_to if reference in all_clause_ids
+                reference
+                for reference in draft.reference_to
+                if reference in all_clause_ids or reference in all_document_ids
             ]
             clauses.append(
                 ClauseSpec(
@@ -607,25 +719,132 @@ class _ScenarioBuilder:
             ) from exc
         return f"{document_id}:{clause_id}"
 
+    def _governing_document_reference(self, fact_id: str) -> str:
+        """Document token for a governing fact, so the relation is text-anchored.
+
+        References to ``fact:<id>`` carry no textual anchor of their own. The
+        governing facts are protected from distribution, so the main agreement
+        is the document that actually holds them; a document target gives gold a
+        narrow span on the main agreement title (see
+        ``_anchor_semantic_references``).
+        """
+
+        if not any(fact_id in draft.fact_ids for draft in self.main_drafts):
+            raise ScenarioError(
+                f"governing fact {fact_id} is not in the main agreement of "
+                f"{self.contract_id}"
+            )
+        return MAIN_DOCUMENT_ID
+
     def _find_amendment_draft(self, mode: ClauseMode) -> _ClauseDraft | None:
         for draft in self.amendment_drafts:
             if draft.mode == mode:
                 return draft
         return None
 
-    def _build_relations(self) -> list[Relation]:
+    # -- document references ---------------------------------------------
+    def _package_documents(self) -> list[tuple[str, ClauseMode]]:
+        """``(document_id, entry_mode)`` for every document the main agreement pulls in."""
+
+        documents: list[tuple[str, ClauseMode]] = []
+        if self.appendix_document_id is not None:
+            documents.append((self.appendix_document_id, ClauseMode.DEFINITION))
+        if self.amendment_document_id is not None:
+            amendment_entry = next(
+                (
+                    entry
+                    for entry in self.definition.amendment_clauses
+                    if entry.min_difficulty <= self.request.difficulty <= entry.max_difficulty
+                ),
+                None,
+            )
+            entry_mode = amendment_entry.mode if amendment_entry is not None else ClauseMode.EXPLICIT
+            documents.append((self.amendment_document_id, entry_mode))
+        return documents
+
+    def _document_reference_anchor(
+        self,
+        document_id: str,
+        entry_mode: ClauseMode,
+        *,
+        prefer_reference_clauses: bool,
+    ) -> _ClauseDraft | None:
+        """Pick the main-agreement clause whose text must name the other document.
+
+        A document-level reference is only verifiable when the source side really
+        says it, so the anchor is a main-agreement clause that already carries an
+        explicit reference of its own (more than one reference would break the
+        correspondence between the clause wording and the recorded relation).
+        Document references already anchored on a clause are reused instead of
+        spreading one reference over several clauses.
+        """
+
+        candidates = [
+            draft
+            for draft in self.main_drafts
+            if self.clause_documents.get(draft.clause_id) == MAIN_DOCUMENT_ID
+            and len(draft.reference_to) <= 1
+            and draft.clause_id not in self.document_reference_clauses
+        ]
+        if not candidates:
+            return None
+        if prefer_reference_clauses:
+            reference_mode = [
+                draft for draft in candidates if draft.mode is ClauseMode.REFERENCE
+            ]
+            if reference_mode:
+                candidates = reference_mode
+        explicit = [draft for draft in candidates if draft.mode is not ClauseMode.REFERENCE]
+        if explicit:
+            return explicit[0]
+        for mode in (ClauseMode.EXPLICIT, ClauseMode.PARAPHRASE, entry_mode):
+            matches = [draft for draft in candidates if draft.mode is mode]
+            if matches:
+                return matches[0]
+        return candidates[0]
+
+    def _anchor_document_references(self) -> list[tuple[str, str]]:
+        """Anchor every package document in a main-agreement clause.
+
+        Returns ``(source_clause_id, target_document_id)`` pairs. The reference is
+        recorded in the clause (``reference_to``) *and* in the document
+        (``references_documents``), so both the scenario and the derived gold set
+        can point at a clause whose text actually names the target document.
+        """
+
+        anchors: list[tuple[str, str]] = []
+        for document_id, entry_mode in self._package_documents():
+            anchor = self._document_reference_anchor(
+                document_id,
+                entry_mode,
+                prefer_reference_clauses=not anchors,
+            )
+            if anchor is None:
+                continue
+            anchor.reference_to = _unique(anchor.reference_to + [document_id])
+            self.document_reference_clauses.add(anchor.clause_id)
+            anchors.append((anchor.clause_id, document_id))
+        return anchors
+
+    def _build_relations(self, document_anchors: list[tuple[str, str]]) -> list[Relation]:
         difficulty = self.request.difficulty
         relations: list[Relation] = []
-        if self.appendix_document_id is not None and self.appendix_drafts:
-            main_clause = self.main_drafts[0].clause_id
-            appendix_clause = self.appendix_drafts[0].clause_id
+        for index, (source_clause_id, target_document_id) in enumerate(document_anchors, start=1):
             relations.append(
                 Relation(
-                    relation_id="rel_appendix_reference",
+                    relation_id=(
+                        "rel_appendix_reference"
+                        if index == 1
+                        else f"rel_document_reference_{index:02d}"
+                    ),
                     kind=RelationKind.REFERENCES,
-                    source=self._reference(main_clause),
-                    target=self._reference(appendix_clause),
-                    description_sv="Huvudavtalet hänvisar till bilagan för närmare detaljer.",
+                    source=self._reference(source_clause_id),
+                    target=target_document_id,
+                    description_sv=(
+                        "Huvudavtalet hänvisar till bilagan för närmare detaljer."
+                        if index == 1
+                        else "Huvudavtalet hänvisar till tillägget för ändrade villkor."
+                    ),
                 )
             )
         for index, distribution in enumerate(self.distributions, start=1):
@@ -640,28 +859,19 @@ class _ScenarioBuilder:
                     ),
                 )
             )
-            for fact_index, fact_id in enumerate(distribution.fact_ids, start=1):
-                relations.append(
-                    Relation(
-                        relation_id=f"rel_distribution_fact_{index:02d}_{fact_index:02d}",
-                        kind=RelationKind.CLARIFIES,
-                        source=f"fact:{fact_id}",
-                        target=self._reference(distribution.target_clause_id),
-                        description_sv="Faktumet specificeras närmare i bilagan.",
-                    )
-                )
         if difficulty == 5:
             contradiction = self._find_amendment_draft(ClauseMode.CONTRADICTION)
             exception = self._find_amendment_draft(ClauseMode.EXCEPTION)
-            base_fact_id = self.definition.contradiction.base_fact_id
             if contradiction is not None:
                 relations.append(
                     Relation(
                         relation_id="rel_conflict_amendment",
                         kind=RelationKind.CONFLICTS_WITH,
                         source=self._reference(contradiction.clause_id),
-                        target=f"fact:{base_fact_id}",
-                        description_sv="Tillägget motsäger huvudavtalets belopp.",
+                        target=self._governing_document_reference(
+                            self.definition.contradiction.base_fact_id
+                        ),
+                        description_sv="Tillägget motsäger ett villkor i huvudavtalet.",
                     )
                 )
             if exception is not None:
@@ -670,8 +880,10 @@ class _ScenarioBuilder:
                         relation_id="rel_exception_condition",
                         kind=RelationKind.CONDITIONS,
                         source=self._reference(exception.clause_id),
-                        target=f"fact:{self.definition.exception.base_fact_id}",
-                        description_sv="Undantaget villkorar huvudavtalets bestämmelse.",
+                        target=self._governing_document_reference(
+                            self.definition.exception.base_fact_id
+                        ),
+                        description_sv="Undantaget villkorar ett villkor i huvudavtalet.",
                     )
                 )
         if difficulty == 6:
@@ -694,11 +906,13 @@ class _ScenarioBuilder:
                         relation_id="rel_conditional_governing",
                         kind=RelationKind.CONDITIONS,
                         source=self._reference(conditional.clause_id),
-                        target=(
-                            "fact:"
-                            f"{self.definition.missing_information.conditional_governing_fact_id}"
+                        target=self._governing_document_reference(
+                            self.definition.missing_information.conditional_governing_fact_id
                         ),
-                        description_sv="Villkoret styrs av ett annat faktum i avtalet.",
+                        description_sv=(
+                            "Villkoret styrs av ett villkor i huvudavtalet; anomalin bär "
+                            "den villkorade answerabilityn."
+                        ),
                     )
                 )
         return relations

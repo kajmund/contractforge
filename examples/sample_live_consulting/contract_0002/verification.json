@@ -17,7 +17,7 @@
         {
           "check_id": "document.main_agreement.rendered.present",
           "status": "PASS",
-          "message": "kanonisk text finns för main_agreement (1121 tecken).",
+          "message": "kanonisk text finns för main_agreement (985 tecken).",
           "document_id": "main_agreement",
           "clause_id": null,
           "details": {}
@@ -121,7 +121,7 @@
         {
           "check_id": "document.main_agreement.clause.clause_01.fact.fact_consultant_name",
           "status": "PASS",
-          "message": "fact_consultant_name: explicit surface 'Lindfors Analys AB' finns i clause_01.",
+          "message": "fact_consultant_name: explicit surface 'Västberg Rådgivning AB' finns i clause_01.",
           "document_id": "main_agreement",
           "clause_id": "clause_01",
           "details": {}
@@ -153,7 +153,7 @@
         {
           "check_id": "document.main_agreement.clause.clause_02.fact.fact_scope",
           "status": "PASS",
-          "message": "fact_scope: explicit surface 'systemutveckling och integration' finns i clause_02.",
+          "message": "fact_scope: explicit surface 'projektledning och analys' finns i clause_02.",
           "document_id": "main_agreement",
           "clause_id": "clause_02",
           "details": {}
@@ -185,7 +185,7 @@
         {
           "check_id": "document.main_agreement.clause.clause_03.fact.fact_hourly_rate",
           "status": "PASS",
-          "message": "fact_hourly_rate: explicit surface '1 150 SEK' finns i clause_03.",
+          "message": "fact_hourly_rate: explicit surface '1 250 SEK' finns i clause_03.",
           "document_id": "main_agreement",
           "clause_id": "clause_03",
           "details": {}
@@ -193,7 +193,7 @@
         {
           "check_id": "document.main_agreement.clause.clause_03.fact.fact_hourly_rate.semantic",
           "status": "PASS",
-          "message": "fact_hourly_rate: operativt värde 1150 SEK verifieras i clause_03.",
+          "message": "fact_hourly_rate: operativt värde 1250 SEK verifieras i clause_03.",
           "document_id": "main_agreement",
           "clause_id": "clause_03",
           "details": {}
@@ -201,7 +201,7 @@
         {
           "check_id": "document.main_agreement.clause.clause_03.fact.fact_estimated_hours",
           "status": "PASS",
-          "message": "fact_estimated_hours: explicit surface '400 timmar' finns i clause_03.",
+          "message": "fact_estimated_hours: explicit surface '320 timmar' finns i clause_03.",
           "document_id": "main_agreement",
           "clause_id": "clause_03",
           "details": {}
@@ -209,7 +209,7 @@
         {
           "check_id": "document.main_agreement.clause.clause_03.fact.fact_estimated_hours.semantic",
           "status": "PASS",
-          "message": "fact_estimated_hours: operativt värde 400 hours verifieras i clause_03.",
+          "message": "fact_estimated_hours: operativt värde 320 hours verifieras i clause_03.",
           "document_id": "main_agreement",
           "clause_id": "clause_03",
           "details": {}
@@ -256,15 +256,11 @@
         },
         {
           "check_id": "document.main_agreement.clause.clause_04.fact.fact_duration_months.semantic",
-          "status": "WARN",
-          "message": "fact_duration_months: rätt värde 6 months finns i clause_04, men även avvikande värden '3 månader'. Distraktorvärden får inte ersätta det operativa värdet.",
+          "status": "PASS",
+          "message": "fact_duration_months: operativt värde 6 months verifieras i clause_04.",
           "document_id": "main_agreement",
           "clause_id": "clause_04",
-          "details": {
-            "conflicts": [
-              "3 månader"
-            ]
-          }
+          "details": {}
         },
         {
           "check_id": "document.main_agreement.clause.clause_04.fact.fact_notice_months",
@@ -276,15 +272,11 @@
         },
         {
           "check_id": "document.main_agreement.clause.clause_04.fact.fact_notice_months.semantic",
-          "status": "WARN",
-          "message": "fact_notice_months: rätt värde 3 months finns i clause_04, men även avvikande värden '6 månader'. Distraktorvärden får inte ersätta det operativa värdet.",
+          "status": "PASS",
+          "message": "fact_notice_months: operativt värde 3 months verifieras i clause_04.",
           "document_id": "main_agreement",
           "clause_id": "clause_04",
-          "details": {
-            "conflicts": [
-              "6 månader"
-            ]
-          }
+          "details": {}
         },
         {
           "check_id": "document.main_agreement.clause.clause_05.heading_present",
@@ -369,7 +361,7 @@
         {
           "check_id": "document.main_agreement.clause.clause_06.fact.fact_ip_rights",
           "status": "PASS",
-          "message": "fact_ip_rights: explicit surface 'Uppdragsgivaren äger resultatet' finns i clause_06.",
+          "message": "fact_ip_rights: explicit surface 'Konsulten behåller bakgrundsrättigheter' finns i clause_06.",
           "document_id": "main_agreement",
           "clause_id": "clause_06",
           "details": {}
@@ -480,11 +472,11 @@
     {
       "check_id": "package.entity.party_client.org_number",
       "status": "PASS",
-      "message": "organisationsnummer '559002-0222' finns i texten.",
+      "message": "organisationsnummer '559002-0135' finns i texten.",
       "document_id": null,
       "clause_id": null,
       "details": {
-        "org_number": "559002-0222"
+        "org_number": "559002-0135"
       }
     },
     {
@@ -510,22 +502,22 @@
     {
       "check_id": "package.entity.party_consultant",
       "status": "PASS",
-      "message": "parten 'Lindfors Analys AB' finns i main_agreement.",
+      "message": "parten 'Västberg Rådgivning AB' finns i main_agreement.",
       "document_id": "main_agreement",
       "clause_id": null,
       "details": {
         "party_id": "party_consultant",
-        "name": "Lindfors Analys AB"
+        "name": "Västberg Rådgivning AB"
       }
     },
     {
       "check_id": "package.entity.party_consultant.org_number",
       "status": "PASS",
-      "message": "organisationsnummer '559003-6653' finns i texten.",
+      "message": "organisationsnummer '559003-4082' finns i texten.",
       "document_id": null,
       "clause_id": null,
       "details": {
-        "org_number": "559003-6653"
+        "org_number": "559003-4082"
       }
     },
     {
@@ -541,7 +533,7 @@
     {
       "check_id": "package.entity.party_consultant.role",
       "status": "WARN",
-      "message": "rollen 'consultant' för 'Lindfors Analys AB' uttrycks inte ordagrant i texten; verifiera att rätt part har rätt roll.",
+      "message": "rollen 'consultant' för 'Västberg Rådgivning AB' uttrycks inte ordagrant i texten; verifiera att rätt part har rätt roll.",
       "document_id": null,
       "clause_id": null,
       "details": {
@@ -582,7 +574,7 @@
     "documents_rejected": 0,
     "checks_total": 66,
     "checks_failed": 0,
-    "checks_warned": 4
+    "checks_warned": 2
   },
   "attempts": 1
 }

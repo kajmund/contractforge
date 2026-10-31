@@ -30,6 +30,7 @@ def run_benchmark(
     *,
     benchmark_id: str | None = None,
     progress=None,
+    force: bool = False,
 ) -> BenchmarkReport:
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -41,6 +42,7 @@ def run_benchmark(
         request,
         dataset_root,
         progress=progress or (lambda _: None),
+        force=force,
     )
     elapsed = time.perf_counter() - started
 
@@ -71,6 +73,8 @@ def run_benchmark(
         stats.clauses_total / (elapsed / 60.0) if stats.clauses_total and elapsed > 0 else None
     )
 
+    rejected_questions = list(getattr(outcome, "rejected_questions", []) or [])
+    details = _benchmark_details(outcome, dataset_root, elapsed, rejected_questions)
     report = BenchmarkReport(
         benchmark_id=benchmark_id,
         provider=config.provider,
@@ -79,6 +83,7 @@ def run_benchmark(
         seed=request.seed,
         config=config,
         stats=stats,
+        details=details,
         notes=notes,
     )
     payload = report.model_dump(mode="json")
@@ -86,3 +91,54 @@ def run_benchmark(
     payload["dataset_path"] = str(dataset_root)
     atomic_write_json(output_dir / f"{benchmark_id}.json", payload)
     return report
+
+
+def _benchmark_details(
+    outcome,
+    dataset_root: Path,
+    elapsed: float,
+    rejected_questions: list,
+) -> dict[str, object]:
+    """Verifiability data: hashes, runtime, validation and question accounting.
+
+    Without this a benchmark report is only a set of numbers: it cannot be tied
+    to the corpus it describes nor re-verified later.
+    """
+
+    from .runtime import environment_summary, runtime_identity
+    from .utils import read_json, sha256_file
+
+    manifest_path = dataset_root / "dataset_manifest.json"
+    manifest = read_json(manifest_path) if manifest_path.is_file() else {}
+    contracts = manifest.get("contracts") or []
+    validation = getattr(outcome, "validation_report", None)
+    contract_hashes = {
+        record.get("contract_id", ""): record.get("manifest_sha256", "")
+        for record in contracts
+        if isinstance(record, dict)
+    }
+    questions_accepted = sum(len(result.questions) for result in outcome.results)
+    calls = [call for result in list(outcome.results) + list(outcome.rejected) for call in result.llm_calls]
+    total_latency = sum(call.latency_ms for call in calls)
+    identity = runtime_identity().model_dump(mode="json")
+    identity["environment"] = environment_summary()
+    return {
+        "dataset_path": str(dataset_root),
+        "dataset_manifest_sha256": sha256_file(manifest_path) if manifest_path.is_file() else None,
+        "dataset_contract_count": len(contracts),
+        "dataset_contracts_hashes": contract_hashes,
+        "validation": (
+            validation.model_dump(mode="json") if validation is not None else None
+        ),
+        "questions_accepted": questions_accepted,
+        "questions_rejected": len(rejected_questions),
+        "rejected_question_ids": [q.question_id for q in rejected_questions],
+        "latency": {
+            "basis": "weighted_per_call",
+            "calls": len(calls),
+            "total_latency_ms": total_latency,
+            "mean_latency_ms": (total_latency / len(calls)) if calls else None,
+        },
+        "wall_clock_seconds": elapsed,
+        "runtime": identity,
+    }

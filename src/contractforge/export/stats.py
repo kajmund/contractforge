@@ -11,6 +11,9 @@ Honesty rules:
   ``total_seconds``, no documents or no latency samples) instead of a made-up
   zero. The three rate fields are non-optional in :class:`DatasetStats`, so they
   stay ``0.0`` when there is no basis.
+* ``mean_document_latency_ms`` is a *weighted* mean over all LLM calls
+  (``sum(mean_latency_ms * calls) / sum(calls)``), never the mean of per-contract
+  means: contracts issue very different numbers of calls.
 """
 
 from __future__ import annotations
@@ -101,9 +104,15 @@ def compute_stats(
         stats.cost_usd = None
         stats.cost_basis = "unknown"
 
-    latencies = [cost.mean_latency_ms for cost in costs if cost.mean_latency_ms is not None]
-    if latencies:
-        stats.mean_document_latency_ms = sum(latencies) / len(latencies)
+    # Weighted mean over *all* calls that reported a latency: sum(mean * calls)
+    # / sum(calls). Averaging the per-contract means instead would let a
+    # two-call contract weigh as much as a twenty-call contract.
+    measured = [cost for cost in costs if cost.mean_latency_ms is not None]
+    measured_calls = sum(cost.calls for cost in measured)
+    if measured_calls:
+        stats.mean_document_latency_ms = (
+            sum(cost.mean_latency_ms * cost.calls for cost in measured) / measured_calls
+        )
 
     if stats.documents_total:
         stats.verification_pass_rate = stats.documents_accepted / stats.documents_total

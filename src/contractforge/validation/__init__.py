@@ -23,6 +23,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from ..models import (
+    AnomalyKind,
     Answerability,
     CheckResult,
     CheckStatus,
@@ -41,6 +42,7 @@ from ..models import (
     GoldFact,
     GoldSet,
     PackageVerification,
+    RelationKind,
     RenderedDocument,
     Scenario,
     TextSpan,
@@ -133,9 +135,19 @@ def _canonical_span(
 
 
 def _span_problems(
-    spans: list[EvidenceSpan], rendered: dict[str, RenderedDocument], label: str
+    spans: list[EvidenceSpan],
+    rendered: dict[str, RenderedDocument],
+    label: str,
+    *,
+    require_exact_quote: bool = False,
 ) -> list[str]:
-    """Validate evidence spans against canonical text. Empty list means valid."""
+    """Validate evidence spans against canonical text. Empty list means valid.
+
+    ``require_exact_quote=True`` is used for evidence marked ``precision=exact``
+    and for golden-question evidence: the ``quote`` must equal the Unicode slice
+    ``canonical_text[start:end]`` character for character. Tolerant whitespace /
+    case matching is only allowed for paraphrase/clause evidence.
+    """
 
     problems: list[str] = []
     seen: set[tuple[str, int, int]] = set()
@@ -163,7 +175,15 @@ def _span_problems(
         slice_text = text[span.start : span.end]
         if not span.quote.strip():
             problems.append(f"{label}: evidensspann {index} saknar quote")
-        elif not contains_span_text(slice_text, 0, len(slice_text), span.quote):
+        elif require_exact_quote and span.quote != slice_text:
+            problems.append(
+                f"{label}: quote {span.quote!r} är inte exakt lika med slice "
+                f"{slice_text!r} i {span.document_id}[{span.start}:{span.end}]; "
+                "exakt precision kräver quote == canonical_text[start:end]"
+            )
+        elif not require_exact_quote and not contains_span_text(
+            slice_text, 0, len(slice_text), span.quote
+        ):
             problems.append(
                 f"{label}: quote {span.quote!r} matchar inte slice "
                 f"{slice_text!r} i {span.document_id}[{span.start}:{span.end}]"
@@ -203,14 +223,16 @@ def _document_for_clause(scenario: Scenario, clause_id: str | None) -> str | Non
 def _intentionally_missing_facts(scenario: Scenario) -> set[str]:
     """Facts that the scenario deliberately leaves unregulated (level 5/6).
 
-    Facts referenced by a ``MISSING_INFORMATION``/``AMBIGUITY`` anomaly must not
-    be required in the text: the scenario says the contract is silent about
-    them, so demanding an explicit surface would force a false repair.
+    Only facts referenced by a ``MISSING_INFORMATION`` anomaly are exempt: the
+    scenario says the information is absent, so demanding an explicit surface
+    would force a false repair. Facts of ``AMBIGUITY``/``CONDITIONAL`` anomalies
+    are still stated in the text (the condition is what is ambiguous, not the
+    value) and must be verified like any other fact.
     """
 
     missing: set[str] = set()
     for anomaly in scenario.anomalies:
-        if anomaly.kind.value in ("missing_information", "ambiguity"):
+        if anomaly.kind.value == "missing_information":
             missing.update(anomaly.fact_ids)
     return missing
 
@@ -292,12 +314,44 @@ class _FactSite:
         return self.analysis.supported
 
 
+def _declared_contradiction_pairs(scenario: Scenario) -> dict[str, set[str]]:
+    """Map ``fact_id`` -> facts the scenario declares as contradicting it.
+
+    Both ``INTENTIONAL_CONTRADICTION`` anomalies and ``CONFLICTS_WITH``
+    relations name the involved facts. Their values are the two sides of a
+    documented contradiction, so neither may be filtered out as a sibling.
+    """
+
+    pairs: dict[str, set[str]] = {}
+    for anomaly in scenario.anomalies:
+        if anomaly.kind is not AnomalyKind.INTENTIONAL_CONTRADICTION:
+            continue
+        named = set(anomaly.fact_ids)
+        for fact_id in named:
+            pairs.setdefault(fact_id, set()).update(named - {fact_id})
+    for relation in scenario.relations:
+        if relation.kind is not RelationKind.CONFLICTS_WITH:
+            continue
+        endpoints = [
+            token[len("fact:") :]
+            for token in (relation.source, relation.target)
+            if token.startswith("fact:")
+        ]
+        for fact_id in endpoints:
+            pairs.setdefault(fact_id, set()).update(
+                other for other in endpoints if other != fact_id
+            )
+    return pairs
+
+
 def _collect_fact_sites(
     scenario: Scenario,
     package: GeneratedPackage,
     rendered: dict[str, RenderedDocument],
 ) -> list[_FactSite]:
     sites: list[_FactSite] = []
+    contradictions = _declared_contradiction_pairs(scenario)
+    known_fact_ids = set(scenario.fact_ids)
     for spec_document in scenario.documents:
         generated = _generated_document(package, spec_document.document_id)
         rendered_document = rendered.get(spec_document.document_id)
@@ -314,11 +368,30 @@ def _collect_fact_sites(
                 text = clause_span.slice(rendered_document.canonical_text)
             else:
                 text = ""
-            for fact_id in _dedupe(list(spec_clause.fact_ids)):
+            clause_fact_ids = [
+                fact_id
+                for fact_id in _dedupe(list(spec_clause.fact_ids))
+                if fact_id in known_fact_ids
+            ]
+            for fact_id in clause_fact_ids:
                 try:
                     fact = scenario.fact(fact_id)
                 except KeyError:  # pragma: no cover - scenario validation forbids it
                     continue
+                # Other facts planned for this clause are legitimate companions:
+                # their correct values must never be read as distractors. Declared
+                # contradictions are the exception and keep their conflict.
+                declared = contradictions.get(fact_id, set())
+                siblings = [
+                    scenario.fact(other_id)
+                    for other_id in clause_fact_ids
+                    if other_id != fact_id and other_id not in declared
+                ]
+                conflicting = [
+                    scenario.fact(other_id)
+                    for other_id in clause_fact_ids
+                    if other_id in declared
+                ]
                 sites.append(
                     _FactSite(
                         document_id=spec_document.document_id,
@@ -326,7 +399,13 @@ def _collect_fact_sites(
                         mode=spec_clause.mode,
                         fact=fact,
                         text=text,
-                        analysis=semantic.analyze_fact(fact, text, scenario.language),
+                        analysis=semantic.analyze_fact(
+                            fact,
+                            text,
+                            scenario.language,
+                            co_located_facts=siblings,
+                            conflicts_with_facts=conflicting,
+                        ),
                         clause_span=clause_span,
                         rendered_document=rendered_document,
                     )
@@ -360,7 +439,7 @@ def _sites_for(
 
 
 def _fact_checks(
-    site: _FactSite, intentionally_missing: set[str]
+    scenario: Scenario, site: _FactSite, intentionally_missing: set[str]
 ) -> list[CheckResult]:
     fact = site.fact
     document_id = site.document_id
@@ -568,11 +647,67 @@ def _fact_checks(
             )
         )
 
-    checks.extend(_semantic_checks(site))
+    checks.extend(_semantic_checks(scenario, site))
     return checks
 
 
-def _semantic_checks(site: _FactSite) -> list[CheckResult]:
+_ANOMALY_KINDS_EXPLAINING_DEVIATION = frozenset(
+    {
+        AnomalyKind.INTENTIONAL_CONTRADICTION,
+        AnomalyKind.EXCEPTION,
+        AnomalyKind.AMBIGUITY,
+    }
+)
+
+
+def _declared_deviation_anomalies(scenario: Scenario, fact_id: str) -> list[str]:
+    """Declared anomalies that make a deviating value legitimate for ``fact_id``.
+
+    An anomaly explains a deviation only for facts it actually names; a
+    supersession (``fact.superseded_by`` / ``AnomalyKind.SUPERSESSION``) is
+    handled elsewhere and is *not* an excuse for a deviating value in the text.
+    """
+
+    explaining: list[str] = []
+    for anomaly in scenario.anomalies:
+        if anomaly.kind not in _ANOMALY_KINDS_EXPLAINING_DEVIATION:
+            continue
+        named = set(anomaly.fact_ids)
+        if anomaly.governing_fact_id is not None:
+            named.add(anomaly.governing_fact_id)
+        if fact_id in named:
+            explaining.append(anomaly.anomaly_id)
+    return explaining
+
+
+def _declared_conflict_relations(scenario: Scenario, fact_id: str) -> list[str]:
+    """``CONFLICTS_WITH`` relations that explicitly name ``fact:<fact_id>``."""
+
+    token = f"fact:{fact_id}"
+    return [
+        relation.relation_id
+        for relation in scenario.relations
+        if relation.kind is RelationKind.CONFLICTS_WITH and token in (relation.source, relation.target)
+    ]
+
+
+def _fact_has_valid_successor(scenario: Scenario, fact_id: str) -> bool:
+    """True when the scenario declares a real supersession for ``fact_id``."""
+
+    fact = scenario.fact(fact_id)
+    return fact.is_superseded and fact.superseded_by is not None
+
+
+def _assess_conflicts(
+    site: _FactSite, conflicts: tuple[semantic.Quantity, ...]
+) -> list[semantic.OperatorAssessment]:
+    return [
+        semantic.assess_quantity_operator(site.text, site.fact, quantity)
+        for quantity in conflicts
+    ]
+
+
+def _semantic_checks(scenario: Scenario, site: _FactSite) -> list[CheckResult]:
     fact = site.fact
     analysis = site.analysis
     check_id = f"document.{site.document_id}.clause.{site.clause_id}.fact.{fact.fact_id}.semantic"
@@ -600,20 +735,7 @@ def _semantic_checks(site: _FactSite) -> list[CheckResult]:
             )
         ]
     if analysis.semantic_span is not None:
-        return [
-            _check(
-                check_id,
-                CheckStatus.WARN,
-                (
-                    f"{fact.fact_id}: rätt värde {expected} finns i {site.clause_id}, men även "
-                    f"avvikande värden {semantic.display_conflicts(conflicts)}. "
-                    "Distraktorvärden får inte ersätta det operativa värdet."
-                ),
-                document_id=site.document_id,
-                clause_id=site.clause_id,
-                details={"conflicts": [quantity.surface for quantity in conflicts]},
-            )
-        ]
+        return _correct_value_with_conflicts_checks(scenario, site, expected, conflicts)
     if conflicts:
         status = (
             CheckStatus.FAIL
@@ -631,7 +753,13 @@ def _semantic_checks(site: _FactSite) -> list[CheckResult]:
                 ),
                 document_id=site.document_id,
                 clause_id=site.clause_id,
-                details={"conflicts": [quantity.surface for quantity in conflicts]},
+                details={
+                    "conflicts": [quantity.surface for quantity in conflicts],
+                    "operator": [
+                        assessment.verdict
+                        for assessment in _assess_conflicts(site, conflicts)
+                    ],
+                },
             )
         ]
     if analysis.explicit_span is not None or analysis.paraphrase_span is not None:
@@ -664,6 +792,125 @@ def _semantic_checks(site: _FactSite) -> list[CheckResult]:
             document_id=site.document_id,
             clause_id=site.clause_id,
             details={"expected": expected},
+        )
+    ]
+
+
+def _correct_value_with_conflicts_checks(
+    scenario: Scenario,
+    site: _FactSite,
+    expected: str,
+    conflicts: tuple[semantic.Quantity, ...],
+) -> list[CheckResult]:
+    """The right value is present but the clause also states deviating values.
+
+    A deviating value may only be a WARN when it is textually non-binding
+    (*"ett tidigare utkast angav ..."*, *"not binding"*) or when the scenario
+    itself declares the deviation as an intentional anomaly. An unexplained or
+    explicitly replacing deviating value is what the clause actually says, so
+    the document must not be accepted with the scenario value as facit.
+    """
+
+    fact = site.fact
+    check_id = f"document.{site.document_id}.clause.{site.clause_id}.fact.{fact.fact_id}.semantic"
+    assessments = _assess_conflicts(site, conflicts)
+    details = {
+        "conflicts": [quantity.surface for quantity in conflicts],
+        "operator": [assessment.verdict for assessment in assessments],
+    }
+    anomalies = _declared_deviation_anomalies(scenario, fact.fact_id)
+    relations = _declared_conflict_relations(scenario, fact.fact_id)
+    if anomalies or relations:
+        details.update(
+            {
+                "declared_anomalies": anomalies,
+                "declared_conflict_relations": relations,
+            }
+        )
+        return [
+            _check(
+                check_id,
+                CheckStatus.WARN,
+                (
+                    f"{fact.fact_id}: rätt värde {expected} finns i {site.clause_id} och även "
+                    f"avvikande värden {semantic.display_conflicts(conflicts)}; avvikelsen är "
+                    "deklarerad i scenariot som avsiktlig motsägelse/undantag/tvetydighet "
+                    f"(anomalier: {', '.join(anomalies) or 'inga'}; "
+                    f"motsägelserelationer: {', '.join(relations) or 'inga'}). "
+                    "Ingen reparation krävs, men texten ger två svar."
+                ),
+                document_id=site.document_id,
+                clause_id=site.clause_id,
+                details=details,
+            )
+        ]
+    if all(assessment.non_binding for assessment in assessments):
+        markers = _dedupe(
+            [marker for assessment in assessments for marker in assessment.markers]
+        )
+        details["markers"] = markers
+        return [
+            _check(
+                check_id,
+                CheckStatus.WARN,
+                (
+                    f"{fact.fact_id}: rätt värde {expected} finns i {site.clause_id}, men även "
+                    f"avvikande värden {semantic.display_conflicts(conflicts)}. Avvikelsen är "
+                    "textligt icke-bindande "
+                    f"({', '.join(repr(marker) for marker in markers)}), så det operativa "
+                    f"värdet {expected} gäller. Ingen reparation krävs."
+                ),
+                document_id=site.document_id,
+                clause_id=site.clause_id,
+                details=details,
+            )
+        ]
+    binding = [
+        f"'{quantity.surface}' ({assessment.verdict}"
+        + (f": {', '.join(assessment.markers)}" if assessment.markers else "")
+        + ")"
+        for quantity, assessment in zip(conflicts, assessments, strict=True)
+    ]
+    details["binding_conflicts"] = [quantity.surface for quantity in conflicts]
+    repaired = [
+        assessment
+        for assessment in assessments
+        if assessment.verdict == semantic.BINDING
+    ]
+    if repaired:
+        cause = (
+            "Klausulen använder en bindande ersättnings-/ändringsformulering "
+            f"({', '.join(repr(marker) for marker in repaired[0].markers)}), så det "
+            "avvikande värdet är det operativa värdet."
+        )
+        advice = (
+            "Ta bort ersättningsformuleringen eller skriv uttryckligen att det avvikande "
+            "värdet inte gäller."
+        )
+    else:
+        cause = (
+            "Det avvikande värdet står utan någon tydligt icke-bindande markör, så texten "
+            "påstår två lika giltiga värden och facit kan inte bevisas."
+        )
+        advice = (
+            "Markera det avvikande värdet som icke-bindande, till exempel med 'tidigare "
+            "utkast', 'diskuterades', 'alternativt' eller 'gäller inte'."
+        )
+    return [
+        _check(
+            check_id,
+            CheckStatus.FAIL,
+            (
+                f"{fact.fact_id}: klausulen {site.clause_id} anger rätt värde {expected} men "
+                f"också avvikande värden {semantic.display_conflicts(conflicts)} som inte är "
+                f"tydligt icke-bindande: {', '.join(binding)}. {cause} Facit är {expected}. "
+                f"{advice} Avvikande värden får bara förekomma som en tydligt icke-bindande "
+                "distraktor, till exempel 'enligt ett tidigare utkast diskuterades X; det "
+                f"avtalade värdet är {expected}'."
+            ),
+            document_id=site.document_id,
+            clause_id=site.clause_id,
+            details=details,
         )
     ]
 
@@ -1039,7 +1286,7 @@ def _verify_document(
             site = _sites_for(sites, document_id, clause_id, fact_id)
             if site is None:  # pragma: no cover - _collect_fact_sites builds every site
                 continue
-            checks.extend(_fact_checks(site, intentionally_missing))
+            checks.extend(_fact_checks(scenario, site, intentionally_missing))
         for reference in _dedupe(list(spec_clause.reference_to)):
             resolved = _resolve_token(scenario, reference)
             if resolved.ok:
@@ -1627,7 +1874,10 @@ def _validate_gold(
                 )
             )
         evidence_problems = _span_problems(
-            gold_fact.evidence, rendered, f"gold.faktum {fact.fact_id}"
+            gold_fact.evidence,
+            rendered,
+            f"gold.faktum {fact.fact_id}",
+            require_exact_quote=gold_fact.precision is EvidencePrecision.EXACT,
         )
         if not gold_fact.evidence and fact.fact_id not in intentionally_missing:
             evidence_problems.append(
@@ -1795,7 +2045,16 @@ def _gold_reference_checks(
             )
         evidence_problems = _span_problems(reference.evidence, rendered, label)
         if not reference.evidence:
-            evidence_problems.append(f"{label}: referensen saknar evidensspann")
+            if reference.target_document_id in declared_missing:
+                # F6: an external reference to a declared missing document can
+                # never be supported by the package text; it is allowed to have
+                # no evidence (never a fabricated fallback span). References
+                # whose target is inside the package still require evidence.
+                pass
+            else:
+                evidence_problems.append(
+                    f"{label}: referensen inom paketet saknar evidensspann"
+                )
         problems.extend(evidence_problems)
     if problems:
         checks.append(
@@ -1851,9 +2110,9 @@ def _gold_anomaly_checks(scenario: Scenario, gold: GoldSet) -> list[CheckResult]
                 f"governing_fact_id {gold_anomaly.governing_fact_id!r} matchar inte "
                 f"{anomaly.governing_fact_id!r}"
             )
-        evidence_optional = anomaly.kind.value in ("missing_information", "ambiguity") or (
-            anomaly.answerability
-            in (Answerability.INSUFFICIENT_EVIDENCE, Answerability.CONDITIONAL)
+        evidence_optional = (
+            anomaly.kind.value == "missing_information"
+            or anomaly.answerability is Answerability.INSUFFICIENT_EVIDENCE
         )
         if not evidence_optional and not gold_anomaly.evidence:
             problems.append("anomalin saknar evidensspann")

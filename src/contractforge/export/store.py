@@ -35,9 +35,11 @@ from ..models import (
     LoadedContract,
     Manifest,
     RenderedDocument,
+    RunRecord,
     VerificationSummary,
 )
 from ..rendering.formats import write_document
+from ..sanitize import sanitize
 from ..utils import atomic_write_json, sha256_file, sha256_text
 
 MANIFEST_FILENAME = "manifest.json"
@@ -52,26 +54,6 @@ _SYNTHETIC_NOTES = [
     "Synthetic test data – not legal advice and not reviewed by a lawyer.",
     "LLM-generated text is not guaranteed to be bit-identical across runs.",
 ]
-
-_SECRET_KEY_MARKERS = (
-    "api_key",
-    "api-key",
-    "apikey",
-    "api_secret",
-    "apisecret",
-    "authorization",
-    "secret",
-    "password",
-    "access_token",
-    "refresh_token",
-    "bearer",
-    "credential",
-    "private_key",
-)
-_SECRET_VALUE_PATTERNS = (
-    re.compile(r"(?i)\b(?:csk|sk|key)[-_][A-Za-z0-9._-]{16,}\b"),
-    re.compile(r"(?i)\bbearer\s+[A-Za-z0-9._-]{8,}\b"),
-)
 
 
 # ---------------------------------------------------------------------------
@@ -114,37 +96,8 @@ def _safe_filename(name: str) -> str:
     return cleaned or "call"
 
 
-def _is_secret_key(key: str) -> bool:
-    normalized = key.lower().replace("-", "_")
-    return any(marker.replace("-", "_") in normalized for marker in _SECRET_KEY_MARKERS)
-
-
-def _scrub_string(value: str) -> str:
-    for pattern in _SECRET_VALUE_PATTERNS:
-        value = pattern.sub("[REDACTED]", value)
-    return value
-
-
-def _sanitize(value: Any) -> Any:
-    """Recursively drop credential keys and redact credential-looking values."""
-
-    if isinstance(value, dict):
-        return {
-            key: _sanitize(item)
-            for key, item in value.items()
-            if not _is_secret_key(str(key))
-        }
-    if isinstance(value, list):
-        return [_sanitize(item) for item in value]
-    if isinstance(value, tuple):
-        return [_sanitize(item) for item in value]
-    if isinstance(value, str):
-        return _scrub_string(value)
-    return value
-
-
 def _sanitized_call(call) -> dict[str, Any]:  # noqa: ANN001 - LLMCallRecord
-    return _sanitize(call.model_dump(mode="json", exclude={"raw"}))
+    return sanitize(call.model_dump(mode="json", exclude={"raw"}))
 
 
 ArtifactKind = Literal[
@@ -330,7 +283,7 @@ def export_contract(
         if not call.raw:
             continue
         raw_path = contract_dir / RAW_DIRNAME / f"{_safe_filename(call.call_id)}.json"
-        _write_json_artifact(raw_path, _sanitize(call.raw))
+        _write_json_artifact(raw_path, sanitize(call.raw))
         artifacts.append(_artifact(raw_path, contract_dir, "raw_response"))
 
     # One manifest entry per file: a duplicated raw call id must not create
@@ -382,6 +335,10 @@ def write_rejected_contract(result: ContractResult, dataset_root: Path) -> Path:
     rejected_dir = Path(dataset_root) / REJECTED_DIRNAME
     rejected_dir.mkdir(parents=True, exist_ok=True)
     path = rejected_dir / f"{result.contract_id}.json"
+    # A rejected attempt still cost money and tokens: keep the sanitized calls so
+    # cost and latency stay auditable. Raw provider bodies are scrubbed and
+    # written next to the record, exactly like for accepted contracts.
+    calls = [_sanitized_call(call) for call in result.llm_calls]
     payload = {
         "schema_version": SCHEMA_VERSION,
         "synthetic": True,
@@ -392,12 +349,21 @@ def write_rejected_contract(result: ContractResult, dataset_root: Path) -> Path:
         "created_at": result.created_at.isoformat(),
         "scenario": result.scenario.model_dump(mode="json"),
         "verification": result.verification.model_dump(mode="json"),
+        "llm_calls": calls,
+        "cost": sanitize(result.cost.model_dump(mode="json")),
+        "config": sanitize(result.config.model_dump(mode="json")),
+        "timings": result.timings,
         "notes": [
             "Rejected contract: kept for auditing and never exported as an accepted "
             "agreement or part of gold/questions.",
         ],
     }
     _write_json_artifact(path, payload)
+    for call in result.llm_calls:
+        if not call.raw:
+            continue
+        raw_path = rejected_dir / RAW_DIRNAME / f"{_safe_filename(call.call_id)}.json"
+        _write_json_artifact(raw_path, sanitize(call.raw))
     return path
 
 
@@ -406,8 +372,15 @@ def write_dataset_manifest(
     config: GenerationConfigSnapshot,
     contracts: list[LoadedContract],
     stats: DatasetStats,
+    *,
+    run: RunRecord | None = None,
 ) -> Path:
-    """Write ``dataset_manifest.json`` and ``stats.json`` for a dataset root."""
+    """Write ``dataset_manifest.json`` and ``stats.json`` for a dataset root.
+
+    ``run`` records what the run owns (prefix, contract ids and generated data
+    files) so a later run can clean up exactly its own artifacts and never
+    delete user files.
+    """
 
     root = Path(dataset_root)
     root.mkdir(parents=True, exist_ok=True)
@@ -429,13 +402,19 @@ def write_dataset_manifest(
             )
         )
 
+    rejected = sorted(
+        path.stem
+        for path in (root / REJECTED_DIRNAME).glob("*.json")
+    ) if (root / REJECTED_DIRNAME).is_dir() else []
     manifest = DatasetManifest(
         contractforge_version=__version__,
         generated_at=stats.generated_at,
         synthetic=True,
         config=config,
         contracts=records,
+        rejected=rejected,
         totals=stats,
+        run=run,
         notes=list(_SYNTHETIC_NOTES),
     )
     manifest_path = _write_json_artifact(

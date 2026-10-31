@@ -14,7 +14,12 @@ from contractforge.models import (
     Anomaly,
     AnomalyKind,
     Answerability,
+    CheckStatus,
     ClauseMode,
+    ClauseSpec,
+    DocKind,
+    DocumentSpec,
+    DocumentStatus,
     EvidencePrecision,
     FactKind,
     FactStatus,
@@ -302,6 +307,28 @@ def test_relations_become_gold_references_with_evidence() -> None:
     )
     scenario = scenario.model_copy(update={"relations": [relation]})
     package = clean_package(scenario)
+    document = package.document("main_agreement")
+    package = package.model_copy(
+        update={
+            "documents": [
+                document.model_copy(
+                    update={
+                        "clauses": [
+                            clause.model_copy(
+                                update={
+                                    "text": clause.text
+                                    + " Ansvarsbegränsning gäller enligt separat klausul."
+                                }
+                            )
+                            if clause.clause_id == "clause_02"
+                            else clause
+                            for clause in document.clauses
+                        ]
+                    }
+                )
+            ]
+        }
+    )
     rendered = make_rendered_documents(scenario, package)
     gold = build_gold_set(scenario, package, rendered)
     assert len(gold.references) == 1
@@ -312,7 +339,166 @@ def test_relations_become_gold_references_with_evidence() -> None:
     assert reference.target_document_id == "main_agreement"
     assert reference.target_clause_id == "clause_05"
     assert reference.evidence
+    assert "Ansvarsbegränsning" in " ".join(span.quote for span in reference.evidence)
     _assert_evidence_valid(gold, rendered)
+
+
+def test_unanchored_in_package_reference_is_omitted() -> None:
+    from contractforge.models import DocKind, DocumentSpec, DocumentStatus
+    from contractforge.validation import validate_package
+
+    scenario = make_consulting_scenario()
+    appendix = DocumentSpec(
+        document_id="appendix_a",
+        kind=DocKind.APPENDIX,
+        title_sv="Bilaga A",
+        title_en="Appendix A",
+        filename_stem="appendix_a",
+        clauses=[
+            ClauseSpec(
+                clause_id="appendix_a_clause_01",
+                document_id="appendix_a",
+                order=1,
+                heading_sv="Särskilda villkor",
+            )
+        ],
+    )
+    relation = Relation(
+        relation_id="rel_unanchored",
+        kind=RelationKind.CONFLICTS_WITH,
+        source="main_agreement:clause_02",
+        target="appendix_a:appendix_a_clause_01",
+        description_sv="Strukturell relation som huvudavtalets text inte namnger.",
+    )
+    scenario = scenario.model_copy(
+        update={"documents": [*scenario.documents, appendix], "relations": [relation]}
+    )
+    package = make_generated_package(scenario)
+    document = package.document("main_agreement")
+    package = package.model_copy(
+        update={
+            "documents": [
+                document.model_copy(
+                    update={
+                        "clauses": [
+                            clause.model_copy(update={"text": PARTY_TEXT})
+                            if clause.clause_id == "clause_01"
+                            else clause
+                            for clause in document.clauses
+                        ]
+                    }
+                ),
+                package.document("appendix_a"),
+            ]
+        }
+    )
+    rendered = make_rendered_documents(scenario, package)
+    gold = build_gold_set(scenario, package, rendered)
+    assert gold.references == [], "facit får inte påstå en ostödd in-package-referens"
+    verification = validate_package(scenario, package, rendered, gold=gold)
+    assert verification.status is DocumentStatus.ACCEPTED
+
+
+def _cross_document_reference_setup(source_clause_text_suffix: str):
+    """Main agreement -> appendix cross-document reference for F2 tests."""
+
+    scenario = make_consulting_scenario()
+    appendix = DocumentSpec(
+        document_id="appendix_a",
+        kind=DocKind.APPENDIX,
+        title_sv="Bilaga A",
+        title_en="Appendix A",
+        filename_stem="appendix_a",
+        clauses=[
+            ClauseSpec(
+                clause_id="appendix_a_clause_01",
+                document_id="appendix_a",
+                order=1,
+                heading_sv="Särskilda villkor",
+                heading_en="Special terms",
+            )
+        ],
+    )
+    relation = Relation(
+        relation_id="rel_cross",
+        kind=RelationKind.REFERENCES,
+        source="main_agreement:clause_02",
+        target="appendix_a:appendix_a_clause_01",
+        description_sv="Ersättningsklausulen hänvisar till bilaga A.",
+    )
+    scenario = scenario.model_copy(
+        update={"documents": [*scenario.documents, appendix], "relations": [relation]}
+    )
+    package = make_generated_package(scenario)
+    document = package.document("main_agreement")
+    package = package.model_copy(
+        update={
+            "documents": [
+                document.model_copy(
+                    update={
+                        "clauses": [
+                            clause.model_copy(update={"text": PARTY_TEXT})
+                            if clause.clause_id == "clause_01"
+                            else clause.model_copy(
+                                update={
+                                    "text": clause.text + source_clause_text_suffix
+                                }
+                            )
+                            if clause.clause_id == "clause_02"
+                            else clause
+                            for clause in document.clauses
+                        ]
+                    }
+                ),
+                package.document("appendix_a"),
+            ]
+        }
+    )
+    rendered = make_rendered_documents(scenario, package)
+    gold = build_gold_set(scenario, package, rendered)
+    return scenario, package, rendered, gold
+
+
+def test_cross_document_reference_evidence_names_document_and_clause() -> None:
+    _scenario, _package, _rendered, gold = _cross_document_reference_setup(
+        ' Närmare bestämmelser framgår av ”Bilaga A” avsnitt ”Särskilda villkor”.'
+    )
+    references = [
+        reference for reference in gold.references if reference.target_document_id == "appendix_a"
+    ]
+    assert len(references) == 1
+    reference = references[0]
+    assert reference.evidence
+    slice_text = reference.evidence[0].quote
+    assert "Bilaga A" in slice_text
+    assert "Särskilda villkor" in slice_text
+    assert reference.evidence[0].document_id == "main_agreement"
+
+
+def test_cross_document_reference_with_only_document_mention_is_kept() -> None:
+    _scenario, _package, _rendered, gold = _cross_document_reference_setup(
+        ' Se närmare i ”Bilaga A”.'
+    )
+    references = [
+        reference for reference in gold.references if reference.target_document_id == "appendix_a"
+    ]
+    assert len(references) == 1
+    assert references[0].evidence
+    assert "Bilaga A" in references[0].evidence[0].quote
+
+
+def test_cross_document_reference_with_heading_only_is_omitted() -> None:
+    _scenario, package, rendered, gold = _cross_document_reference_setup(
+        ' Avsnittet ”Särskilda villkor” gäller.'
+    )
+    assert not [
+        reference for reference in gold.references if reference.target_document_id == "appendix_a"
+    ], "rubrik utan dokumenthänvisning får inte bli korsdokument-evidens"
+
+    from contractforge.validation import validate_package
+
+    verification = validate_package(_scenario, package, rendered, gold=gold)
+    assert verification.status is DocumentStatus.ACCEPTED
 
 
 def test_missing_documents_and_document_reference_are_preserved() -> None:
@@ -335,7 +521,35 @@ def test_missing_documents_and_document_reference_are_preserved() -> None:
     reference = next(
         reference for reference in gold.references if reference.target_document_id == "appendix_b"
     )
-    assert reference.evidence
+    # F6: the text never names the missing document, so gold must not fabricate a
+    # fallback span. Validation allows evidence=[] exactly for declared missing
+    # targets (an in-package reference still requires evidence).
+    assert reference.evidence == []
+
+
+def test_declared_missing_document_reference_validates_without_evidence() -> None:
+    from contractforge.validation import validate_package
+
+    scenario = make_consulting_scenario()
+    document = scenario.documents[0]
+    scenario = scenario.model_copy(
+        update={
+            "documents": [
+                document.model_copy(update={"references_documents": ["appendix_b"]})
+            ],
+            "missing_documents": ["appendix_b"],
+        }
+    )
+    package = clean_package(scenario)
+    rendered = make_rendered_documents(scenario, package)
+    gold = build_gold_set(scenario, package, rendered)
+    verification = validate_package(scenario, package, rendered, gold=gold)
+    reference_check = next(
+        check
+        for check in verification.checks
+        if check.check_id == "gold.references"
+    )
+    assert reference_check.status is CheckStatus.PASS
 
 
 def test_anomalies_are_mapped_with_governing_fact_and_evidence() -> None:
@@ -374,6 +588,31 @@ def test_intentionally_missing_fact_has_no_evidence() -> None:
     assert fact.evidence == []
     assert fact.precision is EvidencePrecision.CLAUSE
     assert "avsiktligt oreglerat" in fact.notes_sv
+
+
+def test_ambiguity_conditional_fact_keeps_value_evidence() -> None:
+    scenario = make_consulting_scenario(difficulty=6)
+    anomaly = Anomaly(
+        anomaly_id="anomaly_conditional",
+        kind=AnomalyKind.AMBIGUITY,
+        fact_ids=["fact_notice_period"],
+        governing_fact_id="fact_liability_cap",
+        answerability=Answerability.CONDITIONAL,
+        description_sv="Villkoret för uppsägningstiden är otydligt.",
+    )
+    scenario = scenario.model_copy(update={"anomalies": [anomaly]})
+    package = clean_package(scenario)
+    rendered = make_rendered_documents(scenario, package)
+    gold = build_gold_set(scenario, package, rendered)
+    fact = gold.fact("fact_notice_period")
+    assert fact.evidence, "villkorade fakta står i texten och måste ha evidens"
+    assert fact.precision is EvidencePrecision.EXACT
+    assert any("tre (3) månader" in span.quote.lower() for span in fact.evidence)
+    gold_anomaly = next(
+        item for item in gold.anomalies if item.anomaly_id == "anomaly_conditional"
+    )
+    assert gold_anomaly.evidence
+    _assert_evidence_valid(gold, rendered)
 
 
 # ---------------------------------------------------------------------------

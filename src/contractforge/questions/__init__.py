@@ -15,6 +15,12 @@ Answerability follows difficulty:
 * ``CONDITIONAL`` / ``INSUFFICIENT_EVIDENCE`` – level 6: conditions and missing
   information.
 
+Package questions (F2/F10): ``relation_questions`` asks at most one question per
+(source document, target document) pair and only when the cited evidence really
+names the target title/heading, while ``comparison_questions`` prefers fact
+pairs whose evidence lives in two different documents, so the answer requires
+combining the main agreement with an appendix or amendment.
+
 Machine-verifiable premises are stored in ``expected_answer.conditions`` with
 stable prefixes (``missing_document:``, ``anomaly:``, ``clause:``,
 ``document:``) so verification can prove the premise instead of trusting the
@@ -43,8 +49,15 @@ from ..models import (
     Scenario,
 )
 from ..utils import contains_span_text, find_span, normalize_for_search
+from ..validation.dataset import question_support_problems
 
-__all__ = ["QuestionOutcome", "generate_and_verify_questions"]
+__all__ = [
+    "MISSING_PREFIX",
+    "QuestionOutcome",
+    "generate_and_verify_questions",
+    "split_questions_by_difficulty",
+    "verify_question_support",
+]
 
 MISSING_PREFIX = "missing_document:"
 ANOMALY_PREFIX = "anomaly:"
@@ -119,11 +132,68 @@ def _evidence_text(
     return "\n".join(part for part in parts if part)
 
 
+def _merge_evidence(*groups: list[EvidenceSpan]) -> list[EvidenceSpan]:
+    """Merge evidence span lists, dropping exact duplicates.
+
+    Several facts can share one evidence span (two parties named in the same
+    clause, a fact and its distractor in the same sentence). The dataset
+    validator rejects duplicate spans in one question, so questions that cite
+    more than one fact must merge rather than concatenate their spans.
+    """
+
+    merged: list[EvidenceSpan] = []
+    seen: set[tuple[str, int, int]] = set()
+    for spans in groups:
+        for span in spans:
+            key = (span.document_id, span.start, span.end)
+            if key in seen:
+                continue
+            seen.add(key)
+            merged.append(span)
+    return merged
+
+
+def _evidence_documents(spans: list[EvidenceSpan]) -> set[str]:
+    """Document ids an evidence list actually cites."""
+
+    return {span.document_id for span in spans}
+
+
+def _rendered_title(
+    scenario: Scenario,
+    rendered: dict[str, RenderedDocument],
+    document_id: str,
+    language: Language,
+) -> str:
+    """Title as it appears in the canonical text, with a scenario fallback."""
+
+    document = rendered.get(document_id)
+    if document is not None and document.title.strip():
+        return document.title
+    return _doc_title(scenario, document_id, language)
+
+
+def _clause_headings(scenario: Scenario, clause_id: str) -> list[str]:
+    for document in scenario.documents:
+        for clause in document.clauses:
+            if clause.clause_id == clause_id:
+                return [clause.heading_sv, clause.heading_en]
+    return []
+
+
 def _evidence_problems(
     spans: list[EvidenceSpan], rendered: dict[str, RenderedDocument]
 ) -> list[str]:
     problems: list[str] = []
+    seen_keys: set[tuple[str, int, int]] = set()
     for index, span in enumerate(spans):
+        key = (span.document_id, span.start, span.end)
+        if key in seen_keys:
+            problems.append(
+                f"evidensspann {index} är dubblerat {span.document_id}[{span.start}:{span.end}]"
+            )
+            continue
+        seen_keys.add(key)
         document = rendered.get(span.document_id)
         if document is None:
             problems.append(
@@ -584,16 +654,47 @@ def _completeness_problems(
     return problems
 
 
+def verify_question_support(
+    question: GoldenQuestion,
+    rendered: dict[str, RenderedDocument],
+    gold: GoldSet,
+) -> list[str]:
+    """Public wrapper: the shared canonical-text support rules for one question.
+
+    Both question generation and ``validate_dataset`` use
+    :func:`contractforge.validation.dataset.question_support_problems`; this
+    wrapper only exposes it next to the generator so callers do not need to
+    know where the rule set lives.
+    """
+
+    gold_facts = {gold_fact.fact_id: gold_fact for gold_fact in gold.facts}
+    return question_support_problems(question, rendered, gold_facts)
+
+
 def _verify_question(
     question: GoldenQuestion,
     scenario: Scenario,
     gold: GoldSet,
     rendered: dict[str, RenderedDocument],
 ) -> list[str]:
+    """Full generation-time verification.
+
+    The first part is *exactly* the shared support rule set that
+    ``validate_dataset`` applies when the dataset is read back, so an accepted
+    question can never fail dataset validation for unchanged data. The remaining
+    rules are generator-only: gold provenance for required facts, machine
+    verifiable premises (conditions), contradiction structure and completeness
+    requirements.
+    """
+
     problems: list[str] = _evidence_problems(question.evidence, rendered)
     gold_facts = {gold_fact.fact_id: gold_fact for gold_fact in gold.facts}
-    if question.answerability is Answerability.ANSWERABLE and not question.evidence:
-        problems.append("ANSWERABLE fråga saknar evidensspann")
+    scenario_facts = {fact.fact_id: fact for fact in scenario.facts}
+    problems.extend(
+        question_support_problems(
+            question, rendered, gold_facts, scenario_facts=scenario_facts
+        )
+    )
     for fact_id in question.required_facts:
         gold_fact = gold_facts.get(fact_id)
         if gold_fact is None:
@@ -604,45 +705,6 @@ def _verify_question(
         ):
             problems.append(f"required_fact {fact_id!r} saknar evidens i gold")
     evidence_text = _evidence_text(question.evidence, rendered)
-    scenario_facts = {fact.fact_id: fact for fact in scenario.facts}
-
-    if question.expected_answer.value is not None:
-        problems.extend(
-            _claim_problems(
-                question,
-                question.expected_answer.value,
-                question.expected_answer.unit,
-                question.expected_answer.currency,
-                gold_facts=gold_facts,
-                scenario_facts=scenario_facts,
-                evidence_text=evidence_text,
-                rendered=rendered,
-            )
-        )
-    for value in question.expected_answer.values:
-        problems.extend(
-            _claim_problems(
-                question,
-                value,
-                question.expected_answer.unit,
-                question.expected_answer.currency,
-                gold_facts=gold_facts,
-                scenario_facts=scenario_facts,
-                evidence_text=evidence_text,
-                rendered=rendered,
-            )
-        )
-    if question.expected_answer.text:
-        if question.category is QuestionCategory.RELATION:
-            if question.answerability is Answerability.ANSWERABLE:
-                problems.extend(_relation_text_problems(question, rendered))
-        elif question.answerability in (
-            Answerability.ANSWERABLE,
-            Answerability.CONDITIONAL,
-        ) and not _contains(evidence_text, question.expected_answer.text):
-            problems.append(
-                f"förväntat svar {question.expected_answer.text!r} saknas i evidensen"
-            )
     if question.category is QuestionCategory.CONTRADICTION:
         problems.extend(_contradiction_problems(question, gold_facts))
     if question.answerability in (
@@ -740,6 +802,57 @@ class _Generator:
         except KeyError:
             return None
 
+    def _reference_names_target(self, reference: Any) -> bool:
+        """True when the reference evidence really names the target.
+
+        A relation question may only be asked when the source text itself names
+        the target document title (or, for clause-level references, the target
+        clause heading). ``gold._reference_evidence`` already returns narrow
+        spans, but this guard keeps the generator from emitting a question whose
+        answer would only be supported by an unrelated mention elsewhere.
+        """
+
+        candidates: list[str] = []
+        rendered_target = self.rendered.get(reference.target_document_id)
+        if rendered_target is not None:
+            candidates.append(rendered_target.title)
+        for document in self.scenario.documents:
+            if document.document_id == reference.target_document_id:
+                candidates.extend([document.title_sv, document.title_en])
+                break
+        if reference.target_clause_id:
+            candidates.extend(_clause_headings(self.scenario, reference.target_clause_id))
+        names = [name for name in dict.fromkeys(candidates) if name and name.strip()]
+        if not names:
+            return False
+        for span in reference.evidence:
+            text = _span_slice(span, self.rendered)
+            if text and any(_contains(text, name) for name in names):
+                return True
+        return False
+
+    def _cross_document_pair(
+        self, entries: list[tuple[Any, Any]]
+    ) -> tuple[tuple[Any, Any], tuple[Any, Any]] | None:
+        """First fact pair whose primary evidence lies in different documents.
+
+        Cross-document comparisons require the reader to combine two documents,
+        which is what makes package questions interesting (F2/F10). The pair is
+        chosen deterministically from the gold order, so the same scenario always
+        yields the same question.
+        """
+
+        for index, (first_gold, _first_fact) in enumerate(entries):
+            if not first_gold.evidence:
+                continue
+            first_document = first_gold.evidence[0].document_id
+            for second_gold, second_fact in entries[index + 1 :]:
+                if not second_gold.evidence:
+                    continue
+                if second_gold.evidence[0].document_id != first_document:
+                    return (first_gold, entries[index][1]), (second_gold, second_fact)
+        return None
+
     # -- category generators ----------------------------------------------
 
     def fact_questions(self) -> None:
@@ -800,9 +913,24 @@ class _Generator:
             )
 
     def relation_questions(self) -> None:
+        # One question per (source document, target document) pair: several
+        # clause-level references to the same target would otherwise produce
+        # identical questions. The pair must also be backed by evidence that
+        # names the target, so a question can never rest on a mention elsewhere.
+        seen_pairs: set[tuple[str, str]] = set()
         for reference in self.gold.references:
             if not reference.evidence:
                 continue
+            if reference.source_document_id == reference.target_document_id:
+                # A clause pointing at a sibling clause within the same document
+                # is not a "which document" relation.
+                continue
+            pair = (reference.source_document_id, reference.target_document_id)
+            if pair in seen_pairs:
+                continue
+            if not self._reference_names_target(reference):
+                continue
+            seen_pairs.add(pair)
             source_title = _doc_title(
                 self.scenario, reference.source_document_id, self.language
             )
@@ -814,12 +942,24 @@ class _Generator:
                 ),
                 None,
             )
-            target_title = (
-                target_spec.title(self.language)
-                if target_spec is not None
-                else reference.target_document_id
-            )
             missing = reference.target_document_id in self.scenario.missing_documents
+            if missing:
+                # A missing document has no canonical text; the only verifiable
+                # answer is the declared id (see _relation_source_problems).
+                target_title = reference.target_document_id
+            elif target_spec is not None:
+                # The renderer uses the *generated* title. Answering with the
+                # scenario title would claim a surface the canonical text may
+                # not contain, so prefer the rendered title and fall back to the
+                # scenario title only when the document is not rendered.
+                rendered_target = self.rendered.get(reference.target_document_id)
+                target_title = (
+                    rendered_target.title
+                    if rendered_target is not None and rendered_target.title.strip()
+                    else target_spec.title(self.language)
+                )
+            else:
+                target_title = reference.target_document_id
             answerability = (
                 Answerability.INSUFFICIENT_EVIDENCE if missing else Answerability.ANSWERABLE
             )
@@ -858,7 +998,12 @@ class _Generator:
         for entries in groups.values():
             if len(entries) < 2:
                 continue
-            (first_gold, first_fact), (second_gold, second_fact) = entries[0], entries[1]
+            # Prefer a pair whose evidence comes from two different documents:
+            # such a comparison question cannot be answered from one document.
+            cross_pair = self._cross_document_pair(entries)
+            (first_gold, first_fact), (second_gold, second_fact) = (
+                cross_pair if cross_pair is not None else (entries[0], entries[1])
+            )
             if _numeric_value(first_gold.value) == _numeric_value(second_gold.value):
                 continue
             larger_gold = (
@@ -868,17 +1013,36 @@ class _Generator:
             )
             label_first = _label(first_fact, self.language)
             label_second = _label(second_fact, self.language)
-            question_text = _text(
-                self.language,
-                f"Vilket av följande värden är högst: {label_first} eller {label_second}?",
-                f"Which of the following values is highest: {label_first} or {label_second}?",
-            )
+            cross_document = cross_pair is not None
+            if cross_document:
+                first_document_id = first_gold.evidence[0].document_id
+                second_document_id = second_gold.evidence[0].document_id
+                first_title = _rendered_title(
+                    self.scenario, self.rendered, first_document_id, self.language
+                )
+                second_title = _rendered_title(
+                    self.scenario, self.rendered, second_document_id, self.language
+                )
+                question_text = _text(
+                    self.language,
+                    f"Jämför dokumenten: vilket värde är högst, {label_first} enligt "
+                    f"{first_title} eller {label_second} enligt {second_title}?",
+                    f"Compare the documents: which value is highest, {label_first} "
+                    f"according to {first_title} or {label_second} according to "
+                    f"{second_title}?",
+                )
+            else:
+                question_text = _text(
+                    self.language,
+                    f"Vilket av följande värden är högst: {label_first} eller {label_second}?",
+                    f"Which of the following values is highest: {label_first} or {label_second}?",
+                )
             expected = ExpectedAnswer(
                 value=larger_gold.value,
                 unit=larger_gold.unit,
                 currency=larger_gold.currency,
             )
-            evidence = list(first_gold.evidence) + list(second_gold.evidence)
+            evidence = _merge_evidence(first_gold.evidence, second_gold.evidence)
             self.emit(
                 self._question(
                     question_text,
@@ -948,7 +1112,7 @@ class _Generator:
                     f"Vilka villkor gäller för {label}?",
                     f"Which conditions apply to {label}?",
                 )
-                evidence = [span for fact in facts for span in fact.evidence]
+                evidence = _merge_evidence(*[fact.evidence for fact in facts])
                 expected = ExpectedAnswer(values=[fact.value for fact in facts])
                 self.emit(
                     self._question(
@@ -1000,7 +1164,7 @@ class _Generator:
                 values=distinct_values,
                 conditions=[f"{ANOMALY_PREFIX}{anomaly.anomaly_id}"],
             )
-            evidence = [span for fact in facts for span in fact.evidence]
+            evidence = _merge_evidence(*[fact.evidence for fact in facts])
             self.emit(
                 self._question(
                     question_text,
@@ -1052,7 +1216,7 @@ class _Generator:
                 f"and {target_heading}?",
             )
             expected = ExpectedAnswer(values=[fact.value for fact in facts])
-            evidence = [span for fact in facts for span in fact.evidence]
+            evidence = _merge_evidence(*[fact.evidence for fact in facts])
             self.emit(
                 self._question(
                     question_text,

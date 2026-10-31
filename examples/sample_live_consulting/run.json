@@ -1,0 +1,34 @@
+{
+  "contract_id_prefix": "contract",
+  "count": 2,
+  "contract_ids": [
+    "contract_0001",
+    "contract_0002"
+  ],
+  "data_files": [
+    "contract_0001/gold_facts.json",
+    "contract_0001/golden_questions.json",
+    "contract_0001/llm_calls.json",
+    "contract_0001/main_agreement.docx",
+    "contract_0001/main_agreement.md",
+    "contract_0001/main_agreement.pdf",
+    "contract_0001/main_agreement.txt",
+    "contract_0001/manifest.json",
+    "contract_0001/raw/contract_0001_main_agreement_a1.json",
+    "contract_0001/rendered.json",
+    "contract_0001/scenario.json",
+    "contract_0001/verification.json",
+    "contract_0002/gold_facts.json",
+    "contract_0002/golden_questions.json",
+    "contract_0002/llm_calls.json",
+    "contract_0002/main_agreement.docx",
+    "contract_0002/main_agreement.md",
+    "contract_0002/main_agreement.pdf",
+    "contract_0002/main_agreement.txt",
+    "contract_0002/manifest.json",
+    "contract_0002/raw/contract_0002_main_agreement_a1.json",
+    "contract_0002/rendered.json",
+    "contract_0002/scenario.json",
+    "contract_0002/verification.json"
+  ]
+}
