@@ -1120,6 +1120,8 @@ class ContractResult(StrictModel):
     config: GenerationConfigSnapshot
     status: DocumentStatus = DocumentStatus.ACCEPTED
     attempts: int = 1
+    #: LLM time only (sum of provider latencies); wall time includes local work.
+    llm_latency_ms: float = 0.0
     created_at: datetime = Field(default_factory=utc_now)
     timings: dict[str, float] = Field(default_factory=dict)
 

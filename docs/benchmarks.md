@@ -50,9 +50,12 @@ deterministisk.
 | LLM-anrop | 200 |
 | Token | okänd (mock rapporterar ingen usage) |
 | Kostnad | okänd (mock; ingen prisuppgift) |
-| Tid | 12,2 s |
-| Dokument/minut | 981 |
-| Klausuler/minut | 6 374 |
+| Tid | 9,4 s |
+| Dokument/minut | 1 367 |
+| Klausuler/minut | 8 336 |
+| Varav LLM-väntan | 0 s (mock rapporterar ingen latens) |
+| Varav export (DOCX/PDF/TXT) | ~6,4 s |
+| Varav datasetvalidering | 0,3 s |
 | Verifiering (dokumentnivå, första försök) | 100 % godkända |
 
 **Tolkning:** siffrorna visar att pipeline, verifiering, export och
@@ -69,8 +72,8 @@ konsultavtal på nivå 2 med 8 klausuler, seed 4242, 4 parallella anrop och
 |------|-------|
 | Rapport | `benchmarks/results/cerebras_consulting_100.json` |
 | Dataset-arkiv (release-asset) | `cerebras_consulting_100.zip` |
-| SHA-256 för arkivet | `51554ba465aabf6c4e319da4559fce5d82b330a9083f054c522fd3607442e390` |
-| `details.dataset_manifest_sha256` | `542842796b4b6be2…` (fullständigt värde i rapporten) |
+| SHA-256 för arkivet | `4344845099a39dbdc7d09c54f6d50cf03e74d1f831c78eda34cb67182893ae7e` |
+| `details.dataset_manifest_sha256` | `7ddd32c544a21f60…` (fullständigt värde i rapporten) |
 | Godkända avtal | 100 av 100 |
 | Dokument godkända på första försöket | 89 |
 | Reparerade dokument | 11 |
@@ -78,10 +81,38 @@ konsultavtal på nivå 2 med 8 klausuler, seed 4242, 4 parallella anrop och
 | Golden-frågor | 1 723 (alla validerade, 0 kasserade) |
 | LLM-anrop | 112 |
 | Token (in/ut/totalt) | 522 351 / 153 523 / 675 874 |
-| Latens (viktat medel per anrop) | 4 215 ms |
-| Tid | 123,6 s |
-| Genomströmning | 48,5 dokument/min |
+| Latens (viktat medel per anrop) | 4 781 ms |
+| Tid | 137,9 s |
+| Genomströmning | 43,5 dokument/min |
+| Effektiv samtidighet | 3,91 (LLM-väntan = 99 % av väggtiden) |
 | Kostnad | okänd utan `pricing.json` |
+
+**Genomströmning redovisas med LLM-väntan separerad** (`details.throughput`):
+i livekörningen var cirka 137 av 138 s väntan på Cerebras (536 s summerad
+anropstid fördelad på 4 samtidiga anrop), medan lokal verifiering/rendering/export
+tog 0,70 s. En dokument/min-siffra för ett LLM-baserat system mäter därför i
+praktiken leverantörens latens – den mock-körda pipeline-siffran (1 367
+dokument/min) mäter ContractForge självt.
+
+### Bevarad tidigare mätning (legacy-referens)
+
+Den första 100-avtalskörningen (`benchmarks/results/cerebras_consulting_20.json` är
+20-avtalskörningen; 100-avtalskörningen från samma generation är ersatt) visade
+**174 dokument/min** mot nuvarande **48,5**. Den siffran var verklig för sin
+konfiguration men **inte jämförbar**: den körningen körde bara text- och
+markdown-export, `max_repair_attempts=1`, och gjordes före F3/F7/F8-fixarna, dvs.
+med en svagare verifiering och utan den slutliga datasetvalideringen i
+`generate`. Nuvarande körning exporterar TXT+Markdown, tillåter två
+reparationsförsök, verifierar allt igen och kör datasetvalidering efter export.
+
+| Körning | Datum | Konfiguration | Dokument/min | Anrop | Token | Verifiering före/efter |
+|---------|-------|---------------|--------------|-------|-------|------------------------|
+| v0.1.0 (legacy) | 2026-10-31 10:54 | 20 avtal, `max_repairs=1`, txt+md | **174** | 23 | 137 820 | svagare (F3/F7/F8 ej fixade) |
+| v0.1.1 | 2026-10-31 13:34 | 100 avtal, `max_repairs=2`, txt+md | **48,5** | 112 | 675 874 | starkare + datasetvalidering |
+
+Legacy-filen har `details.legacy = true` och kan inte bindas till ett corpus. Den
+bevaras för att hastighetsdiskussionen ska kunna följas bakåt, inte som bevis.
+
 
 **`verification_pass_rate` är dokumentnivå och avser första försöket:**
 `documents_accepted / documents_total`, där `documents_accepted` räknar dokument

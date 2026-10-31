@@ -67,3 +67,39 @@ exakta exit-koder och maskinläsbara fel utan extra beroende. `pydantic`
 validerar den delade domänmodellen och gör korrupta dataset till tidiga,
 begripliga fel. DOCX/PDF via `python-docx` och `reportlab` – inga externa
 binärer krävs.
+
+## 2026-10-31 – Facit är strukturellt verifierat, inte semantiskt bevisat; oberoende mätning krävs före extern användning som bevis
+
+**Bevisat:** dokument- och klausulstruktur, exakta evidensspann mot kanonisk
+text, faktavärden mot scenariot, och att varje fråga stöds av texten enligt den
+dokumenterade lexikal/deterministiska regeln `question_support_problems`.
+**Inte bevisat:** att en komplex juridisk parafras har bibehållit avsedd
+betydelse, att det förväntade svaret är det juridiskt rimliga svaret, och att
+evidensspannet är tillräckligt som underlag ur ett läsarperspektiv.
+
+Den deterministiska valideraren kontrollerar att värdet **förekommer** i texten
+– den kan inte skilja på formell och semantisk korrekthet. Att återanvända
+samma validator eller samma LLM-domare ger ingen oberoende prövning.
+
+Beslut:
+
+1. Facit får citeras som *strukturellt verifierat* direkt, men inte som
+   *oberoende bevis* på juridisk eller semantisk korrekthet förrän ett
+   oberoende mätprotokoll är genomfört och publicerat.
+2. Mätningen styrs av [docs/quality-protocol.md](quality-protocol.md):
+   stratifierat urval ur ett fryst ZIP med publicerad SHA-256, två blinda rater
+   som endast ser dokumenttext, fråga, förväntat svar och evidenscitat, fyra
+   bedömningsaxlar, Wilson 95 % KI, Cohen's kappa och felorsaksklassificering.
+3. Exakta grindar innan "oberoende bevis" får användas: Q2 ≥ 95 % korrekthet och
+   Wilson-nedre ≥ 90 %, Q3 ≥ 90 % tillräcklighet och Wilson-nedre ≥ 85 %, Q4
+   ≥ 85 %, alla felorsaker klassificerade. Rapporten publiceras som
+   `docs/quality-report-<dataset>.md` med datasetets SHA-256.
+4. Status till dess: **antagen men ej mätt.** Inga förkortade stickprov får
+   ersätta protokollet.
+5. Mätningen gäller endast det publicerade urvalet – aldrig hela korpusen.
+   v0.1.1 ligger fryst som referens och ändras inte för att underlätta en
+   mätning.
+
+Samma princip som i `verification.md`: skilj på vad systemet faktiskt har
+bevisat och vad vi ännu antar. Ett påstående får bara citeras tillsammans med
+det bevis som bär det.

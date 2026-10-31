@@ -495,3 +495,52 @@ def test_generate_dataset_closes_the_provider_even_when_generation_fails(tmp_pat
         generate_dataset(_settings(), _request(count=1, clauses=8), tmp_path / "d")
 
     assert closed == [True]
+
+
+def test_throughput_breakdown_separates_llm_wait_from_local_work(tmp_path):
+    """A documents/min number is meaningless without the LLM-vs-local split."""
+
+    outcome = _run(_settings(), _request(count=4, clauses=8, seed=5), tmp_path / "ds")
+
+    breakdown = outcome.throughput_breakdown()
+    assert breakdown["total_seconds"] is not None
+    assert breakdown["write_seconds"] >= 0
+    assert breakdown["validation_seconds"] > 0  # the final dataset gate always runs
+    assert breakdown["documents_per_minute"] is not None
+    local = breakdown["local_seconds"]
+    assert local is not None and local >= 0
+    # The mock provider reports zero latency, so nearly all time is local work.
+    assert local <= breakdown["total_seconds"]
+
+
+def test_live_style_latency_is_reported_as_llm_time(tmp_path, monkeypatch):
+    """Provider latency is counted as LLM time, separately from wall time."""
+
+    from contractforge.models import LLMResponse
+    from contractforge.providers.mock import MockProvider
+
+    original = MockProvider.complete
+
+    def slow(self, request):  # noqa: ANN001
+        response = original(self, request)
+        return LLMResponse(
+            text=response.text,
+            provider=response.provider,
+            model=response.model,
+            usage=response.usage,
+            latency_ms=1500.0,
+            finish_reason=response.finish_reason,
+            raw=response.raw,
+        )
+
+    monkeypatch.setattr(MockProvider, "complete", slow)
+    outcome = _run(_settings(), _request(count=2, clauses=6, seed=6), tmp_path / "ds")
+
+    assert outcome.llm_latency_ms == sum(result.llm_latency_ms for result in outcome.results)
+    assert outcome.llm_latency_ms > 0
+    breakdown = outcome.throughput_breakdown()
+    assert breakdown["llm_summed_call_latency_seconds"] > 0
+    assert breakdown["llm_wait_seconds"] > 0
+    # Local work is wall time minus LLM wait minus write/validation, never negative.
+    assert breakdown["local_seconds"] >= 0
+    assert breakdown["local_seconds"] <= breakdown["generation_window_seconds"]

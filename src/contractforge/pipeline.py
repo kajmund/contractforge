@@ -64,6 +64,43 @@ class RunOutcome:
     rejected_questions: list[GoldenQuestion] = field(default_factory=list)
     validation_report: DatasetValidationReport | None = None
     total_seconds: float = 0.0
+    llm_latency_ms: float = 0.0
+    write_seconds: float = 0.0
+    validation_seconds: float = 0.0
+
+    def throughput_breakdown(self) -> dict[str, float | None]:
+        """Wall time that is waiting for the provider vs local CPU work.
+
+        A throughput number is meaningless without knowing how much of the wall
+        clock was spent waiting for the LLM. With ``concurrency > 1`` several
+        provider calls overlap, so summed call latency can exceed wall time;
+        the LLM share is therefore capped by the measured generation window and
+        the concurrent factor is reported instead of an impossible "negative
+        local time".
+        """
+
+        total = self.total_seconds or 0.0
+        generation_window = max(0.0, total - self.write_seconds - self.validation_seconds)
+        summed_llm = sum(result.llm_latency_ms for result in self.results) / 1000.0
+        llm_wait = min(summed_llm, generation_window)
+        local = max(0.0, generation_window - llm_wait)
+        documents = self.stats.documents_total or 0
+        return {
+            "total_seconds": total,
+            "generation_window_seconds": generation_window,
+            "llm_summed_call_latency_seconds": summed_llm,
+            "llm_wait_seconds": llm_wait,
+            "effective_concurrency": (
+                round(summed_llm / generation_window, 2) if generation_window > 0 else None
+            ),
+            "write_seconds": self.write_seconds,
+            "validation_seconds": self.validation_seconds,
+            "local_seconds": local,
+            "documents_per_minute": (documents / (total / 60.0) if total > 0 else None),
+            "documents_per_minute_excluding_llm": (
+                documents / (generation_window / 60.0) if generation_window > 0 else None
+            ),
+        }
 
 
 def _noop(_: str) -> None:
@@ -322,6 +359,7 @@ def run_contract(
             config=config,
             status=DocumentStatus.REJECTED,
             attempts=max(attempt, 1),
+            llm_latency_ms=sum(call.latency_ms for call in all_calls),
             timings={"total_seconds": time.perf_counter() - started},
         )
 
@@ -372,6 +410,7 @@ def run_contract(
             config=config,
             status=DocumentStatus.REJECTED,
             attempts=attempt,
+            llm_latency_ms=sum(call.latency_ms for call in all_calls),
             timings={"total_seconds": time.perf_counter() - started},
         )
 
@@ -389,6 +428,7 @@ def run_contract(
         config=config,
         status=last_verification.status,
         attempts=attempt,
+        llm_latency_ms=sum(call.latency_ms for call in all_calls),
         timings={"total_seconds": time.perf_counter() - started},
     )
 
@@ -647,10 +687,12 @@ def _generate_dataset_inner(
     results.sort(key=lambda result: result.contract_id)
     rejected.sort(key=lambda result: result.contract_id)
 
+    write_started = time.perf_counter()
     for result in results:
         export_contract(result, output, formats=list(settings.formats))
     for result in rejected:
         write_rejected_contract(result, output)
+    write_seconds = time.perf_counter() - write_started
 
     total_seconds = time.perf_counter() - started
     contracts = load_dataset(output)
@@ -668,7 +710,9 @@ def _generate_dataset_inner(
     atomic_write_json(output / RUN_MARKER_FILENAME, _run_record(request, expected_ids, data_files).model_dump(mode="json"))
     write_dataset_manifest(output, config, contracts, stats, run=_run_record(request, expected_ids, data_files))
 
+    validation_started = time.perf_counter()
     report = validate_dataset(output, expect_min_contracts=len(scenarios))
+    validation_seconds = time.perf_counter() - validation_started
     atomic_write_json(output / "validation_report.json", report.model_dump(mode="json"))
     if report.status != CheckStatus.PASS:
         failures = [
@@ -713,6 +757,9 @@ def _generate_dataset_inner(
         rejected_questions=[question for result in results for question in result.rejected_questions],
         validation_report=report,
         total_seconds=total_seconds,
+        llm_latency_ms=sum(result.llm_latency_ms for result in results),
+        write_seconds=write_seconds,
+        validation_seconds=validation_seconds,
     )
 
 

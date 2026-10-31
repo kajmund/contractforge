@@ -75,6 +75,18 @@ def run_benchmark(
 
     rejected_questions = list(getattr(outcome, "rejected_questions", []) or [])
     details = _benchmark_details(outcome, dataset_root, elapsed, rejected_questions)
+    throughput = (
+        outcome.throughput_breakdown()
+        if hasattr(outcome, "throughput_breakdown")
+        else {}
+    )
+    if throughput:
+        details["throughput"] = throughput
+        if throughput.get("documents_per_minute_excluding_llm") is not None:
+            notes.append(
+                "Genomströmning redovisas både totalt och exklusive LLM-väntan "
+                "(details.throughput); en hastighetssiffra utan detta är inte jämförbar."
+            )
     report = BenchmarkReport(
         benchmark_id=benchmark_id,
         provider=config.provider,

@@ -120,3 +120,9 @@ arkiv som publicerades.
 
 Rapporter som skapades före verifierbarhetsändringen saknar `details` och kan
 inte bindas till någon corpus – de är borttagna.
+
+**Facitens eget felprocent mäts inte av benchmarken** utan enligt
+[docs/quality-protocol.md](../docs/quality-protocol.md): stratifierat urval ur det
+frysta ZIP-arkivet, två blinda rater, fyra axlar, Wilson 95 % KI och Cohen's
+kappa. En benchmarkrapport får inte citeras som bevis på facitens semantiska
+korrekthet.

@@ -121,6 +121,27 @@ godkända. Nivå 5–6 använder `CONFLICTING_EVIDENCE`, `CONDITIONAL` och
 }
 ```
 
+## Oberoende mätning av facit
+
+Den deterministiska valideraren bevisar struktur, exakta evidensspann,
+faktavärden mot scenariot och att frågor stöds enligt den dokumenterade
+lexikal/deterministiska regeln. Den bevisar **inte** att en komplex juridisk
+parafras har bibehållit avsedd betydelse, att det förväntade svaret är det
+juridiskt rimliga svaret, eller att evidensspannet är tillräckligt ur ett
+läsarperspektiv.
+
+Valideraren räcker därför **inte ensam** som grund för påståenden om juridisk
+korrekthet. Facitens eget felprocent mäts oberoende av den – med stratifierat
+urval ur ett fryst ZIP med publicerad SHA-256, två blinda rater, fyra
+bedömningsaxlar, Wilson 95 % KI och Cohen's kappa, och med exakta grindar för
+när ett resultat får citeras som oberoende bevis:
+
+- [docs/quality-protocol.md](quality-protocol.md) – protokollet
+- [docs/quality-report-mall.md](quality-report-mall.md) – rapportmallen
+
+Status tills en rapport är publicerad: **antagen men ej mätt**. Se
+[docs/decisions.md](decisions.md) post 2026-10-31.
+
 ## Manuell granskning
 
 `WARN`-checkar och kasserade avtal är avsedda för granskning. Inget i

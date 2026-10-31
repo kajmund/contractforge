@@ -8,6 +8,14 @@
   Innehåller scenario, kanoniska texter, DOCX/PDF, facit, golden-frågor,
   manifest, verifieringsresultat och råsvar. Validera med:
   `contractforge validate examples/sample_live_consulting`.
+- `qsample_live_100/` – **mätpaket för oberoende kvalitetsbedömning** av facit:
+  100 stratifierade frågor från live-datasetet (källa
+  `cerebras_consulting_100.zip`, SHA-256 `43448450…ae7e`, urvals-seed 2026,
+  `selection_sha256` `1272bd8a…f650`). `ratings.csv` är blind för rater;
+  `manifest.json` och `selection.json` är koordinatorns filer. Protokoll och
+  grindar: [`docs/quality-protocol.md`](../docs/quality-protocol.md).
+  Skapa ett nytt urval med
+  `contractforge publish-questions <dataset.zip> --count 100 --seed <seed> --output <dir>`.
 - `offline_demo.sh` – genererar och verifierar ett litet dataset med den
   deterministiska mock-providern (ingen API-nyckel, inga nätverksanrop).
   Skriver till `./dataset` (gitignorerat).

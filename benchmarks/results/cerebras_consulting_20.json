@@ -67,8 +67,13 @@
   "notes": [
     "Benchmarken mäter pipeline, verifiering och export – inte språklig kvalitet.",
     "Kostnad redovisas endast om en explicit PricingTable konfigurerats (CONTRACTFORGE_PRICING).",
-    "En seed reproducerar scenarier och konfiguration; LLM-text är inte garanterat bit-identisk."
+    "En seed reproducerar scenarier och konfiguration; LLM-text är inte garanterat bit-identisk.",
+    "LEGACY: rapport från före v0.1.1; mätningen är bevarad som referens, inte som verifierat corpus."
   ],
   "contractforge_version": "0.1.0",
-  "dataset_path": "benchmarks/results/cerebras_consulting_20/dataset"
+  "dataset_path": "benchmarks/results/cerebras_consulting_20/dataset",
+  "details": {
+    "legacy": true,
+    "legacy_reason": "Genererad före verifierbarhetsändringen: ingen dataset_manifest_sha256, ingen runtime-identitet och ingen koppling till ett corpus. Mätetalen är relevanta som hastighetsreferens under sina egna körförutsättningar (20 avtal, max_repairs=1, tidigt datum), men rapporten kan inte bindas till ett dataset."
+  }
 }

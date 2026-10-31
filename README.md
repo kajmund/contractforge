@@ -236,6 +236,27 @@ Facit innehåller atomära fakta med normaliserade värden, entiteter och roller
 referenser, anomalies, evidenspann (med `precision`: `exact`, `paraphrase` eller
 `clause`), samt vilka fakta som krävs för varje fråga.
 
+### Facitens kvalitet
+
+Facit är **strukturellt verifierat** – men inte semantiskt bevisat. Struktur,
+exakta evidensspann, faktavärden mot scenariot och frågestöd enligt en
+dokumenterad lexikal regel är bevisat; att en komplex juridisk parafras behållit
+avsedd betydelse är antaget. Felprocenten mäts separat enligt
+[docs/quality-protocol.md](docs/quality-protocol.md) – oberoende av den
+deterministiska valideraren (rapportmall:
+[docs/quality-report-mall.md](docs/quality-report-mall.md)). Status: **antagen
+men ej mätt.** v0.1.1 är fryst som referens.
+
+Ett färdigt mätpaket finns: [`examples/qsample_live_100/`](examples/qsample_live_100/)
+– 100 blinda frågor från live-datasetet (källa `cerebras_consulting_100.zip`,
+SHA-256 `43448450…ae7e`, urvals-seed 2026, `selection_sha256`
+`1272bd8a…f650` i `selection.json`), med `ratings.csv` för två oberoende rater. Skapa ett nytt
+urval med:
+
+```bash
+contractforge publish-questions <dataset.zip> --count 100 --seed 2026 --output <dir>
+```
+
 ## Svårighetsgrader
 
 | Nivå | Namn | Innehåll |
@@ -349,17 +370,21 @@ Senaste mätningarna (fullständig rapport i
 
 | Körning | Provider | Avtal | Godkända | Reparerade dokument | Dokument/min | Token | Kostnad |
 |---------|----------|-------|----------|---------------------|--------------|-------|---------|
-| Offline pipeline | mock | 100 | 100 | 0 | 981 | okänd | okänd |
-| Live Cerebras | `gpt-oss-120b` | 100 | 100 | 11 | 48,5 | 675 874 | okänd¹ |
+| Offline pipeline | mock | 100 | 100 | 0 | 1 367 | okänd | okänd |
+| ~~Live (v0.1.0, legacy)~~ | `gpt-oss-120b` | 20 | 20 | 3 | **174** | 137 820 | okänd² |
+| Live Cerebras | `gpt-oss-120b` | 100 | 100 | 11 | 43,5 | 675 874 | okänd¹ |
+
+² **Legacy-referens:** 20-avtalskörningen gjordes före v0.1.1-fixarna med `max_repairs=1` och svagare verifiering; den är bevarad för jämförelse men inte verifierbar mot ett corpus. Nuvarande 43,5 dokument/min kör med två reparationsförsök, full verifiering och datasetvalidering – se [`docs/benchmarks.md`](docs/benchmarks.md).
 
 ¹ Ingen prisuppgift angavs. Med `pricing.json` beräknas faktisk kostnad per
-godkänt dokument och per validerad golden-fråga. Live-körningen tog 123,6 s med
-4 parallella anrop och 4 215 ms genomsnittlig anropstid (viktat över alla
-112 anrop); 89 dokument godkändes på första försöket, 11 reparerades.
+godkänt dokument och per validerad golden-fråga. Live-körningen tog 137,9 s med
+4 parallella anrop (effektiv samtidighet 3,91) och 4 781 ms genomsnittlig
+anropstid (viktat över alla 112 anrop); 99 % av väggtiden var LLM-väntan.
+89 dokument godkändes på första försöket, 11 reparerades.
 
 **Livekörningens dataset-arkiv** publiceras som release-asset:
 `cerebras_consulting_100.zip`, SHA-256
-`51554ba465aabf6c4e319da4559fce5d82b330a9083f054c522fd3607442e390`.
+`4344845099a39dbdc7d09c54f6d50cf03e74d1f831c78eda34cb67182893ae7e`.
 Packa upp och kör `contractforge validate <katalog>` – resultatet ska vara
 `PASS` för alla 100 avtal.
 

@@ -34,8 +34,9 @@ from ..models import (
     utc_now,
 )
 from ..pipeline import generate_dataset, regenerate_questions
+from ..publish import publish_question_sample
 from ..scenarios.registry import load_registry
-from ..utils import atomic_write_json
+from ..utils import atomic_write_json, read_json
 from ..validation.dataset import validate_dataset
 
 EXIT_OK = 0
@@ -170,6 +171,41 @@ def _build_parser() -> argparse.ArgumentParser:
 
     list_types = sub.add_parser("list-types", help="lista avtalstyper")
     add_json_flag(list_types)
+
+    publish = sub.add_parser(
+        "publish-questions",
+        help="publicera ett deterministiskt urval golden-frågor för oberoende bedömning",
+    )
+    publish.add_argument("source", help="dataset (ZIP eller uppackad katalog)")
+    publish.add_argument(
+        "--output", required=True, help="katalog för urvalet (manifest, ratings.csv, README)"
+    )
+    publish.add_argument(
+        "--count", type=_positive_int, default=100, help="antal frågor i urvalet (standard 100)"
+    )
+    publish.add_argument("--seed", type=int, default=0, help="urvals-seed (standard 0)")
+    publish.add_argument(
+        "--corpus-sha256",
+        default=None,
+        metavar="HEX",
+        help="förväntat SHA-256 för källan; avbryter om det inte stämmer",
+    )
+    publish.add_argument(
+        "--force",
+        action="store_true",
+        default=False,
+        help="tillåt att skriva till en befintlig, icke-tom katalog",
+    )
+    publish.add_argument(
+        "--stratified",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help=(
+            "stratifierat urval över (kategori, svårighetsgrad, answerability) – "
+            "standard; --no-stratified ger ett likformigt slumpurval"
+        ),
+    )
+    add_json_flag(publish)
     return parser
 
 
@@ -522,6 +558,49 @@ def _cmd_list_types(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def _cmd_publish_questions(args: argparse.Namespace) -> int:
+    source = Path(args.source)
+    if not source.exists():
+        raise UsageError(f"källan finns inte: {source}", details={"source": str(source)})
+    output = publish_question_sample(
+        source,
+        Path(args.output),
+        count=args.count,
+        seed=args.seed,
+        corpus_sha256=args.corpus_sha256,
+        force=bool(args.force),
+        stratified=bool(getattr(args, "stratified", True)),
+    )
+    manifest = read_json(output / "manifest.json")
+    sampling = manifest["sampling"]
+    payload = {
+        "status": "ok",
+        "command": "publish-questions",
+        "output": str(output),
+        "sample_size": sampling["sample_size"],
+        "pool_size": sampling["pool_size"],
+        "source_sha256": manifest["source_sha256"],
+        "corpus_manifest_sha256": manifest["corpus_manifest_sha256"],
+        "seed": sampling["seed"],
+        "count": sampling["count"],
+        "sample_version": manifest["sample_version"],
+        "selection_sha256": manifest["selection_sha256"],
+        "stratified": sampling["stratified"],
+        "files": ["manifest.json", "ratings.csv", "selection.json", "README.md"],
+    }
+    if _json_mode(args):
+        _emit(payload, json_mode=True)
+    else:
+        print(f"Urval: {output}")
+        print(
+            f"Frågor: {payload['sample_size']} av {payload['pool_size']} i poolen "
+            f"(seed {payload['seed']}, begärt {payload['count']})"
+        )
+        print(f"Källa: {manifest['source_name']} sha256 {manifest['source_sha256']}")
+        print("Filer: manifest.json, ratings.csv, README.md")
+    return EXIT_OK
+
+
 def _dispatch(args: argparse.Namespace) -> int:
     handlers = {
         "generate": _cmd_generate,
@@ -531,6 +610,7 @@ def _dispatch(args: argparse.Namespace) -> int:
         "export": _cmd_export,
         "stats": _cmd_stats,
         "list-types": _cmd_list_types,
+        "publish-questions": _cmd_publish_questions,
     }
     if args.command not in handlers:
         raise UsageError("inget kommando angivet; kör 'contractforge --help'")
