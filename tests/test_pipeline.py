@@ -7,10 +7,8 @@ from __future__ import annotations
 
 import json
 
-from contractforge.export.loader import load_dataset
-from contractforge.validation.dataset import validate_dataset
-
 from contractforge.config import Settings
+from contractforge.export.loader import load_dataset
 from contractforge.models import (
     Answerability,
     ContractType,
@@ -20,6 +18,7 @@ from contractforge.models import (
 )
 from contractforge.pipeline import generate_dataset
 from contractforge.utils import sha256_file
+from contractforge.validation.dataset import validate_dataset
 
 
 def _settings(**env: str) -> Settings:
@@ -124,9 +123,8 @@ def test_repair_loop_marks_repaired_not_rejected(tmp_path, monkeypatch):
 
 
 def test_rejected_contracts_are_not_exported_as_approved(tmp_path, monkeypatch):
-    from contractforge.providers.mock import MockProvider
-
     from contractforge.models import LLMResponse, Usage
+    from contractforge.providers.mock import MockProvider
 
     # Never produce parseable JSON -> GenerationError on every attempt.
 
